@@ -1,6 +1,5 @@
 package sspc.gob.mx.psr.validator;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -18,11 +17,11 @@ public class SentencedValidator {
 
     @NotBlank
     @Size(min = 1, max = 100)
-    String firstLastName;
+    String firstName;
 
     @NotBlank
     @Size(min = 1, max = 100)
-    String secondLastName;
+    String lastName;
 
     @Size(min = 1, max = 100)
     @NotNull

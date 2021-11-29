@@ -25,8 +25,8 @@ class SentencedControllerSpec extends Specification {
         SentencedValidator cmd = new SentencedValidator()
         cmd.with {
             name = 'Juan Antonio'
-            firstLastName = 'Pèrez'
-            secondLastName = 'Garcìa'
+            firstName = 'Pèrez'
+            lastName = 'Garcìa'
             nationality = 'Mexìcana'
             curp = 'HELA880416HHGRZL08'
             maritalStatus ='soltero'
@@ -41,6 +41,8 @@ class SentencedControllerSpec extends Specification {
             mobilePhone =  1234567890
             email = 'juan.antonio.perez.garcia@gmail.com'
         }
+
+        println(cmd.toString())
 
         when:
         def resp = rest.postForObject("http://localhost:${ port }/sentenced", new HttpEntity(cmd, headers), Map)
@@ -63,7 +65,11 @@ class SentencedControllerSpec extends Specification {
             assert it.homePhone ==  1234567890
             assert it.mobilePhone ==  1234567890
             assert it.email == 'juan.antonio.perez.garcia@gmail.com'
+            assert it.id
+            assert it.dateCreated
         }
+      //  assert  org.apache.commons.lang3.StringUtils.stripAccents("Añ")
+
     }
 
     def "Should not post on invalid args "(){
@@ -72,8 +78,8 @@ class SentencedControllerSpec extends Specification {
         headers.setContentType(MediaType.APPLICATION_JSON)
         SentencedValidator cmd = new SentencedValidator()
         cmd.with {
-            firstLastName = 'Pèrez'
-            secondLastName = 'Garcìa'
+            firstName = 'Pèrez'
+            lastName = 'Garcìa'
             nationality = 'Mexìcana'
             curp = 'HELA880416HHGRZL08'
             maritalStatus ='soltero'
