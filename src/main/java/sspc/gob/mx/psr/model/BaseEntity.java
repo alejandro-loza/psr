@@ -18,4 +18,8 @@ public abstract class BaseEntity {
 
     @UpdateTimestamp
     protected LocalDateTime lastUpdated;
+
+    @Column(updatable = false)
+    @CreationTimestamp
+    protected LocalDateTime dateDeleted;
 }

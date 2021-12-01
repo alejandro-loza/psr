@@ -25,7 +25,8 @@ dependencies {
 			'org.springframework.boot:spring-boot-starter-web',
 			'org.springframework.boot:spring-boot-starter-validation:2.4.0',
 			'org.codehaus.groovy:groovy',
-			'javax.inject:javax.inject:1'
+			'javax.inject:javax.inject:1',
+			'org.apache.commons:commons-lang3:3.0'
 
 
 	runtimeOnly 'com.h2database:h2'
@@ -34,7 +35,9 @@ dependencies {
 			'org.springframework.boot:spring-boot-starter-test',
 			'org.springframework.boot:spring-boot-starter-webflux',
 			'org.spockframework:spock-core:2.0-M4-groovy-3.0',
-			'org.spockframework:spock-spring:2.0-M4-groovy-3.0'
+			'org.spockframework:spock-spring:2.0-M4-groovy-3.0',
+			'org.junit.jupiter:junit-jupiter-api:5.8.1'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
 }
 

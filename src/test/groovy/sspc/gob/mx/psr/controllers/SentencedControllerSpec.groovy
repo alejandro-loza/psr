@@ -17,7 +17,6 @@ class SentencedControllerSpec extends Specification {
     int port
     RestTemplate rest = new RestTemplate()
 
-
     def "Should post and create a sentenced"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
@@ -68,7 +67,6 @@ class SentencedControllerSpec extends Specification {
             assert it.id
             assert it.dateCreated
         }
-      //  assert  org.apache.commons.lang3.StringUtils.stripAccents("Añ")
 
     }
 

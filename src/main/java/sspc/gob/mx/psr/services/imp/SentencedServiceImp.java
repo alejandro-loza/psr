@@ -35,7 +35,7 @@ public class SentencedServiceImp implements SentencedService {
                 .birthDate(new Date(sentencedInput.getBirthDate()))//TODO check this!!
                 .occupation(sentencedInput.getOccupation())
                 .gender(sentencedInput.getGender())//TODO ENUM !!
-                .ethnicity(sentencedInput.getEthnicity())//TODO IS A CATALOG?
+                .ethnicity(sentencedInput.getEthnicity())//TODO IS A CATALOG? MAYA
                 .schooling(sentencedInput.getSchooling())
                 .homePhone(sentencedInput.getHomePhone())
                 .mobilePhone(sentencedInput.getMobilePhone())
