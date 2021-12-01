@@ -22,15 +22,13 @@ public class FolioTest {
         folio.setNationalityEncode("MEXIC");
         folio.setConsecutive(new int[]{ 8,9,5,6,7});
 
-        assertEquals(4,folio.getExtra());
-
-
         assertEquals("NECL",folio.getNameEncode());
-        assertEquals("MEX",folio.getNationalityEncode());
-        assertEquals('M',folio.getGenderCode());
         assertArrayEquals( new int[]{8, 8, 0,4,1,6},folio.getBirthDayEncode());
-        assertArrayEquals( new int[]{8, 9},folio.getConsecutive());
         assertArrayEquals( new int[]{1, 2},folio.getStateEncode());
+        assertEquals('M',folio.getGenderCode());
+        assertEquals("MEX",folio.getNationalityEncode());
+        assertArrayEquals( new int[]{8, 9},folio.getConsecutive());
+        assertEquals(4,folio.getExtra());
     }
 }
 

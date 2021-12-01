@@ -17,8 +17,6 @@ public class Folio {
     private int[] consecutive;
     private static int extra;
 
-
-
     public void setNameEncode(String nameEncode) {
         this.nameEncode = StringUtils.stripAccents(nameEncode.substring(0, 4).toUpperCase());
     }
