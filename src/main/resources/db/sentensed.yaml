@@ -1,0 +1,111 @@
+databaseChangeLog:
+  - changeSet:
+      id: sentensed
+      author: alejandro.hernandez
+      changes:
+        - createTable:
+            tableName: sentensed
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: firstName
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastName
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: nationality
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: curp
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: folio
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: maritalStatus
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alias
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: occupation
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gender
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ethnicity
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schooling
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: homePhone
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mobilePhone
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_created
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_updated
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_deleted
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: true

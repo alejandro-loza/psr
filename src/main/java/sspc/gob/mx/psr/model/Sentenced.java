@@ -5,19 +5,19 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.UUID;
 
 
 @Data
 @Builder
 @Entity
-public class Sentenced extends BaseEntity {//TODO the folioooo¡¡¡ check for the dateCreated
+public class Sentenced extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     @NotNull(message= "sentenced.name.null")
     @NotBlank
@@ -77,19 +77,17 @@ public class Sentenced extends BaseEntity {//TODO the folioooo¡¡¡ check for t
 
     @NotNull
     @NotBlank
-    @NotBlank
     @Size(min = 1, max = 50)
     private String schooling;
 
     @NotNull
-    private Long homePhone;
+    private String homePhone;
 
     @NotNull
-    private Long mobilePhone;
+    private String mobilePhone;
 
+    @NotBlank
+    @NotBlank
     private String  email;
-
-
-
 
 }

@@ -41,8 +41,6 @@ class SentencedControllerSpec extends Specification {
             email = 'juan.antonio.perez.garcia@gmail.com'
         }
 
-        println(cmd.toString())
-
         when:
         def resp = rest.postForObject("http://localhost:${ port }/sentenced", new HttpEntity(cmd, headers), Map)
 

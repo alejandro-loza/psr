@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - property:
+        name: uuid_function
+        value: "uid.uuid_generate_v4()"
+        dbms: postgresql
+  - include:
+      file: db/sentensed.yaml

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 public class SentencedDto {
 
-    Long id;
+    String id;
 
     String name;
 
@@ -38,16 +38,16 @@ public class SentencedDto {
 
     String schooling;
 
-    Long homePhone;
+    String homePhone;
 
-    Long mobilePhone;
+    String mobilePhone;
 
     String  email;
 
     LocalDateTime dateCreated;
 
     public SentencedDto(Sentenced sentenced){
-        this.id = sentenced.getId();
+        this.id = sentenced.getId().toString();
         this.name = sentenced.getName();
         this.firstLastName = sentenced.getFirstName();
         this.secondLastName = sentenced.getLastName();

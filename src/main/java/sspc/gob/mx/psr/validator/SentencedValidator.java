@@ -64,18 +64,21 @@ public class SentencedValidator {
 
     @NotNull
     @NotBlank
-    @NotBlank
     @Size(min = 1, max = 50)
     String schooling;
 
     @NotNull
-    @Digits(integer = 10, fraction = 0)
-    Long homePhone;
+    @NotBlank
+    @Size(min = 1, max = 50)
+    String homePhone;
 
     @NotNull
-    @Digits(integer = 10, fraction = 0)
-    Long mobilePhone;
+    @NotBlank
+    @Size(min = 1, max = 50)
+    String mobilePhone;
 
     @Email
+    @NotNull
+    @NotBlank
     String  email;
 }
