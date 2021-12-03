@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: sentensed
+      id: sentenced
       author: alejandro.hernandez
       changes:
         - createTable:
-            tableName: sentensed
+            tableName: sentenced
             columns:
               - column:
                   name: id
@@ -20,12 +20,12 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: firstName
+                  name: first_name
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: lastName
+                  name: last_name
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
@@ -45,12 +45,17 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: maritalStatus
+                  name: marital_status
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
                   name: alias
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: other_names
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
@@ -80,12 +85,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: homePhone
+                  name: home_phone
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: mobilePhone
+                  name: mobile_phone
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
