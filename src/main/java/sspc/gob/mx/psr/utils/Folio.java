@@ -3,7 +3,7 @@ package sspc.gob.mx.psr.utils;
 import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import sspc.gob.mx.psr.enums.Gender;
+import sspc.gob.mx.psr.enums.Sexo;
 import java.util.Arrays;
 
 @Getter
@@ -29,8 +29,8 @@ public class Folio {
         this.stateEncode = Arrays.copyOfRange(stateEncode, 0 ,2);
     }
 
-    public void setGenderCode(Gender genderCode) {
-        this.genderCode = genderCode.getCode();
+    public void setGenderCode(Sexo genderCode) {
+        this.genderCode = genderCode.getCodigo();
     }
 
     public void setNationalityEncode(String nationalityEncode) {

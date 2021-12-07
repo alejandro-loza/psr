@@ -1,7 +1,6 @@
 package sspc.gob.mx.psr.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +10,11 @@ import java.util.Date;
 import java.util.UUID;
 
 
-@Data
+@Getter
+@Setter
 @Builder
 @Entity
-public class Sentenced extends BaseEntity {
+public class Sentenciado extends BaseEntity {
     @Id
     @GeneratedValue
     private UUID id;
@@ -22,20 +22,20 @@ public class Sentenced extends BaseEntity {
     @NotNull(message= "sentenced.name.null")
     @NotBlank
     @Size(min = 1, max = 100)
-    private String name;
+    private String nombre;
 
     @NotBlank
     @Size(min = 1, max = 100)
-    private String firstName;
+    private String apellidoPaterno;
 
     @NotBlank
     @Size(min = 1, max = 100)
-    private String lastName;
+    private String apellidoMaterno;
 
     @Size(min = 1, max = 100)
     @NotNull
     @NotBlank
-    private String nationality;
+    private String nacionalidad;
 
     @NotNull
     @NotBlank
@@ -50,7 +50,7 @@ public class Sentenced extends BaseEntity {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 100)
-    private String maritalStatus;
+    private String estadoCivil;
 
     @NotBlank
     @Size(min = 1, max = 100)
@@ -58,33 +58,33 @@ public class Sentenced extends BaseEntity {
 
     @NotBlank
     @Size(min = 1, max = 100)
-    private String otherNames;
+    private String otrosNombres;
 
-    private Date birthDate;
+    private Date fechaNacimiento;
 
     @NotBlank
     @Size(min = 1, max = 100)
-    private String occupation;
+    private String ocupacion;
 
     @NotNull
     @NotBlank
-    private String gender;
+    private String sexo;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 20)
-    private String ethnicity;
+    private String etnia;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
-    private String schooling;
+    private String escolaridad;
 
     @NotNull
-    private String homePhone;
+    private String telefonoFijo;
 
     @NotNull
-    private String mobilePhone;
+    private String celular;
 
     @NotBlank
     @NotBlank

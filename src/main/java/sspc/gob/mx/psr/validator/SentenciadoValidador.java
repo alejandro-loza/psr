@@ -9,24 +9,24 @@ import javax.validation.constraints.*;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class SentencedValidator {
+public class SentenciadoValidador {
     @NotNull(message= "sentenced.name.null")
     @NotBlank
     @Size(min = 1, max = 100)
-    String name;
+    String nombre;
 
     @NotBlank
     @Size(min = 1, max = 100)
-    String firstName;
+    String apellidoPaterno;
 
     @NotBlank
     @Size(min = 1, max = 100)
-    String lastName;
+    String apellidoMaterno;
 
     @Size(min = 1, max = 100)
     @NotNull
     @NotBlank
-    String nationality;
+    String nacionalidad;
 
     @NotNull
     @NotBlank
@@ -36,7 +36,7 @@ public class SentencedValidator {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 100)
-    String maritalStatus;
+    String estadoCivil;
 
     @NotBlank
     @Size(min = 1, max = 100)
@@ -44,38 +44,38 @@ public class SentencedValidator {
 
     @NotBlank
     @Size(min = 1, max = 100)
-    String otherNames;
+    String otrosNombres;
 
     @Digits(integer = 50, fraction = 0)
-    Long birthDate;
+    Long fechaNacimiento;
 
     @NotBlank
     @Size(min = 1, max = 100)
-    String occupation;
+    String ocupacion;
 
     @NotNull
     @NotBlank
-    String gender;
+    String sexo;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 20)
-    String ethnicity;
+    String etnia;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
-    String schooling;
+    String escolaridad;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
-    String homePhone;
+    String telefonoFijo;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
-    String mobilePhone;
+    String celular;
 
     @Email
     @NotNull

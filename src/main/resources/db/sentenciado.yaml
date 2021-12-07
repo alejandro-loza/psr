@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: sentenced
+      id: sentenciado
       author: alejandro.hernandez
       changes:
         - createTable:
-            tableName: sentenced
+            tableName: sentenciado
             columns:
               - column:
                   name: id
@@ -14,23 +14,23 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: name
+                  name: nombre
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
                     unique: true
               - column:
-                  name: first_name
+                  name: apellido_paterno
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: last_name
+                  name: apellido_materno
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: nationality
+                  name: nacionalidad
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
@@ -45,7 +45,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: marital_status
+                  name: estado_civil
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
@@ -55,42 +55,42 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: other_names
+                  name: otros_nombres
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: birth_date
+                  name: fecha_nacimiento
                   type: DATETIME(6)
                   constraints:
                     nullable: false
               - column:
-                  name: occupation
+                  name: ocupacion
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: gender
+                  name: sexo
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: ethnicity
+                  name: etnia
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: schooling
+                  name: escolaridad
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: home_phone
+                  name: telefono_fijo
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
-                  name: mobile_phone
+                  name: celular
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
