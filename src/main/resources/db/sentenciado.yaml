@@ -1,0 +1,116 @@
+databaseChangeLog:
+  - changeSet:
+      id: sentenciado
+      author: alejandro.hernandez
+      changes:
+        - createTable:
+            tableName: sentenciado
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: apellido_paterno
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: apellido_materno
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: nacionalidad
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: curp
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: folio
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: estado_civil
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alias
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: otros_nombres
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fecha_nacimiento
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ocupacion
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sexo
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: etnia
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: escolaridad
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: telefono_fijo
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: celular
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_created
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_updated
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_deleted
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: true

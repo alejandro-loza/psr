@@ -2,48 +2,48 @@ package sspc.gob.mx.psr.services.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sspc.gob.mx.psr.dto.SentencedDto;
-import sspc.gob.mx.psr.model.Sentenced;
+import sspc.gob.mx.psr.dto.SentenciadoDto;
+import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.repository.SentencedRepository;
-import sspc.gob.mx.psr.services.SentencedService;
-import sspc.gob.mx.psr.validator.SentencedValidator;
+import sspc.gob.mx.psr.services.SentenciadoService;
+import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 import java.util.Date;
 
 @Service
-public class SentencedServiceImp implements SentencedService {
+public class SentencedServiceImp implements SentenciadoService {
 
     @Autowired
     SentencedRepository sentencedRepository;
 
     @Override
-    public SentencedDto create(SentencedValidator sentencedInput) {
-        return new SentencedDto( sentencedRepository.save( generateSentenced(sentencedInput)));
+    public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) {
+        return new SentenciadoDto( sentencedRepository.save( construyeSentenciado(sentenciadoValidador)));
     }
 
-    private Sentenced generateSentenced(SentencedValidator sentencedInput) {
-        return  Sentenced.builder()
+    private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput) {
+        return  Sentenciado.builder()
                 .folio(generateFolio(sentencedInput))//TODO generate the folio
-                .name(sentencedInput.getName())
-                .firstName(sentencedInput.getFirstName())
-                .lastName(sentencedInput.getLastName())
-                .nationality(sentencedInput.getNationality())
+                .nombre(sentencedInput.getNombre())
+                .apellidoPaterno(sentencedInput.getApellidoPaterno())
+                .apellidoMaterno(sentencedInput.getApellidoMaterno())
+                .nacionalidad(sentencedInput.getNacionalidad())
                 .curp(sentencedInput.getCurp())
-                .maritalStatus(sentencedInput.getMaritalStatus())
+                .estadoCivil(sentencedInput.getEstadoCivil())
                 .alias(sentencedInput.getAlias())
-                .otherNames(sentencedInput.getOtherNames())
-                .birthDate(new Date(sentencedInput.getBirthDate()))//TODO check this!!
-                .occupation(sentencedInput.getOccupation())
-                .gender(sentencedInput.getGender())//TODO ENUM !!
-                .ethnicity(sentencedInput.getEthnicity())//TODO IS A CATALOG? MAYA
-                .schooling(sentencedInput.getSchooling())
-                .homePhone(sentencedInput.getHomePhone())
-                .mobilePhone(sentencedInput.getMobilePhone())
+                .otrosNombres(sentencedInput.getOtrosNombres())
+                .fechaNacimiento(new Date(sentencedInput.getFechaNacimiento()))//TODO check this!!
+                .ocupacion(sentencedInput.getOcupacion())
+                .sexo(sentencedInput.getSexo())//TODO ENUM !!
+                .etnia(sentencedInput.getEtnia())//TODO IS A CATALOG? MAYA
+                .escolaridad(sentencedInput.getEscolaridad())
+                .telefonoFijo(sentencedInput.getTelefonoFijo())
+                .celular(sentencedInput.getCelular())
                 .email(sentencedInput.getEmail())
                 .build();
     }
 
-    private String generateFolio(SentencedValidator sentencedInput) {
+    private String generateFolio(SentenciadoValidador sentencedInput) {
         return "null";
     }
 }
