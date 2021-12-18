@@ -5,7 +5,9 @@ import lombok.Setter;
 import sspc.gob.mx.psr.model.Sentenciado;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 @Getter
@@ -30,7 +32,7 @@ public class SentenciadoDto {
 
     String otrosNombres;
 
-    Long fechaNacimiento;
+    LocalDate fechaNacimiento;
 
     String ocupacion;
 
@@ -58,7 +60,7 @@ public class SentenciadoDto {
         this.estadoCivil = sentenciado.getEstadoCivil();
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
-        this.fechaNacimiento = sentenciado.getFechaNacimiento().getTime();
+        this.fechaNacimiento = sentenciado.getFechaNacimiento();
         this.ocupacion = sentenciado.getOcupacion();
         this.sexo = sentenciado.getSexo();
         this.etnia = sentenciado.getEtnia();

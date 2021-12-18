@@ -1,11 +1,14 @@
 package sspc.gob.mx.psr.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -60,7 +63,8 @@ public class Sentenciado extends BaseEntity {
     @Size(min = 1, max = 100)
     private String otrosNombres;
 
-    private Date fechaNacimiento;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDate fechaNacimiento;
 
     @NotBlank
     @Size(min = 1, max = 100)

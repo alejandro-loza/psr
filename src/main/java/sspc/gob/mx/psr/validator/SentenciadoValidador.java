@@ -3,8 +3,11 @@ package sspc.gob.mx.psr.validator;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @RequiredArgsConstructor
 @Getter
@@ -46,8 +49,9 @@ public class SentenciadoValidador {
     @Size(min = 1, max = 100)
     String otrosNombres;
 
-    @Digits(integer = 50, fraction = 0)
-    Long fechaNacimiento;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull
+    LocalDate fechaNacimiento;
 
     @NotBlank
     @Size(min = 1, max = 100)

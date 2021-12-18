@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 import sspc.gob.mx.psr.validator.SentenciadoValidador
 
+import java.time.LocalDate
+import java.time.Month
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SentenciadoControllerSpec extends Specification {
 
@@ -31,7 +34,7 @@ class SentenciadoControllerSpec extends Specification {
             estadoCivil ='soltero'
             alias = "el pinky"
             otrosNombres =  "Enrique Peña"
-            fechaNacimiento = 1587567125458
+            fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacion = "Servidor publico"
             sexo = 'Femenino'
             etnia = 'Maya'
@@ -54,12 +57,12 @@ class SentenciadoControllerSpec extends Specification {
             assert it.estadoCivil == 'soltero'
             assert it.alias == "el pinky"
             assert it.otrosNombres ==  "Enrique Peña"
-            assert it.fechaNacimiento == 1587567125458
+            assert it.fechaNacimiento == '1988-04-16'
             assert it.ocupacion == "Servidor publico"
             assert it.sexo == 'Femenino'
             assert it.etnia == 'Maya'
             assert it.escolaridad == 'Primaria'
-            assert it.telefonoFijo ==  "1234567890"
+            assert it.telefonoFijo ==  '1234567890'
             assert it.celular ==  "1234567890"
             assert it.email == 'juan.antonio.perez.garcia@gmail.com'
             assert it.id
@@ -81,7 +84,7 @@ class SentenciadoControllerSpec extends Specification {
             estadoCivil ='soltero'
             alias = "el pinky"
             otrosNombres =  "Enrique Peña"
-            fechaNacimiento = 1587567125458
+            fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacion = "Servidor publico"
             sexo = 'Femenino'
             etnia = 'Maya'

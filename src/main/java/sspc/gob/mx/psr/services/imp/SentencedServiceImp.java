@@ -32,7 +32,7 @@ public class SentencedServiceImp implements SentenciadoService {
                 .estadoCivil(sentencedInput.getEstadoCivil())
                 .alias(sentencedInput.getAlias())
                 .otrosNombres(sentencedInput.getOtrosNombres())
-                .fechaNacimiento(new Date(sentencedInput.getFechaNacimiento()))//TODO check this!!
+                .fechaNacimiento(sentencedInput.getFechaNacimiento())//TODO check this!!
                 .ocupacion(sentencedInput.getOcupacion())
                 .sexo(sentencedInput.getSexo())//TODO ENUM !!
                 .etnia(sentencedInput.getEtnia())//TODO IS A CATALOG? MAYA
