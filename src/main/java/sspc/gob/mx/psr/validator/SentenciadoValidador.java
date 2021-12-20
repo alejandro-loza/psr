@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import sspc.gob.mx.psr.enums.Sexo;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -32,6 +33,9 @@ public class SentenciadoValidador {
     String nacionalidad;
 
     @NotNull
+    Long estadoId;
+
+    @NotNull
     @NotBlank
     @Size(min = 18, max = 18)
     String curp;
@@ -58,8 +62,7 @@ public class SentenciadoValidador {
     String ocupacion;
 
     @NotNull
-    @NotBlank
-    String sexo;
+    Sexo sexo;
 
     @NotNull
     @NotBlank

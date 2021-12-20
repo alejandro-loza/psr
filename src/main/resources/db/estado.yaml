@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: estado
+      author: alejandro.hernandez
+      changes:
+        - createTable:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true

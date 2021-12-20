@@ -62,7 +62,7 @@ public class SentenciadoDto {
         this.otrosNombres = sentenciado.getOtrosNombres();
         this.fechaNacimiento = sentenciado.getFechaNacimiento();
         this.ocupacion = sentenciado.getOcupacion();
-        this.sexo = sentenciado.getSexo();
+        this.sexo = sentenciado.getSexo().toString();
         this.etnia = sentenciado.getEtnia();
         this.escolaridad = sentenciado.getEscolaridad();
         this.telefonoFijo = sentenciado.getTelefonoFijo();

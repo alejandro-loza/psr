@@ -30,8 +30,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: nacionalidad
-                  type: java.sql.Types.VARCHAR(255)
+                  name: pais_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -62,6 +62,11 @@ databaseChangeLog:
               - column:
                   name: fecha_nacimiento
                   type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: estado_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -114,3 +119,27 @@ databaseChangeLog:
                   type: DATETIME(6)
                   constraints:
                     nullable: true
+  - changeSet:
+      id: sentenciado_pais_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: pais_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_pais
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: pais
+  - changeSet:
+      id: sentenciado_estado_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: estado_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_estado
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: estado
