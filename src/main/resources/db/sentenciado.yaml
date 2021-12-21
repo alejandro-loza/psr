@@ -18,7 +18,6 @@ databaseChangeLog:
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
-                    unique: true
               - column:
                   name: apellido_paterno
                   type: java.sql.Types.VARCHAR(255)
@@ -143,3 +142,15 @@ databaseChangeLog:
             initiallyDeferred: false
             referencedColumnNames: id
             referencedTableName: estado
+  - changeSet:
+      id: sentenciado_pais_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: pais_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_pais
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: pais

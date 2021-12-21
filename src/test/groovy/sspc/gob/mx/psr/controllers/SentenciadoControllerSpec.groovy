@@ -8,6 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
+import sspc.gob.mx.psr.enums.Sexo
 import sspc.gob.mx.psr.validator.SentenciadoValidador
 
 import java.time.LocalDate
@@ -16,6 +17,7 @@ import java.time.Month
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SentenciadoControllerSpec extends Specification {
 
+    public static final int MEXICO_ID = 484
     @Value('${local.server.port}')
     int port
     RestTemplate rest = new RestTemplate()
@@ -24,19 +26,22 @@ class SentenciadoControllerSpec extends Specification {
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
+        def localDate = LocalDate.of(1988, Month.APRIL, 16)
+
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
-            nombre = 'Juan Antonio'
-            apellidoPaterno = 'Pèrez'
-            apellidoMaterno = 'Garcìa'
-            nacionalidad = 'Mexìcana'
+            nombre = 'Alejandro'
+            apellidoPaterno = 'Ràmirez'
+            apellidoMaterno = 'Torres'
+            nacionalidad = MEXICO_ID
+            estadoId = 13
             curp = 'HELA880416HHGRZL08'
             estadoCivil ='soltero'
             alias = "el pinky"
             otrosNombres =  "Enrique Peña"
-            fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
+            fechaNacimiento = localDate
             ocupacion = "Servidor publico"
-            sexo = 'Femenino'
+            sexo = Sexo.FEMENINO
             etnia = 'Maya'
             escolaridad = 'Primaria'
             telefonoFijo =  1234567890
@@ -79,14 +84,15 @@ class SentenciadoControllerSpec extends Specification {
         cmd.with {
             apellidoPaterno = 'Pèrez'
             apellidoMaterno = 'Garcìa'
-            nacionalidad = 'Mexìcana'
+            nacionalidad = MEXICO_ID
+            estadoId = 13
             curp = 'HELA880416HHGRZL08'
             estadoCivil ='soltero'
             alias = "el pinky"
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacion = "Servidor publico"
-            sexo = 'Femenino'
+            sexo = Sexo.FEMENINO
             etnia = 'Maya'
             escolaridad = 'Primaria'
             telefonoFijo =  1234567890

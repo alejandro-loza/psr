@@ -13,7 +13,8 @@ public class Estado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public
     Long id;
-    String nombre;
+    public String nombre;
 
 }

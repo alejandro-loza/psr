@@ -55,7 +55,7 @@ public class SentenciadoDto {
         this.nombre = sentenciado.getNombre();
         this.apellidoPaterno = sentenciado.getApellidoPaterno();
         this.apellidoMaterno = sentenciado.getApellidoMaterno();
-        this.nacionalidad = sentenciado.getNacionalidad();
+        this.nacionalidad = sentenciado.getNacionalidad().getNombre();
         this.curp = sentenciado.getCurp();
         this.estadoCivil = sentenciado.getEstadoCivil();
         this.alias = sentenciado.getAlias();

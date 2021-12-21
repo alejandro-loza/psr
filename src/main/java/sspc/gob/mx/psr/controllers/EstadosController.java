@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sspc.gob.mx.psr.dto.GreetingDto;
+import sspc.gob.mx.psr.services.EstadoService;
 import sspc.gob.mx.psr.services.imp.EstadoServiceImp;
 
 @RequestMapping("/estado")
@@ -14,14 +15,11 @@ import sspc.gob.mx.psr.services.imp.EstadoServiceImp;
 public class EstadosController {
 
     @Autowired
-    EstadoServiceImp estadoservicio;
-
-
+    EstadoService estadoservicio;
 
     @GetMapping( produces = "application/json")
     ResponseEntity estados() {
-        return new ResponseEntity<>( estadoservicio.estados()
-                , HttpStatus.OK);
+        return new ResponseEntity<>( estadoservicio.lista(), HttpStatus.OK);
     }
 
 

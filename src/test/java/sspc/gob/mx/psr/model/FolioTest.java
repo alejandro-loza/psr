@@ -5,6 +5,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import sspc.gob.mx.psr.enums.Sexo;
 import sspc.gob.mx.psr.utils.FolioBuilder;
 
+import java.nio.LongBuffer;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +26,7 @@ public class FolioTest {
         folio.setExtra();
 
         assertEquals("NECL",folio.getNombreCodigo());
-        assertArrayEquals( new int[]{8, 8, 0,4,1,6},folio.getNacimientoCodigo());
+        assertEquals(880416L, folio.getNacimientoCodigo());
         assertArrayEquals( new int[]{1, 2},folio.getEntidadCodigo());
         assertEquals('M',folio.getSexoCodigo());
         assertEquals("MEX",folio.getNacionalidadCodigo());
@@ -36,7 +38,7 @@ public class FolioTest {
     void folioBuilder(){
         Folio folio = new FolioBuilder(
                 "ñéclair",
-                new int[]{8, 8, 0,4,1,6,7},
+                LongBuffer.allocate(6).put(8).put(8).put(0).put(4).put(1).put(6),
                 new int[]{1, 2, 3,4,5,6,7},
                 Sexo.FEMENINO,
                 "MEXIC",
@@ -44,7 +46,7 @@ public class FolioTest {
         ).build();
 
         assertEquals("NECL",folio.getNombreCodigo());
-        assertArrayEquals( new int[]{8, 8, 0,4,1,6},folio.getNacimientoCodigo());
+        assertEquals( 880416L ,folio.getNacimientoCodigo());
         assertArrayEquals( new int[]{1, 2},folio.getEntidadCodigo());
         assertEquals('M',folio.getSexoCodigo());
         assertEquals("MEX",folio.getNacionalidadCodigo());

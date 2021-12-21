@@ -12,10 +12,11 @@ import javax.persistence.Id;
 public class Pais {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public
     Long id;
-    String nombre;
-    String alpha2;
-    String alpha3;
+    public String nombre;
+    public String alpha2;
+    public String alpha3;
 
 
 }

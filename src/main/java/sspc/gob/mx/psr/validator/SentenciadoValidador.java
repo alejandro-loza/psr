@@ -27,10 +27,8 @@ public class SentenciadoValidador {
     @Size(min = 1, max = 100)
     String apellidoMaterno;
 
-    @Size(min = 1, max = 100)
     @NotNull
-    @NotBlank
-    String nacionalidad;
+    Long nacionalidad;
 
     @NotNull
     Long estadoId;

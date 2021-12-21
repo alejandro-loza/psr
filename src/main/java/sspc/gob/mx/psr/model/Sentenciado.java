@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import sspc.gob.mx.psr.enums.Sexo;
 import sspc.gob.mx.psr.model.catalog.Estado;
+import sspc.gob.mx.psr.model.catalog.Pais;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -37,11 +38,12 @@ public class Sentenciado extends BaseEntity {
     @Size(min = 1, max = 100)
     private String apellidoMaterno;
 
-    @Size(min = 1, max = 100)
     @NotNull
-    @NotBlank
-    private String nacionalidad;
+    @ManyToOne
+    @JoinColumn(name="pais_id")
+    private Pais nacionalidad;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name="estado_id")
     private Estado estado;
@@ -52,9 +54,9 @@ public class Sentenciado extends BaseEntity {
     private String curp;
 
     @NotNull
-    @NotBlank
-    @Size(max = 20)
-    private String folio;
+    @ManyToOne
+    @JoinColumn(name="folio_id")
+    private Folio folio;
 
     @NotNull
     @NotBlank

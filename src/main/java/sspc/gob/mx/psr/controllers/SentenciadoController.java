@@ -21,7 +21,7 @@ public class SentenciadoController {
     SentenciadoService sentenciadoService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity crear(@RequestBody @Valid SentenciadoValidador validador) {
+    ResponseEntity crear(@RequestBody @Valid SentenciadoValidador validador) throws Exception {
         return new ResponseEntity<>(sentenciadoService.crear(validador), HttpStatus.OK);
     }
 }

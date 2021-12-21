@@ -1,18 +1,23 @@
 package sspc.gob.mx.psr.services.imp;
 
+import com.google.common.primitives.Ints;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Folio;
-import sspc.gob.mx.psr.repository.EstadoRepository;
+import sspc.gob.mx.psr.model.catalog.Estado;
+import sspc.gob.mx.psr.model.catalog.Pais;
+import sspc.gob.mx.psr.repository.FolioRepository;
 import sspc.gob.mx.psr.services.FolioService;
 import sspc.gob.mx.psr.utils.Altisonantes;
+import sspc.gob.mx.psr.utils.FolioBuilder;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
-import javax.validation.constraints.NotNull;
+import java.nio.LongBuffer;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class FolioServiceImp implements FolioService {
@@ -20,33 +25,47 @@ public class FolioServiceImp implements FolioService {
     public static final String VOCALES = "AaEeIiOoUu";
     public static final String COMODIN_VACIO = "XX";
     public static final char CARACTER_COMODIN = 'X';
-    public static final String NACIONALIDAD_MEXICANA = "MEXICANA";
+    public static final String NACIONALIDAD_MEXICANA = "MXN";
 
     @Autowired
-    EstadoRepository estadoRepository;
+    public
+    FolioRepository folioRepository;
 
     @Override
-    public Folio generar(SentenciadoValidador sentenciadoInput) throws Exception {
-        var estado= buscaClaveEstado(sentenciadoInput);
+    public Folio generar(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
+        Folio entity = construirFolio(sentenciadoInput, estado, pais);
+        return folioRepository.save(entity);
+    }
 
+    private Folio construirFolio(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
+        String codigoPais = pais.getAlpha3();
+        var codigoEntidad = generarCodigoEntidad(estado, codigoPais);
         String codigoNombre = generarCodigoNombre(sentenciadoInput);
         var fecha = generarCodigoFecha(sentenciadoInput.getFechaNacimiento());
+        var consecutivo = getConsecutivo(sentenciadoInput, pais, codigoEntidad,
+                codigoNombre, Long.valueOf(Ints.join("", fecha)));
 
-        return null;
+        return new FolioBuilder(codigoNombre, fecha, codigoEntidad,
+                sentenciadoInput.getSexo(), codigoPais, consecutivo
+                ).build();
     }
 
-    private Long buscaClaveEstado(SentenciadoValidador sentenciadoInput) {
-        if(!sentenciadoInput.getNacionalidad().equals(NACIONALIDAD_MEXICANA)){
-            return 99L;
-        }
-         estadoRepository.findById(sentenciadoInput.getEstadoId())
-                .orElseThrow(() -> new ItemNotFoundException("estado.notFound") );//TODO pasarlo a properties
-        return sentenciadoInput.getEstadoId();
-
+    private int[] getConsecutivo(SentenciadoValidador sentenciadoInput, Pais pais,
+                                 int[] codigoEntidad, String codigoNombre, Long fecha) {
+        int size = folioRepository.findAllByParams(codigoNombre, fecha, codigoEntidad,
+                sentenciadoInput.getSexo().getCodigo(), pais.getAlpha3()).size() + 1;
+        return size < 10 ? new int[]{0, size} : new int[]{size} ;
     }
 
-    private int generarCodigoFecha(LocalDate fechaNacimiento) {
-        return Integer.parseInt(fechaNacimiento.toString().replace("-","").substring(2, 8));
+    private int[] generarCodigoEntidad(Estado estado, String codigoPais) {
+        return !codigoPais.equals(NACIONALIDAD_MEXICANA) ?
+                new int[]{99} :
+                new int[]{estado.getId().intValue()};
+    }
+
+    private int[] generarCodigoFecha(LocalDate fechaNacimiento) {
+        return new int[]{Integer.parseInt(
+                fechaNacimiento.toString().replace("-", "").substring(2, 8))};
     }
 
     private String generarCodigoNombre(SentenciadoValidador sentenciadoInput) throws Exception {
@@ -54,8 +73,8 @@ public class FolioServiceImp implements FolioService {
                  generarCodigoMaterno(sentenciadoInput) +
                  nombrePrimerCaracter(sentenciadoInput);
 
-        return Optional.of(Altisonantes.listado().get(nombreCodificado))
-                                       .orElse(nombreCodificado);
+        String cambioAltisonante = Altisonantes.listado().get(nombreCodificado.toUpperCase());
+        return cambioAltisonante != null ? cambioAltisonante: nombreCodificado;
     }
 
     private Character nombrePrimerCaracter(SentenciadoValidador sentenciadoInput) throws Exception {
