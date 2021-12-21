@@ -5,9 +5,9 @@ spring:
       path: /h2
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/psr_local
+    url: jdbc:postgresql://localhost:5432/PRS
     username: postgres
-    password: qwe
+    password: sa
     driverClassName: org.postgresql.Driver
   liquibase:
     change-log: 'classpath:db/databaseChangeLog.yaml'
