@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.nio.LongBuffer;
 import java.util.Arrays;
 import java.util.UUID;
@@ -22,18 +23,25 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 public class Folio {
-    private static final int COCIENTE_EXTRA = 7;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombreCodigo;
     private Long nacimientoCodigo;
     private Long entidadCodigo;
     private Character sexoCodigo;
     private String nacionalidadCodigo;
-    private Long consecutivo;
+    private String consecutivo;
     private Long extra;
 
-
+    @Override
+    public String toString() {
+        return  nombreCodigo +
+                nacimientoCodigo +
+                entidadCodigo +
+                sexoCodigo +
+                nacionalidadCodigo +
+                consecutivo +
+                extra;
+    }
 }

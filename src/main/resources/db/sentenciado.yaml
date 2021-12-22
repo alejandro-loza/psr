@@ -39,8 +39,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: folio
-                  type: java.sql.Types.VARCHAR(255)
+                  name: folio_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -75,7 +75,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: sexo
-                  type: java.sql.Types.VARCHAR(1)
+                  type: java.sql.Types.VARCHAR(8)
                   constraints:
                     nullable: false
               - column:
@@ -143,14 +143,14 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: estado
   - changeSet:
-      id: sentenciado_pais_fk
+      id: sentenciado_folio_fk
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: pais_id
+            baseColumnNames: folio_id
             baseTableName: sentenciado
-            constraintName: fk_sentenciado_pais
+            constraintName: fk_sentenciado_folio
             deferrable: false
             initiallyDeferred: false
             referencedColumnNames: id
-            referencedTableName: pais
+            referencedTableName: folio

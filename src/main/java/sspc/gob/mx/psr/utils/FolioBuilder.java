@@ -11,8 +11,6 @@ import java.util.Arrays;
 
 public class FolioBuilder implements IFolioBuilder {
     private static final int COCIENTE_EXTRA = 7;
-
-
     private final String nombreCodigo;
     private final int[] nacimientoCodigo;
     private final int[] entidadCodigo;
@@ -28,34 +26,34 @@ public class FolioBuilder implements IFolioBuilder {
                         int[] consecutivo) {
 
         this.nombreCodigo = nombreCodigo;
-        this.nacimientoCodigo = Arrays.copyOfRange(nacimientoCodigo, 0 ,6);
-        this.entidadCodigo = Arrays.copyOfRange(entidadCodigo, 0 ,2);
+        this.nacimientoCodigo = nacimientoCodigo;
+        this.entidadCodigo = entidadCodigo;
         this.sexoCodigo = sexoCodigo;
         this.nacionalidadCodigo = StringUtils.stripAccents(nacionalidadCodigo.substring(0, 3).toUpperCase());;
-        this.consecutivo = Arrays.copyOfRange(consecutivo, 0 ,2);
+        this.consecutivo = consecutivo;
     }
 
     @Override
     public Folio build() {
         Folio folio = new Folio();
         folio.setNombreCodigo(this.nombreCodigo);
-        folio.setNacimientoCodigo( Long.valueOf(Ints.join("", this.nacimientoCodigo)));
-        folio.setEntidadCodigo(this.entidadCodigo);
+        folio.setNacimientoCodigo(Long.valueOf(Ints.join("", this.nacimientoCodigo)));
+        folio.setEntidadCodigo(Long.valueOf(Ints.join("", this.entidadCodigo)));
         folio.setSexoCodigo(this.sexoCodigo.getCodigo());
         folio.setNacionalidadCodigo(this.nacionalidadCodigo);
-        folio.setConsecutivo(this.consecutivo);
+        folio.setConsecutivo(Ints.join("",this.consecutivo));
         folio.setExtra( calculaExtra());
         return folio;
     }
 
-    private int calculaExtra() {
-        return Arrays.stream(ArrayUtils.addAll(
+    private Long calculaExtra() {
+        return (long) (Arrays.stream(ArrayUtils.addAll(
                 ArrayUtils.addAll(
-                        ArrayUtils.addAll(this.nombreCodigo.chars().toArray(),  this.nacimientoCodigo),
+                        ArrayUtils.addAll(this.nombreCodigo.chars().toArray(), this.nacimientoCodigo),
                         ArrayUtils.addAll(this.entidadCodigo, this.nacionalidadCodigo.chars().toArray())
                 ),
                 ArrayUtils.addAll(this.consecutivo, (int) this.sexoCodigo.getCodigo())
-        )).sum() % COCIENTE_EXTRA;
+        )).sum() % COCIENTE_EXTRA);
     }
 
 }

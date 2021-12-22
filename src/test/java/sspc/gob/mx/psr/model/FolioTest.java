@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class FolioTest {
-
+/*
     @Test
     void folioCreate(){
         Folio folio = new Folio();
@@ -54,5 +54,7 @@ public class FolioTest {
         assertEquals(4,folio.getExtra());
 
     }
+
+ */
 }
 

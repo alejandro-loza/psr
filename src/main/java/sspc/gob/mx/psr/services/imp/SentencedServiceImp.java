@@ -34,7 +34,8 @@ public class SentencedServiceImp implements SentenciadoService {
     @Override
     @Transactional
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {
-        return new SentenciadoDto( sentencedRepository.save( construyeSentenciado(sentenciadoValidador)));
+        Sentenciado sentenciado = sentencedRepository.save(construyeSentenciado(sentenciadoValidador));
+        return new SentenciadoDto( sentenciado);
     }
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput) throws Exception {

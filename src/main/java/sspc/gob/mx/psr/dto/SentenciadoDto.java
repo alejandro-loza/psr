@@ -16,6 +16,8 @@ public class SentenciadoDto {
 
     String id;
 
+    String folio;
+
     String nombre;
 
     String apellidoPaterno;
@@ -48,10 +50,10 @@ public class SentenciadoDto {
 
     String  email;
 
-    LocalDateTime dateCreated;
 
     public SentenciadoDto(Sentenciado sentenciado){
         this.id = sentenciado.getId().toString();
+        this.folio = sentenciado.getFolio().toString();
         this.nombre = sentenciado.getNombre();
         this.apellidoPaterno = sentenciado.getApellidoPaterno();
         this.apellidoMaterno = sentenciado.getApellidoMaterno();
@@ -68,7 +70,6 @@ public class SentenciadoDto {
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();
         this.email = sentenciado.getEmail();
-        this.dateCreated = sentenciado.getDateCreated();
     }
 
 }

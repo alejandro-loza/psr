@@ -78,8 +78,6 @@ public class Sentenciado extends BaseEntity {
     @Size(min = 1, max = 100)
     private String ocupacion;
 
-    @NotNull
-    @NotBlank
     @Enumerated(EnumType.STRING)
     @Column(name="sexo")
     private Sexo sexo;

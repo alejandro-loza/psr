@@ -33,8 +33,7 @@ public class FolioServiceImp implements FolioService {
 
     @Override
     public Folio generar(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
-        Folio entity = construirFolio(sentenciadoInput, estado, pais);
-        return folioRepository.save(entity);
+        return folioRepository.save(construirFolio(sentenciadoInput, estado, pais));
     }
 
     private Folio construirFolio(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
@@ -42,7 +41,7 @@ public class FolioServiceImp implements FolioService {
         var codigoEntidad = generarCodigoEntidad(estado, codigoPais);
         String codigoNombre = generarCodigoNombre(sentenciadoInput);
         var fecha = generarCodigoFecha(sentenciadoInput.getFechaNacimiento());
-        var consecutivo = getConsecutivo(sentenciadoInput, pais, codigoEntidad,
+        var consecutivo = getConsecutivo(sentenciadoInput, pais, Long.valueOf(Ints.join("",codigoEntidad)),
                 codigoNombre, Long.valueOf(Ints.join("", fecha)));
 
         return new FolioBuilder(codigoNombre, fecha, codigoEntidad,
@@ -51,10 +50,10 @@ public class FolioServiceImp implements FolioService {
     }
 
     private int[] getConsecutivo(SentenciadoValidador sentenciadoInput, Pais pais,
-                                 int[] codigoEntidad, String codigoNombre, Long fecha) {
-        int size = folioRepository.findAllByParams(codigoNombre, fecha, codigoEntidad,
+                                 Long codigoEntidad, String codigoNombre, Long fecha) {
+        int consecutivo = folioRepository.findAllByParams(codigoNombre, fecha, codigoEntidad,
                 sentenciadoInput.getSexo().getCodigo(), pais.getAlpha3()).size() + 1;
-        return size < 10 ? new int[]{0, size} : new int[]{size} ;
+        return consecutivo < 10 ? new int[]{0, consecutivo} : new int[]{consecutivo} ;
     }
 
     private int[] generarCodigoEntidad(Estado estado, String codigoPais) {

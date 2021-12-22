@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface FolioRepository extends JpaRepository<Folio, Long> {
 
-
     @Query("SELECT f FROM Folio f WHERE" +
             " f.nombreCodigo = ?1 and" +
             " f.nacimientoCodigo = ?2 and" +
@@ -17,8 +16,8 @@ public interface FolioRepository extends JpaRepository<Folio, Long> {
             " f.nacionalidadCodigo = ?5")
     List<Folio> findAllByParams(
             String nombreCodigo,
-            long nacimientoCodigo,
-            int[] entidadCodigo,
-            char sexoCodigo,
+            Long nacimientoCodigo,
+            Long entidadCodigo,
+            Character sexoCodigo,
             String nacionalidadCodigo);
 }

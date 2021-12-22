@@ -40,7 +40,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: consecutivo
-                  type: BIGINT
+                  type: java.sql.Types.VARCHAR(2)
                   constraints:
                     nullable: false
               - column:
