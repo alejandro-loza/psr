@@ -4,5 +4,5 @@ import sspc.gob.mx.psr.dto.SentenciadoDto;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 public interface SentenciadoService {
-    SentenciadoDto crear(SentenciadoValidador sentenciadoValidador);
+    SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception;
 }

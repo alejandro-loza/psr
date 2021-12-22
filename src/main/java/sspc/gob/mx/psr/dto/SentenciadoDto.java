@@ -5,7 +5,9 @@ import lombok.Setter;
 import sspc.gob.mx.psr.model.Sentenciado;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 @Getter
@@ -13,6 +15,8 @@ import java.time.LocalDateTime;
 public class SentenciadoDto {
 
     String id;
+
+    String folio;
 
     String nombre;
 
@@ -30,7 +34,7 @@ public class SentenciadoDto {
 
     String otrosNombres;
 
-    Long fechaNacimiento;
+    LocalDate fechaNacimiento;
 
     String ocupacion;
 
@@ -46,27 +50,26 @@ public class SentenciadoDto {
 
     String  email;
 
-    LocalDateTime dateCreated;
 
     public SentenciadoDto(Sentenciado sentenciado){
         this.id = sentenciado.getId().toString();
+        this.folio = sentenciado.getFolio().toString();
         this.nombre = sentenciado.getNombre();
         this.apellidoPaterno = sentenciado.getApellidoPaterno();
         this.apellidoMaterno = sentenciado.getApellidoMaterno();
-        this.nacionalidad = sentenciado.getNacionalidad();
+        this.nacionalidad = sentenciado.getNacionalidad().getNombre();
         this.curp = sentenciado.getCurp();
         this.estadoCivil = sentenciado.getEstadoCivil();
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
-        this.fechaNacimiento = sentenciado.getFechaNacimiento().getTime();
+        this.fechaNacimiento = sentenciado.getFechaNacimiento();
         this.ocupacion = sentenciado.getOcupacion();
-        this.sexo = sentenciado.getSexo();
+        this.sexo = sentenciado.getSexo().toString();
         this.etnia = sentenciado.getEtnia();
         this.escolaridad = sentenciado.getEscolaridad();
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();
         this.email = sentenciado.getEmail();
-        this.dateCreated = sentenciado.getDateCreated();
     }
 
 }

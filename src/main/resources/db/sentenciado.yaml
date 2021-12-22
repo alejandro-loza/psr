@@ -18,7 +18,6 @@ databaseChangeLog:
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
-                    unique: true
               - column:
                   name: apellido_paterno
                   type: java.sql.Types.VARCHAR(255)
@@ -30,8 +29,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: nacionalidad
-                  type: java.sql.Types.VARCHAR(255)
+                  name: pais_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -40,8 +39,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: folio
-                  type: java.sql.Types.VARCHAR(255)
+                  name: folio_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -65,13 +64,18 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: estado_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
                   name: ocupacion
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:
                   name: sexo
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(8)
                   constraints:
                     nullable: false
               - column:
@@ -114,3 +118,39 @@ databaseChangeLog:
                   type: DATETIME(6)
                   constraints:
                     nullable: true
+  - changeSet:
+      id: sentenciado_pais_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: pais_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_pais
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: pais
+  - changeSet:
+      id: sentenciado_estado_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: estado_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_estado
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: estado
+  - changeSet:
+      id: sentenciado_folio_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: folio_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_folio
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: folio

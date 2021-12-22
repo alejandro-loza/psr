@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: pais_data
+      author: alejandro.hernandez
+      changes:
+        - insert:
+            tableName: pais
+            columns:
+              - column:
+                  name: id
+                  value: 484
+              - column:
+                  name: nombre
+                  value: 'México'
+              - column:
+                  name: alpha2
+                  value: 'MX'
+              - column:
+                  name: alpha3
+                  value: 'MEX'
