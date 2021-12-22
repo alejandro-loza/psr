@@ -2,6 +2,15 @@ databaseChangeLog:
   - property:
         name: uuid_function
         value: "uid.uuid_generate_v4()"
-        dbms: postgresql
+  - include:
+      file: db/folio.yaml
+  - include:
+      file: db/estado.yaml
+  - include:
+      file: db/pais.yaml
   - include:
       file: db/sentenciado.yaml
+  - include:
+      file: db/data/estados_data.yaml
+  - include:
+      file: db/data/pais_data.yaml
