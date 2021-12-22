@@ -2,23 +2,25 @@ package sspc.gob.mx.psr.services.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sspc.gob.mx.psr.dto.EstadoDto;
 import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.catalog.Estado;
 import sspc.gob.mx.psr.repository.EstadoRepository;
 import sspc.gob.mx.psr.services.EstadoService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EstadoServiceImp implements EstadoService {
 
-   @Autowired
+    @Autowired
     EstadoRepository estadoRepository;
 
     @Override
-    public List<Estado> lista(){
-       return estadoRepository.findAll();
-
+    public List<EstadoDto> lista(){
+        return estadoRepository.findAll()
+                .stream().map(EstadoDto::new).collect(Collectors.toList());
    }
 
     @Override

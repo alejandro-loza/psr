@@ -6,21 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sspc.gob.mx.psr.dto.GreetingDto;
-import sspc.gob.mx.psr.services.EstadoService;
-import sspc.gob.mx.psr.services.imp.EstadoServiceImp;
+import sspc.gob.mx.psr.services.PaisService;
 
-@RequestMapping("catalogos/estado")
+@RequestMapping("catalogos/pais")
 @RestController
-public class EstadosController {
+public class PaisesController {
 
     @Autowired
-    EstadoService estadoservicio;
+    PaisService paisService;
 
     @GetMapping( produces = "application/json")
     ResponseEntity estados() {
-        return new ResponseEntity<>( estadoservicio.lista(), HttpStatus.OK);
+        return new ResponseEntity<>( paisService.lista(), HttpStatus.OK);
     }
-
 
 }
