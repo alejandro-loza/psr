@@ -107,7 +107,7 @@ public class FolioServiceImp implements FolioService {
         if(apellido.length() == 1){
             return CARACTER_COMODIN;
         }
-        return buscaPrimerVocal(apellido);
+        return buscaPrimerVocal(apellido.toUpperCase());
     }
 
     private Character buscaPrimerVocal(String apellido) {
