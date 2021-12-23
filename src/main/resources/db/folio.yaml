@@ -25,7 +25,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: entidad_codigo
-                  type: BIGINT
+                  type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
               - column:

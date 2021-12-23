@@ -28,7 +28,7 @@ public class Folio {
     private Long id;
     private String nombreCodigo;
     private Long nacimientoCodigo;
-    private Long entidadCodigo;
+    private String entidadCodigo;
     private Character sexoCodigo;
     private String nacionalidadCodigo;
     private String consecutivo;

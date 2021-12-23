@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import sspc.gob.mx.psr.model.Folio;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FolioRepository extends JpaRepository<Folio, Long> {
 
@@ -17,7 +18,7 @@ public interface FolioRepository extends JpaRepository<Folio, Long> {
     List<Folio> findAllByParams(
             String nombreCodigo,
             Long nacimientoCodigo,
-            Long entidadCodigo,
+            String entidadCodigo,
             Character sexoCodigo,
             String nacionalidadCodigo);
 }
