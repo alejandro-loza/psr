@@ -9,8 +9,12 @@ databaseChangeLog:
   - include:
       file: db/pais.yaml
   - include:
+      file: db/escolaridad.yaml
+  - include:
       file: db/sentenciado.yaml
   - include:
       file: db/data/estados_data.yaml
   - include:
       file: db/data/pais_data.yaml
+  - include:
+      file: db/data/escolaridad_data.yaml

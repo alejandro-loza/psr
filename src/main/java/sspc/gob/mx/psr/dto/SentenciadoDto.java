@@ -26,6 +26,8 @@ public class SentenciadoDto {
 
     String nacionalidad;
 
+    String estado;
+
     String curp;
 
     String estadoCivil;
@@ -58,6 +60,7 @@ public class SentenciadoDto {
         this.apellidoPaterno = sentenciado.getApellidoPaterno();
         this.apellidoMaterno = sentenciado.getApellidoMaterno();
         this.nacionalidad = sentenciado.getNacionalidad().getNombre();
+        this.estado = sentenciado.getEstado().getNombre();
         this.curp = sentenciado.getCurp();
         this.estadoCivil = sentenciado.getEstadoCivil();
         this.alias = sentenciado.getAlias();
@@ -66,7 +69,7 @@ public class SentenciadoDto {
         this.ocupacion = sentenciado.getOcupacion();
         this.sexo = sentenciado.getSexo().toString();
         this.etnia = sentenciado.getEtnia();
-        this.escolaridad = sentenciado.getEscolaridad();
+        this.escolaridad = sentenciado.getEscolaridad().getNombre();
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();
         this.email = sentenciado.getEmail();

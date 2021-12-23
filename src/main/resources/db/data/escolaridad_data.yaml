@@ -1,0 +1,176 @@
+databaseChangeLog:
+  - changeSet:
+      id: escolaridad_data
+      author: alejandro.hernandez
+      changes:
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: nombre
+                  value: 'SIN ESCOLARIDAD'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: nombre
+                  value: 'PRIMARIA INCOMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: nombre
+                  value: 'PRIMARIA COMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: nombre
+                  value: 'SECUNDARIA INCOMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: nombre
+                  value: 'SECUNDARIA COMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: nombre
+                  value: 'CARRERA TECNICA INCOMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: nombre
+                  value: 'CARRERA TECNICA COMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: nombre
+                  value: 'BACHILLERATO INCOMPLETO'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: nombre
+                  value: 'BACHILLERATO COMPLETO'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 10
+              - column:
+                  name: nombre
+                  value: 'LICENCIATURA INCOMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 11
+              - column:
+                  name: nombre
+                  value: 'LICENCIATURA COMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 12
+              - column:
+                  name: nombre
+                  value: 'MAESTRIA INCOMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 13
+              - column:
+                  name: nombre
+                  value: 'MAESTRIA COMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 14
+              - column:
+                  name: nombre
+                  value: 'DOCTORADO INCOMPLETO'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 15
+              - column:
+                  name: nombre
+                  value: 'DOCTORADO COMPLETO'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 16
+              - column:
+                  name: nombre
+                  value: 'ESPECIALIDAD INCOMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 17
+              - column:
+                  name: nombre
+                  value: 'ESPECIALIDAD COMPLETA'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 18
+              - column:
+                  name: nombre
+                  value: 'ANALFABETO(A)'
+        - insert:
+            tableName: escolaridad
+            columns:
+              - column:
+                  name: id
+                  value: 9999
+              - column:
+                  name: nombre
+                  value: 'SIN DATO'

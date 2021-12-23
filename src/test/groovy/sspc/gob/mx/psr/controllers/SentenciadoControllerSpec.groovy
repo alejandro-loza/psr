@@ -43,7 +43,7 @@ class SentenciadoControllerSpec extends Specification {
             ocupacion = "Servidor publico"
             sexo = Sexo.FEMENINO
             etnia = 'Maya'
-            escolaridad = 'Primaria'
+            escolaridad = 1
             telefonoFijo =  1234567890
             celular =  1234567890
             email = 'juan.antonio.perez.garcia@gmail.com'
@@ -66,7 +66,7 @@ class SentenciadoControllerSpec extends Specification {
             assert it.ocupacion == "Servidor publico"
             assert it.sexo == 'FEMENINO'
             assert it.etnia == 'Maya'
-            assert it.escolaridad == 'Primaria'
+            assert it.escolaridad == 'SIN ESCOLARIDAD'
             assert it.telefonoFijo ==  '1234567890'
             assert it.celular ==  "1234567890"
             assert it.email == 'juan.antonio.perez.garcia@gmail.com'
@@ -94,7 +94,7 @@ class SentenciadoControllerSpec extends Specification {
             ocupacion = "Servidor publico"
             sexo = Sexo.FEMENINO
             etnia = 'Maya'
-            escolaridad = 'Primaria'
+            escolaridad =  1
             telefonoFijo =  1234567890
             celular =  1234567890
             email = 'juan.antonio.perez.garcia@gmail.com'
