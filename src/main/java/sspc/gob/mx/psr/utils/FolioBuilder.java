@@ -6,8 +6,10 @@ import org.apache.commons.lang3.StringUtils;
 import sspc.gob.mx.psr.enums.Sexo;
 import sspc.gob.mx.psr.model.Folio;
 
-import java.nio.LongBuffer;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class FolioBuilder implements IFolioBuilder {
     private static final int COCIENTE_EXTRA = 7;
@@ -38,7 +40,7 @@ public class FolioBuilder implements IFolioBuilder {
         Folio folio = new Folio();
         folio.setNombreCodigo(this.nombreCodigo);
         folio.setNacimientoCodigo(Long.valueOf(Ints.join("", this.nacimientoCodigo)));
-        folio.setEntidadCodigo(Long.valueOf(Ints.join("", this.entidadCodigo)));
+        folio.setEntidadCodigo(Ints.join("", this.entidadCodigo));
         folio.setSexoCodigo(this.sexoCodigo.getCodigo());
         folio.setNacionalidadCodigo(this.nacionalidadCodigo);
         folio.setConsecutivo(Ints.join("",this.consecutivo));
@@ -47,13 +49,32 @@ public class FolioBuilder implements IFolioBuilder {
     }
 
     private Long calculaExtra() {
-        return (long) (Arrays.stream(ArrayUtils.addAll(
+        return (long) ( sumaUnitaria(listaValoresNumericosPorCaracter()) % COCIENTE_EXTRA);
+    }
+
+    private List<Integer> listaValoresNumericosPorCaracter() {
+        return Arrays.stream(ArrayUtils.addAll(
                 ArrayUtils.addAll(
                         ArrayUtils.addAll(this.nombreCodigo.chars().toArray(), this.nacimientoCodigo),
                         ArrayUtils.addAll(this.entidadCodigo, this.nacionalidadCodigo.chars().toArray())
                 ),
                 ArrayUtils.addAll(this.consecutivo, (int) this.sexoCodigo.getCodigo())
-        )).sum() % COCIENTE_EXTRA);
+        )).boxed().collect(Collectors.toList());
+    }
+
+    private Integer sumaUnitaria(List<Integer> intStream) {
+        StringBuilder sb = new StringBuilder();
+        for (var element: intStream){
+            sb.append(element.toString());
+        }
+
+        List<Integer> numeros = new ArrayList<>();
+
+        for (int i = 0; i < sb.length(); i++) {
+            numeros.add(Character.getNumericValue(sb.charAt(i)));
+        }
+
+        return numeros.stream().reduce(0, Integer::sum);
     }
 
 }
