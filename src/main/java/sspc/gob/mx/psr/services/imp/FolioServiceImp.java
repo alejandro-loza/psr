@@ -12,12 +12,10 @@ import sspc.gob.mx.psr.services.FolioService;
 import sspc.gob.mx.psr.utils.Altisonantes;
 import sspc.gob.mx.psr.utils.FolioBuilder;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
-
-import java.nio.LongBuffer;
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class FolioServiceImp implements FolioService {
@@ -25,7 +23,7 @@ public class FolioServiceImp implements FolioService {
     public static final String VOCALES = "AaEeIiOoUu";
     public static final String COMODIN_VACIO = "XX";
     public static final char CARACTER_COMODIN = 'X';
-    public static final String NACIONALIDAD_MEXICANA = "MXN";
+    public static final String NACIONALIDAD_MEXICANA = "MEX";
 
     @Autowired
     public
@@ -36,12 +34,13 @@ public class FolioServiceImp implements FolioService {
         return folioRepository.save(construirFolio(sentenciadoInput, estado, pais));
     }
 
-    private Folio construirFolio(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
+    @Override
+    public Folio construirFolio(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
         String codigoPais = pais.getAlpha3();
         var codigoEntidad = generarCodigoEntidad(estado, codigoPais);
         String codigoNombre = generarCodigoNombre(sentenciadoInput);
         var fecha = generarCodigoFecha(sentenciadoInput.getFechaNacimiento());
-        var consecutivo = getConsecutivo(sentenciadoInput, pais, Long.valueOf(Ints.join("",codigoEntidad)),
+        var consecutivo = getConsecutivo(sentenciadoInput, pais, Ints.join("",codigoEntidad),
                 codigoNombre, Long.valueOf(Ints.join("", fecha)));
 
         return new FolioBuilder(codigoNombre, fecha, codigoEntidad,
@@ -50,16 +49,21 @@ public class FolioServiceImp implements FolioService {
     }
 
     private int[] getConsecutivo(SentenciadoValidador sentenciadoInput, Pais pais,
-                                 Long codigoEntidad, String codigoNombre, Long fecha) {
+                                 String codigoEntidad, String codigoNombre, Long fecha) {
+
         int consecutivo = folioRepository.findAllByParams(codigoNombre, fecha, codigoEntidad,
-                sentenciadoInput.getSexo().getCodigo(), pais.getAlpha3()).size() + 1;
+                sentenciadoInput.getSexo().getCodigo(), pais.getAlpha3()).size();
         return consecutivo < 10 ? new int[]{0, consecutivo} : new int[]{consecutivo} ;
     }
 
     private int[] generarCodigoEntidad(Estado estado, String codigoPais) {
         return !codigoPais.equals(NACIONALIDAD_MEXICANA) ?
-                new int[]{99} :
-                new int[]{estado.getId().intValue()};
+                new int[]{99} :  obtenIdEstadoDosCaracteres(estado);
+    }
+
+    private int[] obtenIdEstadoDosCaracteres(Estado estado) {
+        int estadoId = estado.getId().intValue();
+        return estadoId < 10 ? new int[]{0, estadoId} : new int[]{estadoId};
     }
 
     private int[] generarCodigoFecha(LocalDate fechaNacimiento) {
