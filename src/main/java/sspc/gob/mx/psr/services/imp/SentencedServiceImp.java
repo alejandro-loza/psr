@@ -7,10 +7,7 @@ import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Estado;
 import sspc.gob.mx.psr.model.catalog.Pais;
 import sspc.gob.mx.psr.repository.SentencedRepository;
-import sspc.gob.mx.psr.services.EstadoService;
-import sspc.gob.mx.psr.services.FolioService;
-import sspc.gob.mx.psr.services.PaisService;
-import sspc.gob.mx.psr.services.SentenciadoService;
+import sspc.gob.mx.psr.services.*;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 import javax.transaction.Transactional;
@@ -31,6 +28,9 @@ public class SentencedServiceImp implements SentenciadoService {
     @Autowired
     PaisService paisService;
 
+    @Autowired
+    EscolaridadService escolaridadService;
+
     @Override
     @Transactional
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {
@@ -50,14 +50,14 @@ public class SentencedServiceImp implements SentenciadoService {
                 .estado(estado)
                 .nacionalidad(pais)
                 .curp(sentencedInput.getCurp())
-                .estadoCivil(sentencedInput.getEstadoCivil())
-                .alias(sentencedInput.getAlias())
-                .otrosNombres(sentencedInput.getOtrosNombres())
+                .estadoCivil(sentencedInput.getEstadoCivil())  //TODO IS A CATALOG?
+                .alias(sentencedInput.getAlias()) //TODO IS A List?
+                .otrosNombres(sentencedInput.getOtrosNombres())  //TODO IS A List?
                 .fechaNacimiento(sentencedInput.getFechaNacimiento())
-                .ocupacion(sentencedInput.getOcupacion())
+                .ocupacion(sentencedInput.getOcupacion()) //TODO IS A CATALOG?
                 .sexo(sentencedInput.getSexo())
                 .etnia(sentencedInput.getEtnia())//TODO IS A CATALOG? MAYA
-                .escolaridad(sentencedInput.getEscolaridad())
+                .escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()))
                 .telefonoFijo(sentencedInput.getTelefonoFijo())
                 .celular(sentencedInput.getCelular())
                 .email(sentencedInput.getEmail())

@@ -23,11 +23,44 @@ class EstadoControllerSpec extends Specification {
 
     def "Deberia traer todos los estados de la republica"(){
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogos/estado", List)?.body
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado", List)?.body
 
         then:
         assert resp.size() == 32
         assert resp == estadosRespuesta()
+    }
+
+    def "Deberia traer todos las escolaridades"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/escolaridad", List)?.body
+
+        then:
+        assert resp.size() == 19
+        assert resp == escolaridades()
+
+
+    }
+
+    private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {
+        [[id: 1, nombre: 'SIN ESCOLARIDAD'],
+         [id: 2, nombre: 'PRIMARIA INCOMPLETA'],
+         [id: 3, nombre: 'PRIMARIA COMPLETA'],
+         [id: 4, nombre: 'SECUNDARIA INCOMPLETA'],
+         [id: 5, nombre: 'SECUNDARIA COMPLETA'],
+         [id: 6, nombre: 'CARRERA TECNICA INCOMPLETA'],
+         [id: 7, nombre: 'CARRERA TECNICA COMPLETA'],
+         [id: 8, nombre: 'BACHILLERATO INCOMPLETO'],
+         [id: 9, nombre: 'BACHILLERATO COMPLETO'],
+         [id: 10, nombre: 'LICENCIATURA INCOMPLETA'],
+         [id: 11, nombre: 'LICENCIATURA COMPLETA'],
+         [id: 12, nombre: 'MAESTRIA INCOMPLETA'],
+         [id: 13, nombre: 'MAESTRIA COMPLETA'],
+         [id: 14, nombre: 'DOCTORADO INCOMPLETO'],
+         [id: 15, nombre: 'DOCTORADO COMPLETO'],
+         [id: 16, nombre: 'ESPECIALIDAD INCOMPLETA'],
+         [id: 17, nombre: 'ESPECIALIDAD COMPLETA'],
+         [id: 18, nombre: 'ANALFABETO(A)'],
+         [id: 9999, nombre: 'SIN DATO']]
     }
 
     private static ArrayList<LinkedHashMap<String, Serializable>> estadosRespuesta() {
