@@ -31,6 +31,7 @@ public class SentencedServiceImp implements SentenciadoService {
     @Autowired
     EscolaridadService escolaridadService;
 
+
     @Override
     @Transactional
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {

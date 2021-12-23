@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import sspc.gob.mx.psr.enums.Sexo;
 import sspc.gob.mx.psr.model.catalog.Escolaridad;
 import sspc.gob.mx.psr.model.catalog.Estado;
+import sspc.gob.mx.psr.model.catalog.Etnia;
 import sspc.gob.mx.psr.model.catalog.Pais;
 
 import javax.persistence.*;
@@ -84,9 +85,9 @@ public class Sentenciado extends BaseEntity {
     private Sexo sexo;
 
     @NotNull
-    @NotBlank
-    @Size(min = 1, max = 20)
-    private String etnia;
+    @ManyToOne
+    @JoinColumn(name="etnia_id")
+    private Etnia etnia;
 
     @NotNull
     @ManyToOne

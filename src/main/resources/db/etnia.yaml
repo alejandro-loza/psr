@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: etnia
+      author: alejandro.hernandez
+      changes:
+        - createTable:
+            tableName: etnia
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
