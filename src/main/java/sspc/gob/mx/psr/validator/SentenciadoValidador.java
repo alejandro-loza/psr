@@ -68,9 +68,7 @@ public class SentenciadoValidador {
     String etnia;
 
     @NotNull
-    @NotBlank
-    @Size(min = 1, max = 50)
-    String escolaridad;
+    Long escolaridad;
 
     @NotNull
     @NotBlank

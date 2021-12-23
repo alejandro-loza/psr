@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import sspc.gob.mx.psr.enums.Sexo;
+import sspc.gob.mx.psr.model.catalog.Escolaridad;
 import sspc.gob.mx.psr.model.catalog.Estado;
 import sspc.gob.mx.psr.model.catalog.Pais;
 
@@ -88,9 +89,9 @@ public class Sentenciado extends BaseEntity {
     private String etnia;
 
     @NotNull
-    @NotBlank
-    @Size(min = 1, max = 50)
-    private String escolaridad;
+    @ManyToOne
+    @JoinColumn(name="escolaridad_id")
+    private Escolaridad escolaridad;
 
     @NotNull
     private String telefonoFijo;
