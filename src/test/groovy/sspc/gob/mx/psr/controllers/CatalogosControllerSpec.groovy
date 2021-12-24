@@ -2,20 +2,11 @@ package sspc.gob.mx.psr.controllers
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
-import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
-import sspc.gob.mx.psr.enums.Sexo
-import sspc.gob.mx.psr.validator.SentenciadoValidador
-
-import java.time.LocalDate
-import java.time.Month
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class EstadoControllerSpec extends Specification {
+class CatalogosControllerSpec extends Specification {
 
     @Value('${local.server.port}')
     int port
@@ -30,6 +21,22 @@ class EstadoControllerSpec extends Specification {
         assert resp == estadosRespuesta()
     }
 
+    def "Deberia traer todos los estados civiles"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estadoCivil", List)?.body
+
+        then:
+        assert resp.size() == 8
+        assert resp == [[id:1, nombre:'SOLTERO(A)'],
+                        [id:2, nombre:'CASADO(A)'],
+                        [id:3, nombre:'VIUDO(A)'],
+                        [id:4, nombre:'CONCUBINATO'],
+                        [id:5, nombre:'UNIÓN LIBRE'],
+                        [id:6, nombre:'DIVORCIADO(A)'],
+                        [id:7, nombre:'SEPARADO'],
+                        [id:99, nombre:'OTRO(S)']]
+    }
+
     def "Deberia traer todos las escolaridades"(){
         when:
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/escolaridad", List)?.body
@@ -39,6 +46,14 @@ class EstadoControllerSpec extends Specification {
         assert resp == escolaridades()
 
 
+    }
+
+    def "Deberia traer todos las etnias"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/etnia", List)?.body
+
+        then:
+        assert resp.size() > 19
     }
 
     private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {

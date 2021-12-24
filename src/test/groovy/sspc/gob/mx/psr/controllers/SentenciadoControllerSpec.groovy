@@ -33,16 +33,16 @@ class SentenciadoControllerSpec extends Specification {
             nombre = 'Alejandro'
             apellidoPaterno = 'Ràmirez'
             apellidoMaterno = 'Torres'
-            nacionalidad = MEXICO_ID
+            nacionalidadId = MEXICO_ID
             estadoId = 13
             curp = 'HELA880416HHGRZL08'
             estadoCivil ='soltero'
             alias = "el pinky"
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = localDate
-            ocupacion = "Servidor publico"
+            ocupacionId = 1
             sexo = Sexo.FEMENINO
-            etnia = 'Maya'
+            etniaId = 1
             escolaridad = 1
             telefonoFijo =  1234567890
             celular =  1234567890
@@ -63,9 +63,9 @@ class SentenciadoControllerSpec extends Specification {
             assert it.alias == "el pinky"
             assert it.otrosNombres ==  "Enrique Peña"
             assert it.fechaNacimiento == '1988-04-16'
-            assert it.ocupacion == "Servidor publico"
+            assert it.ocupacion == "EMPLEADO"
             assert it.sexo == 'FEMENINO'
-            assert it.etnia == 'Maya'
+            assert it.etnia == 'AMUZGO'
             assert it.escolaridad == 'SIN ESCOLARIDAD'
             assert it.telefonoFijo ==  '1234567890'
             assert it.celular ==  "1234567890"
@@ -84,16 +84,16 @@ class SentenciadoControllerSpec extends Specification {
         cmd.with {
             apellidoPaterno = 'Pèrez'
             apellidoMaterno = 'Garcìa'
-            nacionalidad = MEXICO_ID
+            nacionalidadId = MEXICO_ID
             estadoId = 13
             curp = 'HELA880416HHGRZL08'
             estadoCivil ='soltero'
             alias = "el pinky"
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
-            ocupacion = "Servidor publico"
+            ocupacionId = 1
             sexo = Sexo.FEMENINO
-            etnia = 'Maya'
+            etniaId = 1
             escolaridad =  1
             telefonoFijo =  1234567890
             celular =  1234567890
