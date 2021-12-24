@@ -45,8 +45,7 @@ class FolioServiceSpec extends Specification{
         def resp = folioService.construirFolio(cmd, cdmx, mexico)
 
         then:
-        assert resp.toString() == 'RXTA88041609HMEX006'
-
+        assert resp.toString() == 'HELA88041613HMEX000'
 
     }
 
@@ -64,7 +63,7 @@ class FolioServiceSpec extends Specification{
     static Estado cdmx(){
         Estado cdmx = new Estado()
         cdmx.with {
-            id = 9
+            id = 13
             nombre = 'CIUDAD DE MÉXICO'
         }
         cdmx
