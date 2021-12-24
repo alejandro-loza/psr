@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import java.io.*;
+
+import java.io.IOException;
 import java.util.Map;
 
 @Scope("singleton")

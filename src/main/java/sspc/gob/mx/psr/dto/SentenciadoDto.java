@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import sspc.gob.mx.psr.model.Sentenciado;
 
-import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 
 @Getter
@@ -62,13 +59,13 @@ public class SentenciadoDto {
         this.nacionalidad = sentenciado.getNacionalidad().getNombre();
         this.estado = sentenciado.getEstado().getNombre();
         this.curp = sentenciado.getCurp();
-        this.estadoCivil = sentenciado.getEstadoCivil();
+        this.estadoCivil = sentenciado.getEstadoCivil().getNombre();
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
         this.fechaNacimiento = sentenciado.getFechaNacimiento();
-        this.ocupacion = sentenciado.getOcupacion();
+        this.ocupacion = sentenciado.getOcupacion().getNombre();
         this.sexo = sentenciado.getSexo().toString();
-        this.etnia = sentenciado.getEtnia();
+        this.etnia = sentenciado.getEtnia().getNombre();
         this.escolaridad = sentenciado.getEscolaridad().getNombre();
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();

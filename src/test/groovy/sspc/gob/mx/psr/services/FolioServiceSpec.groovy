@@ -30,10 +30,10 @@ class FolioServiceSpec extends Specification{
 
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
-            nombre = 'Alberto'
-            apellidoPaterno = 'Hernandez'
-            apellidoMaterno = 'Lugo'
-            nacionalidad = mexico.id
+            nombre = 'Alejandro'
+            apellidoPaterno = 'Ràmirez'
+            apellidoMaterno = 'Torres'
+            nacionalidadId = mexico.id
             estadoId = cdmx.id
             fechaNacimiento = localDate
             sexo = Sexo.MASCULINO

@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: etnia
+      author: alejandro.hernandez
+      changes:
+        - createTable:
+            tableName:  cat_etnia
+            columns:
+              - column:
+                  name: id_cat_etnia
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activo
+                  type: java.sql.Types.BOOLEAN
+                  constraints:
+                    nullable: false
