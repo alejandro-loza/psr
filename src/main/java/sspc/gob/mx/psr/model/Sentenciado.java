@@ -58,9 +58,9 @@ public class Sentenciado extends BaseEntity {
     private Folio folio;
 
     @NotNull
-    @NotBlank
-    @Size(min = 1, max = 100)
-    private String estadoCivil;
+    @ManyToOne
+    @JoinColumn(name="estado_civil_id")
+    private EstadoCivil estadoCivil;
 
     @NotBlank
     @Size(min = 1, max = 100)

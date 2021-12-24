@@ -26,6 +26,9 @@ public class SentencedServiceImp implements SentenciadoService {
     EstadoService estadoService;
 
     @Autowired
+    EstadoCivilService estadoCivilService;
+
+    @Autowired
     PaisService paisService;
 
     @Autowired
@@ -40,8 +43,7 @@ public class SentencedServiceImp implements SentenciadoService {
     @Override
     @Transactional
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {
-        Sentenciado sentenciado = sentencedRepository.save(construyeSentenciado(sentenciadoValidador));
-        return new SentenciadoDto( sentenciado);
+        return new SentenciadoDto( sentencedRepository.save(construyeSentenciado(sentenciadoValidador)));
     }
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput) throws Exception {
@@ -56,7 +58,7 @@ public class SentencedServiceImp implements SentenciadoService {
                 .estado(estado)
                 .nacionalidad(pais)
                 .curp(sentencedInput.getCurp())
-                .estadoCivil(sentencedInput.getEstadoCivil())  //TODO IS A CATALOG?
+                .estadoCivil(estadoCivilService.busca(sentencedInput.getEstadoCivil()))
                 .alias(sentencedInput.getAlias()) //TODO IS A List?
                 .otrosNombres(sentencedInput.getOtrosNombres())  //TODO IS A List?
                 .fechaNacimiento(sentencedInput.getFechaNacimiento())

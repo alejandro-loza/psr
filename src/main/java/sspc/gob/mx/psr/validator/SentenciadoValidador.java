@@ -41,9 +41,7 @@ public class SentenciadoValidador {
     String curp;
 
     @NotNull
-    @NotBlank
-    @Size(min = 1, max = 100)
-    String estadoCivil;
+    Long estadoCivil;
 
     @NotBlank
     @Size(min = 1, max = 100)

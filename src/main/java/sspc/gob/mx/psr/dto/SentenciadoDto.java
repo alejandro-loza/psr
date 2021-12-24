@@ -59,7 +59,7 @@ public class SentenciadoDto {
         this.nacionalidad = sentenciado.getNacionalidad().getNombre();
         this.estado = sentenciado.getEstado().getNombre();
         this.curp = sentenciado.getCurp();
-        this.estadoCivil = sentenciado.getEstadoCivil();
+        this.estadoCivil = sentenciado.getEstadoCivil().getNombre();
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
         this.fechaNacimiento = sentenciado.getFechaNacimiento();

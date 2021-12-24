@@ -7,6 +7,8 @@ databaseChangeLog:
   - include:
       file: db/estado.yaml
   - include:
+      file: db/estado_civil.yaml
+  - include:
       file: db/pais.yaml
   - include:
       file: db/escolaridad.yaml
@@ -18,6 +20,8 @@ databaseChangeLog:
       file: db/sentenciado.yaml
   - include:
       file: db/data/estados_data.yaml
+  - include:
+      file: db/data/estados_civil_data.yaml
   - include:
       file: db/data/pais_data.yaml
   - include:
