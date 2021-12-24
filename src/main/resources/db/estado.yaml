@@ -1,21 +1,29 @@
 databaseChangeLog:
   - changeSet:
       id: estado
-      author: alejandro.hernandez
+      author: andrea.perez
       changes:
         - createTable:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
+                  name: id_cat_estado
+                  type: INT
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
                   name: nombre
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(20)
                   constraints:
                     nullable: false
-                    unique: true
+              - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activo
+                  type: boolean
+                  constraints:
+                    nullable: false

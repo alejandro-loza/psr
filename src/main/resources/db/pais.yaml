@@ -4,30 +4,33 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - createTable:
-            tableName: pais
+            tableName: cat_pais
             columns:
               - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
+                  name: id_cat_pais
+                  type: INT
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
                   name: nombre
-                  type: java.sql.Types.VARCHAR(255)
-                  constraints:
-                    nullable: false
-                    unique: true
-              - column:
-                  name: alpha2
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(20)
                   constraints:
                     nullable: false
                     unique: true
               - column:
                   name: alpha3
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(3)
                   constraints:
                     nullable: false
                     unique: true
+              - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activo
+                  type: boolean
+                  constraints:
+                    nullable: false

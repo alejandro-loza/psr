@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: cat_municipio
             columns:
               - column:
-                  name: fk_id_cat_municipio
+                  name: id_cat_municipio
                   type: INT
                   constraints:
                     nullable: false
@@ -27,7 +27,7 @@ databaseChangeLog:
                   name: descripcion
                   type: java.sql.Types.VARCHAR(50)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: activo
                   type: boolean
