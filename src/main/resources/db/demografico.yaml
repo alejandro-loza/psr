@@ -1,91 +1,68 @@
 databaseChangeLog:
   - changeSet:
-      id: sentenciado
-      author: alejandro.hernandez
+      id: demografico
+      author: andrea.perez
       changes:
         - createTable:
-            tableName: sentenciado
+            tableName: domicilio
             columns:
               - column:
-                  name: id_sentenciado
+                  name: id_persona
                   type: uuid
                   valueComputed: "${u_id}"
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: nombre
-                  type: java.sql.Types.VARCHAR(50)
+                  name: id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
                   constraints:
                     nullable: false
-              - column:
-                  name: apellido_paterno
-                  type: java.sql.Types.VARCHAR(50)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: apellido_materno
-                  type: java.sql.Types.VARCHAR(50)
-                  constraints:
-                    nullable: true
+                    primaryKey: true
               - column:
                   name: fk_id_cat_pais
                   type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: fk_id_cat_edo_nacimiento
+                  name: fk_id_cat_estado
                   type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: documento
-                  type: java.sql.Types.VARCHAR(18)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: fk_id_cat_edo_civil
+                  name: fk_id_cat_municipio
                   type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: fch_nacimiento
-                  type: DATE
+                  name: codigo_postal
+                  type: java.sql.Types.VARCHAR(5)
                   constraints:
                     nullable: false
               - column:
-                  name: fk_id_cat_ocupacion
-                  type: INT
+                  name: colonia
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: calle
+                  type: java.sql.Types.VARCHAR(50)
                   constraints:
                     nullable: true
               - column:
-                  name: sexo
-                  type: java.sql.Types.VARCHAR(1)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: fk_id_cat_etnia
-                  type: INT
-                  constraints:
-                    nullable: true
-              - column:
-                  name: escolaridad_id
-                  type: BIGINT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: tel_casa
-                  type: java.sql.Types.VARCHAR(10)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: tel_celular
+                  name: numero
                   type: java.sql.Types.VARCHAR(10)
                   constraints:
                     nullable: false
               - column:
-                  name: correo_electronico
-                  type: java.sql.Types.VARCHAR(60)
+                  name: latitud
+                  type: java.sql.Types.VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: longitud
+                  type: java.sql.Types.VARCHAR(30)
                   constraints:
                     nullable: false
               - column:
