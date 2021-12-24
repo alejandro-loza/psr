@@ -33,7 +33,7 @@ class FolioServiceSpec extends Specification{
             nombre = 'Alejandro'
             apellidoPaterno = 'Ràmirez'
             apellidoMaterno = 'Torres'
-            nacionalidad = mexico.id
+            nacionalidadId = mexico.id
             estadoId = cdmx.id
             fechaNacimiento = localDate
             sexo = Sexo.MASCULINO

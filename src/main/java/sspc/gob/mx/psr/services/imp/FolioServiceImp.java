@@ -12,9 +12,8 @@ import sspc.gob.mx.psr.services.FolioService;
 import sspc.gob.mx.psr.utils.Altisonantes;
 import sspc.gob.mx.psr.utils.FolioBuilder;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service

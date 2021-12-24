@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import sspc.gob.mx.psr.enums.Sexo;
-import sspc.gob.mx.psr.model.catalog.Escolaridad;
-import sspc.gob.mx.psr.model.catalog.Estado;
-import sspc.gob.mx.psr.model.catalog.Etnia;
-import sspc.gob.mx.psr.model.catalog.Pais;
+import sspc.gob.mx.psr.model.catalog.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -76,9 +73,10 @@ public class Sentenciado extends BaseEntity {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDate fechaNacimiento;
 
-    @NotBlank
-    @Size(min = 1, max = 100)
-    private String ocupacion;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="ocupacion_id")
+    private Ocupacion ocupacion;
 
     @Enumerated(EnumType.STRING)
     @Column(name="sexo")

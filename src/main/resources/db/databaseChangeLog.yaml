@@ -11,6 +11,10 @@ databaseChangeLog:
   - include:
       file: db/escolaridad.yaml
   - include:
+      file: db/etnia.yaml
+  - include:
+      file: db/ocupacion.yaml
+  - include:
       file: db/sentenciado.yaml
   - include:
       file: db/data/estados_data.yaml
@@ -18,3 +22,7 @@ databaseChangeLog:
       file: db/data/pais_data.yaml
   - include:
       file: db/data/escolaridad_data.yaml
+  - include:
+      file: db/data/etnia_data.yaml
+  - include:
+      file: db/data/ocupacion_data.yaml

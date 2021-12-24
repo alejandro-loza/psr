@@ -4,10 +4,10 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - createTable:
-            tableName: etnia
+            tableName:  cat_etnia
             columns:
               - column:
-                  name: id
+                  name: id_cat_etnia
                   type: BIGINT
                   autoIncrement: true
                   constraints:
@@ -15,7 +15,16 @@ databaseChangeLog:
                     primaryKey: true
               - column:
                   name: nombre
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(20)
                   constraints:
                     nullable: false
-                    unique: true
+              - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activo
+                  type: java.sql.Types.BOOLEAN
+                  constraints:
+                    nullable: false

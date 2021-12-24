@@ -31,6 +31,11 @@ public class SentencedServiceImp implements SentenciadoService {
     @Autowired
     EscolaridadService escolaridadService;
 
+    @Autowired
+    EtniaService etniaService;
+
+    @Autowired
+    OcupacionService ocupacionService;
 
     @Override
     @Transactional
@@ -41,7 +46,7 @@ public class SentencedServiceImp implements SentenciadoService {
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput) throws Exception {
         Estado estado = estadoService.busca(sentencedInput.getEstadoId());
-        Pais pais = paisService.busca(sentencedInput.getNacionalidad());
+        Pais pais = paisService.busca(sentencedInput.getNacionalidadId());
 
         return  Sentenciado.builder()
                 .folio(folioService.generar(sentencedInput, estado, pais))
@@ -55,9 +60,9 @@ public class SentencedServiceImp implements SentenciadoService {
                 .alias(sentencedInput.getAlias()) //TODO IS A List?
                 .otrosNombres(sentencedInput.getOtrosNombres())  //TODO IS A List?
                 .fechaNacimiento(sentencedInput.getFechaNacimiento())
-                .ocupacion(sentencedInput.getOcupacion()) //TODO IS A CATALOG?
+                .ocupacion(ocupacionService.busca(sentencedInput.getOcupacionId()))
                 .sexo(sentencedInput.getSexo())
-                .etnia(sentencedInput.getEtnia())//TODO IS A CATALOG? MAYA
+                .etnia(etniaService.busca(sentencedInput.getEtniaId()))
                 .escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()))
                 .telefonoFijo(sentencedInput.getTelefonoFijo())
                 .celular(sentencedInput.getCelular())
