@@ -4,17 +4,20 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - insert:
-            tableName: pais
+            tableName: cat_pais
             columns:
               - column:
-                  name: id
+                  name: id_cta_pais
                   value: 484
               - column:
                   name: nombre
                   value: 'México'
               - column:
-                  name: alpha2
-                  value: 'MX'
-              - column:
                   name: alpha3
                   value: 'MEX'
+              - column:
+                  name: descripcion
+                  value: 'ESTADOS UNIDOS MEXICANOS'
+              - column:
+                  name: activo
+                  value: true
