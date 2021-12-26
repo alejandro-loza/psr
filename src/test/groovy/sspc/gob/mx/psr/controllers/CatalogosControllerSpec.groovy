@@ -56,6 +56,14 @@ class CatalogosControllerSpec extends Specification {
         assert resp.size() > 19
     }
 
+    def "Deberia traer todos las ocupaciones"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/ocupacion", List)?.body
+
+        then:
+        assert resp.size() > 19
+    }
+
     private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {
         [[id: 1, nombre: 'SIN ESCOLARIDAD'],
          [id: 2, nombre: 'PRIMARIA INCOMPLETA'],
