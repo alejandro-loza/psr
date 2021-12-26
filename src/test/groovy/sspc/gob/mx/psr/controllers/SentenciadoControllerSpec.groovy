@@ -1,5 +1,7 @@
 package sspc.gob.mx.psr.controllers
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.ObjectWriter
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
@@ -47,6 +49,9 @@ class SentenciadoControllerSpec extends Specification {
             celular =  1234567890
             correoElectronico = 'juan.antonio.perez.garcia@gmail.com'
         }
+
+        def json = new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd)
+        println(json)
 
         when:
         def resp = rest.postForObject("http://localhost:${ port }/sentenciado", new HttpEntity(cmd, headers), Map)

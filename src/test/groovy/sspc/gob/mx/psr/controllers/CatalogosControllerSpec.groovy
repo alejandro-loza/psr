@@ -53,7 +53,8 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/etnia", List)?.body
 
         then:
-        assert resp.size() > 19
+        assert resp == [[id:1, nombre:"AMUZGO"]]
+
     }
 
     private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {

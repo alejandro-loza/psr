@@ -24,7 +24,8 @@ class PaisControllerSpec extends Specification {
             assert it.alpha2 == 'MX'
             assert it.alpha3 == 'MEX'
         }
-        assert  resp.size() > 100
+        assert  resp == [[id:484, nombre:"México", alpha2:"MX", alpha3:"MEX"]]
+
     }
 
 
