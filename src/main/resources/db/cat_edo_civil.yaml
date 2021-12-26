@@ -1,33 +1,31 @@
 databaseChangeLog:
   - changeSet:
-      id: pais
+      id: estado_civil
       author: alejandro.hernandez
       changes:
         - createTable:
-            tableName: pais
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
-                  type: BIGINT
+                  name: id_cat_edo_civil
+                  type: INT
                   autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
                   name: nombre
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(20)
                   constraints:
                     nullable: false
                     unique: true
               - column:
-                  name: alpha2
-                  type: java.sql.Types.VARCHAR(255)
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
                   constraints:
-                    nullable: false
-                    unique: true
+                    nullable: true
               - column:
-                  name: alpha3
-                  type: java.sql.Types.VARCHAR(255)
+                  name: activo
+                  type: java.sql.Types.BOOLEAN
                   constraints:
                     nullable: false
-                    unique: true
