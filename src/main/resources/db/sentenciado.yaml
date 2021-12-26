@@ -34,7 +34,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: curp
+                  name: documento
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
@@ -44,8 +44,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: estado_civil
-                  type: java.sql.Types.VARCHAR(255)
+                  name: estado_civil_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -69,8 +69,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: ocupacion
-                  type: java.sql.Types.VARCHAR(255)
+                  name: ocupacion_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -79,8 +79,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: etnia
-                  type: java.sql.Types.VARCHAR(255)
+                  name: etnia_id
+                  type: BIGINT
                   constraints:
                     nullable: false
               - column:
@@ -99,7 +99,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: email
+                  name: correo_electronico
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
@@ -143,6 +143,18 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: estado
   - changeSet:
+      id: sentenciado_estado_civil_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: estado_civil_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_estado_civil
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: estado_civil
+  - changeSet:
       id: sentenciado_escolaridad_fk
       author: alejandro.hernandez
       changes:
@@ -154,6 +166,30 @@ databaseChangeLog:
             initiallyDeferred: false
             referencedColumnNames: id
             referencedTableName: escolaridad
+  - changeSet:
+      id: sentenciado_ocupacion_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ocupacion_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_ocupacion
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: ocupacion
+  - changeSet:
+      id: sentenciado_etnia_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: etnia_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_etnia
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_etnia
+            referencedTableName: cat_etnia
   - changeSet:
       id: sentenciado_folio_fk
       author: alejandro.hernandez

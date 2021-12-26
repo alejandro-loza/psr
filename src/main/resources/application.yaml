@@ -13,3 +13,10 @@ spring:
       driverClassName: org.h2.Driver
   liquibase:
     change-log: 'classpath:db/databaseChangeLog.yaml'
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false

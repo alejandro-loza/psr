@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 
 @Service
-public class SentencedServiceImp implements SentenciadoService {
+public class SentenciadoServiceImp implements SentenciadoService {
 
     @Autowired
     SentencedRepository sentencedRepository;
@@ -26,21 +26,29 @@ public class SentencedServiceImp implements SentenciadoService {
     EstadoService estadoService;
 
     @Autowired
+    EstadoCivilService estadoCivilService;
+
+    @Autowired
     PaisService paisService;
 
     @Autowired
     EscolaridadService escolaridadService;
 
+    @Autowired
+    EtniaService etniaService;
+
+    @Autowired
+    OcupacionService ocupacionService;
+
     @Override
     @Transactional
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {
-        Sentenciado sentenciado = sentencedRepository.save(construyeSentenciado(sentenciadoValidador));
-        return new SentenciadoDto( sentenciado);
+        return new SentenciadoDto( sentencedRepository.save(construyeSentenciado(sentenciadoValidador)));
     }
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput) throws Exception {
         Estado estado = estadoService.busca(sentencedInput.getEstadoId());
-        Pais pais = paisService.busca(sentencedInput.getNacionalidad());
+        Pais pais = paisService.busca(sentencedInput.getNacionalidadId());
 
         return  Sentenciado.builder()
                 .folio(folioService.generar(sentencedInput, estado, pais))
@@ -49,18 +57,18 @@ public class SentencedServiceImp implements SentenciadoService {
                 .apellidoMaterno(sentencedInput.getApellidoMaterno())
                 .estado(estado)
                 .nacionalidad(pais)
-                .curp(sentencedInput.getCurp())
-                .estadoCivil(sentencedInput.getEstadoCivil())  //TODO IS A CATALOG?
+                .documento(sentencedInput.getDocumento())
+                .estadoCivil(estadoCivilService.busca(sentencedInput.getEstadoCivil()))
                 .alias(sentencedInput.getAlias()) //TODO IS A List?
                 .otrosNombres(sentencedInput.getOtrosNombres())  //TODO IS A List?
                 .fechaNacimiento(sentencedInput.getFechaNacimiento())
-                .ocupacion(sentencedInput.getOcupacion()) //TODO IS A CATALOG?
+                .ocupacion(ocupacionService.busca(sentencedInput.getOcupacionId()))
                 .sexo(sentencedInput.getSexo())
-                .etnia(sentencedInput.getEtnia())//TODO IS A CATALOG? MAYA
+                .etnia(etniaService.busca(sentencedInput.getEtniaId()))
                 .escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()))
                 .telefonoFijo(sentencedInput.getTelefonoFijo())
                 .celular(sentencedInput.getCelular())
-                .email(sentencedInput.getEmail())
+                .correoElectronico(sentencedInput.getCorreoElectronico())
                 .build();
     }
 
