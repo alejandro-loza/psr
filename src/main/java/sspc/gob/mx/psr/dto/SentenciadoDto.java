@@ -25,7 +25,7 @@ public class SentenciadoDto {
 
     String estado;
 
-    String curp;
+    String documento;
 
     String estadoCivil;
 
@@ -47,7 +47,7 @@ public class SentenciadoDto {
 
     String celular;
 
-    String  email;
+    String correoElectronico;
 
 
     public SentenciadoDto(Sentenciado sentenciado){
@@ -58,7 +58,7 @@ public class SentenciadoDto {
         this.apellidoMaterno = sentenciado.getApellidoMaterno();
         this.nacionalidad = sentenciado.getNacionalidad().getNombre();
         this.estado = sentenciado.getEstado().getNombre();
-        this.curp = sentenciado.getCurp();
+        this.documento = sentenciado.getDocumento();
         this.estadoCivil = sentenciado.getEstadoCivil().getNombre();
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
@@ -69,7 +69,7 @@ public class SentenciadoDto {
         this.escolaridad = sentenciado.getEscolaridad().getNombre();
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();
-        this.email = sentenciado.getEmail();
+        this.correoElectronico = sentenciado.getCorreoElectronico();
     }
 
 }

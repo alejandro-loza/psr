@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 
 @Service
-public class SentencedServiceImp implements SentenciadoService {
+public class SentenciadoServiceImp implements SentenciadoService {
 
     @Autowired
     SentencedRepository sentencedRepository;
@@ -57,7 +57,7 @@ public class SentencedServiceImp implements SentenciadoService {
                 .apellidoMaterno(sentencedInput.getApellidoMaterno())
                 .estado(estado)
                 .nacionalidad(pais)
-                .curp(sentencedInput.getCurp())
+                .documento(sentencedInput.getDocumento())
                 .estadoCivil(estadoCivilService.busca(sentencedInput.getEstadoCivil()))
                 .alias(sentencedInput.getAlias()) //TODO IS A List?
                 .otrosNombres(sentencedInput.getOtrosNombres())  //TODO IS A List?
@@ -68,7 +68,7 @@ public class SentencedServiceImp implements SentenciadoService {
                 .escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()))
                 .telefonoFijo(sentencedInput.getTelefonoFijo())
                 .celular(sentencedInput.getCelular())
-                .email(sentencedInput.getEmail())
+                .correoElectronico(sentencedInput.getCorreoElectronico())
                 .build();
     }
 

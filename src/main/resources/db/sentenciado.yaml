@@ -34,7 +34,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: curp
+                  name: documento
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false
@@ -99,7 +99,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: email
+                  name: correo_electronico
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
                     nullable: false

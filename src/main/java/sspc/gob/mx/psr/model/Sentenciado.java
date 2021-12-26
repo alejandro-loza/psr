@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
-public class Sentenciado extends BaseEntity {
+public class Sentenciado extends EntidadBase {
     @Id
     @GeneratedValue
     private UUID id;
@@ -50,7 +50,7 @@ public class Sentenciado extends BaseEntity {
     @NotNull
     @NotBlank
     @Size(min = 18, max = 18)
-    private String curp;
+    private String documento;
 
     @NotNull
     @ManyToOne
@@ -100,6 +100,6 @@ public class Sentenciado extends BaseEntity {
 
     @NotBlank
     @NotBlank
-    private String  email;
+    private String correoElectronico;
 
 }
