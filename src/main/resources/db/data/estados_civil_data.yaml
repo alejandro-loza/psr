@@ -4,74 +4,122 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 1
               - column:
                   name: nombre
                   value: 'SOLTERO(A)'
+              - column:
+                  name: descripcion
+                  value: 'SOLTERO(A)'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 2
               - column:
                   name: nombre
                   value: 'CASADO(A)'
+              - column:
+                  name: descripcion
+                  value: 'CASADO(A)'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 3
               - column:
                   name: nombre
                   value: 'VIUDO(A)'
+              - column:
+                  name: descripcion
+                  value: 'VIUDO(A)'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 4
               - column:
                   name: nombre
                   value: 'CONCUBINATO'
+              - column:
+                  name: descripcion
+                  value: 'CONCUBINATO'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 5
               - column:
                   name: nombre
                   value: 'UNIÓN LIBRE'
+              - column:
+                  name: descripcion
+                  value: 'UNIÓN LIBRE'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 6
               - column:
                   name: nombre
                   value: 'DIVORCIADO(A)'
+              - column:
+                  name: descripcion
+                  value: 'DIVORCIADO(A)'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 7
               - column:
                   name: nombre
                   value: 'SEPARADO'
+              - column:
+                  name: descripcion
+                  value: 'SEPARADO'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado_civil
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id
+                  name: id_cat_edo_civil
                   value: 99
               - column:
                   name: nombre
                   value: 'OTRO(S)'
+              - column:
+                  name: descripcion
+                  value: 'OTRO(S)'
+              - column:
+                  name: activo
+                  value: 1

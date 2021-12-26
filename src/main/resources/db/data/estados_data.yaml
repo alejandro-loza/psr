@@ -4,290 +4,482 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 1
               - column:
                   name: nombre
                   value: 'AGUASCALIENTES'
+              - column:
+                  name: descripcion
+                  value: 'AGUASCALIENTES'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 2
               - column:
                   name: nombre
                   value: 'BAJA CALIFORNIA'
+              - column:
+                  name: descripcion
+                  value: 'BAJA CALIFORNIA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado    
                   value: 3
               - column:
                   name: nombre
                   value: 'BAJA CALIFORNIA SUR'
-        - insert:
-            tableName: estado
+              - column:
+                  name: descripcion
+                  value: 'BAJA CALIFORNIA SUR'
+              - column:
+                  name: activo
+                  value: 1                  
+        - insert:    
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 4
               - column:
                   name: nombre
                   value: 'CAMPECHE'
-        - insert:
-            tableName: estado
+              - column:
+                  name: descripcion
+                  value: 'CAMPECHE'
+              - column:
+                  name: activo
+                  value: 1                  
+        - insert:    
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 5
               - column:
                   name: nombre
                   value: 'COAHUILA DE ZARAGOZA'
-        - insert:
-            tableName: estado
+              - column:
+                  name: descripcion
+                  value: 'COAHUILA DE ZARAGOZA'
+              - column:
+                  name: activo
+                  value: 1                  
+        - insert:    
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 6
               - column:
                   name: nombre
                   value: 'COLIMA'
+              - column:
+                  name: descripcion
+                  value: 'COLIMA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 7
               - column:
                   name: nombre
                   value: 'CHIAPAS'
+              - column:
+                  name: descripcion
+                  value: 'CHIAPAS'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 8
               - column:
                   name: nombre
                   value: 'CHIHUAHUA'
+              - column:
+                  name: descripcion
+                  value: 'CHIHUAHUA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 9
               - column:
                   name: nombre
                   value: 'CIUDAD DE MÉXICO'
+              - column:
+                  name: descripcion
+                  value: 'CIUDAD DE MÉXICO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 10
               - column:
                   name: nombre
                   value: 'DURANGO'
+              - column:
+                  name: descripcion
+                  value: 'DURANGO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 11
               - column:
                   name: nombre
                   value: 'GUANAJUATO'
+              - column:
+                  name: descripcion
+                  value: 'GUANAJUATO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 12
               - column:
                   name: nombre
                   value: 'GUERRERO'
+              - column:
+                  name: descripcion
+                  value: 'GUERRERO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 13
               - column:
                   name: nombre
                   value: 'HIDALGO'
+              - column:
+                  name: descripcion
+                  value: 'HIDALGO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 14
               - column:
                   name: nombre
                   value: 'JALISCO'
+              - column:
+                  name: descripcion
+                  value: 'JALISCO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 15
               - column:
                   name: nombre
                   value: 'ESTADO DE MÉXICO'
+              - column:
+                  name: descripcion
+                  value: 'ESTADO DE MÉXICO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 16
               - column:
                   name: nombre
                   value: 'MICHOACÁN DE OCAMPO'
+              - column:
+                  name: descripcion
+                  value: 'MICHOACÁN DE OCAMPO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 17
               - column:
                   name: nombre
                   value: 'MORELOS'
+              - column:
+                  name: descripcion
+                  value: 'MORELOS'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 18
               - column:
                   name: nombre
                   value: 'NAYARIR'
+              - column:
+                  name: descripcion
+                  value: 'NAYARIR'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 19
               - column:
                   name: nombre
                   value: 'NUEVO LEÓN'
+              - column:
+                  name: descripcion
+                  value: 'NUEVO LEÓN'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 20
               - column:
                   name: nombre
                   value: 'OAXACA'
+              - column:
+                  name: descripcion
+                  value: 'OAXACA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 21
               - column:
                   name: nombre
                   value: 'PUEBLA'
+              - column:
+                  name: descripcion
+                  value: 'PUEBLA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 22
               - column:
                   name: nombre
                   value: 'QUERÉTARO'
+              - column:
+                  name: descripcion
+                  value: 'QUERÉTARO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 23
               - column:
                   name: nombre
                   value: 'QUINTANA ROO'
+              - column:
+                  name: descripcion
+                  value: 'QUINTANA ROO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 24
               - column:
                   name: nombre
                   value: 'SAN LUIS POTOSÍ'
+              - column:
+                  name: descripcion
+                  value: 'SAN LUIS POTOSÍ'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 25
               - column:
                   name: nombre
                   value: 'SINALOA'
+              - column:
+                  name: descripcion
+                  value: 'SINALOA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 26
               - column:
                   name: nombre
                   value: 'SONORA'
+              - column:
+                  name: descripcion
+                  value: 'SONORA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 27
               - column:
                   name: nombre
                   value: 'TABASCO'
+              - column:
+                  name: descripcion
+                  value: 'TABASCO'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 28
               - column:
                   name: nombre
                   value: 'TAMAULIPAS'
+              - column:
+                  name: descripcion
+                  value: 'TAMAULIPAS'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 29
               - column:
                   name: nombre
                   value: 'TLAXCALA'
+              - column:
+                  name: descripcion
+                  value: 'TLAXCALA'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 30
               - column:
                   name: nombre
                   value: 'VERACRUZ'
+              - column:
+                  name: descripcion
+                  value: 'VERACRUZ'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 31
               - column:
                   name: nombre
                   value: 'YUCATÁN'
+              - column:
+                  name: descripcion
+                  value: 'YUCATÁN'
+              - column:
+                  name: activo
+                  value: 1                  
         - insert:
-            tableName: estado
+            tableName: cat_estado
             columns:
               - column:
-                  name: id
+                  name: id_cat_estado
                   value: 32
               - column:
                   name: nombre
                   value: 'ZACATECAS'
+              - column:
+                  name: descripcion
+                  value: 'ZACATECAS'
+              - column:
+                  name: activo
+                  value: 1

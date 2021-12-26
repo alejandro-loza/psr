@@ -1,14 +1,15 @@
 databaseChangeLog:
   - changeSet:
-      id: estado
-      author: andrea.perez
+      id: estado_civil
+      author: alejandro.hernandez
       changes:
         - createTable:
-            tableName: cat_estado
+            tableName: cat_edo_civil
             columns:
               - column:
-                  name: id_cat_estado
+                  name: id_cat_edo_civil
                   type: INT
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -17,6 +18,7 @@ databaseChangeLog:
                   type: java.sql.Types.VARCHAR(20)
                   constraints:
                     nullable: false
+                    unique: true
               - column:
                   name: descripcion
                   type: java.sql.Types.VARCHAR(50)
@@ -24,6 +26,6 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: activo
-                  type: boolean
+                  type: java.sql.Types.BOOLEAN
                   constraints:
                     nullable: false
