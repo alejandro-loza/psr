@@ -38,7 +38,7 @@ public class SentenciadoValidador {
     @NotNull
     @NotBlank
     @Size(min = 18, max = 18)
-    String curp;
+    String documento;
 
     @NotNull
     Long estadoCivil;
@@ -79,5 +79,5 @@ public class SentenciadoValidador {
     @Email
     @NotNull
     @NotBlank
-    String  email;
+    String correoElectronico;
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sspc.gob.mx.psr.dto.SentenciadoDto;
 import sspc.gob.mx.psr.services.SentenciadoService;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
@@ -23,8 +22,7 @@ public class SentenciadoController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity crear(@RequestBody @Valid SentenciadoValidador validador) throws Exception {
-        SentenciadoDto crear = sentenciadoService.crear(validador);
-        return new ResponseEntity<>(crear, HttpStatus.OK);
+        return new ResponseEntity<>( sentenciadoService.crear(validador), HttpStatus.OK);
     }
 }
 
