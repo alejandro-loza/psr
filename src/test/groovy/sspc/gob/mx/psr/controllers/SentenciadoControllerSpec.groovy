@@ -54,6 +54,7 @@ class SentenciadoControllerSpec extends Specification {
         then:
         resp.with {
            assert it.nombre == 'Alejandro'
+            assert it.folio == 'RXTA88041613HMEX001'
             assert it.apellidoPaterno == 'Ràmirez'
             assert it.apellidoMaterno == 'Torres'
             assert it.nacionalidad == 'México'
@@ -63,7 +64,7 @@ class SentenciadoControllerSpec extends Specification {
             assert it.otrosNombres ==  "Enrique Peña"
             assert it.fechaNacimiento == '1988-04-16'
             assert it.ocupacion == "EMPLEADO"
-            assert it.sexo == 'FEMENINO'
+            assert it.sexo == 'MASCULINO'
             assert it.etnia == 'AMUZGO'
             assert it.escolaridad == 'SIN ESCOLARIDAD'
             assert it.telefonoFijo ==  '1234567890'

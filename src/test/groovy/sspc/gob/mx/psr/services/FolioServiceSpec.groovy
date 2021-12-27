@@ -3,11 +3,11 @@ package sspc.gob.mx.psr.services
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 import sspc.gob.mx.psr.enums.Sexo
+import sspc.gob.mx.psr.model.Sentenciado
 import sspc.gob.mx.psr.model.catalog.Estado
 import sspc.gob.mx.psr.model.catalog.Pais
 import sspc.gob.mx.psr.repository.FolioRepository
 import sspc.gob.mx.psr.services.imp.FolioServiceImp
-import sspc.gob.mx.psr.validator.SentenciadoValidador
 
 import java.time.LocalDate
 import java.time.Month
@@ -28,13 +28,14 @@ class FolioServiceSpec extends Specification{
         Estado cdmx = cdmx()
         def localDate = LocalDate.of(1988, Month.APRIL, 16)
 
-        SentenciadoValidador cmd = new SentenciadoValidador()
+
+        Sentenciado cmd = new Sentenciado()
         cmd.with {
             nombre = 'Alberto'
             apellidoPaterno = 'Hernandez'
             apellidoMaterno = 'Lugo'
-            nacionalidadId = mexico.id
-            estadoId = cdmx.id
+            nacionalidad = mexico
+            estado = cdmx
             fechaNacimiento = localDate
             sexo = Sexo.MASCULINO
         }
@@ -42,7 +43,7 @@ class FolioServiceSpec extends Specification{
         when:
         1 * folioService.folioRepository.findAllByParams(_ as String, _ as Long,
                 _ as String, _ as Character, _ as String) >> []
-        def resp = folioService.construirFolio(cmd, cdmx, mexico)
+        def resp = folioService.construirFolio(cmd)
 
         then:
         assert resp.toString() == 'HELA88041613HMEX000'

@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @Table(name = "cat_escolaridad")
 public class Escolaridad {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "id_cat_escolaridad")
     public Long id;
 

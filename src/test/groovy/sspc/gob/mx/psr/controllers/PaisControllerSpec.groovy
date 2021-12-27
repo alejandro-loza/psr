@@ -23,7 +23,6 @@ class PaisControllerSpec extends Specification {
             assert it.nombre == 'México'
             assert it.alpha3 == 'MEX'
         }
-        assert  resp.size() > 100
     }
 
 

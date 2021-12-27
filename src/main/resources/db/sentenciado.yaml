@@ -70,9 +70,9 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: sexo
-                  type: java.sql.Types.VARCHAR(1)
+                  type: java.sql.Types.VARCHAR(9)
                   constraints:
-                    nullable: false
+                    nullable: fals
               - column:
                   name: fk_id_cat_etnia
                   type: INT

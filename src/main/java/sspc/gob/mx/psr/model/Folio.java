@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,8 +15,9 @@ import javax.persistence.*;
 @Entity
 public class Folio {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    @Column(name = "id_folio")
+    private UUID id;
 
     @OneToOne
     @JoinColumn(name="id_sentenciado")
@@ -27,7 +29,8 @@ public class Folio {
     private Character sexoCodigo;
     private String nacionalidadCodigo;
     private String consecutivo;
-    private Long extra;
+    private Long comprobacion;
+    private String folio;
 
     @Override
     public String toString() {
@@ -37,6 +40,6 @@ public class Folio {
                 sexoCodigo +
                 nacionalidadCodigo +
                 consecutivo +
-                extra;
+                comprobacion;
     }
 }

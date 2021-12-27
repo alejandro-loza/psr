@@ -14,8 +14,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class EntidadBase {
 
-    @NotBlank
-    @NotNull
     @Column(updatable = false, name = "aud_usuario_alta")
     private String usuarioAlta;
 
@@ -23,11 +21,9 @@ public abstract class EntidadBase {
     @CreationTimestamp
     protected LocalDateTime fechaCreacion;
 
-    @NotBlank
     @Column(updatable = false, name = "aud_dir_ip_alta")
     private String ipAlta;
 
-    @NotBlank
     @Column(updatable = false, name = "aud_usuario_modificacion")
     private String usuarioModificador;
 
@@ -35,7 +31,6 @@ public abstract class EntidadBase {
     @Column(updatable = false, name = "aud_fch_modificacion")
     protected LocalDateTime ultimaModificacion;
 
-    @NotBlank
     @Column(updatable = false, name = "aud_dir_ip_modificacion")
     private String ipModificacion;
 }

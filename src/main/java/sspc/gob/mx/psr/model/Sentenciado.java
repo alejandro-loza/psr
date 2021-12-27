@@ -1,8 +1,6 @@
 package sspc.gob.mx.psr.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import sspc.gob.mx.psr.enums.Sexo;
 import sspc.gob.mx.psr.model.catalog.*;
@@ -19,9 +17,12 @@ import java.util.UUID;
 @Setter
 @Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Sentenciado extends EntidadBase {
     @Id
     @GeneratedValue
+    @Column(name = "id_sentenciado")
     private UUID id;
 
     @NotNull(message= "sentenced.name.null")
@@ -57,7 +58,7 @@ public class Sentenciado extends EntidadBase {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="estado_civil_id")
+    @JoinColumn(name="fk_id_cat_edo_civil")
     private EstadoCivil estadoCivil;
 
     @NotBlank
@@ -74,21 +75,20 @@ public class Sentenciado extends EntidadBase {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="ocupacion_id")
+    @JoinColumn(name="fk_id_cat_ocupacion")
     private Ocupacion ocupacion;
 
-    @Enumerated(EnumType.STRING)
     @Column(name="sexo")
     private Sexo sexo;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="etnia_id")
+    @JoinColumn(name="fk_id_cat_etnia")
     private Etnia etnia;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="escolaridad_id")
+    @JoinColumn(name="fk_id_cat_escolaridad")
     private Escolaridad escolaridad;
 
     @NotBlank
