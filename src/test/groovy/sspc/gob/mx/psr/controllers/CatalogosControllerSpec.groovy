@@ -83,7 +83,7 @@ class CatalogosControllerSpec extends Specification {
          [id: 16, nombre: 'ESPECIALIDAD INCOMPLETA'],
          [id: 17, nombre: 'ESPECIALIDAD COMPLETA'],
          [id: 18, nombre: 'ANALFABETO(A)'],
-         [id: 9999, nombre: 'SIN DATO']]
+         [id: 99, nombre: 'SIN DATO']]
     }
 
     private static ArrayList<LinkedHashMap<String, Serializable>> estadosRespuesta() {

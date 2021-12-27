@@ -26,35 +26,33 @@ public class Sentenciado extends EntidadBase {
 
     @NotNull(message= "sentenced.name.null")
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 50)
     private String nombre;
 
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 50)
     private String apellidoPaterno;
 
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 50)
     private String apellidoMaterno;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="pais_id")
+    @JoinColumn(name="fk_id_cat_pais")
     private Pais nacionalidad;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="estado_id")
+    @JoinColumn(name="fk_id_cat_edo_nacimiento")
     private Estado estado;
 
     @NotNull
     @NotBlank
-    @Size(min = 18, max = 18)
+    @Size(min = 1, max = 18)
     private String documento;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name="folio_id")
+    @OneToOne(mappedBy="sentenciado")
     private Folio folio;
 
     @NotNull
@@ -71,6 +69,7 @@ public class Sentenciado extends EntidadBase {
     private String otrosNombres;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "fch_nacimiento")
     private LocalDate fechaNacimiento;
 
     @NotNull
@@ -92,14 +91,27 @@ public class Sentenciado extends EntidadBase {
     @JoinColumn(name="escolaridad_id")
     private Escolaridad escolaridad;
 
-    @NotNull
+    @NotBlank
+    @Column(name = "tel_casa")
     private String telefonoFijo;
 
     @NotNull
+    @NotBlank
+    @Column(name = "tel_celular")
     private String celular;
 
     @NotBlank
     @NotBlank
     private String correoElectronico;
+
+    @NotBlank
+    @NotBlank
+    @Column(name = "aud_usuario_modificacion")
+    private String usuarioModificador;
+
+    @NotBlank
+    @NotBlank
+    @Column(name = "aud_dir_ip_alta")
+    private String ipAlta;
 
 }

@@ -62,7 +62,12 @@ databaseChangeLog:
                   name: otros_nombres
                   type: java.sql.Types.VARCHAR(255)
                   constraints:
-                    nullable: false
+                    nullable: true
+              - column:
+                  name: alias
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: fecha_nacimiento
                   type: DATETIME(6)
@@ -122,7 +127,12 @@ databaseChangeLog:
                   name: aud_fch_modificacion
                   type: DATE
                   constraints:
-                    nullable: false
+                    nullable: true
+              - column:
+                  name: aud_fch_fecha_eliminacion
+                  type: DATE
+                  constraints:
+                    nullable: true
               - column:
                   name: aud_dir_ip_modificacion
                   type: java.sql.Types.VARCHAR(60)

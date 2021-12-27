@@ -54,7 +54,6 @@ class FolioServiceSpec extends Specification{
         mexico.with {
             id = 484
             nombre = 'México'
-            alpha2 = 'MX'
             alpha3 = 'MEX'
         }
         mexico

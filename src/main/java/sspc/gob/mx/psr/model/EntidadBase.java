@@ -12,14 +12,15 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class EntidadBase {
 
-    @Column(updatable = false)
+    @Column(updatable = false, name = "aud_fch_alta")
     @CreationTimestamp
-    protected LocalDateTime dateCreated;
+    protected LocalDateTime fechaCreacion;
 
     @UpdateTimestamp
-    protected LocalDateTime lastUpdated;
+    @Column(updatable = false, name = "aud_fch_modificacion")
+    protected LocalDateTime ultimaModificacion;
 
-    @Column(updatable = false)
     @CreationTimestamp
-    protected LocalDateTime dateDeleted;
+    @Column(updatable = false, name = "aud_fch_fecha_eliminacion")
+    protected LocalDateTime fechaEliminacion;
 }

@@ -52,7 +52,7 @@ public class SentenciadoDto {
 
     public SentenciadoDto(Sentenciado sentenciado){
         this.id = sentenciado.getId().toString();
-        this.folio = sentenciado.getFolio().toString();
+        this.folio = sentenciado.getFolio() !=null? sentenciado.getFolio().toString() : null;
         this.nombre = sentenciado.getNombre();
         this.apellidoPaterno = sentenciado.getApellidoPaterno();
         this.apellidoMaterno = sentenciado.getApellidoMaterno();

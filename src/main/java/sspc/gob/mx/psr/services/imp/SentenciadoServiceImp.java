@@ -51,7 +51,6 @@ public class SentenciadoServiceImp implements SentenciadoService {
         Pais pais = paisService.busca(sentencedInput.getNacionalidadId());
 
         return  Sentenciado.builder()
-                .folio(folioService.generar(sentencedInput, estado, pais))
                 .nombre(sentencedInput.getNombre())
                 .apellidoPaterno(sentencedInput.getApellidoPaterno())
                 .apellidoMaterno(sentencedInput.getApellidoMaterno())
