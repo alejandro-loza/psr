@@ -69,11 +69,6 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: fecha_nacimiento
-                  type: DATETIME(6)
-                  constraints:
-                    nullable: false
-              - column:
                   name: sexo
                   type: java.sql.Types.VARCHAR(1)
                   constraints:
@@ -85,7 +80,7 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: fk_id_cat_escolaridad
-                  type: BIGINT
+                  type: INT
                   constraints:
                     nullable: false
               - column:
@@ -107,7 +102,7 @@ databaseChangeLog:
                   name: aud_usuario_alta
                   type: java.sql.Types.VARCHAR(60)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: aud_fch_alta
                   type: DATE
@@ -127,12 +122,7 @@ databaseChangeLog:
                   name: aud_fch_modificacion
                   type: DATE
                   constraints:
-                    nullable: true
-              - column:
-                  name: aud_fch_fecha_eliminacion
-                  type: DATE
-                  constraints:
-                    nullable: true
+                    nullable: false
               - column:
                   name: aud_dir_ip_modificacion
                   type: java.sql.Types.VARCHAR(60)

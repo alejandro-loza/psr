@@ -61,11 +61,11 @@ public class Sentenciado extends EntidadBase {
     private EstadoCivil estadoCivil;
 
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 255)
     private String alias;
 
     @NotBlank
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 255)
     private String otrosNombres;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -101,17 +101,5 @@ public class Sentenciado extends EntidadBase {
     private String celular;
 
     @NotBlank
-    @NotBlank
     private String correoElectronico;
-
-    @NotBlank
-    @NotBlank
-    @Column(name = "aud_usuario_modificacion")
-    private String usuarioModificador;
-
-    @NotBlank
-    @NotBlank
-    @Column(name = "aud_dir_ip_alta")
-    private String ipAlta;
-
 }

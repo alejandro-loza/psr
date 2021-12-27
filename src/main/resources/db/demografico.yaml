@@ -69,7 +69,7 @@ databaseChangeLog:
                   name: aud_usuario_alta
                   type: java.sql.Types.VARCHAR(60)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: aud_fch_alta
                   type: DATE
@@ -79,12 +79,12 @@ databaseChangeLog:
                   name: aud_dir_ip_alta
                   type: inet
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: aud_usuario_modificacion
                   type: java.sql.Types.VARCHAR(60)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: aud_fch_modificacion
                   type: DATE
@@ -94,7 +94,7 @@ databaseChangeLog:
                   name: aud_dir_ip_modificacion
                   type: inet
                   constraints:
-                    nullable: false
+                    nullable: true
   - changeSet:
       id: sentenciado_pais_fk
       author: alejandro.hernandez
