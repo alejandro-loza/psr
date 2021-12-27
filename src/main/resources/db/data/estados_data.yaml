@@ -37,7 +37,7 @@ databaseChangeLog:
             tableName: cat_estado
             columns:
               - column:
-                  name: id_cat_estado    
+                  name: id_cat_estado
                   value: 3
               - column:
                   name: nombre

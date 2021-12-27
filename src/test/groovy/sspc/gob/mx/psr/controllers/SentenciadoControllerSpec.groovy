@@ -40,7 +40,7 @@ class SentenciadoControllerSpec extends Specification {
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = "1988-04-16"
             ocupacionId = 1
-            sexo = Sexo.FEMENINO
+            sexo = Sexo.MASCULINO
             etniaId = 1
             escolaridad = 1
             telefonoFijo =  1234567890
