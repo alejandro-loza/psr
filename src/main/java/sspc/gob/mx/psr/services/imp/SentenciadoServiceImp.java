@@ -3,6 +3,7 @@ package sspc.gob.mx.psr.services.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sspc.gob.mx.psr.dto.SentenciadoDto;
+import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Estado;
 import sspc.gob.mx.psr.model.catalog.Pais;
@@ -11,6 +12,7 @@ import sspc.gob.mx.psr.services.*;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 
 @Service
@@ -41,17 +43,23 @@ public class SentenciadoServiceImp implements SentenciadoService {
     OcupacionService ocupacionService;
 
     @Override
-    @Transactional
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {
-        return new SentenciadoDto( sentencedRepository.save(construyeSentenciado(sentenciadoValidador)));
+        Estado estado = estadoService.busca(sentenciadoValidador.getEstadoId());
+        Pais pais = paisService.busca(sentenciadoValidador.getNacionalidadId());
+
+        Sentenciado sentenciado = sentencedRepository.save(construyeSentenciado(sentenciadoValidador, estado, pais));
+        return new SentenciadoDto(sentenciado, folioService.generar(sentenciado));
     }
 
-    private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput) throws Exception {
-        Estado estado = estadoService.busca(sentencedInput.getEstadoId());
-        Pais pais = paisService.busca(sentencedInput.getNacionalidadId());
+    @Override
+    public Sentenciado busca(UUID id) throws Exception{
+        return sentencedRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound") );
+    }
+
+    private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) {
 
         return  Sentenciado.builder()
-                .folio(folioService.generar(sentencedInput, estado, pais))
                 .nombre(sentencedInput.getNombre())
                 .apellidoPaterno(sentencedInput.getApellidoPaterno())
                 .apellidoMaterno(sentencedInput.getApellidoMaterno())

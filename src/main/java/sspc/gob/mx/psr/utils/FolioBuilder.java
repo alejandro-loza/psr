@@ -5,6 +5,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import sspc.gob.mx.psr.enums.Sexo;
 import sspc.gob.mx.psr.model.Folio;
+import sspc.gob.mx.psr.model.Sentenciado;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class FolioBuilder implements IFolioBuilder {
     private static final int COCIENTE_EXTRA = 7;
+    private Sentenciado sentenciado;
+
     private final String nombreCodigo;
     private final int[] nacimientoCodigo;
     private final int[] entidadCodigo;
@@ -20,17 +23,16 @@ public class FolioBuilder implements IFolioBuilder {
     private final String nacionalidadCodigo;
     private final int[] consecutivo;
 
-    public FolioBuilder(String nombreCodigo,
+    public FolioBuilder(Sentenciado sentenciado, String nombreCodigo,
                         int[]  nacimientoCodigo,
                         int[] entidadCodigo,
-                        Sexo sexoCodigo,
                         String nacionalidadCodigo,
                         int[] consecutivo) {
-
+        this.sentenciado = sentenciado;
         this.nombreCodigo = nombreCodigo;
         this.nacimientoCodigo = nacimientoCodigo;
         this.entidadCodigo = entidadCodigo;
-        this.sexoCodigo = sexoCodigo;
+        this.sexoCodigo = sentenciado.getSexo();
         this.nacionalidadCodigo = StringUtils.stripAccents(nacionalidadCodigo.substring(0, 3).toUpperCase());;
         this.consecutivo = consecutivo;
     }
@@ -38,13 +40,15 @@ public class FolioBuilder implements IFolioBuilder {
     @Override
     public Folio build() {
         Folio folio = new Folio();
+        folio.setSentenciado(this.sentenciado);
         folio.setNombreCodigo(this.nombreCodigo);
         folio.setNacimientoCodigo(Long.valueOf(Ints.join("", this.nacimientoCodigo)));
         folio.setEntidadCodigo(Ints.join("", this.entidadCodigo));
         folio.setSexoCodigo(this.sexoCodigo.getCodigo());
         folio.setNacionalidadCodigo(this.nacionalidadCodigo);
         folio.setConsecutivo(Ints.join("",this.consecutivo));
-        folio.setExtra( calculaExtra());
+        folio.setComprobacion( calculaExtra());
+        folio.setFolio(folio.toString());
         return folio;
     }
 

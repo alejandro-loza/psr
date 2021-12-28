@@ -4,6 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import sspc.gob.mx.psr.model.Sentenciado;
 
-@Repository
-public interface SentencedRepository extends JpaRepository<Sentenciado, Long> {
+import java.util.Optional;
+import java.util.UUID;
+
+@Repository("SentencedRepository")
+public interface SentencedRepository extends JpaRepository<Sentenciado, UUID> {
+    Optional<Sentenciado> findById(UUID id);
 }

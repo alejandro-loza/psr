@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sspc.gob.mx.psr.model.Folio;
+import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Estado;
 import sspc.gob.mx.psr.model.catalog.Pais;
 import sspc.gob.mx.psr.repository.FolioRepository;
@@ -29,29 +30,30 @@ public class FolioServiceImp implements FolioService {
     FolioRepository folioRepository;
 
     @Override
-    public Folio generar(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
-        return folioRepository.save(construirFolio(sentenciadoInput, estado, pais));
+    public Folio generar(Sentenciado sentenciado) throws Exception {
+        return folioRepository.save(construirFolio(sentenciado));
     }
 
     @Override
-    public Folio construirFolio(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
-        String codigoPais = pais.getAlpha3();
-        var codigoEntidad = generarCodigoEntidad(estado, codigoPais);
-        String codigoNombre = generarCodigoNombre(sentenciadoInput);
-        var fecha = generarCodigoFecha(sentenciadoInput.getFechaNacimiento());
-        var consecutivo = getConsecutivo(sentenciadoInput, pais, Ints.join("",codigoEntidad),
-                codigoNombre, Long.valueOf(Ints.join("", fecha)));
+    public Folio construirFolio(Sentenciado sentenciado) throws Exception {
+        String codigoPais = sentenciado.getNacionalidad().getAlpha3();
+        var codigoEntidad = generarCodigoEntidad(sentenciado.getEstado(), codigoPais);
+        String codigoNombre = generarCodigoNombre(sentenciado);
+        var codigoFecha = generarCodigoFecha(sentenciado.getFechaNacimiento());
+        var consecutivo = getConsecutivo(sentenciado, Ints.join("",codigoEntidad),
+                codigoNombre, Long.valueOf(Ints.join("", codigoFecha)));
 
-        return new FolioBuilder(codigoNombre, fecha, codigoEntidad,
-                sentenciadoInput.getSexo(), codigoPais, consecutivo
-                ).build();
+        return new FolioBuilder(
+                sentenciado , codigoNombre, codigoFecha,
+                codigoEntidad, codigoPais, consecutivo
+        ).build();
     }
 
-    private int[] getConsecutivo(SentenciadoValidador sentenciadoInput, Pais pais,
-                                 String codigoEntidad, String codigoNombre, Long fecha) {
+    private int[] getConsecutivo(Sentenciado sentenciado,
+                                 String codigoEntidad, String codigoNombre, Long codigoFecha) {
 
-        int consecutivo = folioRepository.findAllByParams(codigoNombre, fecha, codigoEntidad,
-                sentenciadoInput.getSexo().getCodigo(), pais.getAlpha3()).size();
+        int consecutivo = folioRepository.findAllByParams(codigoNombre, codigoFecha, codigoEntidad,
+                sentenciado.getSexo().getCodigo(), sentenciado.getNacionalidad().getAlpha3()).size();
         return consecutivo < 10 ? new int[]{0, consecutivo} : new int[]{consecutivo} ;
     }
 
@@ -70,36 +72,36 @@ public class FolioServiceImp implements FolioService {
                 fechaNacimiento.toString().replace("-", "").substring(2, 8))};
     }
 
-    private String generarCodigoNombre(SentenciadoValidador sentenciadoInput) throws Exception {
-        var nombreCodificado = generarCodigoPaterno(sentenciadoInput) +
-                 generarCodigoMaterno(sentenciadoInput) +
-                 nombrePrimerCaracter(sentenciadoInput);
+    private String generarCodigoNombre(Sentenciado sentenciado) throws Exception {
+        var nombreCodificado = generarCodigoPaterno(sentenciado) +
+                generarCodigoMaterno(sentenciado) +
+                nombrePrimerCaracter(sentenciado);
 
         String cambioAltisonante = Altisonantes.listado().get(nombreCodificado.toUpperCase());
         return cambioAltisonante != null ? cambioAltisonante: nombreCodificado;
     }
 
-    private Character nombrePrimerCaracter(SentenciadoValidador sentenciadoInput) throws Exception {
+    private Character nombrePrimerCaracter(Sentenciado sentenciadoInput) throws Exception {
         return Optional.ofNullable(sentenciadoInput)
-                .map(SentenciadoValidador::getNombre)
+                .map(Sentenciado::getNombre)
                 .map(s -> s.charAt(0))
                 .orElseThrow(Exception::new);
     }
 
-    private Character generarCodigoMaterno(SentenciadoValidador sentenciadoInput) {
+    private Character generarCodigoMaterno(Sentenciado sentenciadoInput) {
         return Optional.ofNullable(sentenciadoInput)
-                .map(SentenciadoValidador::getApellidoMaterno)
+                .map(Sentenciado::getApellidoMaterno)
                 .map(s -> s.charAt(0)).orElse(CARACTER_COMODIN);
     }
 
-    private String generarCodigoPaterno(SentenciadoValidador sentenciadoInput){
+    private String generarCodigoPaterno(Sentenciado sentenciadoInput){
         var apellidoPaterno = StringUtils.stripAccents(Optional.ofNullable(sentenciadoInput)
-                .map(SentenciadoValidador::getApellidoPaterno)
+                .map(Sentenciado::getApellidoPaterno)
                 .orElse(COMODIN_VACIO));
 
         return apellidoPaterno.equals(COMODIN_VACIO)? apellidoPaterno:
                 String.valueOf(apellidoPaterno.charAt(0)) +
-                obtenerSegundoCaracter(apellidoPaterno);
+                        obtenerSegundoCaracter(apellidoPaterno);
     }
 
     private Character obtenerSegundoCaracter(String  apellido)  {
@@ -112,7 +114,7 @@ public class FolioServiceImp implements FolioService {
     private Character buscaPrimerVocal(String apellido) {
         for(var c : apellido.toCharArray()){
             if(VOCALES.indexOf(c) >= 0)
-              return c;
+                return c;
         }
         return CARACTER_COMODIN;
     }

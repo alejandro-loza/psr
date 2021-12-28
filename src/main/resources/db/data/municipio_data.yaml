@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: estados_data
+      author: alejandro.hernandez
+      changes:
+        - insert:
+            tableName: cat_municipio
+            columns:
+              - column:
+                  name: id_cat_municipio
+                  value: 13048
+              - column:
+                  name: fk_id_cat_estado
+                  value: 13
+              - column:
+                  name: nombre
+                  value: 'Pachuca de Soto'
+              - column:
+                  name: descripcion
+                  value: ''
+              - column:
+                  name: activo
+                  value: true
+        - insert:
+            tableName: cat_municipio
+            columns:
+              - column:
+                  name: id_cat_municipio
+                  value: 12038
+              - column:
+                  name: fk_id_cat_estado
+                  value: 12
+              - column:
+                  name: nombre
+                  value: 'Zihuatanejo de Azueta'
+              - column:
+                  name: descripcion
+                  value: ''
+              - column:
+                  name: activo
+                  value: true

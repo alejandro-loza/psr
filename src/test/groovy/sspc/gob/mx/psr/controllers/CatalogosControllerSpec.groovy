@@ -2,6 +2,7 @@ package sspc.gob.mx.psr.controllers
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.HttpStatus
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 
@@ -19,6 +20,24 @@ class CatalogosControllerSpec extends Specification {
         then:
         assert resp.size() == 32
         assert resp == estadosRespuesta()
+    }
+
+    def "Deberia traer todos los municipios de la hidalgo"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/13/municipio", List)?.body
+
+        then:
+        assert resp == [[id:13048, nombre:"Pachuca de Soto", descripcion:"", estado:"HIDALGO", activo:true]]
+
+    }
+
+    def "Deberia traer todos los municipios de la guerrero"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/12/municipio", List)?.body
+
+        then:
+        assert resp == [[id:12038, nombre:"Zihuatanejo de Azueta", descripcion:"", estado:"GUERRERO", activo:true]]
+
     }
 
     def "Deberia traer todos los estados civiles"(){
@@ -45,23 +64,24 @@ class CatalogosControllerSpec extends Specification {
         assert resp.size() == 19
         assert resp == escolaridades()
 
-
     }
 
     def "Deberia traer todos las etnias"(){
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/etnia", List)?.body
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/etnia", List)
 
         then:
-        assert resp.size() > 19
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp.body
     }
 
     def "Deberia traer todos las ocupaciones"(){
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/ocupacion", List)?.body
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/ocupacion", List)
 
         then:
-        assert resp.size() > 19
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp.body
     }
 
     private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {
@@ -83,7 +103,7 @@ class CatalogosControllerSpec extends Specification {
          [id: 16, nombre: 'ESPECIALIDAD INCOMPLETA'],
          [id: 17, nombre: 'ESPECIALIDAD COMPLETA'],
          [id: 18, nombre: 'ANALFABETO(A)'],
-         [id: 9999, nombre: 'SIN DATO']]
+         [id: 99, nombre: 'SIN DATO']]
     }
 
     private static ArrayList<LinkedHashMap<String, Serializable>> estadosRespuesta() {
