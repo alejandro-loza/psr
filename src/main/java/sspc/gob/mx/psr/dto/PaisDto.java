@@ -11,9 +11,9 @@ public class PaisDto {
     public String alpha3;
 
     public PaisDto(Pais pais) {
-        this.id = pais.id;
-        this.nombre = pais.nombre;
-        this.alpha3 = pais.alpha3;
+        this.id = pais.getId();
+        this.nombre = pais.getNombre();
+        this.alpha3 = pais.getAlpha3();
     }
 
 }

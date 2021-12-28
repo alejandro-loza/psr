@@ -66,6 +66,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
                   name: aud_usuario_alta
                   type: java.sql.Types.VARCHAR(60)
                   constraints:
@@ -77,7 +82,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: aud_dir_ip_alta
-                  type: inet
+                  type: java.sql.Types.VARCHAR(60)
                   constraints:
                     nullable: true
               - column:
@@ -92,78 +97,54 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: aud_dir_ip_modificacion
-                  type: inet
+                  type: java.sql.Types.VARCHAR(60)
                   constraints:
                     nullable: true
   - changeSet:
-      id: sentenciado_pais_fk
+      id: domicilio_pais_fk
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: fk_id_cat_pais
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_pais
+            baseTableName: domicilio
+            constraintName: fk_domicilio_pais
             deferrable: false
             initiallyDeferred: false
             referencedColumnNames: id_cat_pais
             referencedTableName: cat_pais
   - changeSet:
-      id: sentenciado_estado_fk
+      id: domicilio_estado_fk
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: fk_id_cat_edo_nacimiento
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_estado
+            baseColumnNames: fk_id_cat_estado
+            baseTableName: domicilio
+            constraintName: fk_domicilio_estado
             deferrable: false
             initiallyDeferred: false
-            referencedColumnNames: id_cat_edo_nacimiento
-            referencedTableName: cat_edo_nacimiento
+            referencedColumnNames: id_cat_estado
+            referencedTableName: cat_estado
   - changeSet:
-      id: sentenciado_estado_civil_fk
+      id: domicilio_municipio_fk
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: fk_id_cat_edo_civil
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_edo_civil
+            baseColumnNames: fk_id_cat_municipio
+            baseTableName: domicilio
+            constraintName: fk_domicilio_municipio
             deferrable: false
             initiallyDeferred: false
-            referencedColumnNames: id_cat_edo_civil
-            referencedTableName: cat_edo_civil
+            referencedColumnNames: id_cat_municipio
+            referencedTableName: cat_municipio
   - changeSet:
-      id: sentenciado_escolaridad_fk
+      id: domicilio_persona_fk
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: fk_id_cat_ocupacion
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_ocupacion
+            baseColumnNames: id_persona
+            baseTableName: domicilio
+            constraintName: fk_domicilio_persona
             deferrable: false
             initiallyDeferred: false
-            referencedColumnNames: id_cat_ocupacion
-            referencedTableName: cat_ocupacion
-  - changeSet:
-      id: sentenciado_etnia_fk
-      author: alejandro.hernandez
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_cat_etnia
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_etnia
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: id_cat_etnia
-            referencedTableName: cat_etnia
-  - changeSet:
-      id: sentenciado_escolaridad_fk
-      author: alejandro.hernandez
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: fk_id_cat_escolaridad
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_escolaridad
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: id_cat_escolaridad
-            referencedTableName: cat_escolaridad
+            referencedColumnNames: id_sentenciado
+            referencedTableName: sentenciado

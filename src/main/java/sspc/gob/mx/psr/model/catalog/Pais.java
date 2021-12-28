@@ -14,25 +14,23 @@ public class Pais {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cat_pais")
-    public Long id;
+    private Long id;
 
     @NotBlank
     @NotNull
     @Size(min = 1, max = 20)
-    public String nombre;
+    private String nombre;
 
     @NotBlank
     @NotNull
     @Size(min = 3, max = 3)
-    public String alpha3;
+    private String alpha3;
 
     @NotBlank
     @Size(min = 1, max = 50)
-    public String descripcion;
+    private String descripcion;
 
     @NotNull
-    public boolean activo = true;
-
-
+    private boolean activo = true;
 
 }

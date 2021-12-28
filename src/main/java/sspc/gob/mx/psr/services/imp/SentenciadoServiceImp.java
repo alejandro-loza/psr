@@ -3,6 +3,7 @@ package sspc.gob.mx.psr.services.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sspc.gob.mx.psr.dto.SentenciadoDto;
+import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Estado;
 import sspc.gob.mx.psr.model.catalog.Pais;
@@ -11,6 +12,7 @@ import sspc.gob.mx.psr.services.*;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 
 @Service
@@ -49,8 +51,13 @@ public class SentenciadoServiceImp implements SentenciadoService {
         return new SentenciadoDto(sentenciado, folioService.generar(sentenciado));
     }
 
-    private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) throws Exception {
+    @Override
+    public Sentenciado busca(UUID id) throws Exception{
+        return sentencedRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound") );
+    }
 
+    private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) {
 
         return  Sentenciado.builder()
                 .nombre(sentencedInput.getNombre())
