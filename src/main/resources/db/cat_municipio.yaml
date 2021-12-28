@@ -20,7 +20,7 @@ databaseChangeLog:
                     primaryKey: true
               - column:
                   name: nombre
-                  type: java.sql.Types.VARCHAR(20)
+                  type: java.sql.Types.VARCHAR(30)
                   constraints:
                     nullable: false
               - column:

@@ -22,12 +22,21 @@ class CatalogosControllerSpec extends Specification {
         assert resp == estadosRespuesta()
     }
 
-    def "Deberia traer todos los municipios de la aguascalientes"(){
+    def "Deberia traer todos los municipios de la hidalgo"(){
         when:
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/13/municipio", List)?.body
 
         then:
         assert resp == [[id:13048, nombre:"Pachuca de Soto", descripcion:"", estado:"HIDALGO", activo:true]]
+
+    }
+
+    def "Deberia traer todos los municipios de la guerrero"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/12/municipio", List)?.body
+
+        then:
+        assert resp == [[id:12038, nombre:"Zihuatanejo de Azueta", descripcion:"", estado:"GUERRERO", activo:true]]
 
     }
 
