@@ -3,21 +3,265 @@ databaseChangeLog:
       id: pais_data
       author: alejandro.hernandez
       changes:
-        - insert:
-            tableName: cat_pais
-            columns:
-              - column:
-                  name: id_cat_pais
-                  value: 484
-              - column:
-                  name: nombre
-                  value: 'México'
-              - column:
-                  name: alpha3
-                  value: 'MEX'
-              - column:
-                  name: descripcion
-                  value: 'ESTADOS UNIDOS MEXICANOS'
-              - column:
-                  name: activo
-                  value: true
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (1,'AFG','AFGANISTAN','AFGANISTAN','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (3,'ALB','ALBANIA','ALBANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (4,'DEU','ALEMANIA','ALEMANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (5,'AND','ANDORRA','ANDORRA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (6,'AGO','ANGOLA','ANGOLA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (124,'SAU','ARABIA SAUDITA','ARABIA SAUDITA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (8,'DZA','ARGELIA','ARGELIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (9,'ARG','ARGENTINA','ARGENTINA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (10,'AUS','AUSTRALIA','AUSTRALIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (11,'AUT','AUSTRIA','AUSTRIACA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (125,'BHS','BAHAMAS','BAHAMAS','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (12,'BGD','BANGLADESH','BANGLADESH','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (13,'BEL','BELGICA','BELGA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (14,'BLZ','BELICE','BELICEÑA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (123,'BEN','BENIN (DAHOMEY)','BENIN (DAHOMEY)','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (15,'MMR','BIRMANA','BIRMANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (16,'BOL','BOLIVIA','BOLIVIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (17,'BRA','BRASIL','BRASILEÑA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (18,'BGR','BULGARIA','BULGARA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (19,'BDI','BURUNDI','BURUNDI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (20,'KHM','CAMBOYA','CAMBOYA (KAMPUCHEA)','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (21,'CMR','CAMERUN','CAMERUNESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (22,'CAN','CANADA','CANADIENSE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (23,'CAF','CENTROAFRICANA (REP.)','CENTROAFRICANA (REP.','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (30,'TCD','CHAD','CHAD','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (31,'CHL','CHILE','CHILENA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (32,'CHN','CHINA','CHINA COMUNISTA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (34,'CYP','CHIPRE','CHIPRE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (24,'COL','COLOMBIA','COLOMBIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (25,'COG','CONGO (REP.DOM)','CONGO (REP.DOM)','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (26,'KOR','COREA','COREANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (27,'CIV','COSTA DE MARFIL','COSTA DE MARFIL','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (28,'CRI','COSTA RICA','COSTA RICENSE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (126,'HRV','CROACIA','CROACIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (29,'CUB','CUBA','CUBANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (35,'DNK','DINAMARCA','DINAMARCA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (36,'DMA','DOMINICANA (REP.)','DOMINICANA (REP.)','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (37,'ECU','ECUADOR','ECUATORIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (38,'EGY','EGIPTO','EGIPCIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (7,'ARE','EMIRATOS ARABES','ARABE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (40,'ESP','ESPAÐA','ESPAÑOLA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (41,'USA','ESTADOS UNIDOS DE AMERICA','ESTADO UNIDENSE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (42,'ETH','ETIOPIA','ETIOPE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (43,'PHL','FILIPINAS','FILIPINA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (44,'FIN','FINLANDIA','FINLANDESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (45,'FRA','FRANCIA','FRANCESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (46,'GAB','GABON','GABON','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (47,'GMB','GAMBIA','GAMBIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (48,'GHA','GHANA','GHANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (50,'GRC','GRECIA','GRIEGA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (51,'GTM','GUATEMALA','GUATEMALTECA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (52,'GIN','GUINEA','GUINEA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (53,'GUY','GUYANA','GUYANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (54,'HTI','HAITI','HAITIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (55,'NLD','HOLANDA','HOLANDESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (56,'HND','HONDURAS','HONDUREÑA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (57,'HUN','HUNGRIA','HUNGARA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (58,'IND','INDIA','INDU','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (59,'IDN','INDONESIA','INDONESIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (49,'GBR','INGLATERRA','INGLESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (60,'IRQ','IRAK','IRAQUI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (61,'IRN','IRAN','IRANI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (62,'IRL','IRLANDA','IRLANDESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (63,'ISL','ISLANDIA','ISLANDIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (64,'ISR','ISRAEL','ISRAELI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (65,'ITA','ITALIA','ITALIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (66,'JAM','JAMAICA','JAMAIQUINA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (67,'JAP','JAPON','JAPONESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (68,'JOR','JORDANIA','JORDANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (69,'KEN','KENIA','KENIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (70,'KUW','KUWAIT','KUWAITI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (71,'LAO','LAOS','LAOS','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (127,'LET','LETONIA','LETONIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (72,'LIB','LIBANO','LIBANESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (74,'LIB','LIBANO','LIBANESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (73,'LIB','LIBIA','LIBERIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (75,'LUX','LUXEMBURGO','LUXEMBURGO','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (76,'MAD','MADAGASCAR','MADAGASCAR','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (78,'MAL','MALASIA','MALASIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (77,'MAL','MALAWI','MALAWI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (79,'MAL','MALI','MALI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (80,'MAR','MARRUECOS','MARROQUI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (81,'MAU','MAURITANA','MAURITANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (82,'MEX','MÉXICO','MEXICANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (83,'MON','MONACO','MONACO','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (84,'MOZ','MOZAMBIQUE','MOZAMBIQUE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (85,'NEP','NEPAL','NEPAL','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (86,'NIC','NICARAGUA','NICARAGUENSE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (87,'NIG','NIGERIA','NIGER','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (88,'NIG','NIGERIANA','NIGERIANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (89,'NOR','NORUEGA','NORUEGA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (90,'NUE','NUEVA ZELANDA','NUEVA ZELANDA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (92,'PAK','PAKISTAN','PAKISTANI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (91,'PAN','PANAMA','PANAMEÑA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (93,'PAR','PARAGUAY','PARAGUAY','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (94,'PER','PERU','PERUANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (95,'POL','POLONIA','POLACA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (96,'POR','PORTUGAL','PORTUGUESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (97,'PUE','PUERTO RICO','PUERTO RIQUENSE','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (98,'RUA','RUANDA','RUANDESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (99,'RUM','RUMANIA','RUMANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (128,'RUS','RUSIA','RUSIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (39,'SAL','SALVADOR','SALVADOREÑA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (100,'SEN','SENEGAL','SENEGAL','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (101,'SIE','SIERRA LEONA','SIERRA LEONA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (9999,'SIN','SIN INFORMACION','SIN INFORMACION','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (102,'SIR','SIRIA','SIRIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (103,'SOM','SOMALIA','SOMALI','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (2,'AFR','SUDAFRICA','AFRICANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (104,'SUD','SUDAN','SUDAN','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (105,'SUE','SUECIA','SUECA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (106,'SUI','SUIZA','SUIZA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (107,'SUR','SURINAM','SURINAM','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (108,'TAI','TAILANDIA','TAILANDESA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (33,'CHI','TAIWAN','CHINA NACIONALISTA (','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (109,'TAN','TANZANIA','TANZANIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (110,'TOG','TOGO','TOGO','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (111,'TRI','TRINIDAD Y TOBAGO','TRINIDAD Y TOBAGO','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (112,'TUN','TUNEZ','TUNEZ','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (113,'TUR','TURQUIA','TURCA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (129,'UCR','UCRANIA','UCRANIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (114,'UGA','UGANDA','UGANDA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (115,'URU','URUGUAY','URUGUAYA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (116,'VAT','VATICANO','VATICANO','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (117,'VEN','VENEZUELA','VENEZOLANA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (118,'VIE','VIETNAM','VIETNAMITA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (119,'YEM','YEMEN (REP. ARABE)','YEMEN (REP. ARABE)','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (120,'YEM','YEMEN (REP.D.P.)','YEMEN (REP.D.P.)','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (130,'YUG','YUGOSLAVIA','YUGOSLAVIA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (121,'ZAI','ZAIRE','ZAIREÑA','1');
+        - sql:
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (122,'ZAM','ZAMBIA','ZAMBIA','1');

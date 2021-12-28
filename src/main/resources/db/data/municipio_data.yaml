@@ -3,6 +3,8 @@ databaseChangeLog:
       id: estados_data
       author: alejandro.hernandez
       changes:
+        - sql:
+              sql: INSERT INTO cat_municipio(id_cat_municipio, fk_id_cat_estado, nombre, descripcion, activo)VALUES (09013,9,'Benito Juárez','','1');
         - insert:
             tableName: cat_municipio
             columns:

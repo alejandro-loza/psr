@@ -17,6 +17,7 @@ class PaisControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogos/pais", List)?.body
 
         then:
+        assert !resp
         def mex = resp.find {it.id == 484}
 
         mex.with {
