@@ -19,7 +19,11 @@ databaseChangeLog:
   - include:
       file: db/folio.yaml
   - include:
+      file: db/cat_municipio.yaml
+  - include:
       file: db/data/estados_data.yaml
+  - include:
+      file: db/data/municipio_data.yaml
   - include:
       file: db/data/estados_civil_data.yaml
   - include:

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sspc.gob.mx.psr.model.catalog.EstadoCivil;
@@ -18,6 +19,9 @@ public class CatalogosController {
 
     @Autowired
     EstadoCivilService estadoCivilService;
+
+    @Autowired
+    MunicipioService municipioService;
 
     @Autowired
     EscolaridadService escolaridadService;
@@ -38,6 +42,11 @@ public class CatalogosController {
         return new ResponseEntity<>( estadoservicio.lista(), HttpStatus.OK);
     }
 
+    @GetMapping(path="/estado/{estadoId}/municipio", produces = "application/json")
+    ResponseEntity municipios(@PathVariable("estadoId") Long estadoId) {
+        return new ResponseEntity<>( municipioService.muncipiosPorEstado(estadoservicio.busca(estadoId)), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/estadoCivil", produces = "application/json")
     ResponseEntity estadoCivil() {
         return new ResponseEntity<>( estadoCivilService.lista(), HttpStatus.OK);
@@ -52,5 +61,6 @@ public class CatalogosController {
     ResponseEntity ocupaciones() {
         return new ResponseEntity<>( ocupacionService.lista(), HttpStatus.OK);
     }
+
 
 }

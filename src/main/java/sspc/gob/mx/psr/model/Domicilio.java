@@ -34,11 +34,11 @@ public class Domicilio extends EntidadBase {
     private Estado estado;
 
     @ManyToOne
-    @JoinColumn(name = "fk_id_cat_estado", nullable = false, updatable = false )
+    @JoinColumn(name = "fk_id_cat_pais", nullable = false, updatable = false )
     private Pais pais;
 
     @ManyToOne
-    @JoinColumn(name = "fk_id_cat_estado", nullable = false, updatable = false )
+    @JoinColumn(name = "fk_id_cat_municipio", nullable = false, updatable = false )
     private Municipio municipio;
 
     @NotNull
