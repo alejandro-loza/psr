@@ -1,0 +1,204 @@
+databaseChangeLog:
+  - changeSet:
+      id: sentenciado
+      author: alejandro.hernandez
+      changes:
+        - createTable:
+            tableName: sentenciado
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: apellido_paterno
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: apellido_materno
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pais_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: documento
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: folio_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: estado_civil_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alias
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: otros_nombres
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fecha_nacimiento
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: estado_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ocupacion_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sexo
+                  type: java.sql.Types.VARCHAR(8)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: etnia_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: escolaridad_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: telefono_fijo
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: celular
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: correo_electronico
+                  type: java.sql.Types.VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_created
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_updated
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_deleted
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: sentenciado_pais_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: pais_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_pais
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: pais
+  - changeSet:
+      id: sentenciado_estado_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: estado_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_estado
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: estado
+  - changeSet:
+      id: sentenciado_estado_civil_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: estado_civil_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_estado_civil
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: estado_civil
+  - changeSet:
+      id: sentenciado_escolaridad_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: escolaridad_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_escolaridad
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: escolaridad
+  - changeSet:
+      id: sentenciado_ocupacion_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: ocupacion_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_ocupacion
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: ocupacion
+  - changeSet:
+      id: sentenciado_etnia_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: etnia_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_etnia
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_etnia
+            referencedTableName: cat_etnia
+  - changeSet:
+      id: sentenciado_folio_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: folio_id
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_folio
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: folio

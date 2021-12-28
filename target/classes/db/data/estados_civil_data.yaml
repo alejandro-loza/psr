@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: estados_data
+      author: alejandro.hernandez
+      changes:
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: nombre
+                  value: 'SOLTERO(A)'
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: nombre
+                  value: 'CASADO(A)'
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: nombre
+                  value: 'VIUDO(A)'
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: nombre
+                  value: 'CONCUBINATO'
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: nombre
+                  value: 'UNIÓN LIBRE'
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: nombre
+                  value: 'DIVORCIADO(A)'
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: nombre
+                  value: 'SEPARADO'
+        - insert:
+            tableName: estado_civil
+            columns:
+              - column:
+                  name: id
+                  value: 99
+              - column:
+                  name: nombre
+                  value: 'OTRO(S)'
