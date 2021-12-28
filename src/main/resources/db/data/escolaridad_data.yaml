@@ -4,173 +4,284 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 1
               - column:
                   name: nombre
                   value: 'SIN ESCOLARIDAD'
+              - column:
+                  name: descripcion
+                  value: 'SIN ESCOLARIDAD'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 2
               - column:
                   name: nombre
                   value: 'PRIMARIA INCOMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'PRIMARIA INCOMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 3
               - column:
                   name: nombre
                   value: 'PRIMARIA COMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'PRIMARIA COMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 4
               - column:
                   name: nombre
                   value: 'SECUNDARIA INCOMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'SECUNDARIA INCOMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 5
               - column:
                   name: nombre
                   value: 'SECUNDARIA COMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'SECUNDARIA COMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 6
               - column:
                   name: nombre
                   value: 'CARRERA TECNICA INCOMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'CARRERA TECNICA INCOMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 7
               - column:
                   name: nombre
                   value: 'CARRERA TECNICA COMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 8
               - column:
                   name: nombre
                   value: 'BACHILLERATO INCOMPLETO'
+              - column:
+                  name: descripcion
+                  value: 'BACHILLERATO INCOMPLETO'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 9
               - column:
                   name: nombre
                   value: 'BACHILLERATO COMPLETO'
+              - column:
+                  name: descripcion
+                  value: 'BACHILLERATO COMPLETO'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 10
               - column:
                   name: nombre
                   value: 'LICENCIATURA INCOMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'LICENCIATURA INCOMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 11
               - column:
                   name: nombre
                   value: 'LICENCIATURA COMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'LICENCIATURA COMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 12
               - column:
                   name: nombre
                   value: 'MAESTRIA INCOMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'MAESTRIA INCOMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 13
               - column:
                   name: nombre
                   value: 'MAESTRIA COMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'MAESTRIA COMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 14
               - column:
                   name: nombre
                   value: 'DOCTORADO INCOMPLETO'
+              - column:
+                  name: descripcion
+                  value: 'DOCTORADO INCOMPLETO'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 15
               - column:
                   name: nombre
                   value: 'DOCTORADO COMPLETO'
+              - column:
+                  name: descripcion
+                  value: 'DOCTORADO INCOMPLETO'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 16
               - column:
                   name: nombre
                   value: 'ESPECIALIDAD INCOMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'ESPECIALIDAD INCOMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 17
               - column:
                   name: nombre
                   value: 'ESPECIALIDAD COMPLETA'
+              - column:
+                  name: descripcion
+                  value: 'ESPECIALIDAD COMPLETA'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
+                  name: id_cat_escolaridad
                   value: 18
               - column:
                   name: nombre
                   value: 'ANALFABETO(A)'
+              - column:
+                  name: descripcion
+                  value: 'ANALFABETO(A)'
+              - column:
+                  name: activo
+                  value: 1
         - insert:
-            tableName: escolaridad
+            tableName: cat_escolaridad
             columns:
               - column:
-                  name: id
-                  value: 9999
+                  name: id_cat_escolaridad
+                  value: 99
               - column:
                   name: nombre
                   value: 'SIN DATO'
+              - column:
+                  name: descripcion
+                  value: 'SIN DATOS'
+              - column:
+                  name: activo
+                  value: 1

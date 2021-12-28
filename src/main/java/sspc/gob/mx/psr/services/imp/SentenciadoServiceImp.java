@@ -41,17 +41,18 @@ public class SentenciadoServiceImp implements SentenciadoService {
     OcupacionService ocupacionService;
 
     @Override
-    @Transactional
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {
-        return new SentenciadoDto( sentencedRepository.save(construyeSentenciado(sentenciadoValidador)));
+        Estado estado = estadoService.busca(sentenciadoValidador.getEstadoId());
+        Pais pais = paisService.busca(sentenciadoValidador.getNacionalidadId());
+
+        Sentenciado sentenciado = sentencedRepository.save(construyeSentenciado(sentenciadoValidador, estado, pais));
+        return new SentenciadoDto(sentenciado, folioService.generar(sentenciado));
     }
 
-    private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput) throws Exception {
-        Estado estado = estadoService.busca(sentencedInput.getEstadoId());
-        Pais pais = paisService.busca(sentencedInput.getNacionalidadId());
+    private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) throws Exception {
+
 
         return  Sentenciado.builder()
-                .folio(folioService.generar(sentencedInput, estado, pais))
                 .nombre(sentencedInput.getNombre())
                 .apellidoPaterno(sentencedInput.getApellidoPaterno())
                 .apellidoMaterno(sentencedInput.getApellidoMaterno())

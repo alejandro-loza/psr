@@ -37,7 +37,7 @@ public class SentenciadoValidador {
 
     @NotNull
     @NotBlank
-    @Size(min = 18, max = 18)
+    @Size(min = 1, max = 18)
     String documento;
 
     @NotNull

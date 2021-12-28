@@ -1,31 +1,37 @@
 databaseChangeLog:
   - changeSet:
       id: folio
-      author: alejandro.hernandez
+      author: andrea.perez
       changes:
         - createTable:
             tableName: folio
             columns:
               - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
+                  name: id_folio
+                  type: uuid
+                  valueComputed: "${u_id}"
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
+                  name: id_sentenciado
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
                   name: nombre_codigo
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(4)
                   constraints:
                     nullable: false
               - column:
                   name: nacimiento_codigo
-                  type: BIGINT
+                  type: INT
                   constraints:
                     nullable: false
               - column:
                   name: entidad_codigo
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(2)
                   constraints:
                     nullable: false
               - column:
@@ -35,7 +41,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: nacionalidad_codigo
-                  type: java.sql.Types.VARCHAR(255)
+                  type: java.sql.Types.VARCHAR(3)
                   constraints:
                     nullable: false
               - column:
@@ -44,7 +50,25 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: extra
-                  type: BIGINT
+                  name: comprobacion
+                  type: INT
                   constraints:
                     nullable: false
+              - column:
+                  name: folio
+                  type: java.sql.Types.VARCHAR(19)
+                  constraints:
+                    nullable: false
+                    unique: true
+  - changeSet:
+      id: folio_sentenciado
+      author: andrea.perez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_sentenciado
+            baseTableName: folio
+            constraintName: fk_id_sentenciado
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_sentenciado
+            referencedTableName: sentenciado

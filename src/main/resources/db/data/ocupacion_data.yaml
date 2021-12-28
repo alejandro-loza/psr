@@ -4,11 +4,17 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - insert:
-            tableName: ocupacion
+            tableName: cat_ocupacion
             columns:
               - column:
-                  name: id
+                  name: id_cat_ocupacion
                   value: 1
               - column:
                   name: nombre
                   value: 'EMPLEADO'
+              - column:
+                  name: descripcion
+                  value: 'EMPLEADO'
+              - column:
+                  name: activo
+                  value: true

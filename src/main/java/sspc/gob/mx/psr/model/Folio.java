@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,15 +15,22 @@ import javax.persistence.Id;
 @Entity
 public class Folio {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    @Column(name = "id_folio")
+    private UUID id;
+
+    @OneToOne
+    @JoinColumn(name="id_sentenciado")
+    private Sentenciado sentenciado;
+
     private String nombreCodigo;
     private Long nacimientoCodigo;
     private String entidadCodigo;
     private Character sexoCodigo;
     private String nacionalidadCodigo;
     private String consecutivo;
-    private Long extra;
+    private Long comprobacion;
+    private String folio;
 
     @Override
     public String toString() {
@@ -35,6 +40,6 @@ public class Folio {
                 sexoCodigo +
                 nacionalidadCodigo +
                 consecutivo +
-                extra;
+                comprobacion;
     }
 }

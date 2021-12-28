@@ -13,7 +13,6 @@ public class PaisDto {
     public PaisDto(Pais pais) {
         this.id = pais.id;
         this.nombre = pais.nombre;
-        this.alpha2 = pais.alpha2;
         this.alpha3 = pais.alpha3;
     }
 

@@ -1,101 +1,68 @@
 databaseChangeLog:
   - changeSet:
-      id: sentenciado
-      author: alejandro.hernadnez
+      id: demografico
+      author: andrea.perez
       changes:
         - createTable:
-            tableName: sentenciado
+            tableName: domicilio
             columns:
               - column:
-                  name: id_sentenciado
+                  name: id_persona
                   type: uuid
                   valueComputed: "${u_id}"
                   constraints:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: nombre
-                  type: java.sql.Types.VARCHAR(50)
+                  name: id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
                   constraints:
                     nullable: false
-              - column:
-                  name: apellido_paterno
-                  type: java.sql.Types.VARCHAR(50)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: apellido_materno
-                  type: java.sql.Types.VARCHAR(50)
-                  constraints:
-                    nullable: true
+                    primaryKey: true
               - column:
                   name: fk_id_cat_pais
                   type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: fk_id_cat_edo_nacimiento
+                  name: fk_id_cat_estado
                   type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: documento
-                  type: java.sql.Types.VARCHAR(18)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: fk_id_cat_edo_civil
+                  name: fk_id_cat_municipio
                   type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: fch_nacimiento
-                  type: DATE
+                  name: codigo_postal
+                  type: java.sql.Types.VARCHAR(5)
                   constraints:
                     nullable: false
               - column:
-                  name: fk_id_cat_ocupacion
-                  type: INT
-                  constraints:
-                    nullable: true
-              - column:
-                  name: otros_nombres
-                  type: java.sql.Types.VARCHAR(255)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: alias
-                  type: java.sql.Types.VARCHAR(255)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: sexo
-                  type: java.sql.Types.VARCHAR(9)
-                  constraints:
-                    nullable: fals
-              - column:
-                  name: fk_id_cat_etnia
-                  type: INT
-                  constraints:
-                    nullable: true
-              - column:
-                  name: fk_id_cat_escolaridad
-                  type: INT
+                  name: colonia
+                  type: java.sql.Types.VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: tel_casa
-                  type: java.sql.Types.VARCHAR(10)
+                  name: calle
+                  type: java.sql.Types.VARCHAR(50)
                   constraints:
                     nullable: true
               - column:
-                  name: tel_celular
+                  name: numero
                   type: java.sql.Types.VARCHAR(10)
                   constraints:
                     nullable: false
               - column:
-                  name: correo_electronico
-                  type: java.sql.Types.VARCHAR(60)
+                  name: latitud
+                  type: java.sql.Types.VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: longitud
+                  type: java.sql.Types.VARCHAR(30)
                   constraints:
                     nullable: false
               - column:
@@ -110,7 +77,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: aud_dir_ip_alta
-                  type: java.sql.Types.VARCHAR(60)
+                  type: inet
                   constraints:
                     nullable: true
               - column:
@@ -125,12 +92,12 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: aud_dir_ip_modificacion
-                  type: java.sql.Types.VARCHAR(60)
+                  type: inet
                   constraints:
                     nullable: true
   - changeSet:
       id: sentenciado_pais_fk
-      author: andrea.perez
+      author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: fk_id_cat_pais
@@ -142,7 +109,7 @@ databaseChangeLog:
             referencedTableName: cat_pais
   - changeSet:
       id: sentenciado_estado_fk
-      author: andrea.perez
+      author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: fk_id_cat_edo_nacimiento
@@ -150,11 +117,11 @@ databaseChangeLog:
             constraintName: fk_sentenciado_estado
             deferrable: false
             initiallyDeferred: false
-            referencedColumnNames: id_cat_estado
-            referencedTableName: cat_estado
+            referencedColumnNames: id_cat_edo_nacimiento
+            referencedTableName: cat_edo_nacimiento
   - changeSet:
       id: sentenciado_estado_civil_fk
-      author: andrea.perez
+      author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: fk_id_cat_edo_civil
@@ -166,31 +133,7 @@ databaseChangeLog:
             referencedTableName: cat_edo_civil
   - changeSet:
       id: sentenciado_escolaridad_fk
-      author: andrea.perez
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: fk_id_cat_escolaridad
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_escolaridad
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: id_cat_escolaridad
-            referencedTableName: cat_escolaridad
-  - changeSet:
-      id: sentenciado_etnia
-      author: andrea.perez
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: fk_id_cat_etnia
-            baseTableName: sentenciado
-            constraintName: fk_sentenciado_etnia
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: id_cat_etnia
-            referencedTableName: cat_etnia
-  - changeSet:
-      id: sentenciado_ocupacion_fk
-      author: andrea.perez
+      author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: fk_id_cat_ocupacion
@@ -200,3 +143,27 @@ databaseChangeLog:
             initiallyDeferred: false
             referencedColumnNames: id_cat_ocupacion
             referencedTableName: cat_ocupacion
+  - changeSet:
+      id: sentenciado_etnia_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_cat_etnia
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_etnia
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_etnia
+            referencedTableName: cat_etnia
+  - changeSet:
+      id: sentenciado_escolaridad_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_cat_escolaridad
+            baseTableName: sentenciado
+            constraintName: fk_sentenciado_escolaridad
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_escolaridad
+            referencedTableName: cat_escolaridad
