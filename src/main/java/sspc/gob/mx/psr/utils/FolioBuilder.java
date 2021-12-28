@@ -64,7 +64,7 @@ public class FolioBuilder implements IFolioBuilder {
 
     private Integer sumaUnitaria(List<Integer> intStream) {
         StringBuilder sb = new StringBuilder();
-        for (Integer element: intStream){
+        for (var element: intStream){
             sb.append(element.toString());
         }
 

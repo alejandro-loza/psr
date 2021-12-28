@@ -36,10 +36,10 @@ public class FolioServiceImp implements FolioService {
     @Override
     public Folio construirFolio(SentenciadoValidador sentenciadoInput, Estado estado, Pais pais) throws Exception {
         String codigoPais = pais.getAlpha3();
-        int[] codigoEntidad = generarCodigoEntidad(estado, codigoPais);
+        var codigoEntidad = generarCodigoEntidad(estado, codigoPais);
         String codigoNombre = generarCodigoNombre(sentenciadoInput);
-        int[] fecha = generarCodigoFecha(sentenciadoInput.getFechaNacimiento());
-        int[]  consecutivo = getConsecutivo(sentenciadoInput, pais, Ints.join("",codigoEntidad),
+        var fecha = generarCodigoFecha(sentenciadoInput.getFechaNacimiento());
+        var consecutivo = getConsecutivo(sentenciadoInput, pais, Ints.join("",codigoEntidad),
                 codigoNombre, Long.valueOf(Ints.join("", fecha)));
 
         return new FolioBuilder(codigoNombre, fecha, codigoEntidad,
@@ -71,7 +71,7 @@ public class FolioServiceImp implements FolioService {
     }
 
     private String generarCodigoNombre(SentenciadoValidador sentenciadoInput) throws Exception {
-        String nombreCodificado = generarCodigoPaterno(sentenciadoInput) +
+        var nombreCodificado = generarCodigoPaterno(sentenciadoInput) +
                  generarCodigoMaterno(sentenciadoInput) +
                  nombrePrimerCaracter(sentenciadoInput);
 
@@ -93,7 +93,7 @@ public class FolioServiceImp implements FolioService {
     }
 
     private String generarCodigoPaterno(SentenciadoValidador sentenciadoInput){
-        String apellidoPaterno = StringUtils.stripAccents(Optional.ofNullable(sentenciadoInput)
+        var apellidoPaterno = StringUtils.stripAccents(Optional.ofNullable(sentenciadoInput)
                 .map(SentenciadoValidador::getApellidoPaterno)
                 .orElse(COMODIN_VACIO));
 
@@ -110,7 +110,7 @@ public class FolioServiceImp implements FolioService {
     }
 
     private Character buscaPrimerVocal(String apellido) {
-        for(char c : apellido.toCharArray()){
+        for(var c : apellido.toCharArray()){
             if(VOCALES.indexOf(c) >= 0)
               return c;
         }
