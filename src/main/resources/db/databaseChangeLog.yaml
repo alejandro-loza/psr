@@ -21,6 +21,8 @@ databaseChangeLog:
   - include:
       file: db/cat_municipio.yaml
   - include:
+      file: db/demografico.yaml
+  - include:
       file: db/data/estados_data.yaml
   - include:
       file: db/data/municipio_data.yaml
