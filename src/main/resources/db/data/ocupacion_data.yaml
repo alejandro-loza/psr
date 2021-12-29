@@ -3,18 +3,7 @@ databaseChangeLog:
       id: ocupacion_data
       author: alejandro.hernandez
       changes:
-        - insert:
-            tableName: cat_ocupacion
-            columns:
-              - column:
-                  name: id_cat_ocupacion
-                  value: 1
-              - column:
-                  name: nombre
-                  value: 'EMPLEADO'
-              - column:
-                  name: descripcion
-                  value: 'EMPLEADO'
-              - column:
-                  name: activo
-                  value: true
+        - sql:
+            sql: INSERT INTO cat_ocupacion(id_cat_ocupacion, nombre, descripcion, activo)VALUES (1,'EMPLEADO','','1');
+        - sql:
+            sql: INSERT INTO cat_ocupacion(id_cat_ocupacion, nombre, descripcion, activo)VALUES (2,'ADMINISTRADOR','','1');

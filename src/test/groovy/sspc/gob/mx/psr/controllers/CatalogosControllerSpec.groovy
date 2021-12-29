@@ -27,7 +27,7 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/13/municipio", List)?.body
 
         then:
-        assert resp == [[id:13048, nombre:"Pachuca de Soto", descripcion:"", estado:"HIDALGO", activo:true]]
+        assert resp.size() == 84
 
     }
 
@@ -36,7 +36,7 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/12/municipio", List)?.body
 
         then:
-        assert resp == [[id:12038, nombre:"Zihuatanejo de Azueta", descripcion:"", estado:"GUERRERO", activo:true]]
+        assert resp.size() == 81
 
     }
 
@@ -72,7 +72,7 @@ class CatalogosControllerSpec extends Specification {
 
         then:
         assert resp.getStatusCode() == HttpStatus.OK
-        assert resp.body
+        assert resp.body.size() == 71
     }
 
     def "Deberia traer todos las ocupaciones"(){

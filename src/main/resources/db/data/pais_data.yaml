@@ -150,21 +150,21 @@ databaseChangeLog:
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (127,'LET','LETONIA','LETONIA','1');
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (72,'LIB','LIBANO','LIBANESA','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (72,'LBN','LIBANO','LIBANESA','1');
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (74,'LIB','LIBANO','LIBANESA','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (73,'LBY','LIBIA','LIBERIA','1');
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (73,'LIB','LIBIA','LIBERIA','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (74,'LBR','LIBERIA','LIBANESA','1');
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (75,'LUX','LUXEMBURGO','LUXEMBURGO','1');
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (76,'MAD','MADAGASCAR','MADAGASCAR','1');
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (78,'MAL','MALASIA','MALASIA','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (78,'MYS','MALASIA','MALASIA','1');
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (77,'MAL','MALAWI','MALAWI','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (77,'MWI','MALAWI','MALAWI','1');
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (79,'MAL','MALI','MALI','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (79,'RMM','MALI','MALI','1');
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (80,'MAR','MARRUECOS','MARROQUI','1');
         - sql:
@@ -181,8 +181,6 @@ databaseChangeLog:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (86,'NIC','NICARAGUA','NICARAGUENSE','1');
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (87,'NIG','NIGERIA','NIGER','1');
-        - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (88,'NIG','NIGERIANA','NIGERIANA','1');
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (89,'NOR','NORUEGA','NORUEGA','1');
         - sql:
@@ -258,7 +256,7 @@ databaseChangeLog:
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (119,'YEM','YEMEN (REP. ARABE)','YEMEN (REP. ARABE)','1');
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (120,'YEM','YEMEN (REP.D.P.)','YEMEN (REP.D.P.)','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (120,'YMD','YEMEN (REP.D.P.)','YEMEN (REP.D.P.)','1');
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (130,'YUG','YUGOSLAVIA','YUGOSLAVIA','1');
         - sql:
