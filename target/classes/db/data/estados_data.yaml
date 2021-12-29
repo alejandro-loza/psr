@@ -1,0 +1,293 @@
+databaseChangeLog:
+  - changeSet:
+      id: estados_data
+      author: alejandro.hernandez
+      changes:
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: nombre
+                  value: 'AGUASCALIENTES'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: nombre
+                  value: 'BAJA CALIFORNIA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: nombre
+                  value: 'BAJA CALIFORNIA SUR'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: nombre
+                  value: 'CAMPECHE'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: nombre
+                  value: 'COAHUILA DE ZARAGOZA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: nombre
+                  value: 'COLIMA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: nombre
+                  value: 'CHIAPAS'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: nombre
+                  value: 'CHIHUAHUA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: nombre
+                  value: 'CIUDAD DE MÉXICO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 10
+              - column:
+                  name: nombre
+                  value: 'DURANGO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 11
+              - column:
+                  name: nombre
+                  value: 'GUANAJUATO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 12
+              - column:
+                  name: nombre
+                  value: 'GUERRERO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 13
+              - column:
+                  name: nombre
+                  value: 'HIDALGO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 14
+              - column:
+                  name: nombre
+                  value: 'JALISCO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 15
+              - column:
+                  name: nombre
+                  value: 'ESTADO DE MÉXICO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 16
+              - column:
+                  name: nombre
+                  value: 'MICHOACÁN DE OCAMPO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 17
+              - column:
+                  name: nombre
+                  value: 'MORELOS'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 18
+              - column:
+                  name: nombre
+                  value: 'NAYARIR'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 19
+              - column:
+                  name: nombre
+                  value: 'NUEVO LEÓN'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 20
+              - column:
+                  name: nombre
+                  value: 'OAXACA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 21
+              - column:
+                  name: nombre
+                  value: 'PUEBLA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 22
+              - column:
+                  name: nombre
+                  value: 'QUERÉTARO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 23
+              - column:
+                  name: nombre
+                  value: 'QUINTANA ROO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 24
+              - column:
+                  name: nombre
+                  value: 'SAN LUIS POTOSÍ'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 25
+              - column:
+                  name: nombre
+                  value: 'SINALOA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 26
+              - column:
+                  name: nombre
+                  value: 'SONORA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 27
+              - column:
+                  name: nombre
+                  value: 'TABASCO'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 28
+              - column:
+                  name: nombre
+                  value: 'TAMAULIPAS'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 29
+              - column:
+                  name: nombre
+                  value: 'TLAXCALA'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 30
+              - column:
+                  name: nombre
+                  value: 'VERACRUZ'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 31
+              - column:
+                  name: nombre
+                  value: 'YUCATÁN'
+        - insert:
+            tableName: estado
+            columns:
+              - column:
+                  name: id
+                  value: 32
+              - column:
+                  name: nombre
+                  value: 'ZACATECAS'

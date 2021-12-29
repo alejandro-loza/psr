@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: etnia_data
+      author: alejandro.hernandez
+      changes:
+        - insert:
+            tableName: cat_etnia
+            columns:
+              - column:
+                  name: id_cat_etnia
+                  value: 1
+              - column:
+                  name: nombre
+                  value: 'AMUZGO'
+              - column:
+                  name: descripcion
+                  value: 'AMUZGO'
+              - column:
+                  name: activo
+                  value: true
