@@ -110,7 +110,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: aud_dir_ip_alta
-                  type: java.sql.Types.VARCHAR(60)
+                  type: java.sql.Types.VARCHAR(15)
                   constraints:
                     nullable: true
               - column:
@@ -125,7 +125,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: aud_dir_ip_modificacion
-                  type: java.sql.Types.VARCHAR(60)
+                  type: java.sql.Types.VARCHAR(15)
                   constraints:
                     nullable: true
   - changeSet:
