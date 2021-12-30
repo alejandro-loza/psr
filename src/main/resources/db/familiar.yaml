@@ -16,10 +16,8 @@ databaseChangeLog:
               - column:
                   name: id_sentenciado
                   type: uuid
-                  valueComputed: "${u_id}"
                   constraints:
-                    nullable:
-                      false
+                    nullable: false
               - column:
                   name: nombre
                   type: java.sql.Types.VARCHAR(50)
@@ -59,7 +57,7 @@ databaseChangeLog:
                   name: aud_usuario_alta
                   type: java.sql.Types.VARCHAR(60)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: aud_fch_alta
                   type: DATE
@@ -69,12 +67,12 @@ databaseChangeLog:
                   name: aud_dir_ip_alta
                   type: java.sql.Types.VARCHAR(15)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: aud_usuario_modificacion
                   type: java.sql.Types.VARCHAR(60)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: aud_fch_modificacion
                   type: DATE
@@ -84,7 +82,7 @@ databaseChangeLog:
                   name: aud_dir_ip_modificacion
                   type: java.sql.Types.VARCHAR(15)
                   constraints:
-                    nullable: false
+                    nullable: true
   - changeSet:
       id: familiar_parentesco_fk
       author: andrea.perez
@@ -97,3 +95,15 @@ databaseChangeLog:
             initiallyDeferred: false
             referencedColumnNames: id_cat_parentesco
             referencedTableName: cat_parentesco
+  - changeSet:
+      id: familiar_sentenciado
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_sentenciado
+            baseTableName: familiar
+            constraintName: fk_familiar_sentenciado
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_sentenciado
+            referencedTableName: sentenciado

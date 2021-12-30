@@ -84,6 +84,16 @@ class CatalogosControllerSpec extends Specification {
         assert resp.body
     }
 
+    def "Deberia traer todos los parentescos"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/parentesco", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp.body
+        assert resp.body == [[id:1, nombre:'PADRE'], [id:2, nombre:'MADRE'], [id:3, nombre:'CÓNYUGE']]
+    }
+
     private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {
         [[id: 1, nombre: 'SIN ESCOLARIDAD'],
          [id: 2, nombre: 'PRIMARIA INCOMPLETA'],

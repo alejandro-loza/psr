@@ -40,3 +40,5 @@ databaseChangeLog:
       file: db/data/etnia_data.yaml
   - include:
       file: db/data/ocupacion_data.yaml
+  - include:
+      file: db/data/parentesco_data.yaml
