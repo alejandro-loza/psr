@@ -1,5 +1,6 @@
 package sspc.gob.mx.psr.controllers
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -129,6 +130,8 @@ class SentenciadoControllerSpec extends Specification {
             celular = 123123
             parentescoId = 2
         }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
 
         when:
         def resp = rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
