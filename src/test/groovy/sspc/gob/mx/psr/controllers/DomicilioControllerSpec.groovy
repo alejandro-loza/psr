@@ -19,6 +19,8 @@ import java.time.Month
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class DomicilioControllerSpec extends Specification {
+    public static final int MEXICO_ID = 82
+
 
     @Value('${local.server.port}')
     int port
@@ -40,7 +42,7 @@ class DomicilioControllerSpec extends Specification {
         cmd.with {
             sentenciadoId = senteciado.id
             estadoId = 13
-            paisId = 484
+            paisId = MEXICO_ID
             municipioId = 13048
             codigoPostal = '12345'
             colonia = 'Benito Juarez'
@@ -58,7 +60,7 @@ class DomicilioControllerSpec extends Specification {
         resp.with {
             assert it.sentenciadoId
             assert it.estado == 'HIDALGO'
-            assert it.pais == 'México'
+            assert it.pais == 'MÉXICO'
             assert it.municipio == 'Pachuca de Soto'
             assert it.colonia == 'Benito Juarez'
             assert it.calle == 'Bolevar of bronken dreams'
@@ -76,7 +78,7 @@ class DomicilioControllerSpec extends Specification {
             nombre = 'Tomas'
             apellidoPaterno = 'Ràmirez'
             apellidoMaterno = 'Torres'
-            nacionalidadId = 484
+            nacionalidadId = 82
             estadoId = 13
             documento = 'HELA880416HHGRZL08'
             estadoCivil = 1

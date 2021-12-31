@@ -14,6 +14,12 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
               - column:
+                  name: fk_id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+              - column:
                   name: nombre
                   type: java.sql.Types.VARCHAR(50)
                   constraints:
@@ -42,7 +48,7 @@ databaseChangeLog:
                   name: documento
                   type: java.sql.Types.VARCHAR(18)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: fk_id_cat_edo_civil
                   type: INT
@@ -82,7 +88,7 @@ databaseChangeLog:
                   name: fk_id_cat_escolaridad
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: tel_casa
                   type: java.sql.Types.VARCHAR(10)

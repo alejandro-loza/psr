@@ -3,18 +3,145 @@ databaseChangeLog:
       id: etnia_data
       author: alejandro.hernandez
       changes:
-        - insert:
-            tableName: cat_etnia
-            columns:
-              - column:
-                  name: id_cat_etnia
-                  value: 1
-              - column:
-                  name: nombre
-                  value: 'AMUZGO'
-              - column:
-                  name: descripcion
-                  value: 'AMUZGO'
-              - column:
-                  name: activo
-                  value: true
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (1,'AMUZGO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (2,'CAKCHIQUEL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (3,'COCHIMI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (4,'CORA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (5,'CUCAPA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (6,'CUICATECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (7,'CHATINO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (8,'CHICHIMECA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (9,'CHINATECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (10,'CHOCHO POPOLOCA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (11,'CHOL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (12,'CHONTAL DE OAXACA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (13,'GUARIJIO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (14,'HUASTECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (15,'HUAVE','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (16,'HUICHOL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (17,'IXCATECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (18,'IXIL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (19,'JACALTECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (20,'KANJOBAL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (21,'KEKCHI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (22,'KIKAPU','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (23,'KILIWA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (24,'KUMIAI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (25,'LACANDON','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (26,'MAME','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (27,'MATLATZINCA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (28,'MAYA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (29,'MAYO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (30,'MAZAHUA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (31,'MAZATECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (32,'MIXE','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (33,'MIXTECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (34,'MOTOCINTLECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (35,'NAHUATL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (36,'OCUITECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (37,'OPATA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (38,'OTOMI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (39,'PAIPAI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (40,'PAME','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (41,'PAPAGO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (42,'PIMA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (43,'POPOLUCA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (44,'PUREPECHA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (45,'QUICHE','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (46,'SERI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (47,'TARAHUMARA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (48,'TEPEHUA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (49,'TEPEHUAN','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (50,'TLAPANECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (51,'TOJOLABAL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (52,'TOTONACA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (53,'TRIQUI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (54,'TZELTAL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (55,'TZOTZIL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (56,'YAQUI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (57,'ZAPOTECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (58,'ZOQUE','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (59,'NEGRO MASCOGO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (60,'MESTIZO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (61,'TARASCO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (62,'TEPEHUANA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (63,'RARAMURI','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (64,'TEPEHUANO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (65,'OJITECO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (66,'TZETZAL','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (67,'CHINANTECOS','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (68,'CHIAPANECOS','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (69,'CHIMALHUACANO','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (70,'NINGUNA','','1');
+        - sql:
+            sql: INSERT INTO cat_etnia(id_cat_etnia, nombre, descripcion, activo)VALUES (9999,'SIN DATO','','1');

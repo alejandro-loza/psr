@@ -17,7 +17,7 @@ import java.time.Month
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SentenciadoControllerSpec extends Specification {
 
-    public static final int MEXICO_ID = 484
+    public static final int MEXICO_ID = 82
     @Value('${local.server.port}')
     int port
     RestTemplate rest = new RestTemplate()
@@ -57,7 +57,7 @@ class SentenciadoControllerSpec extends Specification {
             assert it.folio == 'RXTA88041613HMEX001'
             assert it.apellidoPaterno == 'Ràmirez'
             assert it.apellidoMaterno == 'Torres'
-            assert it.nacionalidad == 'México'
+            assert it.nacionalidad == 'MÉXICO'
             assert it.documento == 'HELA880416HHGRZL08'
             assert it.estadoCivil == 'SOLTERO(A)'
             assert it.alias == "el pinky"
