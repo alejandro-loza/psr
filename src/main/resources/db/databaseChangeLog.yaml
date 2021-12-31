@@ -21,6 +21,10 @@ databaseChangeLog:
   - include:
       file: db/cat_municipio.yaml
   - include:
+      file: db/cat_parentesco.yaml
+  - include:
+      file: db/familiar.yaml
+  - include:
       file: db/demografico.yaml
   - include:
       file: db/data/estados_data.yaml
@@ -36,3 +40,5 @@ databaseChangeLog:
       file: db/data/etnia_data.yaml
   - include:
       file: db/data/ocupacion_data.yaml
+  - include:
+      file: db/data/parentesco_data.yaml

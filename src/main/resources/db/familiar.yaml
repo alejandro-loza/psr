@@ -96,7 +96,7 @@ databaseChangeLog:
                   constraints:
                     nullable: true
   - changeSet:
-      id: sentenciado_folio_fk
+      id: familiar_sentenciado_fk
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
@@ -108,14 +108,14 @@ databaseChangeLog:
             referencedColumnNames: fk_id_sentenciado
             referencedTableName: sentenciado
   - changeSet:
-      id: sentenciado_familiar_fk
+      id: familiar_domicilio_fk
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: fk_id_sentenciado
+            baseColumnNames: fk_id_domicilio
             baseTableName: familiar
-            constraintName: fk_sentenciado_familiar
+            constraintName: fk_familiar_domicilio
             deferrable: false
             initiallyDeferred: false
-            referencedColumnNames: fk_id_sentenciado
-            referencedTableName: sentenciado
+            referencedColumnNames: id_domicilio
+            referencedTableName: domicilio
