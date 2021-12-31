@@ -24,7 +24,7 @@ databaseChangeLog:
                   type: uuid
                   valueComputed: "${u_id}"
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: nombre
                   type: java.sql.Types.VARCHAR(50)
@@ -57,11 +57,6 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: fk_id_cat_parentesco
-                  type: INT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: fk_id_parentesco
                   type: INT
                   constraints:
                     nullable: false
@@ -102,7 +97,7 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseColumnNames: fk_id_cat_parentesco
             baseTableName: familiar
-            constraintName: fk_id_cat_parentesco
+            constraintName: id_cat_parentesco_fk
             deferrable: false
             initiallyDeferred: false
             referencedColumnNames: id_cat_parentesco

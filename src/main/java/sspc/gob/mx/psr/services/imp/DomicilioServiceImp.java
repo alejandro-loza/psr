@@ -20,16 +20,15 @@ public class DomicilioServiceImp implements DomicilioService {
 
     @Override
     public DomicilioDto crear(DomicilioValidador domicilioValidador, Municipio municipio,
-                              Pais pais, Sentenciado sentenciado) {
+                              Pais pais) {
         return new DomicilioDto(domicilioRepository.save(construyeDomicilio(
-                domicilioValidador, municipio, pais, sentenciado
+                domicilioValidador, municipio, pais
         )));
     }
 
     private Domicilio construyeDomicilio(DomicilioValidador cmd, Municipio municipio,
-                                         Pais pais, Sentenciado sentenciado){
+                                         Pais pais){
         return Domicilio.builder()
-                .sentenciado(sentenciado)
                 .estado(municipio.getEstado())
                 .municipio(municipio)
                 .pais(pais)

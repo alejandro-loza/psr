@@ -14,7 +14,7 @@ class PaisControllerSpec extends Specification {
 
     def "Deberia traer todos los paises "(){
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogos/pais", List)?.body
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/pais", List)?.body
 
         then:
         assert resp.size() == 130

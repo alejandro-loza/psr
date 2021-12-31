@@ -23,10 +23,6 @@ public class Domicilio extends EntidadBase {
     @Column(name = "id_domicilio")
     private UUID id;
 
-    @OneToOne
-    @JoinColumn(name="id_persona")
-    private Sentenciado sentenciado;//todo persona
-
     @ManyToOne
     @JoinColumn(name = "fk_id_cat_estado", nullable = false, updatable = false )
     private Estado estado;

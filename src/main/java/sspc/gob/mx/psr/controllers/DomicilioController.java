@@ -38,7 +38,6 @@ public class DomicilioController {
     ResponseEntity crear(@RequestBody @Valid DomicilioValidador validador) throws Exception {
         Pais pais = paisService.busca(validador.getPaisId());
         Municipio municipio = municipioService.busca(validador.getMunicipioId());
-        Sentenciado sentenciado = sentenciadoService.busca(UUID.fromString(validador.getSentenciadoId()));
-        return new ResponseEntity<>( domicilioService.crear(validador, municipio, pais, sentenciado), HttpStatus.OK);
+        return new ResponseEntity<>( domicilioService.crear(validador, municipio, pais), HttpStatus.OK);
     }
 }

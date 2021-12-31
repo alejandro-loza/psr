@@ -38,7 +38,7 @@ public class CatalogosController {
     @Autowired
     PaisService paisService;
 
-    @GetMapping( produces = "application/json")
+    @GetMapping(path = "/pais", produces = "application/json")
     ResponseEntity paises() {
         return new ResponseEntity<>( paisService.lista(), HttpStatus.OK);
     }

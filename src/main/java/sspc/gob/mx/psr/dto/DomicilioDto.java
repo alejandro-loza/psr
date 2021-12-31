@@ -6,7 +6,6 @@ import sspc.gob.mx.psr.model.Domicilio;
 @Data
 public class DomicilioDto {
 
-    String sentenciadoId;
 
     String estado;
 
@@ -27,7 +26,6 @@ public class DomicilioDto {
     String longitud;
 
     public DomicilioDto(Domicilio domicilio) {
-        this.sentenciadoId = domicilio.getSentenciado().getId().toString();
         this.estado = domicilio.getEstado().getNombre();
         this.pais = domicilio.getPais().getNombre();
         this.municipio = domicilio.getMunicipio().getNombre();

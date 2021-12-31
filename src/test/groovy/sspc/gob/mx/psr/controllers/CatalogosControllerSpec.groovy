@@ -18,7 +18,7 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado", List)?.body
 
         then:
-        assert resp.size() == 32
+        assert resp.size() == 33
         assert resp == estadosRespuesta()
     }
 
@@ -147,7 +147,8 @@ class CatalogosControllerSpec extends Specification {
          [id: 29, nombre: "TLAXCALA"],
          [id: 30, nombre: "VERACRUZ"],
          [id: 31, nombre: "YUCATÁN"],
-         [id: 32, nombre: "ZACATECAS"]]
+         [id: 32, nombre: "ZACATECAS"],
+         [id: 33, nombre: "OTROS"]]
     }
 
 }

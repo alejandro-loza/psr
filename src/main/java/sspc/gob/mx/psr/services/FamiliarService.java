@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface FamiliarService {
-    public FamiliarDto crear(FamiliarValidador familiarValidador, Sentenciado sentenciado) throws Exception ;
-    public Familiar busca(UUID id) throws ItemNotFoundException;
-    public List<FamiliarDto> familiaresSentenciado(Sentenciado sentenciado);
+    FamiliarDto crear(FamiliarValidador familiarValidador, Sentenciado sentenciado) throws Exception ;
+    Familiar busca(UUID id) throws ItemNotFoundException;
+    List<FamiliarDto> familiaresSentenciado(Sentenciado sentenciado);
 }

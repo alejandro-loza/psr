@@ -26,21 +26,16 @@ class DomicilioControllerSpec extends Specification {
     int port
     RestTemplate rest = new RestTemplate()
 
-    @Autowired
-    SentenciadoService sentenciadoService;
 
     def "Deberia crear un domicilio"(){
         given:
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
 
-        and:'un sentenciado guardado'
-        def senteciado = sentenciadoGuardado()
 
         and:'a body request'
         DomicilioValidador cmd = new DomicilioValidador()
         cmd.with {
-            sentenciadoId = senteciado.id
             estadoId = 13
             paisId = MEXICO_ID
             municipioId = 13048
@@ -58,7 +53,6 @@ class DomicilioControllerSpec extends Specification {
 
         then:
         resp.with {
-            assert it.sentenciadoId
             assert it.estado == 'HIDALGO'
             assert it.pais == 'MÉXICO'
             assert it.municipio == 'Pachuca de Soto'
@@ -72,29 +66,6 @@ class DomicilioControllerSpec extends Specification {
 
     }
 
-    private SentenciadoDto sentenciadoGuardado() {
-        SentenciadoValidador cmd = new SentenciadoValidador()
-        cmd.with {
-            nombre = 'Tomas'
-            apellidoPaterno = 'Ràmirez'
-            apellidoMaterno = 'Torres'
-            nacionalidadId = 82
-            estadoId = 13
-            documento = 'HELA880416HHGRZL08'
-            estadoCivil = 1
-            alias = "el pinky"
-            otrosNombres = "Enrique Peña"
-            fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
-            ocupacionId = 1
-            sexo = Sexo.MASCULINO
-            etniaId = 1
-            escolaridad = 1
-            telefonoFijo = 1234567890
-            celular = 1234567890
-            correoElectronico = 'juan.antonio.perez.garcia@gmail.com'
-        }
-        return sentenciadoService.crear(cmd)
-    }
 
 
 }

@@ -1,5 +1,6 @@
 package sspc.gob.mx.psr.model;
 
+import com.sun.istack.Nullable;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -28,8 +29,13 @@ public class Familiar extends EntidadBase {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="id_sentenciado")
+    @JoinColumn(name="fk_id_sentenciado")
     private Sentenciado sentenciado;
+
+    @ManyToOne
+    @JoinColumn(name="fk_id_domicilio")
+    @Nullable
+    private Domicilio domicilio;
 
     @NotNull(message= "sentenced.name.null")
     @NotBlank

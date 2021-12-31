@@ -32,9 +32,11 @@ class FamiliarServiceImp implements FamiliarService{
 
     @Override
     public FamiliarDto crear(FamiliarValidador familiarValidador, Sentenciado sentenciado) throws Exception {
-        var parentesco = parentescoService.busca(familiarValidador.getParentescoId());
 
-        return new FamiliarDto(familiarRepository.save(construyeFamiliar(familiarValidador, sentenciado, parentesco)));
+        Familiar familiar = construyeFamiliar(familiarValidador, sentenciado,
+                parentescoService.busca(familiarValidador.getParentescoId()));
+        Familiar save = familiarRepository.save(familiar);
+        return new FamiliarDto(save);
     }
 
     @Override

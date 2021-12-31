@@ -12,6 +12,6 @@ import sspc.gob.mx.psr.validator.DomicilioValidador;
 public interface DomicilioService {
 
     DomicilioDto crear(DomicilioValidador domicilioValidador, Municipio municipio,
-                       Pais pais, Sentenciado sentenciado) throws Exception;
+                       Pais pais) throws Exception;
 
 }

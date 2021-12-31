@@ -1,5 +1,6 @@
 package sspc.gob.mx.psr.model;
 
+import com.sun.istack.Nullable;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -26,7 +27,6 @@ public class Sentenciado extends EntidadBase {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Type(type="uuid-char")
     @Column(name = "id_sentenciado", columnDefinition = "uuid", updatable = false)
-
     private UUID id;
 
     @NotNull(message= "sentenced.name.null")
@@ -59,6 +59,11 @@ public class Sentenciado extends EntidadBase {
 
     @OneToOne(mappedBy="sentenciado")
     private Folio folio;
+
+    @ManyToOne
+    @JoinColumn(name="fk_id_domicilio")
+    @Nullable
+    private Domicilio domicilio;
 
     @NotNull
     @ManyToOne
