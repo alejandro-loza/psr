@@ -7,13 +7,6 @@ databaseChangeLog:
             tableName: domicilio
             columns:
               - column:
-                  name: id_persona
-                  type: uuid
-                  valueComputed: "${u_id}"
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-              - column:
                   name: id_domicilio
                   type: uuid
                   valueComputed: "${u_id}"

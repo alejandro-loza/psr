@@ -20,6 +20,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: fk_id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+              - column:
                   name: nombre
                   type: java.sql.Types.VARCHAR(50)
                   constraints:
