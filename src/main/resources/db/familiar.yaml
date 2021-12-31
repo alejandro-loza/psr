@@ -14,8 +14,15 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: id_sentenciado
+                  name: fk_id_sentenciado
                   type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fk_id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
                   constraints:
                     nullable: false
               - column:
@@ -37,7 +44,7 @@ databaseChangeLog:
                   name: documento
                   type: java.sql.Types.VARCHAR(18)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: tel_casa
                   type: java.sql.Types.VARCHAR(10)
@@ -50,6 +57,11 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: fk_id_cat_parentesco
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fk_id_parentesco
                   type: INT
                   constraints:
                     nullable: false
@@ -100,10 +112,23 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: id_sentenciado
+            baseColumnNames: fk_id_sentenciado
             baseTableName: familiar
             constraintName: fk_familiar_sentenciado
             deferrable: false
             initiallyDeferred: false
             referencedColumnNames: id_sentenciado
             referencedTableName: sentenciado
+  - changeSet:
+      id: familiar_domicilio_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_domicilio
+            baseTableName: familiar
+            constraintName: fk_familiar_domicilio
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_domicilio
+            referencedTableName: domicilio
+

@@ -7,13 +7,6 @@ databaseChangeLog:
             tableName: domicilio
             columns:
               - column:
-                  name: id_persona
-                  type: uuid
-                  valueComputed: "${u_id}"
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-              - column:
                   name: id_domicilio
                   type: uuid
                   valueComputed: "${u_id}"
@@ -136,15 +129,3 @@ databaseChangeLog:
             initiallyDeferred: false
             referencedColumnNames: id_cat_municipio
             referencedTableName: cat_municipio
-  - changeSet:
-      id: domicilio_persona_fk
-      author: alejandro.hernandez
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_persona
-            baseTableName: domicilio
-            constraintName: fk_domicilio_persona
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: id_sentenciado
-            referencedTableName: sentenciado

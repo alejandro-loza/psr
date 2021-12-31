@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class FolioBuilder implements IFolioBuilder {
     private static final int COCIENTE_EXTRA = 7;
-    private Sentenciado sentenciado;
+    private final Sentenciado sentenciado;
 
     private final String nombreCodigo;
     private final int[] nacimientoCodigo;
@@ -33,7 +33,7 @@ public class FolioBuilder implements IFolioBuilder {
         this.nacimientoCodigo = nacimientoCodigo;
         this.entidadCodigo = entidadCodigo;
         this.sexoCodigo = sentenciado.getSexo();
-        this.nacionalidadCodigo = StringUtils.stripAccents(nacionalidadCodigo.substring(0, 3).toUpperCase());;
+        this.nacionalidadCodigo = StringUtils.stripAccents(nacionalidadCodigo.substring(0, 3).toUpperCase());
         this.consecutivo = consecutivo;
     }
 
@@ -62,13 +62,13 @@ public class FolioBuilder implements IFolioBuilder {
                         ArrayUtils.addAll(this.nombreCodigo.chars().toArray(), this.nacimientoCodigo),
                         ArrayUtils.addAll(this.entidadCodigo, this.nacionalidadCodigo.chars().toArray())
                 ),
-                ArrayUtils.addAll(this.consecutivo, (int) this.sexoCodigo.getCodigo())
+                ArrayUtils.addAll(this.consecutivo, this.sexoCodigo.getCodigo())
         )).boxed().collect(Collectors.toList());
     }
 
     private Integer sumaUnitaria(List<Integer> intStream) {
         StringBuilder sb = new StringBuilder();
-        for (var element: intStream){
+        for (Integer element: intStream){
             sb.append(element.toString());
         }
 

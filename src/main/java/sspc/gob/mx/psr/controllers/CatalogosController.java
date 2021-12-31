@@ -35,6 +35,14 @@ public class CatalogosController {
     @Autowired
     ParentescoService parentescoService;
 
+    @Autowired
+    PaisService paisService;
+
+    @GetMapping( produces = "application/json")
+    ResponseEntity paises() {
+        return new ResponseEntity<>( paisService.lista(), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/escolaridad", produces = "application/json")
     ResponseEntity escolaridad() {
         return new ResponseEntity<>( escolaridadService.lista(), HttpStatus.OK);
