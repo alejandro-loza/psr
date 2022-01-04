@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sspc.gob.mx.psr.model.Sentenciado;
+import sspc.gob.mx.psr.services.FamiliarService;
 import sspc.gob.mx.psr.services.SentenciadoService;
+import sspc.gob.mx.psr.validator.FamiliarValidador;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @RequestMapping("/sentenciado")
 @RestController
@@ -20,9 +21,22 @@ public class SentenciadoController {
     @Autowired
     SentenciadoService sentenciadoService;
 
+    @Autowired
+    FamiliarService familiarService;
+
+
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity crear(@RequestBody @Valid SentenciadoValidador validador) throws Exception {
         return new ResponseEntity<>( sentenciadoService.crear(validador), HttpStatus.OK);
+    }
+
+    @PostMapping(path="/{sentenciadoId}/familiar", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity crearFamiliar(@RequestBody @Valid FamiliarValidador validador,
+                                 @PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
+        Sentenciado sentenciado = sentenciadoService.busca(sentenciadoId);
+        return new ResponseEntity<>( familiarService.crear(validador, sentenciado), HttpStatus.OK);
     }
 }
 

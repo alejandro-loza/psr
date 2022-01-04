@@ -15,13 +15,17 @@ databaseChangeLog:
   - include:
       file: db/cat_ocupacion.yaml
   - include:
+      file: db/cat_municipio.yaml
+  - include:
+      file: db/demografico.yaml
+  - include:
       file: db/sentenciado.yaml
   - include:
       file: db/folio.yaml
   - include:
-      file: db/cat_municipio.yaml
+      file: db/cat_parentesco.yaml
   - include:
-      file: db/demografico.yaml
+      file: db/familiar.yaml
   - include:
       file: db/data/estados_data.yaml
   - include:
@@ -36,3 +40,5 @@ databaseChangeLog:
       file: db/data/etnia_data.yaml
   - include:
       file: db/data/ocupacion_data.yaml
+  - include:
+      file: db/data/parentesco_data.yaml

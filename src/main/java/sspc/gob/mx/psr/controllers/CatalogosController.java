@@ -32,6 +32,17 @@ public class CatalogosController {
     @Autowired
     OcupacionService ocupacionService;
 
+    @Autowired
+    ParentescoService parentescoService;
+
+    @Autowired
+    PaisService paisService;
+
+    @GetMapping(path = "/pais", produces = "application/json")
+    ResponseEntity paises() {
+        return new ResponseEntity<>( paisService.lista(), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/escolaridad", produces = "application/json")
     ResponseEntity escolaridad() {
         return new ResponseEntity<>( escolaridadService.lista(), HttpStatus.OK);
@@ -60,6 +71,11 @@ public class CatalogosController {
     @GetMapping(path = "/ocupacion", produces = "application/json")
     ResponseEntity ocupaciones() {
         return new ResponseEntity<>( ocupacionService.lista(), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/parentesco", produces = "application/json")
+    ResponseEntity parentescos() {
+        return new ResponseEntity<>( parentescoService.lista(), HttpStatus.OK);
     }
 
 

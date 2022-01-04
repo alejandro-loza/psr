@@ -14,6 +14,12 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
               - column:
+                  name: fk_id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: true
+              - column:
                   name: nombre
                   type: java.sql.Types.VARCHAR(50)
                   constraints:
@@ -42,7 +48,7 @@ databaseChangeLog:
                   name: documento
                   type: java.sql.Types.VARCHAR(18)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: fk_id_cat_edo_civil
                   type: INT
@@ -82,7 +88,7 @@ databaseChangeLog:
                   name: fk_id_cat_escolaridad
                   type: INT
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: tel_casa
                   type: java.sql.Types.VARCHAR(10)
@@ -200,3 +206,15 @@ databaseChangeLog:
             initiallyDeferred: false
             referencedColumnNames: id_cat_ocupacion
             referencedTableName: cat_ocupacion
+  - changeSet:
+      id: sentenciado_domicilio_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_domicilio
+            baseTableName: sentenciado
+            constraintName: fk_id_domicilio
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_domicilio
+            referencedTableName: domicilio

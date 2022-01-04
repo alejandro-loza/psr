@@ -9,10 +9,6 @@ import javax.validation.constraints.Size;
 @Data
 public class DomicilioValidador {
 
-    @NotBlank
-    @NotNull
-    private String sentenciadoId;
-
     @NotNull
     private Long estadoId;
 

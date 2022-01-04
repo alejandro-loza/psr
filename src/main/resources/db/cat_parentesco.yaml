@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: municipio
+      id: parentesco
       author: andrea.perez
       changes:
         - createTable:
@@ -12,7 +12,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-            - column:
+              - column:
                   name: nombre
                   type: java.sql.Types.VARCHAR(20)
                   constraints:

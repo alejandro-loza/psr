@@ -14,14 +14,15 @@ class PaisControllerSpec extends Specification {
 
     def "Deberia traer todos los paises "(){
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogos/pais", List)?.body
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/pais", List)?.body
 
         then:
-        def mex = resp.find {it.id == 484}
+        assert resp.size() == 130
+        def mex = resp.find {it.nombre == 'MÉXICO'}
 
         mex.with {
-            assert it.nombre == 'México'
-            assert it.alpha3 == 'MEX'
+            assert it.nombre == 'MÉXICO'
+            assert it.alfa3 == 'MEX'
         }
     }
 

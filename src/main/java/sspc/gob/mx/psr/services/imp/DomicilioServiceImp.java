@@ -2,10 +2,7 @@ package sspc.gob.mx.psr.services.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sspc.gob.mx.psr.dto.DomicilioDto;
 import sspc.gob.mx.psr.model.Domicilio;
-import sspc.gob.mx.psr.model.Sentenciado;
-import sspc.gob.mx.psr.model.catalog.Estado;
 import sspc.gob.mx.psr.model.catalog.Municipio;
 import sspc.gob.mx.psr.model.catalog.Pais;
 import sspc.gob.mx.psr.repository.DomicilioRepository;
@@ -19,17 +16,16 @@ public class DomicilioServiceImp implements DomicilioService {
     DomicilioRepository domicilioRepository;
 
     @Override
-    public DomicilioDto crear(DomicilioValidador domicilioValidador, Municipio municipio,
-                              Pais pais, Sentenciado sentenciado) {
-        return new DomicilioDto(domicilioRepository.save(construyeDomicilio(
-                domicilioValidador, municipio, pais, sentenciado
-        )));
+    public Domicilio crear(DomicilioValidador domicilioValidador, Municipio municipio,
+                           Pais pais) {
+        return domicilioRepository.save(construyeDomicilio(
+                domicilioValidador, municipio, pais
+        ));
     }
 
     private Domicilio construyeDomicilio(DomicilioValidador cmd, Municipio municipio,
-                                         Pais pais, Sentenciado sentenciado){
+                                         Pais pais){
         return Domicilio.builder()
-                .sentenciado(sentenciado)
                 .estado(municipio.getEstado())
                 .municipio(municipio)
                 .pais(pais)

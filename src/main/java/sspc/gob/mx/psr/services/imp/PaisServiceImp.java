@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import sspc.gob.mx.psr.dto.PaisDto;
 import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.catalog.Pais;
-import sspc.gob.mx.psr.repository.PaisRepository;
+import sspc.gob.mx.psr.repository.catalog.PaisRepository;
 import sspc.gob.mx.psr.services.PaisService;
 
 import java.util.List;

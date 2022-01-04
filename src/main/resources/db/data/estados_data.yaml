@@ -483,3 +483,18 @@ databaseChangeLog:
               - column:
                   name: activo
                   value: 1
+        - insert:
+            tableName: cat_estado
+            columns:
+              - column:
+                  name: id_cat_estado
+                  value: 33
+              - column:
+                  name: nombre
+                  value: 'OTROS'
+              - column:
+                  name: descripcion
+                  value: 'CUANDO EL PAÍS NO ES MÉXICO'
+              - column:
+                  name: activo
+                  value: 1

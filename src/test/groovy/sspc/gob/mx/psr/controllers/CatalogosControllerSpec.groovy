@@ -18,7 +18,7 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado", List)?.body
 
         then:
-        assert resp.size() == 32
+        assert resp.size() == 33
         assert resp == estadosRespuesta()
     }
 
@@ -27,7 +27,7 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/13/municipio", List)?.body
 
         then:
-        assert resp == [[id:13048, nombre:"Pachuca de Soto", descripcion:"", estado:"HIDALGO", activo:true]]
+        assert resp.size() == 84
 
     }
 
@@ -36,7 +36,7 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/12/municipio", List)?.body
 
         then:
-        assert resp == [[id:12038, nombre:"Zihuatanejo de Azueta", descripcion:"", estado:"GUERRERO", activo:true]]
+        assert resp.size() == 81
 
     }
 
@@ -72,7 +72,7 @@ class CatalogosControllerSpec extends Specification {
 
         then:
         assert resp.getStatusCode() == HttpStatus.OK
-        assert resp.body
+        assert resp.body.size() == 71
     }
 
     def "Deberia traer todos las ocupaciones"(){
@@ -82,6 +82,16 @@ class CatalogosControllerSpec extends Specification {
         then:
         assert resp.getStatusCode() == HttpStatus.OK
         assert resp.body
+    }
+
+    def "Deberia traer todos los parentescos"(){
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/parentesco", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp.body
+        assert resp.body == [[id:1, nombre:'PADRE'], [id:2, nombre:'MADRE'], [id:3, nombre:'CÓNYUGE']]
     }
 
     private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {
@@ -137,7 +147,8 @@ class CatalogosControllerSpec extends Specification {
          [id: 29, nombre: "TLAXCALA"],
          [id: 30, nombre: "VERACRUZ"],
          [id: 31, nombre: "YUCATÁN"],
-         [id: 32, nombre: "ZACATECAS"]]
+         [id: 32, nombre: "ZACATECAS"],
+         [id: 33, nombre: "OTROS"]]
     }
 
 }

@@ -9,22 +9,19 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Getter
-@Table(name = "cat_pais")
-public class Pais {
+@Table(name = "cat_parentesco")
+public class Parentesco {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cat_pais")
+    @Column(name = "id_cat_parentesco")
     private Long id;
 
     @NotBlank
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 20)
     private String nombre;
-
-    @NotBlank
-    @NotNull
-    @Size(min = 3, max = 3)
-    private String alfa3;
 
     @NotBlank
     @Size(min = 1, max = 50)

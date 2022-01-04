@@ -7,12 +7,10 @@ import org.springframework.stereotype.Service;
 import sspc.gob.mx.psr.model.Folio;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Estado;
-import sspc.gob.mx.psr.model.catalog.Pais;
 import sspc.gob.mx.psr.repository.FolioRepository;
 import sspc.gob.mx.psr.services.FolioService;
 import sspc.gob.mx.psr.utils.Altisonantes;
 import sspc.gob.mx.psr.utils.FolioBuilder;
-import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -36,7 +34,7 @@ public class FolioServiceImp implements FolioService {
 
     @Override
     public Folio construirFolio(Sentenciado sentenciado) throws Exception {
-        String codigoPais = sentenciado.getNacionalidad().getAlpha3();
+        String codigoPais = sentenciado.getNacionalidad().getAlfa3();
         var codigoEntidad = generarCodigoEntidad(sentenciado.getEstado(), codigoPais);
         String codigoNombre = generarCodigoNombre(sentenciado);
         var codigoFecha = generarCodigoFecha(sentenciado.getFechaNacimiento());
@@ -53,7 +51,7 @@ public class FolioServiceImp implements FolioService {
                                  String codigoEntidad, String codigoNombre, Long codigoFecha) {
 
         int consecutivo = folioRepository.findAllByParams(codigoNombre, codigoFecha, codigoEntidad,
-                sentenciado.getSexo().getCodigo(), sentenciado.getNacionalidad().getAlpha3()).size();
+                sentenciado.getSexo().getCodigo(), sentenciado.getNacionalidad().getAlfa3()).size();
         return consecutivo < 10 ? new int[]{0, consecutivo} : new int[]{consecutivo} ;
     }
 

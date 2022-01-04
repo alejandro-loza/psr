@@ -1,5 +1,7 @@
 package sspc.gob.mx.psr.controllers
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
@@ -8,7 +10,10 @@ import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
+import sspc.gob.mx.psr.dto.SentenciadoDto
 import sspc.gob.mx.psr.enums.Sexo
+import sspc.gob.mx.psr.services.SentenciadoService
+import sspc.gob.mx.psr.validator.FamiliarValidador
 import sspc.gob.mx.psr.validator.SentenciadoValidador
 
 import java.time.LocalDate
@@ -17,10 +22,13 @@ import java.time.Month
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SentenciadoControllerSpec extends Specification {
 
-    public static final int MEXICO_ID = 484
+    public static final int MEXICO_ID = 82
     @Value('${local.server.port}')
     int port
     RestTemplate rest = new RestTemplate()
+
+    @Autowired
+    SentenciadoService sentenciadoService;
 
     def "Deberia crear un sentenciado"(){
         given:'a body request'
@@ -57,7 +65,7 @@ class SentenciadoControllerSpec extends Specification {
             assert it.folio == 'RXTA88041613HMEX001'
             assert it.apellidoPaterno == 'Ràmirez'
             assert it.apellidoMaterno == 'Torres'
-            assert it.nacionalidad == 'México'
+            assert it.nacionalidad == 'MÉXICO'
             assert it.documento == 'HELA880416HHGRZL08'
             assert it.estadoCivil == 'SOLTERO(A)'
             assert it.alias == "el pinky"
@@ -105,5 +113,68 @@ class SentenciadoControllerSpec extends Specification {
         then:
         thrown HttpClientErrorException.BadRequest
     }
+
+    def "Deberia crear un familiar del sentenciado"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            nombre = 'Chapo Mama'
+            apellidoMaterno = 'Loera'
+            apellidoPaterno = 'Virginia'
+            documento = 'HELA880416HHGRZL08'
+            telefonoFijo = 1234567
+            celular = 123123
+            parentescoId = 2
+        }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
+
+        when:
+        def resp = rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
+
+        then:
+        resp.with {
+            assert id
+            assert sentenciadoId == sentenciado.id
+            assert nombre == 'Chapo Mama'
+            assert apellidoPaterno == 'Virginia'
+            assert apellidoMaterno == 'Loera'
+            assert documento == 'HELA880416HHGRZL08'
+            assert telefonoFijo == '1234567'
+            assert celular == '123123'
+            assert parentesco == 'MADRE'
+
+        }
+
+    }
+
+    private SentenciadoDto sentenciadoGuardado() {
+        SentenciadoValidador cmd = new SentenciadoValidador()
+        cmd.with {
+            nombre = 'Tomas'
+            apellidoPaterno = 'Ràmirez'
+            apellidoMaterno = 'Torres'
+            nacionalidadId = 82
+            estadoId = 13
+            documento = 'HELA880416HHGRZL08'
+            estadoCivil = 1
+            alias = "el pinky"
+            otrosNombres = "Enrique Peña"
+            fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
+            ocupacionId = 1
+            sexo = Sexo.MASCULINO
+            etniaId = 1
+            escolaridad = 1
+            telefonoFijo = 1234567890
+            celular = 1234567890
+            correoElectronico = 'juan.antonio.perez.garcia@gmail.com'
+        }
+        return sentenciadoService.crear(cmd)
+    }
+
 
 }
