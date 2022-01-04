@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sspc.gob.mx.psr.dto.FamiliarDto;
 import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
+import sspc.gob.mx.psr.model.Domicilio;
 import sspc.gob.mx.psr.model.Familiar;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Parentesco;
@@ -11,6 +12,7 @@ import sspc.gob.mx.psr.repository.FamiliarRepository;
 import sspc.gob.mx.psr.services.FamiliarService;
 import sspc.gob.mx.psr.services.ParentescoService;
 import sspc.gob.mx.psr.services.SentenciadoService;
+import sspc.gob.mx.psr.validator.DomicilioValidador;
 import sspc.gob.mx.psr.validator.FamiliarValidador;
 
 import java.util.List;
@@ -22,9 +24,6 @@ class FamiliarServiceImp implements FamiliarService{
 
     @Autowired
     FamiliarRepository familiarRepository;
-
-    @Autowired
-    SentenciadoService sentenciadoService;
 
     @Autowired
     ParentescoService parentescoService;
@@ -43,6 +42,24 @@ class FamiliarServiceImp implements FamiliarService{
     public Familiar busca(UUID id) throws ItemNotFoundException  {
         return familiarRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("familiar.notFound") );
+    }
+
+    @Override
+    public Familiar buscaFamiliarSentenciado(Sentenciado sentenciado, UUID familiarId) throws ItemNotFoundException  {
+        Familiar familiar = busca(familiarId);
+        if(familiar.getSentenciado() != sentenciado){
+            throw  new ItemNotFoundException("familiar.sentenciado.notFound");
+        }
+        return familiar;
+    }
+
+    @Override
+    public Familiar creaDireccion(Familiar familiar, Domicilio domicilio) throws Exception {
+        if(familiar.getDomicilio() == null){
+            familiar.setDomicilio(domicilio);
+            return familiarRepository.save(familiar);
+        }
+        else throw new Exception("familiar.domicilio.alreadyExist");
     }
 
     @Override

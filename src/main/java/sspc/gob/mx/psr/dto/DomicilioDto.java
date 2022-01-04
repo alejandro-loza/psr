@@ -3,9 +3,12 @@ package sspc.gob.mx.psr.dto;
 import lombok.Data;
 import sspc.gob.mx.psr.model.Domicilio;
 
+import java.util.UUID;
+
 @Data
 public class DomicilioDto {
 
+    UUID personaId;
 
     String estado;
 
@@ -25,7 +28,8 @@ public class DomicilioDto {
 
     String longitud;
 
-    public DomicilioDto(Domicilio domicilio) {
+    public DomicilioDto(Domicilio domicilio, UUID personaId) {
+        this.personaId = personaId;
         this.estado = domicilio.getEstado().getNombre();
         this.pais = domicilio.getPais().getNombre();
         this.municipio = domicilio.getMunicipio().getNombre();
