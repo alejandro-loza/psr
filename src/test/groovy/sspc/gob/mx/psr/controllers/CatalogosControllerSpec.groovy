@@ -1,10 +1,14 @@
 package sspc.gob.mx.psr.controllers
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
+import sspc.gob.mx.psr.model.catalog.Municipio
+import sspc.gob.mx.psr.repository.catalog.EstadoRepository
+import sspc.gob.mx.psr.repository.catalog.MunicipioRepository
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CatalogosControllerSpec extends Specification {
@@ -12,6 +16,12 @@ class CatalogosControllerSpec extends Specification {
     @Value('${local.server.port}')
     int port
     RestTemplate rest = new RestTemplate()
+
+    @Autowired
+    MunicipioRepository municipioRepository
+
+    @Autowired
+    EstadoRepository estadoRepository
 
     def "Deberia traer todos los estados de la republica"(){
         when:
@@ -28,6 +38,22 @@ class CatalogosControllerSpec extends Specification {
 
         then:
         assert resp.size() == 84
+
+    }
+
+    def "Deberia traer todos los municipios activos de  hidalgo"(){
+        given:
+        Municipio pachuca =municipioRepository.findById(13048L).get()
+        pachuca.descripcion =
+        pachuca.activo = false
+        municipioRepository.save(pachuca)
+
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/13/municipio", List)?.body
+
+        then:
+        assert resp.size() == 83
 
     }
 

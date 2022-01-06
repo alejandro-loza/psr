@@ -23,7 +23,6 @@ public class Estado {
     @Size(min = 1, max = 20)
     public String nombre;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     public String descripcion;
 
