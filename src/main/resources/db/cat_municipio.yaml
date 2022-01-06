@@ -12,6 +12,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
+                    unique: true
               - column:
                   name: fk_id_cat_estado
                   type: INT
