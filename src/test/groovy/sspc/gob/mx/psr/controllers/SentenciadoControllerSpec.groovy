@@ -112,7 +112,6 @@ class SentenciadoControllerSpec extends Specification {
         then:
         resp.with {
             assert it.id
-            assert it.folio
             assert apellidoMaterno == "DDD"
             assert apellidoPaterno ==  "DDD"
             assert celular ==  "9999999999"
