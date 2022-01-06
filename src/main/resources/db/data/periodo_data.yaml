@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: etnia_data
+      author: alejandro.hernandez
+      changes:
+        - sql:
+            sql: INSERT INTO cat_periodo(id_cat_periodo, nombre, descripcion, activo)VALUES (1,'SEMANAL','','1');
+        - sql:
+            sql: INSERT INTO cat_periodo(id_cat_periodo, nombre, descripcion, activo)VALUES (2,'QUINCENAL','','1');
+        - sql:
+            sql: INSERT INTO cat_periodo(id_cat_periodo, nombre, descripcion, activo)VALUES (3,'MENSUAL','','1');
+        - sql:
+            sql: INSERT INTO cat_periodo(id_cat_periodo, nombre, descripcion, activo)VALUES (4,'BIMESTRAL','','1');
+        - sql:
+            sql: INSERT INTO cat_periodo(id_cat_periodo, nombre, descripcion, activo)VALUES (5,'TRIMESTRAL','','1');
