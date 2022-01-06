@@ -17,12 +17,11 @@ public class Escolaridad {
     @Column(name = "id_cat_escolaridad")
     public Long id;
 
-    @NotBlank
     @NotNull
+    @NotBlank
     @Size(min = 1, max = 30)
     public String nombre;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     public String descripcion;
 

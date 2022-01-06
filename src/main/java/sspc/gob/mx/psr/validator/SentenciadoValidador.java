@@ -21,11 +21,9 @@ public class SentenciadoValidador {
     @Size(min = 1, max = 100)
     String nombre;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String apellidoPaterno;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String apellidoMaterno;
 
@@ -43,11 +41,9 @@ public class SentenciadoValidador {
     @NotNull
     Long estadoCivil;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String alias;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String otrosNombres;
 
@@ -60,14 +56,10 @@ public class SentenciadoValidador {
     @NotNull
     Sexo sexo;
 
-    @NotNull
     Long etniaId;
 
-    @NotNull
     Long escolaridad;
 
-    @NotNull
-    @NotBlank
     @Size(min = 1, max = 50)
     String telefonoFijo;
 

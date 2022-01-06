@@ -34,11 +34,9 @@ public class Sentenciado extends EntidadBase {
     @Size(min = 1, max = 50)
     private String nombre;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     private String apellidoPaterno;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     private String apellidoMaterno;
 
@@ -70,11 +68,9 @@ public class Sentenciado extends EntidadBase {
     @JoinColumn(name="fk_id_cat_edo_civil")
     private EstadoCivil estadoCivil;
 
-    @NotBlank
     @Size(min = 1, max = 255)
     private String alias;
 
-    @NotBlank
     @Size(min = 1, max = 255)
     private String otrosNombres;
 
@@ -82,7 +78,6 @@ public class Sentenciado extends EntidadBase {
     @Column(name = "fch_nacimiento")
     private LocalDate fechaNacimiento;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name="fk_id_cat_ocupacion")
     private Ocupacion ocupacion;
@@ -90,17 +85,14 @@ public class Sentenciado extends EntidadBase {
     @Column(name="sexo")
     private Sexo sexo;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name="fk_id_cat_etnia")
     private Etnia etnia;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name="fk_id_cat_escolaridad")
     private Escolaridad escolaridad;
 
-    @NotBlank
     @Column(name = "tel_casa")
     private String telefonoFijo;
 
@@ -109,6 +101,5 @@ public class Sentenciado extends EntidadBase {
     @Column(name = "tel_celular")
     private String celular;
 
-    @NotBlank
     private String correoElectronico;
 }
