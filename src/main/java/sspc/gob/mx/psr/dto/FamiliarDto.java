@@ -14,6 +14,7 @@ public class FamiliarDto {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String documento;
+    private String nacionalidad;
     private String telefonoFijo;
     private String celular;
     private String parentesco;
@@ -25,6 +26,7 @@ public class FamiliarDto {
         this.apellidoPaterno = familiar.getApellidoPaterno();
         this.apellidoMaterno = familiar.getApellidoMaterno();
         this.documento = familiar.getDocumento();
+        this.nacionalidad = familiar.getNacionalidad().getNombre();
         this.telefonoFijo = familiar.getTelefonoFijo();
         this.celular = familiar.getCelular();
         this.parentesco = familiar.getParentesco().getNombre();
