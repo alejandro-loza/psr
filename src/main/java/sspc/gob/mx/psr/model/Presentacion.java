@@ -25,9 +25,48 @@ public class Presentacion extends EntidadBase {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type="uuid-char")
-    @Column(name = "id_presentacion", columnDefinition = "uuid", updatable = false)
+    @Type(type = "uuid-char")
+    @Column(name = "id", columnDefinition = "uuid", updatable = false)
     private UUID id;
+
+    @NotNull
+    @NotBlank
+    @Size(min = 1, max = 10)
+    private String folioReporte;
+
+    @NotNull
+    @NotBlank
+    private UUID idSentenciado;
+
+    @NotNull
+    @NotBlank
+    @Size(min = 19, max = 19)
+    private String folioSentenciado;
+
+    @NotNull
+    @NotBlank
+    private String numReporte;
+
+    @NotNull
+    @NotBlank
+    private String totalReporte;
+
+    @NotNull
+    @NotBlank
+    @Column(name = "periodo_presenta")
+    private String periodoPresenta;
+
+    @NotNull
+    @NotBlank
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "fch_impresion")
+    private LocalDate fchImpresion;
+
+    @NotNull
+    @NotBlank
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "fch_reporte")
+    private LocalDate fchReporte;
 
     @NotNull(message= "sentenced.name.null")
     @NotBlank
@@ -111,4 +150,5 @@ public class Presentacion extends EntidadBase {
 
     @NotBlank
     private String correoElectronico;
+
 }

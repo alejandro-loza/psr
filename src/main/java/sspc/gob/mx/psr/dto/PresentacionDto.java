@@ -86,11 +86,11 @@ public class PresentacionDto {
     public PresentacionDto(Presentacion presentacion, Sentenciado sentenciado){
         this.id = presentacion.getId().toString();
         this.folioReporte = presentacion.getFolio().toString();
-        this.numReporte = presentacion.numReporte().toString();
-        this.totalReporte = presentacion.totalReporte().toString();
-        this.periodoPresenta = presentacion.periodoPresenta().toString();
-        this.fchImpresion = presentacion.fchImpresion().toDate();
-        this.fchReporte = presentacion.fchReporte().toDateTime();
+        this.numReporte = presentacion.getNumReporte().toString();
+        this.totalReporte = presentacion.getTotalReporte().toString();
+        this.periodoPresenta = presentacion.getPeriodoPresenta().toString();
+        this.fchImpresion = presentacion.getFchImpresion();
+        this.fchReporte = presentacion.getFchReporte();
         this.idSentenciado = sentenciado.getId().toString();
         this.folioSentenciado = sentenciado.getFolio().toString();
         this.nombre = sentenciado.getNombre();

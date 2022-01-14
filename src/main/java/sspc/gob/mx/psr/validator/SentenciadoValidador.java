@@ -70,8 +70,7 @@ public class SentenciadoValidador {
 
     @NotNull
     @NotBlank
-    @Size(min = 10, max = 1
-            0)
+    @Size(min = 10, max = 10)
     String celular;
 
     @Email
