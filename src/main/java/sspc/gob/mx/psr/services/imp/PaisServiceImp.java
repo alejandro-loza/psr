@@ -17,7 +17,7 @@ public class PaisServiceImp implements PaisService {
     PaisRepository paisRepository;
 
     @Override
-    public Pais busca(Long id) {
+    public Pais busca(Long id) throws ItemNotFoundException  {
         return paisRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("pais.notFound") );
     }

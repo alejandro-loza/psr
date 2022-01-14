@@ -7,12 +7,12 @@ import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Domicilio;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Estado;
+import sspc.gob.mx.psr.model.catalog.Ocupacion;
 import sspc.gob.mx.psr.model.catalog.Pais;
 import sspc.gob.mx.psr.repository.SentencedRepository;
 import sspc.gob.mx.psr.services.*;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
-import javax.transaction.Transactional;
 import java.util.UUID;
 
 
@@ -69,7 +69,7 @@ public class SentenciadoServiceImp implements SentenciadoService {
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) {
 
-        return  Sentenciado.builder()
+        Sentenciado.SentenciadoBuilder sb = Sentenciado.builder()
                 .nombre(sentencedInput.getNombre())
                 .apellidoPaterno(sentencedInput.getApellidoPaterno())
                 .apellidoMaterno(sentencedInput.getApellidoMaterno())
@@ -80,14 +80,22 @@ public class SentenciadoServiceImp implements SentenciadoService {
                 .alias(sentencedInput.getAlias()) //TODO IS A List?
                 .otrosNombres(sentencedInput.getOtrosNombres())  //TODO IS A List?
                 .fechaNacimiento(sentencedInput.getFechaNacimiento())
-                .ocupacion(ocupacionService.busca(sentencedInput.getOcupacionId()))
                 .sexo(sentencedInput.getSexo())
-                .etnia(etniaService.busca(sentencedInput.getEtniaId()))
-                .escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()))
                 .telefonoFijo(sentencedInput.getTelefonoFijo())
                 .celular(sentencedInput.getCelular())
-                .correoElectronico(sentencedInput.getCorreoElectronico())
-                .build();
+                .correoElectronico(sentencedInput.getCorreoElectronico());
+
+        if(sentencedInput.getEscolaridad() != null)
+            sb.escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()));
+
+        if(sentencedInput.getEtniaId() != null)
+            sb.etnia(etniaService.busca(sentencedInput.getEtniaId()));
+
+        if(sentencedInput.getOcupacionId() != null)
+            sb.ocupacion(ocupacionService.busca(sentencedInput.getOcupacionId()) );
+
+
+        return  sb.build();
     }
 
 }

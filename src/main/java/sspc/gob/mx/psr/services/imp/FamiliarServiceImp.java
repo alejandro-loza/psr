@@ -7,9 +7,11 @@ import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Domicilio;
 import sspc.gob.mx.psr.model.Familiar;
 import sspc.gob.mx.psr.model.Sentenciado;
+import sspc.gob.mx.psr.model.catalog.Pais;
 import sspc.gob.mx.psr.model.catalog.Parentesco;
 import sspc.gob.mx.psr.repository.FamiliarRepository;
 import sspc.gob.mx.psr.services.FamiliarService;
+import sspc.gob.mx.psr.services.PaisService;
 import sspc.gob.mx.psr.services.ParentescoService;
 import sspc.gob.mx.psr.services.SentenciadoService;
 import sspc.gob.mx.psr.validator.DomicilioValidador;
@@ -28,14 +30,18 @@ class FamiliarServiceImp implements FamiliarService{
     @Autowired
     ParentescoService parentescoService;
 
+    @Autowired
+    PaisService paisService;
+
 
     @Override
     public FamiliarDto crear(FamiliarValidador familiarValidador, Sentenciado sentenciado) throws Exception {
-
-        Familiar familiar = construyeFamiliar(familiarValidador, sentenciado,
-                parentescoService.busca(familiarValidador.getParentescoId()));
-        Familiar save = familiarRepository.save(familiar);
-        return new FamiliarDto(save);
+        return new FamiliarDto(
+                familiarRepository.save(construyeFamiliar(familiarValidador, sentenciado,
+                    parentescoService.busca(familiarValidador.getParentescoId()),
+                    paisService.busca(familiarValidador.getNacionalidadId()))
+                )
+        );
     }
 
     @Override
@@ -69,11 +75,13 @@ class FamiliarServiceImp implements FamiliarService{
 
     }
 
-    private Familiar construyeFamiliar(FamiliarValidador familiar, Sentenciado sentenciado, Parentesco parentesco) {
+    private Familiar construyeFamiliar(FamiliarValidador familiar, Sentenciado sentenciado,
+                                       Parentesco parentesco, Pais nacionalidad) {
         return Familiar.builder()
                 .nombre(familiar.getNombre())
                 .apellidoPaterno(familiar.getApellidoPaterno())
                 .apellidoMaterno(familiar.getApellidoMaterno())
+                .nacionalidad(nacionalidad)
                 .documento(familiar.getDocumento())
                 .telefonoFijo(familiar.getTelefonoFijo())
                 .celular(familiar.getCelular())

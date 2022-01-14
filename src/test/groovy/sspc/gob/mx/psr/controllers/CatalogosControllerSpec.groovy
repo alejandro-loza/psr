@@ -19,8 +19,7 @@ class CatalogosControllerSpec extends Specification {
 
     @Autowired
     MunicipioRepository municipioRepository
-    @Autowired
-    EstadoRepository estadoRepository
+
 
     def "Deberia traer todos los estados de la republica"(){
         when:
@@ -40,19 +39,50 @@ class CatalogosControllerSpec extends Specification {
 
     }
 
-    def "Deberia traer todos los municipios de la hidalgo activos"(){
-        given:
-        Municipio tagamandapio = new Municipio()
-        tagamandapio.nombre = "tamangapio"
-        tagamandapio.estado = estadoRepository.findById(13L).get()
-        tagamandapio.descripcion = "nuevo"
-        tagamandapio.activo = true
-        municipioRepository.save(tagamandapio)
+
+    def "Deberia traer todos los municipios activos de  aguascalientes"(){
+
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/13/municipio", List)?.body
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/1/municipio", List)?.body
 
         then:
-        assert resp.size() == 84
+        assert resp == [[id:1001, nombre:'Aguascalientes', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1002, nombre:'Asientos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1003, nombre:'Calvillo', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1004, nombre:'Cosio', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1005, nombre:'Jesús María', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1006, nombre:'Pabellón de Arteaga', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1007, nombre:'Rincón de Ramos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1008, nombre:'San José de García', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1009, nombre:'Tepezalá', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1010, nombre:'El Llano', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1011, nombre:'San Francisco de los Romo', descripcion:'', estado:'AGUASCALIENTES', activo:true]]
+
+    }
+
+    def "Deberia traer todos los municipios activos de  aguascalientes excepto la ciudad de aguascalientes"(){
+
+        given:'ciudad de aguascalientes desactivada'
+        Municipio aguascalientesCiudad =municipioRepository.findById(1001L).get()
+                aguascalientesCiudad.activo = false
+        municipioRepository.save(aguascalientesCiudad)
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/1/municipio", List)?.body
+
+        then:
+        assert resp == [
+                        [id:1002, nombre:'Asientos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1003, nombre:'Calvillo', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1004, nombre:'Cosio', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1005, nombre:'Jesús María', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1006, nombre:'Pabellón de Arteaga', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1007, nombre:'Rincón de Ramos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1008, nombre:'San José de García', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1009, nombre:'Tepezalá', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1010, nombre:'El Llano', descripcion:'', estado:'AGUASCALIENTES', activo:true],
+                        [id:1011, nombre:'San Francisco de los Romo', descripcion:'', estado:'AGUASCALIENTES', activo:true]]
 
     }
 
