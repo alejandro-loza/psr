@@ -161,6 +161,7 @@ class DomicilioControllerSpec extends Specification {
             telefonoFijo = 1234567
             celular = 123123
             parentescoId = 2
+            nacionalidadId = 82
         }
         return familiarService.crear(cmd, sentenciado)
     }

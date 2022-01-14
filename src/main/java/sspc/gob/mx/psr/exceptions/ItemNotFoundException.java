@@ -1,4 +1,4 @@
-package sspc.gob.mx.psr.exeptions;
+package sspc.gob.mx.psr.exceptions;
 
 public class ItemNotFoundException extends RuntimeException {
     public ItemNotFoundException(String message) {

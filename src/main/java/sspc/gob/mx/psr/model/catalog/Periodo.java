@@ -1,6 +1,5 @@
 package sspc.gob.mx.psr.model.catalog;
 
-
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -10,12 +9,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Getter
-@Table(name = "cat_municipio")
-public class Municipio {
+@Table(name = "cat_periodo")
+public class Periodo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cat_municipio")
+    @Column(name = "id_cat_periodo")
     public Long id;
 
     @NotBlank
@@ -23,12 +22,9 @@ public class Municipio {
     @Size(min = 1, max = 20)
     public String nombre;
 
+    @NotBlank
+    @Size(min = 1, max = 50)
     public String descripcion;
-
-
-    @ManyToOne
-    @JoinColumn(name = "fk_id_cat_estado", nullable = false, updatable = false )
-    public Estado estado;
 
     @NotNull
     public boolean activo = true;

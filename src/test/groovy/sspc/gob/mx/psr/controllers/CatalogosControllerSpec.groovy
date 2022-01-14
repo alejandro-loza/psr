@@ -20,8 +20,6 @@ class CatalogosControllerSpec extends Specification {
     @Autowired
     MunicipioRepository municipioRepository
 
-    @Autowired
-    EstadoRepository estadoRepository
 
     def "Deberia traer todos los estados de la republica"(){
         when:
@@ -40,6 +38,7 @@ class CatalogosControllerSpec extends Specification {
         assert resp.size() == 84
 
     }
+
 
     def "Deberia traer todos los municipios activos de  aguascalientes"(){
 

@@ -60,12 +60,13 @@ public class SentenciadoValidador {
 
     Long escolaridad;
 
+
     @Size(min = 1, max = 50)
     String telefonoFijo;
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 50)
+    @Size(min = 10, max = 10)
     String celular;
 
     @Email

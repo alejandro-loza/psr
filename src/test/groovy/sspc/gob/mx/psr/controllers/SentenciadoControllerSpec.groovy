@@ -214,6 +214,7 @@ class SentenciadoControllerSpec extends Specification {
             telefonoFijo = 1234567
             celular = 123123
             parentescoId = 2
+            nacionalidadId =  82
         }
 
         println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
@@ -232,6 +233,7 @@ class SentenciadoControllerSpec extends Specification {
             assert telefonoFijo == '1234567'
             assert celular == '123123'
             assert parentesco == 'MADRE'
+            assert nacionalidad ==  "MÉXICO"
 
         }
 
