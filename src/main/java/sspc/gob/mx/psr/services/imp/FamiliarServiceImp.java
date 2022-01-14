@@ -3,7 +3,7 @@ package sspc.gob.mx.psr.services.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sspc.gob.mx.psr.dto.FamiliarDto;
-import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
+import sspc.gob.mx.psr.exceptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Domicilio;
 import sspc.gob.mx.psr.model.Familiar;
 import sspc.gob.mx.psr.model.Sentenciado;
@@ -13,8 +13,6 @@ import sspc.gob.mx.psr.repository.FamiliarRepository;
 import sspc.gob.mx.psr.services.FamiliarService;
 import sspc.gob.mx.psr.services.PaisService;
 import sspc.gob.mx.psr.services.ParentescoService;
-import sspc.gob.mx.psr.services.SentenciadoService;
-import sspc.gob.mx.psr.validator.DomicilioValidador;
 import sspc.gob.mx.psr.validator.FamiliarValidador;
 
 import java.util.List;

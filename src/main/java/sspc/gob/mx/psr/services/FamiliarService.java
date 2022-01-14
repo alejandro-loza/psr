@@ -1,11 +1,10 @@
 package sspc.gob.mx.psr.services;
 
 import sspc.gob.mx.psr.dto.FamiliarDto;
-import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
+import sspc.gob.mx.psr.exceptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Domicilio;
 import sspc.gob.mx.psr.model.Familiar;
 import sspc.gob.mx.psr.model.Sentenciado;
-import sspc.gob.mx.psr.validator.DomicilioValidador;
 import sspc.gob.mx.psr.validator.FamiliarValidador;
 
 import java.util.List;
