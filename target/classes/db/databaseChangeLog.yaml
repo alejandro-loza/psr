@@ -3,25 +3,33 @@ databaseChangeLog:
         name: uuid_function
         value: "uid.uuid_generate_v4()"
   - include:
-      file: db/folio.yaml
+      file: db/cat_estado.yaml
   - include:
-      file: db/estado.yaml
+      file: db/cat_edo_civil.yaml
   - include:
-      file: db/estado_civil.yaml
+      file: db/cat_pais.yaml
   - include:
-      file: db/pais.yaml
+      file: db/cat_escolaridad.yaml
   - include:
-      file: db/escolaridad.yaml
+      file: db/cat_etnia.yaml
   - include:
-      file: db/etnia.yaml
+      file: db/cat_ocupacion.yaml
   - include:
-      file: db/ocupacion.yaml
+      file: db/cat_municipio.yaml
+  - include:
+      file: db/demografico.yaml
   - include:
       file: db/sentenciado.yaml
   - include:
+      file: db/folio.yaml
+  - include:
+      file: db/cat_parentesco.yaml
+  - include:
+      file: db/familiar.yaml
+  - include:
       file: db/data/estados_data.yaml
   - include:
-      file: db/data/estados_civil_data.yaml
+      file: db/data/municipio_data.yaml
   - include:
       file: db/data/pais_data.yaml
   - include:
@@ -30,3 +38,7 @@ databaseChangeLog:
       file: db/data/etnia_data.yaml
   - include:
       file: db/data/ocupacion_data.yaml
+  - include:
+      file: db/data/parentesco_data.yaml
+  - include:
+      file: db/data/estados_civil_data.yaml

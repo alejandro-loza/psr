@@ -31,8 +31,6 @@ databaseChangeLog:
   - include:
       file: db/data/municipio_data.yaml
   - include:
-      file: db/data/estados_civil_data.yaml
-  - include:
       file: db/data/pais_data.yaml
   - include:
       file: db/data/escolaridad_data.yaml
@@ -42,3 +40,5 @@ databaseChangeLog:
       file: db/data/ocupacion_data.yaml
   - include:
       file: db/data/parentesco_data.yaml
+  - include:
+      file: db/data/estados_civil_data.yaml
