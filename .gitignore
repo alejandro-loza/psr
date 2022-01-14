@@ -36,5 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 .idea
+
+
+## config
 application.yaml
-/target
+target/

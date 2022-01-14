@@ -41,6 +41,11 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
+                  name: fk_id_cat_pais
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
                   name: documento
                   type: java.sql.Types.VARCHAR(18)
                   constraints:
