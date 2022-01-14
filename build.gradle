@@ -28,9 +28,10 @@ dependencies {
 			'javax.inject:javax.inject:1',
 			'org.apache.commons:commons-lang3:3.0',
 			'org.liquibase:liquibase-core',
-	        'com.google.guava:guava:11.0.2'
-
-
+	        'com.google.guava:guava:11.0.2',
+	        'io.jsonwebtoken:jjwt:0.9.1',
+			'org.springframework.boot:spring-boot-starter-security',
+			'org.springframework.security:spring-security-test'
 
 	runtimeOnly 'com.h2database:h2',
 			    'org.postgresql:postgresql:42.2.18'

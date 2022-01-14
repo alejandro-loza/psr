@@ -13,3 +13,5 @@ spring:
       driverClassName: org.h2.Driver
   liquibase:
     change-log: 'classpath:db/databaseChangeLog.yaml'
+jwt:
+  secret: javainuse
