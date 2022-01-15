@@ -2,6 +2,7 @@ package mx.gob.oadprs.sicosel.services.imp;
 
 import mx.gob.oadprs.sicosel.dto.SentenciadoDto;
 import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
+import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.model.catalog.Estado;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
@@ -10,7 +11,6 @@ import mx.gob.oadprs.sicosel.services.*;
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import mx.gob.oadprs.sicosel.model.Domicilio;
 
 import java.util.UUID;
 

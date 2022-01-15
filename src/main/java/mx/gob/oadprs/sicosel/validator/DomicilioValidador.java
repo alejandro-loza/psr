@@ -38,15 +38,12 @@ public class DomicilioValidador {
     @Size(min = 1, max = 5)
     private String codigoPostal;
 
-    @NotBlank
     @Size(min = 1, max = 15)
     private String latitud;
 
-    @NotBlank
     @Size(min = 1, max = 15)
     private String longitud;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     private String descripcion;
 

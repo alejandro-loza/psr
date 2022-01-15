@@ -2,11 +2,9 @@ package mx.gob.oadprs.sicosel.model;
 
 import com.sun.istack.Nullable;
 import lombok.*;
-import mx.gob.oadprs.sicosel.model.catalog.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 import mx.gob.oadprs.sicosel.enums.Sexo;
+import mx.gob.oadprs.sicosel.model.catalog.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -23,9 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Sentenciado extends EntidadBase {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type="uuid-char")
+    @GeneratedValue
     @Column(name = "id_sentenciado", columnDefinition = "uuid", updatable = false)
     private UUID id;
 

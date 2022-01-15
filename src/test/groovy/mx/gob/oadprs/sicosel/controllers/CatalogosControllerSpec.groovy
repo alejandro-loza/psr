@@ -1,13 +1,12 @@
 package mx.gob.oadprs.sicosel.controllers
 
-
+import mx.gob.oadprs.sicosel.repository.catalog.MunicipioRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
-import mx.gob.oadprs.sicosel.repository.catalog.MunicipioRepository
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CatalogosControllerSpec extends Specification {
