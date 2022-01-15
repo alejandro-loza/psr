@@ -1,9 +1,8 @@
 package mx.gob.oadprs.sicosel.services
 
-
+import mx.gob.oadprs.sicosel.services.imp.FolioServiceImp
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
-import mx.gob.oadprs.sicosel.services.imp.FolioServiceImp
 
 import java.time.LocalDate
 import java.time.Month
@@ -11,7 +10,7 @@ import java.time.Month
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FolioServiceSpec extends Specification{
 
-    FolioService folioService = new FolioServiceImp();
+    FolioService folioService = new FolioServiceImp()
 
     void setup(){
         folioService.folioRepository = Mock(mx.gob.oadprs.sicosel.repository.FolioRepository)

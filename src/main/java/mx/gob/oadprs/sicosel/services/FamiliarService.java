@@ -1,10 +1,10 @@
 package mx.gob.oadprs.sicosel.services;
 
-import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
-import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.dto.FamiliarDto;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.Familiar;
+import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador;
 
 import java.util.List;

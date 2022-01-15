@@ -4,8 +4,6 @@ import com.sun.istack.Nullable;
 import lombok.*;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.model.catalog.Parentesco;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,9 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Familiar extends EntidadBase {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type="uuid-char")
+    @GeneratedValue
     @Column(name = "id_familiar", columnDefinition = "uuid", updatable = false)
     private UUID id;
 

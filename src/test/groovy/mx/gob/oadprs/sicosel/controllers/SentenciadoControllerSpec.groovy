@@ -1,6 +1,11 @@
 package mx.gob.oadprs.sicosel.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import mx.gob.oadprs.sicosel.dto.SentenciadoDto
+import mx.gob.oadprs.sicosel.enums.Sexo
+import mx.gob.oadprs.sicosel.services.SentenciadoService
+import mx.gob.oadprs.sicosel.validator.FamiliarValidador
+import mx.gob.oadprs.sicosel.validator.SentenciadoValidador
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -10,7 +15,6 @@ import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
-import mx.gob.oadprs.sicosel.validator.FamiliarValidador
 
 import java.time.LocalDate
 import java.time.Month
@@ -24,7 +28,7 @@ class SentenciadoControllerSpec extends Specification {
     RestTemplate rest = new RestTemplate()
 
     @Autowired
-    mx.gob.oadprs.sicosel.services.SentenciadoService sentenciadoService;
+    SentenciadoService sentenciadoService
 
     def "Deberia crear un sentenciado"(){
         given:'a body request'
@@ -44,7 +48,7 @@ class SentenciadoControllerSpec extends Specification {
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = "1988-04-16"
             ocupacionId = 1
-            sexo = mx.gob.oadprs.sicosel.enums.Sexo.MASCULINO
+            sexo = Sexo.MASCULINO
             etniaId = 1
             escolaridad = 1
             telefonoFijo =  1234567890
@@ -168,7 +172,7 @@ class SentenciadoControllerSpec extends Specification {
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        mx.gob.oadprs.sicosel.validator.SentenciadoValidador cmd = new mx.gob.oadprs.sicosel.validator.SentenciadoValidador()
+        SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
             apellidoPaterno = 'Pèrez'
             apellidoMaterno = 'Garcìa'
@@ -180,7 +184,7 @@ class SentenciadoControllerSpec extends Specification {
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacionId = 1
-            sexo = mx.gob.oadprs.sicosel.enums.Sexo.FEMENINO
+            sexo = Sexo.FEMENINO
             etniaId = 1
             escolaridad =  1
             telefonoFijo =  1234567890
@@ -235,8 +239,8 @@ class SentenciadoControllerSpec extends Specification {
 
     }
 
-    private mx.gob.oadprs.sicosel.dto.SentenciadoDto sentenciadoGuardado() {
-        mx.gob.oadprs.sicosel.validator.SentenciadoValidador cmd = new mx.gob.oadprs.sicosel.validator.SentenciadoValidador()
+    private SentenciadoDto sentenciadoGuardado() {
+        SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
             nombre = 'Tomas'
             apellidoPaterno = 'Ràmirez'
@@ -249,7 +253,7 @@ class SentenciadoControllerSpec extends Specification {
             otrosNombres = "Enrique Peña"
             fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacionId = 1
-            sexo = mx.gob.oadprs.sicosel.enums.Sexo.MASCULINO
+            sexo = Sexo.MASCULINO
             etniaId = 1
             escolaridad = 1
             telefonoFijo = 1234567890

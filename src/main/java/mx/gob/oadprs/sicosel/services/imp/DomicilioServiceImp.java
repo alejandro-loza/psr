@@ -1,13 +1,13 @@
 package mx.gob.oadprs.sicosel.services.imp;
 
-import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.catalog.Municipio;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.repository.DomicilioRepository;
 import mx.gob.oadprs.sicosel.services.DomicilioService;
+import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class DomicilioServiceImp implements DomicilioService {
