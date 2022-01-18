@@ -1,0 +1,131 @@
+databaseChangeLog:
+  - changeSet:
+      id: demografico
+      author: andrea.perez
+      changes:
+        - createTable:
+            tableName: domicilio
+            columns:
+              - column:
+                  name: id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: fk_id_cat_pais
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fk_id_cat_estado
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fk_id_cat_municipio
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: codigo_postal
+                  type: java.sql.Types.VARCHAR(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: colonia
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: calle
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: numero
+                  type: java.sql.Types.VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: latitud
+                  type: java.sql.Types.VARCHAR(30)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: longitud
+                  type: java.sql.Types.VARCHAR(30)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_usuario_alta
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_alta
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aud_dir_ip_alta
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_usuario_modificacion
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_modificacion
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aud_dir_ip_modificacion
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: domicilio_pais_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_cat_pais
+            baseTableName: domicilio
+            constraintName: fk_domicilio_pais
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_pais
+            referencedTableName: cat_pais
+  - changeSet:
+      id: domicilio_estado_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_cat_estado
+            baseTableName: domicilio
+            constraintName: fk_domicilio_estado
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_estado
+            referencedTableName: cat_estado
+  - changeSet:
+      id: domicilio_municipio_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_cat_municipio
+            baseTableName: domicilio
+            constraintName: fk_domicilio_municipio
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_municipio
+            referencedTableName: cat_municipio

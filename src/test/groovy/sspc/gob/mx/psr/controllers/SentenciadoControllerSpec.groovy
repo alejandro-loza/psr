@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
+import org.springframework.http.*
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
@@ -14,7 +12,9 @@ import sspc.gob.mx.psr.dto.SentenciadoDto
 import sspc.gob.mx.psr.enums.Sexo
 import sspc.gob.mx.psr.services.SentenciadoService
 import sspc.gob.mx.psr.validator.FamiliarValidador
+import sspc.gob.mx.psr.validator.LoginRequest
 import sspc.gob.mx.psr.validator.SentenciadoValidador
+import sspc.gob.mx.psr.validator.UserRequest
 
 import java.time.LocalDate
 import java.time.Month
@@ -28,13 +28,36 @@ class SentenciadoControllerSpec extends Specification {
     RestTemplate rest = new RestTemplate()
 
     @Autowired
-    SentenciadoService sentenciadoService;
+    SentenciadoService sentenciadoService
 
     def "Deberia crear un sentenciado"(){
-        given:'a body request'
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
 
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        and:
         Map cmd = [:]
         cmd.with {
             nombre = 'Alejandro'
@@ -84,8 +107,32 @@ class SentenciadoControllerSpec extends Specification {
     }
 
     def "Should not post on invalid args "(){
-        given:'a body request'
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
         headers.setContentType(MediaType.APPLICATION_JSON)
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
@@ -115,8 +162,32 @@ class SentenciadoControllerSpec extends Specification {
     }
 
     def "Deberia crear un familiar del sentenciado"(){
-        given:'a body request'
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
         headers.setContentType(MediaType.APPLICATION_JSON)
         def sentenciado = sentenciadoGuardado()
 

@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: pais_data
+      author: alejandro.hernandez
+      changes:
+        -  sql:
+             sql: INSERT INTO cat_parentesco(id_cat_parentesco, nombre, descripcion, activo)VALUES (1,'PADRE','','1');
+        - sql:
+             sql: INSERT INTO cat_parentesco(id_cat_parentesco, nombre, descripcion, activo)VALUES (2,'MADRE','','1');
+        - sql:
+            sql: INSERT INTO cat_parentesco(id_cat_parentesco, nombre, descripcion, activo)VALUES (3,'CÓNYUGE','','1');

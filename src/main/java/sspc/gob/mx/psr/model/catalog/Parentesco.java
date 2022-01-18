@@ -28,6 +28,6 @@ public class Parentesco {
     private String descripcion;
 
     @NotNull
-    private boolean activo = true;
+    private final boolean activo = true;
 
 }

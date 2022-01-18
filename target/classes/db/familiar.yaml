@@ -1,0 +1,134 @@
+databaseChangeLog:
+  - changeSet:
+      id: familiar
+      author: andrea.perez
+      changes:
+        - createTable:
+            tableName: familiar
+            columns:
+              - column:
+                  name: id_familiar
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: fk_id_sentenciado
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fk_id_domicilio
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: apellido_paterno
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: apellido_materno
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: fk_id_cat_pais
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: documento
+                  type: java.sql.Types.VARCHAR(18)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: tel_casa
+                  type: java.sql.Types.VARCHAR(10)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: tel_celular
+                  type: java.sql.Types.VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fk_id_cat_parentesco
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aud_usuario_alta
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_alta
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aud_dir_ip_alta
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_usuario_modificacion
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_modificacion
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aud_dir_ip_modificacion
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: familiar_parentesco_fk
+      author: andrea.perez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_cat_parentesco
+            baseTableName: familiar
+            constraintName: id_cat_parentesco_fk
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_cat_parentesco
+            referencedTableName: cat_parentesco
+  - changeSet:
+      id: familiar_sentenciado
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_sentenciado
+            baseTableName: familiar
+            constraintName: fk_familiar_sentenciado
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_sentenciado
+            referencedTableName: sentenciado
+  - changeSet:
+      id: familiar_domicilio_fk
+      author: alejandro.hernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_domicilio
+            baseTableName: familiar
+            constraintName: fk_familiar_domicilio
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_domicilio
+            referencedTableName: domicilio
+

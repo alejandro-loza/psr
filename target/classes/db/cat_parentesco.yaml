@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: parentesco
+      author: andrea.perez
+      changes:
+        - createTable:
+            tableName: cat_parentesco
+            columns:
+              - column:
+                  name: id_cat_parentesco
+                  type: INT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activo
+                  type: boolean
+                  constraints:
+                    nullable: false
