@@ -1,12 +1,17 @@
 package mx.gob.oadprs.sicosel.controllers
 
-import mx.gob.oadprs.sicosel.repository.catalog.MunicipioRepository
-import org.springframework.beans.factory.annotation.Autowired
+import mx.gob.oadprs.sicosel.validator.LoginRequest
+import mx.gob.oadprs.sicosel.validator.UserRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CatalogosControllerSpec extends Specification {
@@ -15,13 +20,35 @@ class CatalogosControllerSpec extends Specification {
     int port
     RestTemplate rest = new RestTemplate()
 
-    @Autowired
-    MunicipioRepository municipioRepository
-
-
     def "Deberia traer todos los estados de la republica"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado", List)?.body
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/estado",
+                HttpMethod.GET, httpEntity, List)?.body
 
         then:
         assert resp.size() == 33
@@ -29,64 +56,71 @@ class CatalogosControllerSpec extends Specification {
     }
 
     def "Deberia traer todos los municipios de la hidalgo"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/13/municipio", List)?.body
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/estado/13/municipio",
+                HttpMethod.GET, httpEntity, List)?.body
 
         then:
         assert resp.size() == 84
 
     }
 
-
-    def "Deberia traer todos los municipios activos de  aguascalientes"(){
-
-
-        when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/1/municipio", List)?.body
-
-        then:
-        assert resp == [[id:1001, nombre:'Aguascalientes', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1002, nombre:'Asientos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1003, nombre:'Calvillo', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1004, nombre:'Cosio', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1005, nombre:'Jesús María', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1006, nombre:'Pabellón de Arteaga', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1007, nombre:'Rincón de Ramos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1008, nombre:'San José de García', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1009, nombre:'Tepezalá', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1010, nombre:'El Llano', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1011, nombre:'San Francisco de los Romo', descripcion:'', estado:'AGUASCALIENTES', activo:true]]
-
-    }
-
-    def "Deberia traer todos los municipios activos de  aguascalientes excepto la ciudad de aguascalientes"(){
-
-        given:'ciudad de aguascalientes desactivada'
-        mx.gob.oadprs.sicosel.model.catalog.Municipio aguascalientesCiudad =municipioRepository.findById(1001L).get()
-                aguascalientesCiudad.activo = false
-        municipioRepository.save(aguascalientesCiudad)
-
-        when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/1/municipio", List)?.body
-
-        then:
-        assert resp == [
-                        [id:1002, nombre:'Asientos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1003, nombre:'Calvillo', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1004, nombre:'Cosio', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1005, nombre:'Jesús María', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1006, nombre:'Pabellón de Arteaga', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1007, nombre:'Rincón de Ramos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1008, nombre:'San José de García', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1009, nombre:'Tepezalá', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1010, nombre:'El Llano', descripcion:'', estado:'AGUASCALIENTES', activo:true],
-                        [id:1011, nombre:'San Francisco de los Romo', descripcion:'', estado:'AGUASCALIENTES', activo:true]]
-
-    }
-
     def "Deberia traer todos los municipios de la guerrero"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/12/municipio", List)?.body
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/estado/12/municipio",
+                HttpMethod.GET, httpEntity, List)?.body
 
         then:
         assert resp.size() == 81
@@ -94,8 +128,36 @@ class CatalogosControllerSpec extends Specification {
     }
 
     def "Deberia traer todos los estados civiles"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estadoCivil", List)?.body
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/estadoCivil",
+                HttpMethod.GET, httpEntity, List)?.body
 
         then:
         assert resp.size() == 8
@@ -110,8 +172,35 @@ class CatalogosControllerSpec extends Specification {
     }
 
     def "Deberia traer todos las escolaridades"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/escolaridad", List)?.body
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/escolaridad",
+                HttpMethod.GET, httpEntity, List)?.body
 
         then:
         assert resp.size() == 19
@@ -120,8 +209,35 @@ class CatalogosControllerSpec extends Specification {
     }
 
     def "Deberia traer todos las etnias"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/etnia", List)
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/etnia",
+                HttpMethod.GET, httpEntity, List)
 
         then:
         assert resp.getStatusCode() == HttpStatus.OK
@@ -129,8 +245,35 @@ class CatalogosControllerSpec extends Specification {
     }
 
     def "Deberia traer todos las ocupaciones"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/ocupacion", List)
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/ocupacion",
+                HttpMethod.GET, httpEntity, List)
 
         then:
         assert resp.getStatusCode() == HttpStatus.OK
@@ -138,8 +281,35 @@ class CatalogosControllerSpec extends Specification {
     }
 
     def "Deberia traer todos los parentescos"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
         when:
-        def resp = rest.getForEntity("http://localhost:${ port }/catalogo/parentesco", List)
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/catalogo/parentesco",
+                HttpMethod.GET, httpEntity, List)
 
         then:
         assert resp.getStatusCode() == HttpStatus.OK
