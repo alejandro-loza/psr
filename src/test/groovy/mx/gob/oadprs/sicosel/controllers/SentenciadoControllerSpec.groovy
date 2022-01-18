@@ -2,20 +2,19 @@ package mx.gob.oadprs.sicosel.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import mx.gob.oadprs.sicosel.dto.SentenciadoDto
-import mx.gob.oadprs.sicosel.enums.Sexo
 import mx.gob.oadprs.sicosel.services.SentenciadoService
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador
+import mx.gob.oadprs.sicosel.validator.LoginRequest
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador
+import mx.gob.oadprs.sicosel.validator.UserRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
+import org.springframework.http.*
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
-
+import mx.gob.oadprs.sicosel.enums.Sexo
 import java.time.LocalDate
 import java.time.Month
 
@@ -31,10 +30,33 @@ class SentenciadoControllerSpec extends Specification {
     SentenciadoService sentenciadoService
 
     def "Deberia crear un sentenciado"(){
-        given:'a body request'
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
 
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        and:
         Map cmd = [:]
         cmd.with {
             nombre = 'Alejandro'
@@ -61,7 +83,7 @@ class SentenciadoControllerSpec extends Specification {
 
         then:
         resp.with {
-           assert it.nombre == 'Alejandro'
+            assert it.nombre == 'Alejandro'
             assert it.folio == 'RXTA88041613HMEX001'
             assert it.apellidoPaterno == 'Ràmirez'
             assert it.apellidoMaterno == 'Torres'
@@ -83,94 +105,33 @@ class SentenciadoControllerSpec extends Specification {
 
     }
 
-    def "Deberia crear un sentenciado caso de QA"(){
-        given:'a body request'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-
-        Map cmd = [:]
-        cmd.with {
-            apellidoMaterno = "DDD"
-            apellidoPaterno =  "DDD"
-            celular =  "9999999999"
-            correoElectronico =  "anita19@ggd"
-            documento = "AINA941015MDFVYN05"
-            escolaridad = "5"
-            estadoCivil = "5"
-            estadoId = "9"
-            etniaId = "3"
-            fechaNacimiento = "2022-01-07"
-            nacionalidadId =  "82"
-            nombre =  "DDDD"
-            ocupacionId =  "1"
-            sexo = "MASCULINO"
-        }
-
-        when:
-        def resp = rest.postForObject("http://localhost:${ port }/sentenciado", new HttpEntity(cmd, headers), Map)
-
-        then:
-        resp.with {
-            assert it.id
-            assert apellidoMaterno == "DDD"
-            assert apellidoPaterno ==  "DDD"
-            assert celular ==  "9999999999"
-            assert correoElectronico ==  "anita19@ggd"
-            assert documento == "AINA941015MDFVYN05"
-            assert escolaridad == "SECUNDARIA COMPLETA"
-            assert estadoCivil == "UNIÓN LIBRE"
-            assert estado == "CIUDAD DE MÉXICO"
-            assert etnia == "COCHIMI"
-            assert fechaNacimiento == "2022-01-07"
-            assert nacionalidad ==  "MÉXICO"
-            assert nombre ==  "DDDD"
-            assert ocupacion ==  "EMPLEADO"
-            assert sexo == "MASCULINO"
-        }
-
-    }
-
-    def "Deberia crear un sentenciado sin campos opcionales"(){
-        given:'a body request'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-
-        Map cmd = [:]
-        cmd.with {
-            celular =  "9999999999"
-            correoElectronico =  "anita19@ggd"
-            documento = "AINA941015MDFVYN05"
-            estadoCivil = "5"
-            estadoId = "9"
-            fechaNacimiento = "2022-01-07"
-            nacionalidadId =  "82"
-            nombre =  "DDDD"
-            sexo = "MASCULINO"
-        }
-
-        when:
-        def resp = rest.postForObject("http://localhost:${ port }/sentenciado", new HttpEntity(cmd, headers), Map)
-
-        then:
-        resp.with {
-            assert it.id
-            assert it.folio
-            assert celular == "9999999999"
-            assert correoElectronico == "anita19@ggd"
-            assert documento == "AINA941015MDFVYN05"
-            assert estadoCivil == "UNIÓN LIBRE"
-            assert estado == "CIUDAD DE MÉXICO"
-            assert fechaNacimiento == "2022-01-07"
-            assert nacionalidad ==  "MÉXICO"
-            assert nombre ==  "DDDD"
-            assert sexo == "MASCULINO"
-        }
-
-    }
-
     def "Should not post on invalid args "(){
-        given:'a body request'
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
         headers.setContentType(MediaType.APPLICATION_JSON)
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
@@ -200,8 +161,32 @@ class SentenciadoControllerSpec extends Specification {
     }
 
     def "Deberia crear un familiar del sentenciado"(){
-        given:'a body request'
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
         headers.setContentType(MediaType.APPLICATION_JSON)
         def sentenciado = sentenciadoGuardado()
 
@@ -214,7 +199,8 @@ class SentenciadoControllerSpec extends Specification {
             telefonoFijo = 1234567
             celular = 123123
             parentescoId = 2
-            nacionalidadId =  82
+            nacionalidadId = MEXICO_ID
+
         }
 
         println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
@@ -233,7 +219,6 @@ class SentenciadoControllerSpec extends Specification {
             assert telefonoFijo == '1234567'
             assert celular == '123123'
             assert parentesco == 'MADRE'
-            assert nacionalidad ==  "MÉXICO"
 
         }
 

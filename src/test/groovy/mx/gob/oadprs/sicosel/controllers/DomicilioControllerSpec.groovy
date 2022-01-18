@@ -2,21 +2,25 @@ package mx.gob.oadprs.sicosel.controllers
 
 import mx.gob.oadprs.sicosel.dto.FamiliarDto
 import mx.gob.oadprs.sicosel.dto.SentenciadoDto
-import mx.gob.oadprs.sicosel.enums.Sexo
 import mx.gob.oadprs.sicosel.model.Sentenciado
 import mx.gob.oadprs.sicosel.services.FamiliarService
 import mx.gob.oadprs.sicosel.services.SentenciadoService
 import mx.gob.oadprs.sicosel.validator.DomicilioValidador
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador
+import mx.gob.oadprs.sicosel.validator.LoginRequest
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador
+import mx.gob.oadprs.sicosel.validator.UserRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
+import mx.gob.oadprs.sicosel.enums.Sexo
 
 import java.time.LocalDate
 import java.time.Month
@@ -38,8 +42,32 @@ class DomicilioControllerSpec extends Specification {
     FamiliarService familiarService
 
     def "Deberia crear un domicilio"(){
-        given:
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
         headers.setContentType(MediaType.APPLICATION_JSON)
 
         and:'un sentenciado guardado'
@@ -81,8 +109,31 @@ class DomicilioControllerSpec extends Specification {
     }
 
     def "Deberia crear un domicilio de familiar"(){
-        given:
+        given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
         headers.setContentType(MediaType.APPLICATION_JSON)
 
         and:'un sentenciado guardado'
@@ -101,6 +152,8 @@ class DomicilioControllerSpec extends Specification {
             colonia = 'Benito Juarez'
             calle = 'Bolevar of bronken dreams'
             numero = 666
+            latitud = '19.4326018'
+            longitud = '-99.1332049'
             descripcion = 'datos test'
         }
 
@@ -118,6 +171,8 @@ class DomicilioControllerSpec extends Specification {
             assert it.calle == 'Bolevar of bronken dreams'
             assert it.numero == '666'
             assert it.codigoPostal == '12345'
+            assert it.latitud == '19.4326018'
+            assert it.longitud == '-99.1332049'
         }
 
     }
@@ -157,7 +212,7 @@ class DomicilioControllerSpec extends Specification {
             telefonoFijo = 1234567
             celular = 123123
             parentescoId = 2
-            nacionalidadId = 82
+            nacionalidadId = MEXICO_ID
         }
         return familiarService.crear(cmd, sentenciado)
     }
