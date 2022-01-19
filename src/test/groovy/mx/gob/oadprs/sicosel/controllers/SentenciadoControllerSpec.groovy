@@ -239,6 +239,67 @@ class SentenciadoControllerSpec extends Specification {
 
     }
 
+    def "No deberia crear el sentenciado cuando faltan campos requeridos y responder Bad Request"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            apellidoMaterno = 'Loera'
+            apellidoPaterno = 'Virginia'
+            documento = 'HELA880416HHGRZL08'
+            telefonoFijo = "1234567"
+            celular = "123123"
+        }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
+
+        when:
+        rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
+
+        then:
+        thrown HttpClientErrorException.BadRequest
+
+    }
+
+    def "Deberia  crear un familiar del sentenciado solo con campos requeridos"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            nombre = 'Chapo Mama'
+            documento = 'HELA880416HHGRZL08'
+            parentescoId = 2
+            nacionalidadId =  MEXICO_ID
+        }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
+
+        when:
+        def resp = rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
+
+        then:
+        resp.with {
+            assert id
+            assert sentenciadoId == sentenciado.id
+            assert nombre == 'Chapo Mama'
+            assert apellidoPaterno == null
+            assert apellidoMaterno == null
+            assert documento == 'HELA880416HHGRZL08'
+            assert telefonoFijo == null
+            assert celular ==  null
+            assert parentesco == 'MADRE'
+            assert nacionalidad ==  "MÉXICO"
+
+        }
+
+    }
+
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
