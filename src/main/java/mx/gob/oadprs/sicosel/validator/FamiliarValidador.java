@@ -20,8 +20,6 @@ class FamiliarValidador {
     @Size(min = 1, max = 50)
     private String apellidoMaterno;
 
-    @NotNull(message= "familiar.documento.null")
-    @NotBlank(message= "familiar.documento.blank")
     @Size(min = 1, max = 18)
     private String documento;
 

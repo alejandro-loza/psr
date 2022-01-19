@@ -211,8 +211,8 @@ class SentenciadoControllerSpec extends Specification {
             apellidoMaterno = 'Loera'
             apellidoPaterno = 'Virginia'
             documento = 'HELA880416HHGRZL08'
-            telefonoFijo = 1234567
-            celular = 123123
+            telefonoFijo = "1234567"
+            celular = "123123"
             parentescoId = 2
             nacionalidadId =  82
         }
