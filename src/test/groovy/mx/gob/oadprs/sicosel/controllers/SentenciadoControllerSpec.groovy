@@ -273,7 +273,6 @@ class SentenciadoControllerSpec extends Specification {
         FamiliarValidador cmd = new FamiliarValidador()
         cmd.with {
             nombre = 'Chapo Mama'
-            documento = 'HELA880416HHGRZL08'
             parentescoId = 2
             nacionalidadId =  MEXICO_ID
         }
@@ -290,7 +289,7 @@ class SentenciadoControllerSpec extends Specification {
             assert nombre == 'Chapo Mama'
             assert apellidoPaterno == null
             assert apellidoMaterno == null
-            assert documento == 'HELA880416HHGRZL08'
+            assert documento == null
             assert telefonoFijo == null
             assert celular ==  null
             assert parentesco == 'MADRE'
