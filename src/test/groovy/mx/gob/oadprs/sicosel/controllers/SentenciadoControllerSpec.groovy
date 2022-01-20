@@ -211,8 +211,8 @@ class SentenciadoControllerSpec extends Specification {
             apellidoMaterno = 'Loera'
             apellidoPaterno = 'Virginia'
             documento = 'HELA880416HHGRZL08'
-            telefonoFijo = 1234567
-            celular = 123123
+            telefonoFijo = "1234567"
+            celular = "123123"
             parentescoId = 2
             nacionalidadId =  82
         }
@@ -232,6 +232,65 @@ class SentenciadoControllerSpec extends Specification {
             assert documento == 'HELA880416HHGRZL08'
             assert telefonoFijo == '1234567'
             assert celular == '123123'
+            assert parentesco == 'MADRE'
+            assert nacionalidad ==  "MÉXICO"
+        }
+
+    }
+
+    def "No deberia crear el familiar cuando faltan campos requeridos y responder Bad Request"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            documento = 'HELA880416HHGRZL08'
+            telefonoFijo = "1234567"
+            celular = "123123"
+        }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
+
+        when:
+        rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
+
+        then:
+        thrown HttpClientErrorException.BadRequest
+
+    }
+
+    def "Deberia  crear un familiar del sentenciado solo con campos requeridos"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            nombre = 'CHAPO MAMA'
+            apellidoMaterno = "NOYOLA"
+            apellidoPaterno = "AVILA"
+            parentescoId = 2
+            nacionalidadId =  MEXICO_ID
+        }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
+
+        when:
+        def resp = rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
+
+        then:
+        resp.with {
+            assert id
+            assert sentenciadoId == sentenciado.id
+            assert nombre == 'CHAPO MAMA'
+            assert apellidoPaterno == 'AVILA'
+            assert apellidoMaterno == 'NOYOLA'
+            assert documento == null
+            assert telefonoFijo == null
+            assert celular ==  null
             assert parentesco == 'MADRE'
             assert nacionalidad ==  "MÉXICO"
 
