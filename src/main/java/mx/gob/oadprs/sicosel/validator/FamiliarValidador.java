@@ -14,9 +14,13 @@ class FamiliarValidador {
     @NotBlank(message= "familiar.nombre.blank")
     private String nombre;
 
+    @NotNull(message= "familiar.apellidoPaterno.null")
+    @NotBlank(message= "familiar.apellidoPaterno.blank")
     @Size(min = 1, max = 50)
     private String apellidoPaterno;
 
+    @NotNull(message= "familiar.apellidoMaterno.null")
+    @NotBlank(message= "familiar.apellidoMaterno.blank")
     @Size(min = 1, max = 50)
     private String apellidoMaterno;
 

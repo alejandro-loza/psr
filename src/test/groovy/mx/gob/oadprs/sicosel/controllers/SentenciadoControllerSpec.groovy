@@ -234,12 +234,11 @@ class SentenciadoControllerSpec extends Specification {
             assert celular == '123123'
             assert parentesco == 'MADRE'
             assert nacionalidad ==  "MÉXICO"
-
         }
 
     }
 
-    def "No deberia crear el sentenciado cuando faltan campos requeridos y responder Bad Request"(){
+    def "No deberia crear el familiar cuando faltan campos requeridos y responder Bad Request"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
@@ -247,8 +246,6 @@ class SentenciadoControllerSpec extends Specification {
 
         FamiliarValidador cmd = new FamiliarValidador()
         cmd.with {
-            apellidoMaterno = 'Loera'
-            apellidoPaterno = 'Virginia'
             documento = 'HELA880416HHGRZL08'
             telefonoFijo = "1234567"
             celular = "123123"
@@ -272,7 +269,9 @@ class SentenciadoControllerSpec extends Specification {
 
         FamiliarValidador cmd = new FamiliarValidador()
         cmd.with {
-            nombre = 'Chapo Mama'
+            nombre = 'CHAPO MAMA'
+            apellidoMaterno = "NOYOLA"
+            apellidoPaterno = "AVILA"
             parentescoId = 2
             nacionalidadId =  MEXICO_ID
         }
@@ -286,9 +285,9 @@ class SentenciadoControllerSpec extends Specification {
         resp.with {
             assert id
             assert sentenciadoId == sentenciado.id
-            assert nombre == 'Chapo Mama'
-            assert apellidoPaterno == null
-            assert apellidoMaterno == null
+            assert nombre == 'CHAPO MAMA'
+            assert apellidoPaterno == 'AVILA'
+            assert apellidoMaterno == 'NOYOLA'
             assert documento == null
             assert telefonoFijo == null
             assert celular ==  null
