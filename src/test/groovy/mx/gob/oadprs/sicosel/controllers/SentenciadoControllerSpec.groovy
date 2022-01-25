@@ -29,13 +29,73 @@ class SentenciadoControllerSpec extends Specification {
     @Autowired
     SentenciadoService sentenciadoService
 
-    def "Deberia crear un sentenciado"(){
+    def "Deberia no crear un sentenciado con rol equivocado"(){
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
         LoginRequest loginRequest = new LoginRequest()
         loginRequest.with {
             user = "pinky"
+            password = "pwd"
+        }
+
+        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
+
+        when:
+        def response = rest.exchange("http://localhost:${ port }/login",
+                HttpMethod.POST, httpEntity, UserRequest)
+
+
+        then:
+        assert response.statusCode == HttpStatus.OK
+        assert response.body
+        response.body.with {
+            assert token
+        }
+
+
+        headers.set("Authorization", "Bearer "+response.body.token)
+
+        and:
+        Map cmd = [:]
+        cmd.with {
+            nombre = 'Alejandro'
+            apellidoPaterno = 'Ràmirez'
+            apellidoMaterno = 'Torres'
+            nacionalidadId = MEXICO_ID
+            estadoId = 13
+            documento = 'HELA880416HHGRZL08'
+            estadoCivil = 1
+            alias = "el pinky"
+            otrosNombres =  "Enrique Peña"
+            fechaNacimiento = "1988-04-16"
+            ocupacionId = 1
+            sexo = Sexo.MASCULINO
+            etniaId = 1
+            escolaridad = 1
+            telefonoFijo =  1234567890
+            celular =  1234567890
+            correoElectronico = 'juan.antonio.perez.garcia@gmail.com'
+        }
+
+        when:
+        rest.exchange("http://localhost:${ port }/sentenciado",
+                HttpMethod.POST, new HttpEntity(cmd, headers), Map)
+
+        then:
+        def e = thrown(HttpClientErrorException)
+        assert e.with {
+            message == ''
+        }
+    }
+
+    def "Deberia crear un sentenciado"(){
+        given:'a body login request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequest loginRequest = new LoginRequest()
+        loginRequest.with {
+            user = "ADMIN"
             password = "pwd"
         }
 
