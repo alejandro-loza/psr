@@ -1,5 +1,6 @@
 package mx.gob.oadprs.sicosel.services.imp;
 
+import mx.gob.oadprs.sicosel.dto.DomicilioDto;
 import mx.gob.oadprs.sicosel.dto.FamiliarDto;
 import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Domicilio;
@@ -8,9 +9,8 @@ import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.model.catalog.Parentesco;
 import mx.gob.oadprs.sicosel.repository.FamiliarRepository;
-import mx.gob.oadprs.sicosel.services.FamiliarService;
-import mx.gob.oadprs.sicosel.services.PaisService;
-import mx.gob.oadprs.sicosel.services.ParentescoService;
+import mx.gob.oadprs.sicosel.services.*;
+import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +30,16 @@ class FamiliarServiceImp implements FamiliarService{
 
     @Autowired
     PaisService paisService;
+
+    @Autowired
+    MunicipioService municipioService;
+
+
+    @Autowired
+    DomicilioService domicilioService;
+
+    @Autowired
+    SentenciadoService sentenciadoService;
 
 
     @Override
@@ -58,12 +68,23 @@ class FamiliarServiceImp implements FamiliarService{
     }
 
     @Override
-    public Familiar creaDireccion(Familiar familiar, Domicilio domicilio) throws Exception {
-        if(familiar.getDomicilio() == null){
-            familiar.setDomicilio(domicilio);
-            return familiarRepository.save(familiar);
+    public DomicilioDto creaDireccion(UUID sentenciadoId, UUID familiarId, DomicilioValidador validador) throws Exception {
+        Sentenciado sentenciado = sentenciadoService.busca(sentenciadoId);
+        Familiar familiar = buscaFamiliarSentenciado(sentenciado, familiarId);
+        if(familiar.getDomicilio() != null){
+            throw new Exception("familiar.domicilio.alreadyExist");
         }
-        else throw new Exception("familiar.domicilio.alreadyExist");
+        return agregaDomicilio(familiarId, validador, familiar);
+    }
+
+    private DomicilioDto agregaDomicilio(UUID familiarId, DomicilioValidador validador, Familiar familiar) throws Exception {
+        Domicilio domicilio = domicilioService.crear(validador,
+            municipioService.busca(validador.getMunicipioId()),
+            paisService.busca(validador.getPaisId()));
+
+        familiar.setDomicilio(domicilio);
+        familiarRepository.save(familiar);
+        return new DomicilioDto(domicilio, familiarId);
     }
 
     @Override

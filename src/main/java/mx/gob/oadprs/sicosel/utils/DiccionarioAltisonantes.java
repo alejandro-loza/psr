@@ -10,19 +10,19 @@ import java.util.Map;
 
 @Scope("singleton")
 @Component("altisonantes")
-public class Altisonantes {
+public class DiccionarioAltisonantes {
 
     private static final String FILE_PATH = "altisonantes.json";
-    private static Altisonantes instancia;
+    private static DiccionarioAltisonantes instancia;
     private final Map<String, String> altisonantes;
 
-    private Altisonantes(Map<String, String> altisonantes) {
+    private DiccionarioAltisonantes(Map<String, String> altisonantes) {
         this.altisonantes = altisonantes;
     }
 
     public static Map<String, String> listado() throws IOException {
         if(instancia == null){
-            instancia = new Altisonantes(leeArchivo());
+            instancia = new DiccionarioAltisonantes(leeArchivo());
         }
         return instancia.getAltisonantes();
     }
@@ -31,7 +31,7 @@ public class Altisonantes {
         return altisonantes;
     }
 
-    private static Map<String, String> leeArchivo() throws IOException {
+    private static Map leeArchivo() throws IOException {
         return new ObjectMapper().readValue(new ClassPathResource(FILE_PATH).getInputStream(), Map.class);
     }
 
