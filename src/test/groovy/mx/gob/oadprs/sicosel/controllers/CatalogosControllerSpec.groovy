@@ -1,6 +1,6 @@
 package mx.gob.oadprs.sicosel.controllers
 
-import mx.gob.oadprs.sicosel.validator.LoginRequest
+import mx.gob.oadprs.sicosel.validator.LoginRequestValidador
 import mx.gob.oadprs.sicosel.validator.UserRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -24,10 +24,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -59,10 +59,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -95,10 +95,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -131,10 +131,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -175,10 +175,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -212,10 +212,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -248,10 +248,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -284,10 +284,10 @@ class CatalogosControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)

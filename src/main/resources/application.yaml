@@ -20,3 +20,5 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+clientes:
+  autenticacion: http://10.238.1.143

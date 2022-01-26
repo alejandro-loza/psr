@@ -7,7 +7,7 @@ import mx.gob.oadprs.sicosel.services.FamiliarService
 import mx.gob.oadprs.sicosel.services.SentenciadoService
 import mx.gob.oadprs.sicosel.validator.DomicilioValidador
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador
-import mx.gob.oadprs.sicosel.validator.LoginRequest
+import mx.gob.oadprs.sicosel.validator.LoginRequestValidador
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador
 import mx.gob.oadprs.sicosel.validator.UserRequest
 import org.springframework.beans.factory.annotation.Autowired
@@ -45,10 +45,10 @@ class DomicilioControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -112,10 +112,10 @@ class DomicilioControllerSpec extends Specification {
         given:'a body login request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)

@@ -1,6 +1,6 @@
 package mx.gob.oadprs.sicosel.controllers
 
-import mx.gob.oadprs.sicosel.validator.LoginRequest
+import mx.gob.oadprs.sicosel.validator.LoginRequestValidador
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.*
@@ -18,10 +18,10 @@ class LoginControllerSpec extends Specification {
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        LoginRequest loginRequest = new LoginRequest()
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
         loginRequest.with {
-            user = "pinky"
-            password = "pwd"
+            usuario = "pinky"
+            contrasenia = "pwd"
         }
 
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
@@ -34,6 +34,24 @@ class LoginControllerSpec extends Specification {
             assert token
         }
 
+
+    }
+
+    def "Deberia hacer login a prs"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        LoginRequestValidador loginRequest = new LoginRequestValidador()
+        loginRequest.with {
+            usuario = "accesod.infotec@oadprs.gob.mx"
+            contrasenia = "MXFhejJ3c1g="
+        }
+
+        when:
+        def response = rest.postForObject("http://localhost:${ port }/prsLogin", new HttpEntity(loginRequest, headers), Map)
+
+        then:
+        assert response
 
     }
 

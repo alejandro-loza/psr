@@ -3,8 +3,11 @@ package mx.gob.oadprs.sicosel.controllers;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import mx.gob.oadprs.sicosel.validator.LoginRequest;
+import mx.gob.oadprs.sicosel.services.LoginService;
+import mx.gob.oadprs.sicosel.validator.LoginRequestValidador;
 import mx.gob.oadprs.sicosel.validator.UserRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,19 +18,28 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
 public class LoginController {
-    @PostMapping("login")
-    public UserRequest login(@RequestBody @Valid LoginRequest loginRequest) {
+    @Autowired
+    LoginService loginService;
 
-        String token = getJWTToken(loginRequest.getUser());
+    @PostMapping("login")
+    public UserRequest login(@RequestBody @Valid LoginRequestValidador loginRequestValidador) {
+
+        String token = getJWTToken(loginRequestValidador.getUsuario());
         UserRequest user = new UserRequest();
-        user.setUser(loginRequest.getUser());
+        user.setUser(loginRequestValidador.getUsuario());
         user.setToken(token);
         return user;
 
+    }
+
+    @PostMapping("prsLogin")
+    public HttpEntity<Map> prsLogin(@RequestBody @Valid LoginRequestValidador cmd) {
+       return loginService.login(cmd);
     }
 
     private String getJWTToken(String username) {
