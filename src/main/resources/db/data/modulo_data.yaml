@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: modulo_data
+      author: andrea.perez
+      changes:
+        -  sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (1,'GENERAL','sentenciado','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (2,'DEMOGRAFICO','sentenciado/{id_sentenciado}/demograficos','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (3,'BIOMÉTRICOS','sentenciado/{id_sentenciado}/biometricos','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (4,'FAMILIARES','sentenciado/{id_sentenciado}/familiar','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (5,'PROCESO','proceso','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (6,'AMPARO','proceso/{id_proceso]/amparo','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (7,'CONCLUCION','proceso/{id_proceso]/conclucion','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (8,'EXTINCION','proceso/{id_proceso]/extincion','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (9,'OFICIOS ','oficio','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (10,'REPORTES','reporte','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (11,'BAJA DE VIGILANCIA','bajavigilancia','1');
+        - sql:
+            sql: INSERT INTO seg.modulo(id_modulo, modulo, path_json, activo)VALUES (12,'PRESENTACION','presentacion','1');

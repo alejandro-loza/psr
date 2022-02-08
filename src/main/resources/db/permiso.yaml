@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: permiso
+      author: andrea.perez
+      changes:
+        - createTable:
+            tableName: permiso
+            columns:
+              - column:
+                  name: id_permiso
+                  type: uuid
+                  valueComputed: "${u_id}"
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: rol
+                  type: java.sql.Types.VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: alcance
+                  type: java.sql.Types.VARCHAR(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fk_id_modulo
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: activo
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aud_usuario_alta
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_alta
+                  type: DATE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_dir_ip_alta
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_usuario_modificacion
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_modificacion
+                  type: DATE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_dir_ip_modificacion
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: permiso_modulo_fk
+      author: andrea.perez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: fk_id_modulo
+            baseTableName: permiso
+            constraintName: fk_id_modulo
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id_modulo
+            referencedTableName: modulo

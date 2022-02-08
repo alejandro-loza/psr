@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: permiso
+      author: andrea.perez
+      changes:
+        - createTable:
+            tableName: modulo
+            columns:
+              - column:
+                  name: id_modulo
+                  type: INT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: modulo
+                  type: java.sql.Types.VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: path_json
+                  type: java.sql.Types.VARCHAR(70)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: activo
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: aud_usuario_alta
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_alta
+                  type: DATE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_dir_ip_alta
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_usuario_modificacion
+                  type: java.sql.Types.VARCHAR(60)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_fch_modificacion
+                  type: DATE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aud_dir_ip_modificacion
+                  type: java.sql.Types.VARCHAR(15)
+                  constraints:
+                    nullable: true

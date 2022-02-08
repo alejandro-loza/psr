@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: permiso_data
+      author: andrea.perez
+      changes:
+        -  sql:
+            sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-42E3F9BE5F9A','ROL_ADMON','RACI',1,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-42E3F9BE5F9B','ROL_ADMON','RACI',2,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-42E3F9BE5F9C','ROL_ADMON','RACI',3,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-42E3F9BE5F9D','ROL_ADMON','RACI',4,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-42E3F9BE5F9E','ROL_ADMON','RACI',5,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-42E3F9BE5F9F','ROL_ADMON','RACI',6,'1');
+        - sql:
+            sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-62E3F9BE5F9F','ROL_ADMON','RACI',7,'1');
+        -  sql:
+             sql:   INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-63E3F9BE5F9F','ROL_ADMON','RACI',8,'1');
+        - sql:
+            sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-8A0C-63E4F9BE5F9F','ROL_ADMON','RACI',9,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEF-5B51-4796-8A0C-63E4F9BE5F9F','ROL_ADMON','RACI',10,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-1B51-4796-8A0C-63E4F9BE5F9F','ROL_ADMON','RACI',11,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F07F1CEE-5B51-4796-7A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',1,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-5B51-4796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',2,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-5B51-6796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',3,'1');
+        - sql:
+            sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-5B51-4726-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',4,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CAE-5B51-4796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',5,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-5A51-4796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',6,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-5A51-4798-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',7,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-5B51-5796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',8,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-5B51-8796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',9,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CEE-6EE1-4796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',10,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CAA-5A51-4796-8A0C-63E4F9BE5F9F','ROL_PRESENTA_VIG','RACI',11,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CBB-5A51-4796-8A0C-63E4F9BE5F9F','ROL_TRABAJO_SOCIAL','RACI',1,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CCC-5A51-4796-8A0C-63E4F9BE5F9F','ROL_TRABAJO_SOCIAL','RACI',2,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDC-5A51-4796-8A0C-63E4F9BE5F9F','ROL_TRABAJO_SOCIAL','RACI',4,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4796-8A0C-63E4F9BE5F9F','ROL_TRABAJO_SOCIAL','RACI',9,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-6A51-4796-8A0C-63E4F9BE5F9F','ROL_TRABAJO_SOCIAL','RACI',10,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-7A51-4796-8A0C-63E4F9BE5F9F','ROL_TRABAJO_SOCIAL','RACI',11,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-8A51-4796-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',1,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-9A51-4796-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',2,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4196-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',3,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4296-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',4,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4396-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',5,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4496-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',6,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4596-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',7,'1');
+        -  sql:
+             sql:  INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4696-8A0C-63E4F9BE5F9F','ROL_JURIDICO','C',8,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4716-8A0C-63E4F9BE5F9F','ROL_JURIDICO','c',9,'1');
+        -  sql:
+             sql: INSERT INTO seg.permiso(id_permiso, rol, alcance, fk_id_modulo, activo)VALUES ('F08F1CDD-5A51-4726-8A0C-63E4F9BE5F9F','ROL_JURIDICO','RACI',10,'1');
