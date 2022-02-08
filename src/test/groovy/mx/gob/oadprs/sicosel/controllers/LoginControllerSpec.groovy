@@ -24,8 +24,6 @@ class LoginControllerSpec extends Specification {
             contrasenia = "pwd"
         }
 
-        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
-
         when:
         def response = rest.postForObject("http://localhost:${ port }/login", new HttpEntity(loginRequest, headers), Map)
 
@@ -45,13 +43,11 @@ class LoginControllerSpec extends Specification {
         loginRequest.with {
             usuario = "accesod.infotec@oadprs.gob.mx"
             contrasenia = "MXFhejJ3c1g="
-
         }
 
-        def httpEntity = new HttpEntity<Object>(loginRequest, headers)
-
         when:
-        def response = rest.postForObject("http://localhost:${ port }/prsLogin", httpEntity, Map)
+        def response = rest.postForObject("http://localhost:${ port }/login/prs",
+                new HttpEntity<Object>(loginRequest, headers), Map)
 
         then:
         response.with {

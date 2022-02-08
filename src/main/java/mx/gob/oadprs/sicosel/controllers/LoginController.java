@@ -17,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -26,11 +27,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/login")
 public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @PostMapping("/login")
+    @PostMapping()
     public UserRequest login(@RequestBody @Valid LoginRequestValidador loginRequestValidador) {
 
         String token = getJWTToken(loginRequestValidador.getUsuario());
@@ -41,7 +43,7 @@ public class LoginController {
 
     }
 
-    @PostMapping(path="/prsLogin", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(path="/prs", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginDto> prsLogin(@RequestBody @Valid LoginRequestValidador cmd) throws Exception {
        return loginService.login(cmd);
