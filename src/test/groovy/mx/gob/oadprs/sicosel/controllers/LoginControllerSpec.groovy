@@ -51,7 +51,11 @@ class LoginControllerSpec extends Specification {
 
         then:
         response.with {
-            assert token
+            assert usuario == "CN=ACCESO INFOTEC,OU=GENERICAS,OU=CTICS,OU=DGA,OU=PYRS,DC=oadprs,DC=gob,DC=mx"
+            assert sistema == "SICOSEL"
+            assert roles == ["ADMIN", "CONSULTA", "AUDITORIA"]
+            assert token != null
+
         }
     }
 

@@ -24,17 +24,14 @@ public class Modulo {
 
     @NotNull
     @NotBlank
-    @JoinColumn(name="modulo")
     private String modulo;
 
     @NotNull
     @NotBlank
-    @JoinColumn(name="path_json")
     private String pathJson ;
 
     @NotNull
     @NotBlank
-    @JoinColumn(name="activo")
     private String activo;
 
 }

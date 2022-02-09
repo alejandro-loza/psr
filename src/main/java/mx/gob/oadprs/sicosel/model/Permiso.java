@@ -24,23 +24,18 @@ public class Permiso {
 
     @NotNull
     @NotBlank
-    @JoinColumn(name="rol")
     private String rol;
 
     @NotNull
     @NotBlank
-    @JoinColumn(name="alcance")
     private String alcance;
 
-    @NotNull
-    @NotBlank
     @ManyToOne
-    @JoinColumn(name="fk_id_modulo")
+    @JoinColumn(name = "fk_id_modulo", nullable = false, updatable = false )
     private Modulo modulo;
 
     @NotNull
     @NotBlank
-    @JoinColumn(name="activo")
     private String activo;
 
 }

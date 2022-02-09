@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class LoginDto {
 
-    public Long id;
     public String usuario;
     public String sistema;
+    public List<String> roles;
+    public String token;
 }

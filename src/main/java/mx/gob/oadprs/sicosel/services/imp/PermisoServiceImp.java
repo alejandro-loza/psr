@@ -11,20 +11,14 @@ import java.util.List;
 @Service
 public class PermisoServiceImp implements PermisoService {
 
-    String rol = "ROL_ADMON";
 
     @Autowired
     PermisoRepository permisoRepository;
 
     @Override
-    public List getPermisos(String Rol) throws Exception {
-        try {
-            List<PermisoDto> permisos;
-            permisos = permisoRepository.findByRol(rol);
-            System.out.println("Entro " + permisos.toString());
+    public List<PermisoDto> getPermisos(String rol)  {
+            List<PermisoDto> permisos = permisoRepository.findAllByRolAndActivo(rol, true);
             return permisos;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
         }
     }
-}
+

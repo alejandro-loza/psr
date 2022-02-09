@@ -4,14 +4,12 @@ import mx.gob.oadprs.sicosel.dto.LoginDto;
 import mx.gob.oadprs.sicosel.services.LoginService;
 import mx.gob.oadprs.sicosel.validator.LoginRequest;
 import mx.gob.oadprs.sicosel.validator.LoginRequestValidador;
-import mx.gob.oadprs.sicosel.validator.PermisoRequestValidador;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,7 +21,7 @@ public class LoginServiceImp implements LoginService {
     private String url;
 
     @Override
-    public ResponseEntity<LoginDto> login(LoginRequestValidador loginRequestValidador) {
+    public LoginDto login(LoginRequestValidador loginRequestValidador) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -33,20 +31,21 @@ public class LoginServiceImp implements LoginService {
         cmd.setContrasenia(loginRequestValidador.getContrasenia());
         cmd.setSistema(NOMBRE_SISTEMA);
 
-        ResponseEntity<LoginDto> responseEntity;
-
-            responseEntity = restTemplate.exchange(url + "/api/seguridad/autenticacion/",
-                    HttpMethod.POST, new HttpEntity(cmd, headers), LoginDto.class);
-
+        ResponseEntity<Map> responseEntity = restTemplate.exchange(url + "/api/seguridad/autenticacion/",
+                    HttpMethod.POST, new HttpEntity(cmd, headers), Map.class);
+        LoginDto loginDto = new LoginDto();
             if (responseEntity.getStatusCode() == HttpStatus.CREATED) {
                 try {
-                    System.out.println("lectura correcta "+ responseEntity.getBody());
-                //    jsonObject = new JSONObject(responseEntity.getBody());
+                    loginDto.setUsuario(responseEntity.getBody().get("usuario").toString());
+                    loginDto.setSistema(responseEntity.getBody().get("sistema").toString());
+                    loginDto.setRoles((List<String>) responseEntity.getBody().get("roles"));
+                    loginDto.setToken(String.valueOf(responseEntity.getHeaders().get("X-JWT")));
                 } catch (Exception e) {
                     throw new RuntimeException("JSONException occurred");
+                    //System.out.println(" "+ responseEntity.getBody());
                 }
             }
-        return responseEntity;
+        return loginDto;
 }
 
 }

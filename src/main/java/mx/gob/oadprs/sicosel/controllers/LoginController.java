@@ -46,8 +46,10 @@ public class LoginController {
     @PostMapping(path="/prs", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginDto> prsLogin(@RequestBody @Valid LoginRequestValidador cmd) throws Exception {
-       return loginService.login(cmd);
+        return new ResponseEntity<>( loginService.login(cmd), HttpStatus.OK);
     }
+
+
 
     private String getJWTToken(String username) {
         String secretKey = "mySecretKey";

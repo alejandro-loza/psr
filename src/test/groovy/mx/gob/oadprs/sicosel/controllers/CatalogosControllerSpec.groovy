@@ -68,7 +68,8 @@ class CatalogosControllerSpec extends Specification {
         def httpEntity = new HttpEntity<Object>(loginRequest, headers)
 
         when:
-        def response = rest.exchange("http://localhost:${ port }/login",
+        def response =
+                rest.exchange("http://localhost:${ port }/login",
                 HttpMethod.POST, httpEntity, UserRequest)
 
 
