@@ -1,11 +1,9 @@
 package mx.gob.oadprs.sicosel.controllers
 
-import mx.gob.oadprs.sicosel.validator.PermisoRequestValidador
+
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
@@ -18,7 +16,7 @@ class PermisoControllerSpec extends Specification {
     RestTemplate rest = new RestTemplate()
 
 
-    def "Should get permission"() {
+    def "Deberia obtner los permisos"() {
         given: 'a body request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)

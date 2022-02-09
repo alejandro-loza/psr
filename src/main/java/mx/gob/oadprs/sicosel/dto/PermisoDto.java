@@ -1,11 +1,7 @@
 package mx.gob.oadprs.sicosel.dto;
 
 import lombok.Data;
-import mx.gob.oadprs.sicosel.model.Modulo;
 import mx.gob.oadprs.sicosel.model.Permiso;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 public class PermisoDto {
@@ -15,12 +11,12 @@ public class PermisoDto {
     String modulo;
     String path;
 
-    public PermisoDto(PermisoDto permiso) {
+    public PermisoDto(Permiso permiso) {
         super();
         this.rol = permiso.getRol();
         this.alcance = permiso.getAlcance();
-        this.modulo = permiso.getModulo();
-        this.rol = permiso.getPath();
+        this.modulo = permiso.getModulo().getModulo();
+        this.rol = permiso.getRol();
     }
 
 }

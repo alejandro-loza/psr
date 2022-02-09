@@ -3,8 +3,11 @@ package mx.gob.oadprs.sicosel.controllers
 import mx.gob.oadprs.sicosel.validator.LoginRequestValidador
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.*
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
+import spock.lang.Ignore
 import spock.lang.Specification
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -35,6 +38,7 @@ class LoginControllerSpec extends Specification {
 
     }
 
+    @Ignore
     def "Deberia hacer login a prs"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()

@@ -2,7 +2,6 @@ package mx.gob.oadprs.sicosel.dto;
 
 import lombok.Data;
 import mx.gob.oadprs.sicosel.model.Modulo;
-import mx.gob.oadprs.sicosel.model.Permiso;
 
 @Data
 public class ModuloDto {

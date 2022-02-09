@@ -6,20 +6,17 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import mx.gob.oadprs.sicosel.dto.LoginDto;
 import mx.gob.oadprs.sicosel.services.LoginService;
 import mx.gob.oadprs.sicosel.validator.LoginRequestValidador;
-import mx.gob.oadprs.sicosel.validator.PermisoRequestValidador;
 import mx.gob.oadprs.sicosel.validator.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import javax.validation.Valid;
 import java.util.Date;

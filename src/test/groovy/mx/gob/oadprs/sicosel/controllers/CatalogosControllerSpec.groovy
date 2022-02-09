@@ -4,14 +4,9 @@ import mx.gob.oadprs.sicosel.validator.LoginRequestValidador
 import mx.gob.oadprs.sicosel.validator.UserRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpMethod
-import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
+import org.springframework.http.*
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
-
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CatalogosControllerSpec extends Specification {

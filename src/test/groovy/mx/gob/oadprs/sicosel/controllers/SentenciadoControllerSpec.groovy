@@ -2,6 +2,7 @@ package mx.gob.oadprs.sicosel.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import mx.gob.oadprs.sicosel.dto.SentenciadoDto
+import mx.gob.oadprs.sicosel.enums.Sexo
 import mx.gob.oadprs.sicosel.services.SentenciadoService
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador
 import mx.gob.oadprs.sicosel.validator.LoginRequestValidador
@@ -14,7 +15,7 @@ import org.springframework.http.*
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
-import mx.gob.oadprs.sicosel.enums.Sexo
+
 import java.time.LocalDate
 import java.time.Month
 

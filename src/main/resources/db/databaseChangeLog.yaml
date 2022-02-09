@@ -27,6 +27,10 @@ databaseChangeLog:
   - include:
       file: db/familiar.yaml
   - include:
+      file: db/modulo.yaml
+  - include:
+      file: db/permiso.yaml
+  - include:
       file: db/data/estados_data.yaml
   - include:
       file: db/data/municipio_data.yaml
