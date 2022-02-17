@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    generate-ddl=true:
+    hibernate:
+      ddl-auto=create-drop:h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://10.238.1.127:5432/SICOSEL2_PRS1?currentSchema=rsl
+    username:  infotec_dev
+    password:  1nf0t3c2021.
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    change-log: 'classpath:db/databaseChangeLog.yaml'
