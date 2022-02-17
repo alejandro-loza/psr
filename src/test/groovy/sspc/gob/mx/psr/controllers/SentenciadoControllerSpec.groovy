@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
+import org.springframework.web.client.HttpServerErrorException
+import org.springframework.web.client.HttpStatusCodeException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 import sspc.gob.mx.psr.dto.SentenciadoDto
@@ -30,7 +32,24 @@ class SentenciadoControllerSpec extends Specification {
     RestTemplate rest = new RestTemplate()
 
     @Autowired
-    SentenciadoService sentenciadoService;
+    SentenciadoService sentenciadoService
+
+    def "Debería traer un sentenciado por nombre completo"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
+                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
+                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", Map)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp.getBody()
+    }
 
     def "Deberia crear un sentenciado"(){
         given:'a body request'
@@ -177,33 +196,17 @@ class SentenciadoControllerSpec extends Specification {
         given: 'dado un sentenciado guardado'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
 
         when:
         rest.getForEntity(
                 "http://localhost:${ port }/sentenciado/XXXXXXXXXXXX" , Map)
 
         then:
-        thrown ItemNotFoundException
+        def e = thrown(HttpStatusCodeException)
+        e.statusCode == HttpStatus.NOT_FOUND
 
     }
 
-    def "Debería traer un sentenciado por nombre completo"(){
-        given: 'dado un sentenciado guardado'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
-
-        when:
-        def resp = rest.getForEntity(
-                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
-                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
-                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", Map)
-
-        then:
-        assert resp.getStatusCode() == HttpStatus.OK
-        assert resp.getBody()
-    }
 
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()

@@ -125,6 +125,13 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
+    @ExceptionHandler({ sspc.gob.mx.psr.exeptions.ItemNotFoundException.class })
+    public ResponseEntity<Object> handleConstraintViolation(final sspc.gob.mx.psr.exeptions.ItemNotFoundException ex, final WebRequest request) {
+        logger.info(ex.getClass().getName());
+        final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), ex.getLocalizedMessage());
+        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
     // 405
 
     @Override
