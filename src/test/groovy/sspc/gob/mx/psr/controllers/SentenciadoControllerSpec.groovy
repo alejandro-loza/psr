@@ -16,6 +16,9 @@ import spock.lang.Specification
 import sspc.gob.mx.psr.dto.SentenciadoDto
 import sspc.gob.mx.psr.enums.Sexo
 import sspc.gob.mx.psr.exeptions.ItemNotFoundException
+import sspc.gob.mx.psr.repository.FamiliarRepository
+import sspc.gob.mx.psr.repository.FolioRepository
+import sspc.gob.mx.psr.repository.SentencedRepository
 import sspc.gob.mx.psr.services.SentenciadoService
 import sspc.gob.mx.psr.validator.FamiliarValidador
 import sspc.gob.mx.psr.validator.SentenciadoValidador
@@ -33,6 +36,27 @@ class SentenciadoControllerSpec extends Specification {
 
     @Autowired
     SentenciadoService sentenciadoService
+
+    @Autowired
+    FamiliarRepository familiarRepository
+
+    @Autowired
+    FolioRepository folioRepository
+
+    @Autowired
+    SentencedRepository sentencedRepository
+
+    void cleanup(){
+        folioRepository.findAll().each {
+            folioRepository.delete(it)
+        }
+        familiarRepository.findAll().each {
+            familiarRepository.delete(it)
+        }
+        sentencedRepository.findAll().each {
+            sentencedRepository.delete(it)
+        }
+    }
 
     def "Debería traer un sentenciado por nombre completo"(){
         given: 'dado un sentenciado guardado'
@@ -206,7 +230,6 @@ class SentenciadoControllerSpec extends Specification {
         e.statusCode == HttpStatus.NOT_FOUND
 
     }
-
 
     def "Debería traer un sentenciado por nombre y apellido"(){
         given: 'dado un sentenciado guardado'
