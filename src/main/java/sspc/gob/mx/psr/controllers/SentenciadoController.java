@@ -13,6 +13,7 @@ import sspc.gob.mx.psr.validator.FamiliarValidador;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/sentenciado")
@@ -53,15 +54,15 @@ public class SentenciadoController {
                 busquedaNombreApellidoPaterno(nombre, apellidoPaterno);
     }
 
-    private ResponseEntity<SentenciadoDto> busquedaNombreCompleto(
+    private ResponseEntity<List <SentenciadoDto>> busquedaNombreCompleto(
             String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception {
-        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorNombreCompleto(
-                nombre, apellidoPaterno, apellidoMaterno)), HttpStatus.OK);
+        return new ResponseEntity<>(sentenciadoService.buscaPorNombreCompleto(
+                nombre, apellidoPaterno, apellidoMaterno), HttpStatus.OK);
     }
 
-    private ResponseEntity<SentenciadoDto> busquedaNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception {
-        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorNombreApellidoPaterno(
-                nombre, apellidoPaterno)), HttpStatus.OK);
+    private ResponseEntity<List <SentenciadoDto>> busquedaNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception {
+        return new ResponseEntity<>(sentenciadoService.buscaPorNombreApellidoPaterno(
+                nombre, apellidoPaterno), HttpStatus.OK);
     }
 }
 

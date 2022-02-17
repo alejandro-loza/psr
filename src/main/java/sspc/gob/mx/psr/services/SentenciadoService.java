@@ -5,6 +5,7 @@ import sspc.gob.mx.psr.model.Domicilio;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface SentenciadoService {
@@ -15,7 +16,7 @@ public interface SentenciadoService {
 
     Sentenciado creaDireccion(Sentenciado sentenciado, Domicilio domicilio) throws Exception;
 
-    Sentenciado buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception;
+    List<SentenciadoDto> buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception;
 
-    Sentenciado buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception;
+    List<SentenciadoDto> buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception;
 }

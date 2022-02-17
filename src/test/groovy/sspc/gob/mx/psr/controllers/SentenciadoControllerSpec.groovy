@@ -58,23 +58,6 @@ class SentenciadoControllerSpec extends Specification {
         }
     }
 
-    def "Debería traer un sentenciado por nombre completo"(){
-        given: 'dado un sentenciado guardado'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
-
-        when:
-        def resp = rest.getForEntity(
-                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
-                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
-                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", Map)
-
-        then:
-        assert resp.getStatusCode() == HttpStatus.OK
-        assert resp.getBody()
-    }
-
     def "Deberia crear un sentenciado"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
@@ -231,7 +214,7 @@ class SentenciadoControllerSpec extends Specification {
 
     }
 
-    def "Debería traer un sentenciado por nombre y apellido"(){
+    def "Debería traer un sentenciado por nombre completo"(){
         given: 'dado un sentenciado guardado'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
@@ -240,11 +223,28 @@ class SentenciadoControllerSpec extends Specification {
         when:
         def resp = rest.getForEntity(
                 "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
-                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}", Map)
+                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
+                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", List)
 
         then:
         assert resp.getStatusCode() == HttpStatus.OK
-        assert resp.getBody()
+        assert !resp.getBody().isEmpty()
+    }
+
+    def "Debería buscar  sentenciados por nombre y apellido"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
+                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert !resp.getBody().isEmpty()
     }
 
     private SentenciadoDto sentenciadoGuardado() {

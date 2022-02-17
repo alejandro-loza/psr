@@ -12,7 +12,9 @@ import sspc.gob.mx.psr.repository.SentencedRepository;
 import sspc.gob.mx.psr.services.*;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -72,15 +74,17 @@ public class SentenciadoServiceImp implements SentenciadoService {
     }
 
     @Override
-    public Sentenciado buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception{
-        return sentencedRepository.findByNombreAndApellidoPaternoAndApellidoMaterno(nombre, apellidoPaterno, apellidoMaterno)
-                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound"));
+    public List<SentenciadoDto> buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception{
+        return sentencedRepository
+                .findAllByNombreAndApellidoPaternoAndApellidoMaterno(nombre, apellidoPaterno, apellidoMaterno)
+                .stream().map(SentenciadoDto::new).collect(Collectors.toList());
+
     }
 
     @Override
-    public Sentenciado buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception{
-        return sentencedRepository.findByNombreAndApellidoPaterno(nombre, apellidoPaterno)
-                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound"));
+    public List<SentenciadoDto> buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception{
+        return sentencedRepository.findAllByNombreAndApellidoPaterno(nombre, apellidoPaterno)
+                .stream().map(SentenciadoDto::new).collect(Collectors.toList());
     }
 
 
