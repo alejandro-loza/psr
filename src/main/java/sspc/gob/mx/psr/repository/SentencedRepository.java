@@ -12,4 +12,6 @@ public interface SentencedRepository extends JpaRepository<Sentenciado, UUID> {
     Optional<Sentenciado> findById(UUID id);
     Optional<Sentenciado> findByNombreAndApellidoPaternoAndApellidoMaterno(
             String nombre, String apellidoPaterno, String apellidoMaterno);
+    Optional<Sentenciado> findByNombreAndApellidoPaterno(
+            String nombre, String apellidoPaterno);
 }

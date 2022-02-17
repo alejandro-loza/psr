@@ -16,4 +16,6 @@ public interface SentenciadoService {
     Sentenciado creaDireccion(Sentenciado sentenciado, Domicilio domicilio) throws Exception;
 
     Sentenciado buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception;
+
+    Sentenciado buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception;
 }

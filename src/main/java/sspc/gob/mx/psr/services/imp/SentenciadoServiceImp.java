@@ -77,6 +77,12 @@ public class SentenciadoServiceImp implements SentenciadoService {
                 .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound"));
     }
 
+    @Override
+    public Sentenciado buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception{
+        return sentencedRepository.findByNombreAndApellidoPaterno(nombre, apellidoPaterno)
+                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound"));
+    }
+
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) {
 
