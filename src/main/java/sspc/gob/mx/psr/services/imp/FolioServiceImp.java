@@ -4,6 +4,7 @@ import com.google.common.primitives.Ints;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sspc.gob.mx.psr.exeptions.ItemNotFoundException;
 import sspc.gob.mx.psr.model.Folio;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.model.catalog.Estado;
@@ -30,6 +31,12 @@ public class FolioServiceImp implements FolioService {
     @Override
     public Folio generar(Sentenciado sentenciado) throws Exception {
         return folioRepository.save(construirFolio(sentenciado));
+    }
+
+    @Override
+    public Folio buscaPorFolio(String folio) {
+        return folioRepository.findByFolio(folio)
+        .orElseThrow(() -> new ItemNotFoundException("folio.notFound") );
     }
 
     @Override
@@ -116,6 +123,7 @@ public class FolioServiceImp implements FolioService {
         }
         return CARACTER_COMODIN;
     }
+
 
 
 }

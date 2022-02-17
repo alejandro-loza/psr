@@ -10,5 +10,10 @@ import java.util.UUID;
 public interface SentenciadoService {
     SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception;
     Sentenciado busca(UUID id) throws Exception;
+
+    Sentenciado buscaPorFolio(String folio) throws Exception;
+
     Sentenciado creaDireccion(Sentenciado sentenciado, Domicilio domicilio) throws Exception;
+
+    Sentenciado buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception;
 }

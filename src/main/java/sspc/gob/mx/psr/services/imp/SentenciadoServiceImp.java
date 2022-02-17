@@ -12,7 +12,6 @@ import sspc.gob.mx.psr.repository.SentencedRepository;
 import sspc.gob.mx.psr.services.*;
 import sspc.gob.mx.psr.validator.SentenciadoValidador;
 
-import javax.transaction.Transactional;
 import java.util.UUID;
 
 
@@ -59,6 +58,11 @@ public class SentenciadoServiceImp implements SentenciadoService {
     }
 
     @Override
+    public Sentenciado buscaPorFolio(String folio) throws Exception {
+        return folioService.buscaPorFolio(folio).getSentenciado();
+    }
+
+    @Override
     public Sentenciado creaDireccion(Sentenciado sentenciado, Domicilio domicilio) throws Exception {
         if(sentenciado.getDomicilio() == null){
             sentenciado.setDomicilio(domicilio);
@@ -66,6 +70,13 @@ public class SentenciadoServiceImp implements SentenciadoService {
         }
         else throw new Exception("sentenciado.domicilio.alreadyExist");
     }
+
+    @Override
+    public Sentenciado buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception{
+        return sentencedRepository.findByNombreAndApellidoPaternoAndApellidoMaterno(nombre, apellidoPaterno, apellidoMaterno)
+                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound"));
+    }
+
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) {
 

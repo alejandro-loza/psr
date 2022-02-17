@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 import sspc.gob.mx.psr.dto.SentenciadoDto
 import sspc.gob.mx.psr.enums.Sexo
+import sspc.gob.mx.psr.exeptions.ItemNotFoundException
 import sspc.gob.mx.psr.services.SentenciadoService
 import sspc.gob.mx.psr.validator.FamiliarValidador
 import sspc.gob.mx.psr.validator.SentenciadoValidador
@@ -150,6 +152,57 @@ class SentenciadoControllerSpec extends Specification {
 
         }
 
+    }
+
+    def "Debería traer un sentenciado por folio"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${ port }/sentenciado/${sentenciado.getFolio()}" , Map)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        resp.getBody().with {
+            assert folio == sentenciado.getFolio()
+            assert documento == 'HELA880416HHGRZL08'
+
+        }
+    }
+
+    def "No debería traer un sentenciado por folio con folio erroneo"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        rest.getForEntity(
+                "http://localhost:${ port }/sentenciado/XXXXXXXXXXXX" , Map)
+
+        then:
+        thrown ItemNotFoundException
+
+    }
+
+    def "Debería traer un sentenciado por nombre completo"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
+                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
+                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", Map)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp.getBody()
     }
 
     private SentenciadoDto sentenciadoGuardado() {

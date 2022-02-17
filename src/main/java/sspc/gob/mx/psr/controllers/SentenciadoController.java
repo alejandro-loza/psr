@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sspc.gob.mx.psr.dto.SentenciadoDto;
 import sspc.gob.mx.psr.model.Sentenciado;
 import sspc.gob.mx.psr.services.FamiliarService;
 import sspc.gob.mx.psr.services.SentenciadoService;
@@ -37,6 +38,19 @@ public class SentenciadoController {
                                  @PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
         Sentenciado sentenciado = sentenciadoService.busca(sentenciadoId);
         return new ResponseEntity<>( familiarService.crear(validador, sentenciado), HttpStatus.OK);
+    }
+
+    @GetMapping("/{folio}")
+    ResponseEntity buscaPorFolio(@PathVariable("folio") String folio) throws Exception {
+        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorFolio(folio)) , HttpStatus.OK);
+    }
+
+    @GetMapping()
+    @ResponseBody
+    public ResponseEntity buscaPorNombreCompleto(@RequestParam(required = true) String nombre,
+                                         @RequestParam(required = true) String apellidoPaterno,
+                                         @RequestParam(required = true) String apellidoMaterno) throws Exception {
+        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorNombreCompleto(nombre, apellidoPaterno, apellidoMaterno)), HttpStatus.OK);
     }
 }
 
