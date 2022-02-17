@@ -25,8 +25,6 @@ public class SentenciadoController {
     @Autowired
     FamiliarService familiarService;
 
-
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity crear(@RequestBody @Valid SentenciadoValidador validador) throws Exception {
         return new ResponseEntity<>( sentenciadoService.crear(validador), HttpStatus.OK);
@@ -49,8 +47,21 @@ public class SentenciadoController {
     @ResponseBody
     public ResponseEntity buscaPorNombreCompleto(@RequestParam(required = true) String nombre,
                                          @RequestParam(required = true) String apellidoPaterno,
-                                         @RequestParam(required = true) String apellidoMaterno) throws Exception {
-        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorNombreCompleto(nombre, apellidoPaterno, apellidoMaterno)), HttpStatus.OK);
+                                         @RequestParam(required = false) String apellidoMaterno) throws Exception {
+        return (apellidoMaterno != null) ?
+                busquedaNombreCompleto(nombre, apellidoPaterno, apellidoMaterno):
+                busquedaNombreApellidoPaterno(nombre, apellidoPaterno);
+    }
+
+    private ResponseEntity<SentenciadoDto> busquedaNombreCompleto(
+            String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception {
+        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorNombreCompleto(
+                nombre, apellidoPaterno, apellidoMaterno)), HttpStatus.OK);
+    }
+
+    private ResponseEntity<SentenciadoDto> busquedaNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception {
+        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorNombreApellidoPaterno(
+                nombre, apellidoPaterno)), HttpStatus.OK);
     }
 }
 

@@ -205,6 +205,22 @@ class SentenciadoControllerSpec extends Specification {
         assert resp.getBody()
     }
 
+    def "Debería traer un sentenciado por nombre y apellido"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
+                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}", Map)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp.getBody()
+    }
+
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
