@@ -1,17 +1,17 @@
 package mx.gob.oadprs.sicosel.services.imp;
 
 import com.google.common.primitives.Ints;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import mx.gob.oadprs.sicosel.exeptions.ItemNotFoundException;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Folio;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.model.catalog.Estado;
 import mx.gob.oadprs.sicosel.repository.FolioRepository;
 import mx.gob.oadprs.sicosel.services.FolioService;
-import mx.gob.oadprs.sicosel.utils.Altisonantes;
-import mx.gob.oadprs.sicosel.utils.FolioBuilder;
+import mx.gob.oadprs.sicosel.utils.DiccionarioAltisonantes;
+import mx.gob.oadprs.sicosel.utils.FolioBuilderImp;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -48,7 +48,7 @@ public class FolioServiceImp implements FolioService {
         var consecutivo = getConsecutivo(sentenciado, Ints.join("",codigoEntidad),
                 codigoNombre, Long.valueOf(Ints.join("", codigoFecha)));
 
-        return new FolioBuilder(
+        return new FolioBuilderImp(
                 sentenciado , codigoNombre, codigoFecha,
                 codigoEntidad, codigoPais, consecutivo
         ).build();
@@ -82,7 +82,7 @@ public class FolioServiceImp implements FolioService {
                 generarCodigoMaterno(sentenciado) +
                 nombrePrimerCaracter(sentenciado);
 
-        String cambioAltisonante = Altisonantes.listado().get(nombreCodificado.toUpperCase());
+        String cambioAltisonante = DiccionarioAltisonantes.listado().get(nombreCodificado.toUpperCase());
         return cambioAltisonante != null ? cambioAltisonante: nombreCodificado;
     }
 
@@ -123,7 +123,6 @@ public class FolioServiceImp implements FolioService {
         }
         return CARACTER_COMODIN;
     }
-
 
 
 }

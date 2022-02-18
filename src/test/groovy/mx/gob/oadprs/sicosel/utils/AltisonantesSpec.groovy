@@ -8,7 +8,7 @@ class AltisonantesSpec extends Specification{
 
     def "Deberia obtener las palabras altisonantes como singleton"(){
         when:
-        def resp = Altisonantes.listado()
+        def resp = DiccionarioAltisonantes.listado()
 
         then:
         assert resp.size() == 81
@@ -18,7 +18,7 @@ class AltisonantesSpec extends Specification{
         }
 
         when:
-        def res = Altisonantes.listado()
+        def res = DiccionarioAltisonantes.listado()
 
         then:
         assert res

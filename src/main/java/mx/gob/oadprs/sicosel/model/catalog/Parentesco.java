@@ -23,11 +23,10 @@ public class Parentesco {
     @Size(min = 1, max = 20)
     private String nombre;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     private String descripcion;
 
     @NotNull
-    private boolean activo = true;
+    private final boolean activo = true;
 
 }

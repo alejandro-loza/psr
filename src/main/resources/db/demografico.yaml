@@ -52,12 +52,12 @@ databaseChangeLog:
                   name: latitud
                   type: java.sql.Types.VARCHAR(30)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: longitud
                   type: java.sql.Types.VARCHAR(30)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: descripcion
                   type: java.sql.Types.VARCHAR(50)

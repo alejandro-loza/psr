@@ -1,13 +1,13 @@
 package mx.gob.oadprs.sicosel.services.imp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import mx.gob.oadprs.sicosel.dto.MunicipioDto;
-import mx.gob.oadprs.sicosel.exeptions.ItemNotFoundException;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.catalog.Estado;
 import mx.gob.oadprs.sicosel.model.catalog.Municipio;
 import mx.gob.oadprs.sicosel.repository.catalog.MunicipioRepository;
 import mx.gob.oadprs.sicosel.services.MunicipioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ public class MunicipioServiceImp implements MunicipioService {
 
     @Override
     public List<MunicipioDto> muncipiosPorEstado(Estado estado) {
-        return municipioRepository.findAllByEstado(estado)
+        return municipioRepository.findAllByEstadoAndActivo(estado, true)
                 .stream().map(MunicipioDto::new).collect(Collectors.toList());
     }
 

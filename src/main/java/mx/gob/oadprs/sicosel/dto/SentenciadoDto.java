@@ -86,10 +86,13 @@ public class SentenciadoDto {
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
         this.fechaNacimiento = sentenciado.getFechaNacimiento();
-        this.ocupacion = sentenciado.getOcupacion().getNombre();
+        this.ocupacion = sentenciado.getOcupacion() != null ?
+                sentenciado.getOcupacion().getNombre(): null;
         this.sexo = sentenciado.getSexo().toString();
-        this.etnia = sentenciado.getEtnia().getNombre();
-        this.escolaridad = sentenciado.getEscolaridad().getNombre();
+        this.etnia = sentenciado.getEtnia() != null?
+                sentenciado.getEtnia().getNombre(): null;
+        this.escolaridad = sentenciado.getEscolaridad() != null?
+                sentenciado.getEscolaridad().getNombre(): null;
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();
         this.correoElectronico = sentenciado.getCorreoElectronico();

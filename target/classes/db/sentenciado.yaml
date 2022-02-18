@@ -78,7 +78,7 @@ databaseChangeLog:
                   name: sexo
                   type: java.sql.Types.VARCHAR(9)
                   constraints:
-                    nullable: fals
+                    nullable: false
               - column:
                   name: fk_id_cat_etnia
                   type: INT

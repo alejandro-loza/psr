@@ -1,16 +1,18 @@
 package mx.gob.oadprs.sicosel.services.imp;
 
-import mx.gob.oadprs.sicosel.services.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import mx.gob.oadprs.sicosel.dto.DomicilioDto;
 import mx.gob.oadprs.sicosel.dto.SentenciadoDto;
-import mx.gob.oadprs.sicosel.exeptions.ItemNotFoundException;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.model.catalog.Estado;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.repository.SentencedRepository;
+import mx.gob.oadprs.sicosel.services.*;
+import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +46,12 @@ public class SentenciadoServiceImp implements SentenciadoService {
     @Autowired
     OcupacionService ocupacionService;
 
+    @Autowired
+    DomicilioService domicilioService;
+
+    @Autowired
+    MunicipioService municipioService;
+
     @Override
     public SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception {
         Estado estado = estadoService.busca(sentenciadoValidador.getEstadoId());
@@ -58,6 +66,20 @@ public class SentenciadoServiceImp implements SentenciadoService {
         return sentencedRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound") );
     }
+    @Override
+    public DomicilioDto agregaDireccion(UUID sentenciadoId, DomicilioValidador validador) throws Exception {
+        Sentenciado sentenciado = busca(sentenciadoId);
+        Domicilio domicilio = domicilioService.crear(validador,
+                municipioService.busca(validador.getMunicipioId()),
+                paisService.busca(validador.getPaisId()));
+        if(sentenciado.getDomicilio() == null){
+            sentenciado.setDomicilio(domicilio);
+            sentencedRepository.save(sentenciado);
+            return new DomicilioDto(domicilio, sentenciado.getId());
+        }
+        else throw new Exception("sentenciado.domicilio.alreadyExist");
+    }
+
 
     @Override
     public Sentenciado buscaPorFolio(String folio) throws Exception {
@@ -90,7 +112,7 @@ public class SentenciadoServiceImp implements SentenciadoService {
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) {
 
-        return  Sentenciado.builder()
+        Sentenciado.SentenciadoBuilder sb = Sentenciado.builder()
                 .nombre(sentencedInput.getNombre())
                 .apellidoPaterno(sentencedInput.getApellidoPaterno())
                 .apellidoMaterno(sentencedInput.getApellidoMaterno())
@@ -101,14 +123,22 @@ public class SentenciadoServiceImp implements SentenciadoService {
                 .alias(sentencedInput.getAlias()) //TODO IS A List?
                 .otrosNombres(sentencedInput.getOtrosNombres())  //TODO IS A List?
                 .fechaNacimiento(sentencedInput.getFechaNacimiento())
-                .ocupacion(ocupacionService.busca(sentencedInput.getOcupacionId()))
                 .sexo(sentencedInput.getSexo())
-                .etnia(etniaService.busca(sentencedInput.getEtniaId()))
-                .escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()))
                 .telefonoFijo(sentencedInput.getTelefonoFijo())
                 .celular(sentencedInput.getCelular())
-                .correoElectronico(sentencedInput.getCorreoElectronico())
-                .build();
+                .correoElectronico(sentencedInput.getCorreoElectronico());
+
+        if(sentencedInput.getEscolaridad() != null)
+            sb.escolaridad(escolaridadService.busca(sentencedInput.getEscolaridad()));
+
+        if(sentencedInput.getEtniaId() != null)
+            sb.etnia(etniaService.busca(sentencedInput.getEtniaId()));
+
+        if(sentencedInput.getOcupacionId() != null)
+            sb.ocupacion(ocupacionService.busca(sentencedInput.getOcupacionId()) );
+
+
+        return  sb.build();
     }
 
 }

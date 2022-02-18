@@ -2,9 +2,8 @@ package mx.gob.oadprs.sicosel.model;
 
 import com.sun.istack.Nullable;
 import lombok.*;
+import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.model.catalog.Parentesco;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,9 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Familiar extends EntidadBase {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type="uuid-char")
+    @GeneratedValue
     @Column(name = "id_familiar", columnDefinition = "uuid", updatable = false)
     private UUID id;
 
@@ -37,30 +34,32 @@ public class Familiar extends EntidadBase {
     @Nullable
     private Domicilio domicilio;
 
-    @NotNull(message= "sentenced.name.null")
+    @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
     private String nombre;
 
+    @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
     private String apellidoPaterno;
 
+    @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
     private String apellidoMaterno;
 
     @NotNull
-    @NotBlank
+    @ManyToOne
+    @JoinColumn(name="fk_id_cat_pais")
+    private Pais nacionalidad;
+
     @Size(min = 1, max = 18)
     private String documento;
 
-    @NotBlank
     @Column(name = "tel_casa")
     private String telefonoFijo;
 
-    @NotNull
-    @NotBlank
     @Column(name = "tel_celular")
     private String celular;
 

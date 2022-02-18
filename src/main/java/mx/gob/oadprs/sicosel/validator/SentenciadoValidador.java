@@ -6,10 +6,7 @@ import lombok.Setter;
 import mx.gob.oadprs.sicosel.enums.Sexo;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @RequiredArgsConstructor
@@ -17,67 +14,61 @@ import java.time.LocalDate;
 @Setter
 public class SentenciadoValidador {
     @NotNull(message= "sentenced.name.null")
-    @NotBlank
+    @NotBlank(message= "sentenced.name.blank")
     @Size(min = 1, max = 100)
     String nombre;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String apellidoPaterno;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String apellidoMaterno;
 
-    @NotNull
+    @NotNull(message= "sentenced.nacionalidadId.null")
     Long nacionalidadId;
 
     @NotNull
     Long estadoId;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message= "sentenced.documento.null")
+    @NotBlank(message= "sentenced.documento.blank")
     @Size(min = 1, max = 18)
     String documento;
 
-    @NotNull
+    @NotNull(message= "sentenced.estadoCivil.null")
     Long estadoCivil;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String alias;
 
-    @NotBlank
     @Size(min = 1, max = 100)
     String otrosNombres;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @NotNull
+    @Past
+    @NotNull(message= "sentenced.fechaNacimiento.null")
     LocalDate fechaNacimiento;
 
     Long ocupacionId;
 
-    @NotNull
+    @NotNull(message= "sentenced.sexo.null")
     Sexo sexo;
 
-    @NotNull
     Long etniaId;
 
-    @NotNull
     Long escolaridad;
 
-    @NotNull
-    @NotBlank
+
     @Size(min = 1, max = 50)
     String telefonoFijo;
 
-    @NotNull
-    @NotBlank
-    @Size(min = 1, max = 50)
+    @NotNull(message= "sentenced.celular.null")
+    @NotBlank(message= "sentenced.celular.blank")
+    @Size(min = 10, max = 10)
     String celular;
 
     @Email
-    @NotNull
-    @NotBlank
+    @NotNull(message= "sentenced.correoElectronico.null")
+    @NotBlank(message= "sentenced.correoElectronico.blank")
     String correoElectronico;
 }

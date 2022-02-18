@@ -1,6 +1,14 @@
 package mx.gob.oadprs.sicosel.controllers
 
-
+import mx.gob.oadprs.sicosel.dto.FamiliarDto
+import mx.gob.oadprs.sicosel.dto.SentenciadoDto
+import mx.gob.oadprs.sicosel.enums.Sexo
+import mx.gob.oadprs.sicosel.model.Sentenciado
+import mx.gob.oadprs.sicosel.services.FamiliarService
+import mx.gob.oadprs.sicosel.services.SentenciadoService
+import mx.gob.oadprs.sicosel.validator.DomicilioValidador
+import mx.gob.oadprs.sicosel.validator.FamiliarValidador
+import mx.gob.oadprs.sicosel.validator.SentenciadoValidador
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
@@ -24,10 +32,10 @@ class DomicilioControllerSpec extends Specification {
     RestTemplate rest = new RestTemplate()
 
     @Autowired
-    mx.gob.oadprs.sicosel.services.SentenciadoService sentenciadoService
+    SentenciadoService sentenciadoService
 
     @Autowired
-    mx.gob.oadprs.sicosel.services.FamiliarService familiarService
+    FamiliarService familiarService
 
     def "Deberia crear un domicilio"(){
         given:
@@ -38,7 +46,7 @@ class DomicilioControllerSpec extends Specification {
         def senteciado = sentenciadoGuardado()
 
         and:'a body request'
-        mx.gob.oadprs.sicosel.validator.DomicilioValidador cmd = new mx.gob.oadprs.sicosel.validator.DomicilioValidador()
+        DomicilioValidador cmd = new DomicilioValidador()
         cmd.with {
             estadoId = 13
             paisId = MEXICO_ID
@@ -84,7 +92,7 @@ class DomicilioControllerSpec extends Specification {
         def familiar = crearFamiliar(sentenciadoService.busca(UUID.fromString(senteciado.id)))
 
         and:'a body request'
-        mx.gob.oadprs.sicosel.validator.DomicilioValidador cmd = new mx.gob.oadprs.sicosel.validator.DomicilioValidador()
+        DomicilioValidador cmd = new DomicilioValidador()
         cmd.with {
             estadoId = 13
             paisId = MEXICO_ID
@@ -93,8 +101,6 @@ class DomicilioControllerSpec extends Specification {
             colonia = 'Benito Juarez'
             calle = 'Bolevar of bronken dreams'
             numero = 666
-            latitud = '19.4326018'
-            longitud = '-99.1332049'
             descripcion = 'datos test'
         }
 
@@ -112,15 +118,13 @@ class DomicilioControllerSpec extends Specification {
             assert it.calle == 'Bolevar of bronken dreams'
             assert it.numero == '666'
             assert it.codigoPostal == '12345'
-            assert it.latitud == '19.4326018'
-            assert it.longitud == '-99.1332049'
         }
 
     }
 
 
-    private mx.gob.oadprs.sicosel.dto.SentenciadoDto sentenciadoGuardado() {
-        mx.gob.oadprs.sicosel.validator.SentenciadoValidador cmd = new mx.gob.oadprs.sicosel.validator.SentenciadoValidador()
+    private SentenciadoDto sentenciadoGuardado() {
+        SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
             nombre = 'Tomas'
             apellidoPaterno = 'Ràmirez'
@@ -133,7 +137,7 @@ class DomicilioControllerSpec extends Specification {
             otrosNombres = "Enrique Peña"
             fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacionId = 1
-            sexo = mx.gob.oadprs.sicosel.enums.Sexo.MASCULINO
+            sexo = Sexo.MASCULINO
             etniaId = 1
             escolaridad = 1
             telefonoFijo = 1234567890
@@ -143,8 +147,8 @@ class DomicilioControllerSpec extends Specification {
         return sentenciadoService.crear(cmd)
     }
 
-    private mx.gob.oadprs.sicosel.dto.FamiliarDto crearFamiliar(mx.gob.oadprs.sicosel.model.Sentenciado sentenciado){
-        mx.gob.oadprs.sicosel.validator.FamiliarValidador cmd = new mx.gob.oadprs.sicosel.validator.FamiliarValidador()
+    private FamiliarDto crearFamiliar(Sentenciado sentenciado){
+        FamiliarValidador cmd = new FamiliarValidador()
         cmd.with {
             nombre = 'Chapo Mama'
             apellidoMaterno = 'Loera'
@@ -153,6 +157,7 @@ class DomicilioControllerSpec extends Specification {
             telefonoFijo = 1234567
             celular = 123123
             parentescoId = 2
+            nacionalidadId = 82
         }
         return familiarService.crear(cmd, sentenciado)
     }

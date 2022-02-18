@@ -1,24 +1,26 @@
 package mx.gob.oadprs.sicosel.services.imp;
 
-import mx.gob.oadprs.sicosel.services.FamiliarService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import mx.gob.oadprs.sicosel.dto.DomicilioDto;
 import mx.gob.oadprs.sicosel.dto.FamiliarDto;
-import mx.gob.oadprs.sicosel.exeptions.ItemNotFoundException;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.Familiar;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
+import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.model.catalog.Parentesco;
 import mx.gob.oadprs.sicosel.repository.FamiliarRepository;
-import mx.gob.oadprs.sicosel.services.ParentescoService;
+import mx.gob.oadprs.sicosel.services.*;
+import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-class FamiliarServiceImp implements FamiliarService {
+class FamiliarServiceImp implements FamiliarService{
 
     @Autowired
     FamiliarRepository familiarRepository;
@@ -26,18 +28,32 @@ class FamiliarServiceImp implements FamiliarService {
     @Autowired
     ParentescoService parentescoService;
 
+    @Autowired
+    PaisService paisService;
+
+    @Autowired
+    MunicipioService municipioService;
+
+
+    @Autowired
+    DomicilioService domicilioService;
+
+    @Autowired
+    SentenciadoService sentenciadoService;
+
 
     @Override
     public FamiliarDto crear(FamiliarValidador familiarValidador, Sentenciado sentenciado) throws Exception {
-
-        Familiar familiar = construyeFamiliar(familiarValidador, sentenciado,
-                parentescoService.busca(familiarValidador.getParentescoId()));
-        Familiar save = familiarRepository.save(familiar);
-        return new FamiliarDto(save);
+        return new FamiliarDto(
+                familiarRepository.save(construyeFamiliar(familiarValidador, sentenciado,
+                        parentescoService.busca(familiarValidador.getParentescoId()),
+                        paisService.busca(familiarValidador.getNacionalidadId()))
+                )
+        );
     }
 
     @Override
-    public Familiar busca(UUID id) throws ItemNotFoundException  {
+    public Familiar busca(UUID id) throws ItemNotFoundException {
         return familiarRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("familiar.notFound") );
     }
@@ -52,12 +68,23 @@ class FamiliarServiceImp implements FamiliarService {
     }
 
     @Override
-    public Familiar creaDireccion(Familiar familiar, Domicilio domicilio) throws Exception {
-        if(familiar.getDomicilio() == null){
-            familiar.setDomicilio(domicilio);
-            return familiarRepository.save(familiar);
+    public DomicilioDto creaDireccion(UUID sentenciadoId, UUID familiarId, DomicilioValidador validador) throws Exception {
+        Sentenciado sentenciado = sentenciadoService.busca(sentenciadoId);
+        Familiar familiar = buscaFamiliarSentenciado(sentenciado, familiarId);
+        if(familiar.getDomicilio() != null){
+            throw new Exception("familiar.domicilio.alreadyExist");
         }
-        else throw new Exception("familiar.domicilio.alreadyExist");
+        return agregaDomicilio(familiarId, validador, familiar);
+    }
+
+    private DomicilioDto agregaDomicilio(UUID familiarId, DomicilioValidador validador, Familiar familiar) throws Exception {
+        Domicilio domicilio = domicilioService.crear(validador,
+                municipioService.busca(validador.getMunicipioId()),
+                paisService.busca(validador.getPaisId()));
+
+        familiar.setDomicilio(domicilio);
+        familiarRepository.save(familiar);
+        return new DomicilioDto(domicilio, familiarId);
     }
 
     @Override
@@ -67,11 +94,13 @@ class FamiliarServiceImp implements FamiliarService {
 
     }
 
-    private Familiar construyeFamiliar(FamiliarValidador familiar, Sentenciado sentenciado, Parentesco parentesco) {
+    private Familiar construyeFamiliar(FamiliarValidador familiar, Sentenciado sentenciado,
+                                       Parentesco parentesco, Pais nacionalidad) {
         return Familiar.builder()
                 .nombre(familiar.getNombre())
                 .apellidoPaterno(familiar.getApellidoPaterno())
                 .apellidoMaterno(familiar.getApellidoMaterno())
+                .nacionalidad(nacionalidad)
                 .documento(familiar.getDocumento())
                 .telefonoFijo(familiar.getTelefonoFijo())
                 .celular(familiar.getCelular())

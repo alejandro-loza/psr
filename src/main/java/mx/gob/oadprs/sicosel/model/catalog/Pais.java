@@ -26,11 +26,10 @@ public class Pais {
     @Size(min = 3, max = 3)
     private String alfa3;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     private String descripcion;
 
     @NotNull
-    private boolean activo = true;
+    private final boolean activo = true;
 
 }

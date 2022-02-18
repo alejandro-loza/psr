@@ -1,15 +1,18 @@
 package mx.gob.oadprs.sicosel.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import mx.gob.oadprs.sicosel.dto.SentenciadoDto
+import mx.gob.oadprs.sicosel.enums.Sexo
+import mx.gob.oadprs.sicosel.services.SentenciadoService
+import mx.gob.oadprs.sicosel.validator.FamiliarValidador
+import mx.gob.oadprs.sicosel.validator.SentenciadoValidador
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
-import org.springframework.web.client.HttpStatusCodeException
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 
@@ -25,28 +28,7 @@ class SentenciadoControllerSpec extends Specification {
     RestTemplate rest = new RestTemplate()
 
     @Autowired
-    mx.gob.oadprs.sicosel.services.SentenciadoService sentenciadoService
-
-    @Autowired
-    mx.gob.oadprs.sicosel.repository.FamiliarRepository familiarRepository
-
-    @Autowired
-    mx.gob.oadprs.sicosel.repository.FolioRepository folioRepository
-
-    @Autowired
-    mx.gob.oadprs.sicosel.repository.SentencedRepository sentencedRepository
-
-    void cleanup(){
-        folioRepository.findAll().each {
-            folioRepository.delete(it)
-        }
-        familiarRepository.findAll().each {
-            familiarRepository.delete(it)
-        }
-        sentencedRepository.findAll().each {
-            sentencedRepository.delete(it)
-        }
-    }
+    SentenciadoService sentenciadoService
 
     def "Deberia crear un sentenciado"(){
         given:'a body request'
@@ -66,7 +48,7 @@ class SentenciadoControllerSpec extends Specification {
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = "1988-04-16"
             ocupacionId = 1
-            sexo = mx.gob.oadprs.sicosel.enums.Sexo.MASCULINO
+            sexo = Sexo.MASCULINO
             etniaId = 1
             escolaridad = 1
             telefonoFijo =  1234567890
@@ -101,11 +83,96 @@ class SentenciadoControllerSpec extends Specification {
 
     }
 
+    def "Deberia crear un sentenciado caso de QA"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        Map cmd = [:]
+        cmd.with {
+            apellidoMaterno = "DDD"
+            apellidoPaterno =  "DDD"
+            celular =  "9999999999"
+            correoElectronico =  "anita19@ggd"
+            documento = "AINA941015MDFVYN05"
+            escolaridad = "5"
+            estadoCivil = "5"
+            estadoId = "9"
+            etniaId = "3"
+            fechaNacimiento = "2022-01-07"
+            nacionalidadId =  "82"
+            nombre =  "DDDD"
+            ocupacionId =  "1"
+            sexo = "MASCULINO"
+        }
+
+        when:
+        def resp = rest.postForObject("http://localhost:${ port }/sentenciado", new HttpEntity(cmd, headers), Map)
+
+        then:
+        resp.with {
+            assert it.id
+            assert apellidoMaterno == "DDD"
+            assert apellidoPaterno ==  "DDD"
+            assert celular ==  "9999999999"
+            assert correoElectronico ==  "anita19@ggd"
+            assert documento == "AINA941015MDFVYN05"
+            assert escolaridad == "SECUNDARIA COMPLETA"
+            assert estadoCivil == "UNIÓN LIBRE"
+            assert estado == "CIUDAD DE MÉXICO"
+            assert etnia == "COCHIMI"
+            assert fechaNacimiento == "2022-01-07"
+            assert nacionalidad ==  "MÉXICO"
+            assert nombre ==  "DDDD"
+            assert ocupacion ==  "EMPLEADO"
+            assert sexo == "MASCULINO"
+        }
+
+    }
+
+    def "Deberia crear un sentenciado sin campos opcionales"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        Map cmd = [:]
+        cmd.with {
+            celular =  "9999999999"
+            correoElectronico =  "anita19@ggd"
+            documento = "AINA941015MDFVYN05"
+            estadoCivil = "5"
+            estadoId = "9"
+            fechaNacimiento = "2022-01-07"
+            nacionalidadId =  "82"
+            nombre =  "DDDD"
+            sexo = "MASCULINO"
+        }
+
+        when:
+        def resp = rest.postForObject("http://localhost:${ port }/sentenciado", new HttpEntity(cmd, headers), Map)
+
+        then:
+        resp.with {
+            assert it.id
+            assert it.folio
+            assert celular == "9999999999"
+            assert correoElectronico == "anita19@ggd"
+            assert documento == "AINA941015MDFVYN05"
+            assert estadoCivil == "UNIÓN LIBRE"
+            assert estado == "CIUDAD DE MÉXICO"
+            assert fechaNacimiento == "2022-01-07"
+            assert nacionalidad ==  "MÉXICO"
+            assert nombre ==  "DDDD"
+            assert sexo == "MASCULINO"
+        }
+
+    }
+
     def "Should not post on invalid args "(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        mx.gob.oadprs.sicosel.validator.SentenciadoValidador cmd = new mx.gob.oadprs.sicosel.validator.SentenciadoValidador()
+        SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
             apellidoPaterno = 'Pèrez'
             apellidoMaterno = 'Garcìa'
@@ -117,7 +184,7 @@ class SentenciadoControllerSpec extends Specification {
             otrosNombres =  "Enrique Peña"
             fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacionId = 1
-            sexo = mx.gob.oadprs.sicosel.enums.Sexo.FEMENINO
+            sexo = Sexo.FEMENINO
             etniaId = 1
             escolaridad =  1
             telefonoFijo =  1234567890
@@ -138,15 +205,16 @@ class SentenciadoControllerSpec extends Specification {
         headers.setContentType(MediaType.APPLICATION_JSON)
         def sentenciado = sentenciadoGuardado()
 
-        mx.gob.oadprs.sicosel.validator.FamiliarValidador cmd = new mx.gob.oadprs.sicosel.validator.FamiliarValidador()
+        FamiliarValidador cmd = new FamiliarValidador()
         cmd.with {
             nombre = 'Chapo Mama'
             apellidoMaterno = 'Loera'
             apellidoPaterno = 'Virginia'
             documento = 'HELA880416HHGRZL08'
-            telefonoFijo = 1234567
-            celular = 123123
+            telefonoFijo = "1234567"
+            celular = "123123"
             parentescoId = 2
+            nacionalidadId =  82
         }
 
         println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
@@ -165,80 +233,73 @@ class SentenciadoControllerSpec extends Specification {
             assert telefonoFijo == '1234567'
             assert celular == '123123'
             assert parentesco == 'MADRE'
+            assert nacionalidad ==  "MÉXICO"
+        }
+
+    }
+
+    def "No deberia crear el familiar cuando faltan campos requeridos y responder Bad Request"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            documento = 'HELA880416HHGRZL08'
+            telefonoFijo = "1234567"
+            celular = "123123"
+        }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
+
+        when:
+        rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
+
+        then:
+        thrown HttpClientErrorException.BadRequest
+
+    }
+
+    def "Deberia  crear un familiar del sentenciado solo con campos requeridos"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            nombre = 'CHAPO MAMA'
+            apellidoMaterno = "NOYOLA"
+            apellidoPaterno = "AVILA"
+            parentescoId = 2
+            nacionalidadId =  MEXICO_ID
+        }
+
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
+
+        when:
+        def resp = rest.postForObject("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", new HttpEntity(cmd, headers), Map)
+
+        then:
+        resp.with {
+            assert id
+            assert sentenciadoId == sentenciado.id
+            assert nombre == 'CHAPO MAMA'
+            assert apellidoPaterno == 'AVILA'
+            assert apellidoMaterno == 'NOYOLA'
+            assert documento == null
+            assert telefonoFijo == null
+            assert celular ==  null
+            assert parentesco == 'MADRE'
+            assert nacionalidad ==  "MÉXICO"
 
         }
 
     }
 
-    def "Debería traer un sentenciado por folio"(){
-        given: 'dado un sentenciado guardado'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
-
-        when:
-        def resp = rest.getForEntity(
-                "http://localhost:${ port }/sentenciado/${sentenciado.getFolio()}" , Map)
-
-        then:
-        assert resp.getStatusCode() == HttpStatus.OK
-        resp.getBody().with {
-            assert folio == sentenciado.getFolio()
-            assert documento == 'HELA880416HHGRZL08'
-
-        }
-    }
-
-    def "No debería traer un sentenciado por folio con folio erroneo"(){
-        given: 'dado un sentenciado guardado'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-
-        when:
-        rest.getForEntity(
-                "http://localhost:${ port }/sentenciado/XXXXXXXXXXXX" , Map)
-
-        then:
-        def e = thrown(HttpStatusCodeException)
-        e.statusCode == HttpStatus.NOT_FOUND
-
-    }
-
-    def "Debería traer un sentenciado por nombre completo"(){
-        given: 'dado un sentenciado guardado'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
-
-        when:
-        def resp = rest.getForEntity(
-                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
-                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
-                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", List)
-
-        then:
-        assert resp.getStatusCode() == HttpStatus.OK
-        assert !resp.getBody().isEmpty()
-    }
-
-    def "Debería buscar  sentenciados por nombre y apellido"(){
-        given: 'dado un sentenciado guardado'
-        HttpHeaders headers = new HttpHeaders()
-        headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
-
-        when:
-        def resp = rest.getForEntity(
-                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
-                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}", List)
-
-        then:
-        assert resp.getStatusCode() == HttpStatus.OK
-        assert !resp.getBody().isEmpty()
-    }
-
-    private mx.gob.oadprs.sicosel.dto.SentenciadoDto sentenciadoGuardado() {
-        mx.gob.oadprs.sicosel.validator.SentenciadoValidador cmd = new mx.gob.oadprs.sicosel.validator.SentenciadoValidador()
+    private SentenciadoDto sentenciadoGuardado() {
+        SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
             nombre = 'Tomas'
             apellidoPaterno = 'Ràmirez'
@@ -251,7 +312,7 @@ class SentenciadoControllerSpec extends Specification {
             otrosNombres = "Enrique Peña"
             fechaNacimiento = LocalDate.of(1988, Month.APRIL, 16)
             ocupacionId = 1
-            sexo = mx.gob.oadprs.sicosel.enums.Sexo.MASCULINO
+            sexo = Sexo.MASCULINO
             etniaId = 1
             escolaridad = 1
             telefonoFijo = 1234567890

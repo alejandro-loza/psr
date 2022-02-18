@@ -23,6 +23,7 @@ public class DomicilioValidador {
     @Size(min = 1, max = 50)
     private String colonia;
 
+    @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
     private String calle;
@@ -37,17 +38,12 @@ public class DomicilioValidador {
     @Size(min = 1, max = 5)
     private String codigoPostal;
 
-    @NotNull
-    @NotBlank
     @Size(min = 1, max = 15)
     private String latitud;
 
-    @NotNull
-    @NotBlank
     @Size(min = 1, max = 15)
     private String longitud;
 
-    @NotBlank
     @Size(min = 1, max = 50)
     private String descripcion;
 

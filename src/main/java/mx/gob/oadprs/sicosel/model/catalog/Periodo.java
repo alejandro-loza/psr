@@ -9,12 +9,12 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Getter
-@Table(name = "cat_ocupacion")
-public class Ocupacion {
+@Table(name = "cat_periodo")
+public class Periodo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cat_ocupacion")
+    @Column(name = "id_cat_periodo")
     public Long id;
 
     @NotBlank
@@ -22,6 +22,7 @@ public class Ocupacion {
     @Size(min = 1, max = 20)
     public String nombre;
 
+    @NotBlank
     @Size(min = 1, max = 50)
     public String descripcion;
 

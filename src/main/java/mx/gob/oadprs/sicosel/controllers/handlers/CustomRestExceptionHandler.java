@@ -1,7 +1,7 @@
 package mx.gob.oadprs.sicosel.controllers.handlers;
 
 
-import mx.gob.oadprs.sicosel.exeptions.ItemNotFoundException;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
