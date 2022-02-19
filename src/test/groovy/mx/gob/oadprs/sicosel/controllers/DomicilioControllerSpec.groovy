@@ -69,7 +69,7 @@ class DomicilioControllerSpec extends Specification {
             assert it.personaId == senteciado.id
             assert it.estado == 'HIDALGO'
             assert it.pais == 'MÉXICO'
-            assert it.municipio == 'Pachuca de Soto'
+            assert it.municipio == 'PACHUCA DE SOTO'
             assert it.colonia == 'Benito Juarez'
             assert it.calle == 'Bolevar of bronken dreams'
             assert it.numero == '666'
@@ -113,7 +113,7 @@ class DomicilioControllerSpec extends Specification {
             assert it.personaId == familiar.id.toString()
             assert it.estado == 'HIDALGO'
             assert it.pais == 'MÉXICO'
-            assert it.municipio == 'Pachuca de Soto'
+            assert it.municipio == 'PACHUCA DE SOTO'
             assert it.colonia == 'Benito Juarez'
             assert it.calle == 'Bolevar of bronken dreams'
             assert it.numero == '666'
