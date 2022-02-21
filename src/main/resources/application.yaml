@@ -16,7 +16,7 @@ spring:
   liquibase:
     change-log: 'classpath:db/databaseChangeLog.yaml'
 
-# To expose Spring Boot info actuator
+# Para exponer actuador de Spring Boot
 management:
   info:
     env:
