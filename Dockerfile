@@ -22,7 +22,7 @@ COPY src src
 RUN mvn clean package -DskipTests
 
 # nuestra imagen base final
-FROM openjdk:11-jre-slim
+FROM openjdk:11.0.14-jre-slim
 
 # establecer carpeta de trabajo
 WORKDIR /app
