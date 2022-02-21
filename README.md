@@ -51,6 +51,9 @@ mvn package
 docker-compose build
 
 # Para inicializar los servicios del stack de docker utilice el siguiente comando:
+docker-compose up -d
+
+# Para generar la imagen e inicializar los servicios del stack de docker
 docker-compose up -d --build
 
 ```
