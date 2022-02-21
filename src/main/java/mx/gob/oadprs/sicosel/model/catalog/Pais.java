@@ -24,6 +24,7 @@ public class Pais {
     @NotBlank
     @NotNull
     @Size(min = 3, max = 3)
+    @Column(name = "iso_alfa_3")
     private String alfa3;
 
     @Size(min = 1, max = 50)
