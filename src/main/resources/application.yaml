@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: '@project.name@'
   jpa:
     generate-ddl=true:
     hibernate:
@@ -14,3 +16,20 @@ spring:
   liquibase:
     change-log: 'classpath:db/databaseChangeLog.yaml'
 
+# To expose Spring Boot info actuator
+management:
+  info:
+    env:
+      enabled: true
+    git:
+      enable: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+info:
+  application:
+    name: ${spring.application.name}
+    description: '@project.description@'

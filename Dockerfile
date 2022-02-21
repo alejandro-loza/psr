@@ -1,13 +1,37 @@
-FROM maven:3.6.3-jdk-11 as build
-WORKDIR /workspace/app
+# nuestra imagen base para compilar
+FROM maven:3.6.3-jdk-11 as maven
 
-COPY pom.xml .
+# establecer carpeta de trabajo
+WORKDIR /workspace
+
+# establecer zona horaria
+ENV TZ America/Mexico_City
+
+# copiar otros archivos del proyecto
+COPY pom.xml pom.xml
+COPY .git .git
+COPY .gitignore .gitignore
+
+# construir todas las dependencias
+RUN mvn dependency:go-offline -B
+
+# copiar los archivos del proyecto
 COPY src src
 
-RUN mvn install -DskipTests
+# construir el artefacto
+RUN mvn clean package -DskipTests
 
-FROM openjdk:11-slim
+# nuestra imagen base final
+FROM openjdk:11-jre-slim
+
+# establecer carpeta de trabajo
 WORKDIR /app
-ARG DEPENDENCY=/workspace/app/target
-COPY --from=build ${DEPENDENCY}/sspc-0.0.1-SNAPSHOT.jar /app/app.jar
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+
+# establecer zona horaria
+ENV TZ America/Mexico_City
+
+# copiar el artefacto construido en la imagen maven
+COPY --from=maven /workspace/target /app
+
+# configurar el comando de inicio para ejecutar el artefacto
+ENTRYPOINT ["java","-jar","sentenciados_ms.jar"]
