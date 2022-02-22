@@ -1,0 +1,11 @@
+version: "3.5"
+
+services:
+  api:
+    build: .
+    image: sentenciados_ms:${IMAGE_TAG:-local}
+    container_name: sentenciados_ms
+    restart: always
+    env_file: .env
+    ports:
+      - "8080:8080"
