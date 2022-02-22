@@ -23,6 +23,7 @@ management:
       enabled: true
     git:
       enable: true
+      mode: full
 
   endpoints:
     web:
