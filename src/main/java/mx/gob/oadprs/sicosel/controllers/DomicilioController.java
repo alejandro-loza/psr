@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:4200")
+
 @RequestMapping("/sentenciado")
 @RestController
 public class DomicilioController {
