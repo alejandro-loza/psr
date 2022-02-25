@@ -1,6 +1,9 @@
 spring:
   application:
     name: '@project.name@'
+  liquibase:
+    change-log: 'classpath:db/databaseChangeLog.yaml'
+    enabled: false
 
 # Para exponer actuador de Spring Boot
 management:
@@ -15,6 +18,7 @@ management:
     web:
       exposure:
         include: "health,info"
+
 info:
   application:
     name: ${spring.application.name}
