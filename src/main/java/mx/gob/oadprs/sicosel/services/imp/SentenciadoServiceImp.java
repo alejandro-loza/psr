@@ -66,7 +66,6 @@ public class SentenciadoServiceImp implements SentenciadoService {
         return sentencedRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound") );
     }
-
     @Override
     public DomicilioDto agregaDireccion(UUID sentenciadoId, DomicilioValidador validador) throws Exception {
         Sentenciado sentenciado = busca(sentenciadoId);

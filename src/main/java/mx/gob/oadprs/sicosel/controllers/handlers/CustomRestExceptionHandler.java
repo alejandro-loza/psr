@@ -1,6 +1,7 @@
 package mx.gob.oadprs.sicosel.controllers.handlers;
 
 
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -122,6 +123,13 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         final String error = "No handler found for " + ex.getHttpMethod() + " " + ex.getRequestURL();
 
         final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), error);
+        return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler({ ItemNotFoundException.class })
+    public ResponseEntity<Object> handleConstraintViolation(final ItemNotFoundException ex, final WebRequest request) {
+        logger.info(ex.getClass().getName());
+        final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), ex.getLocalizedMessage());
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
