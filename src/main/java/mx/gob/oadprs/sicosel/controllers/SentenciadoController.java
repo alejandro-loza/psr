@@ -39,9 +39,14 @@ public class SentenciadoController {
         return new ResponseEntity<>( familiarService.crear(validador, sentenciado), HttpStatus.OK);
     }
 
-    @GetMapping("/{folio}")
+    @GetMapping("/folio/{folio}")
     ResponseEntity buscaPorFolio(@PathVariable("folio") String folio) throws Exception {
         return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.buscaPorFolio(folio)) , HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity buscaPorId(@PathVariable("folio") UUID sentenciadoId) throws Exception {
+        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.busca(sentenciadoId)) , HttpStatus.OK);
     }
 
     @GetMapping()
