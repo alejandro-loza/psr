@@ -3,9 +3,12 @@ package mx.gob.oadprs.sicosel.repository;
 import mx.gob.oadprs.sicosel.model.Folio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
+@Repository
 public interface FolioRepository extends JpaRepository<Folio, Long> {
 
     @Query("SELECT f FROM Folio f WHERE" +
@@ -20,4 +23,6 @@ public interface FolioRepository extends JpaRepository<Folio, Long> {
             String entidadCodigo,
             Character sexoCodigo,
             String nacionalidadCodigo);
+
+    Optional<Folio> findByFolio(String folio);
 }

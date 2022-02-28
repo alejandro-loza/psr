@@ -1,6 +1,7 @@
 package mx.gob.oadprs.sicosel.services.imp;
 
 import com.google.common.primitives.Ints;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Folio;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.model.catalog.Estado;
@@ -30,6 +31,12 @@ public class FolioServiceImp implements FolioService {
     @Override
     public Folio generar(Sentenciado sentenciado) throws Exception {
         return folioRepository.save(construirFolio(sentenciado));
+    }
+
+    @Override
+    public Folio buscaPorFolio(String folio) {
+        return folioRepository.findByFolio(folio)
+        .orElseThrow(() -> new ItemNotFoundException("folio.notFound") );
     }
 
     @Override
