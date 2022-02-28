@@ -1,7 +1,8 @@
 spring:
   application:
     name: '@project.name@'
-
+  profiles:
+    active: '@profileActive@'
 # Para exponer actuador de Spring Boot
 management:
   info:

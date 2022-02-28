@@ -93,6 +93,21 @@
 
 	<build>
 		<finalName>${artifactId}</finalName>
+
+		<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/env</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>application.${profileActive}.yaml</include>
+                </includes>
+            </resource>
+        </resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -124,5 +139,29 @@
             </plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <profileActive>loc</profileActive>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>development</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
