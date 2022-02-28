@@ -25,7 +25,7 @@ class CatalogosControllerSpec extends Specification {
 
         then:
         assert resp.size() == 33
-    //    assert resp == estadosRespuesta()
+        assert resp == estadosRespuesta()
     }
 
     def "Deberia traer todos los municipios de la hidalgo"(){
@@ -46,8 +46,7 @@ class CatalogosControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/estado/1/municipio", List)?.body
 
         then:
-
-        assert  resp.size() == 10
+        assert  resp.size() == 11
     }
 
     def "Deberia traer todos los municipios activos de  aguascalientes excepto la ciudad de aguascalientes"(){
@@ -62,7 +61,7 @@ class CatalogosControllerSpec extends Specification {
 
         then:
         assert resp.size() == 10
-     /*   assert resp == [
+        assert resp == [
                         [id:1002, nombre:'Asientos', descripcion:'', estado:'AGUASCALIENTES', activo:true],
                         [id:1003, nombre:'Calvillo', descripcion:'', estado:'AGUASCALIENTES', activo:true],
                         [id:1004, nombre:'Cosio', descripcion:'', estado:'AGUASCALIENTES', activo:true],
@@ -73,7 +72,7 @@ class CatalogosControllerSpec extends Specification {
                         [id:1009, nombre:'Tepezalá', descripcion:'', estado:'AGUASCALIENTES', activo:true],
                         [id:1010, nombre:'El Llano', descripcion:'', estado:'AGUASCALIENTES', activo:true],
                         [id:1011, nombre:'San Francisco de los Romo', descripcion:'', estado:'AGUASCALIENTES', activo:true]]
-*/
+
     }
 
     def "Deberia traer todos los municipios de la guerrero"(){
@@ -107,7 +106,7 @@ class CatalogosControllerSpec extends Specification {
 
         then:
         assert resp.size() == 19
-       // assert resp == escolaridades()
+        assert resp == escolaridades()
 
     }
 
@@ -136,9 +135,7 @@ class CatalogosControllerSpec extends Specification {
         then:
         assert resp.getStatusCode() == HttpStatus.OK
         assert resp.body
-        assert resp.body == [[id:1, nombre:'PADRE'], [id:2, nombre:'MADRE'], [id:3, nombre:'CÓNYUGE'],
-                             [id:4, nombre:'HIJOS'], [id:5, nombre:'HERMANOS'], [id:6, nombre:'LIBERADO'],
-                             [id:7, nombre:'PRELIBERADO']] }
+        assert resp.body == [[id:1, nombre:'PADRE'], [id:2, nombre:'MADRE'], [id:3, nombre:'CÓNYUGE']] }
 
     private static ArrayList<LinkedHashMap<String, Integer>> escolaridades() {
         [[id: 1, nombre: 'SIN ESCOLARIDAD'],
