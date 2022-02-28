@@ -4,7 +4,7 @@ databaseChangeLog:
       author: alejandro.hernandez
       changes:
         - sql:
-            sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (1,'AFG','AFGANISTAN','AFGANISTAN','1');
+            sql: INSERT INTO cat_pais(id_cat_pais, iso_alfa_3, nombre, descripcion, activo)VALUES (1,'AFG','AFGANISTAN','AFGANISTAN','1');
         - sql:
             sql: INSERT INTO cat_pais(id_cat_pais, alfa3, nombre, descripcion, activo)VALUES (3,'ALB','ALBANIA','ALBANA','1');
         - sql:
