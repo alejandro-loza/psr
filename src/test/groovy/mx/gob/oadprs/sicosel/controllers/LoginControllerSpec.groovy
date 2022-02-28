@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
+import spock.lang.Ignore
 import spock.lang.Specification
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -16,6 +17,7 @@ class LoginControllerSpec extends Specification {
     int port
     RestTemplate rest = new RestTemplate()
 
+    @Ignore
     def "Deberia traer los datos del usuarios autentificado"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
