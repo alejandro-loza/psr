@@ -17,8 +17,7 @@ class PaisControllerSpec extends Specification {
         def resp = rest.getForEntity("http://localhost:${ port }/catalogo/pais", List)?.body
 
         then:
-       // assert resp.size() == 130
-        assert resp.size() == 131
+        assert resp.size() == 130
         def mex = resp.find {it.nombre == 'MÉXICO'}
 
         mex.with {
