@@ -19,13 +19,10 @@ public class SeguridadLogin {
         Cipher cipher = Cipher.getInstance(c1);
         SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), algoritmo);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
-        try {
-            cipher.init(cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
-            byte[] encriptada = cipher.doFinal(contrasenia.getBytes());
-            return new String(encodeBase64(encriptada));
-        }catch (Exception e){
-            return null;
-        }
+        cipher.init(cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
+        byte[] encriptada = cipher.doFinal(contrasenia.getBytes());
+        return new String(encodeBase64(encriptada));
+
     }
 
     public static String desencriptarAES(String contrasenia) throws Exception {
