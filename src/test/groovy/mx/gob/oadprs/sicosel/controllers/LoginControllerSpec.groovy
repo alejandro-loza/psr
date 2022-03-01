@@ -17,6 +17,7 @@ class LoginControllerSpec extends Specification {
     int port
     RestTemplate rest = new RestTemplate()
 
+    @Ignore
     def "Deberia traer los datos del usuarios autentificado"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
@@ -26,7 +27,6 @@ class LoginControllerSpec extends Specification {
             usuario = "accesod.infotec@oadprs.gob.mx"
             contrasenia = "c2b7a35d89ff553dc8acf4c9f3d71626e4bc77798f917e1973dcbe154cbc5da8="
         }
-
 
         when:
         def resp = rest.postForObject("http://localhost:${ port }/login",
