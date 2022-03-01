@@ -1,4 +1,6 @@
 spring:
+  liquibase:
+    enabled: false
   jpa:
     generate-ddl=false:
     hibernate:
@@ -12,5 +14,12 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driverClassName: org.postgresql.Driver
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
 clientes:
   autenticacion: &{AUTETICACION_API_URL}
