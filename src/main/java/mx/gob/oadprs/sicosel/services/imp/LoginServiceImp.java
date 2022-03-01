@@ -2,6 +2,7 @@ package mx.gob.oadprs.sicosel.services.imp;
 
 
 import mx.gob.oadprs.sicosel.services.LoginService;
+import mx.gob.oadprs.sicosel.utils.SeguridadLogin;
 import mx.gob.oadprs.sicosel.validator.LoginRequest;
 import mx.gob.oadprs.sicosel.validator.LoginRequestValidador;
 import mx.gob.oadprs.sicosel.validator.UserRequest;
@@ -27,12 +28,27 @@ public class LoginServiceImp implements LoginService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("X-Get-JWT", "true");
         LoginRequestValidador cmd = new LoginRequestValidador();
-        cmd.setUsuario(loginRequest.getUsuario());//"accesod.infotec@oadprs.gob.mx");
-        cmd.setContrasenia("MXFhejJ3c1g=");
+        cmd.setUsuario(loginRequest.getUsuario());
+        String contrasenia = "";
+
+        try {
+            contrasenia = new String(SeguridadLogin.desencriptarAES(new String(loginRequest.getContrasenia())));
+        }
+        catch (Exception e){
+            System.out.println("Error al desencriptar contraseña "+ e.toString());
+            return null;
+        }
+        try {
+            contrasenia = new String(SeguridadLogin.codificar64(contrasenia));
+        }
+        catch (Exception e){
+            System.out.println("Error al codificación contraseña 64 "+ e.toString());
+            return null;
+        }
+
+        cmd.setContrasenia(contrasenia);
         cmd.setSistema(NOMBRE_SISTEMA);
 
-        System.out.println(" loginRequest "+loginRequest);
-        System.out.println(" cmd "+cmd);
         ResponseEntity<Map> responseEntity = restTemplate.exchange(url + "/api/seguridad/autenticacion/",
                 HttpMethod.POST, new HttpEntity(cmd, headers), Map.class);
         UserRequest userRequest = new UserRequest();
@@ -45,8 +61,8 @@ public class LoginServiceImp implements LoginService {
                 throw new RuntimeException("JSONException occurred");
             }
         }
-        System.out.println(" response "+ responseEntity.getBody());
-        System.out.println(" "+ userRequest);
+        System.out.println("Contrasela final "+ contrasenia);
+        System.out.println("usuario  "+ userRequest.getToken());
         return userRequest;
     }
 

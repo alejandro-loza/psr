@@ -1,9 +1,6 @@
 package mx.gob.oadprs.sicosel.controllers;
 
 
-//import io.jsonwebtoken.Jwts;
-//import io.jsonwebtoken.SignatureAlgorithm;
-
 import mx.gob.oadprs.sicosel.services.LoginService;
 import mx.gob.oadprs.sicosel.validator.LoginRequest;
 import mx.gob.oadprs.sicosel.validator.UserRequest;
