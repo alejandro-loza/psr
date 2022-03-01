@@ -14,7 +14,8 @@ public class SeguridadLogin {
     private static String iv = "0123456789ABCDEF";
     private static final String algoritmo = "AES";
 
-    public static String encriptar(String contrasenia) throws Exception {
+
+    public static String encriptarAES(String contrasenia) throws Exception {
         Cipher cipher = Cipher.getInstance(c1);
         SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), algoritmo);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
@@ -25,13 +26,13 @@ public class SeguridadLogin {
             String s = new String(encodeBase64(encriptada));
             System.out.println(contrasenia + " encriptada es " + encriptada+ " base64 " +s);
 
-            return s; // encriptada.toString();
+            return s;
         }catch (Exception e){
             return null;
         }
     }
 
-    public static String desencriptar(String contrasenia) throws Exception {
+    public static String desencriptarAES(String contrasenia) throws Exception {
         Cipher cipher = Cipher.getInstance(c1);
         SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), algoritmo);
         IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
@@ -51,14 +52,14 @@ public class SeguridadLogin {
         }
     }
 
-    public static String encriptar64(String contrasenia) throws Exception {
+    public static String codificar64(String contrasenia) throws Exception {
         String encriptada = new String(encodeBase64(contrasenia.getBytes()));
         System.out.println(contrasenia + " encriptada es " + encriptada);
 
         return encriptada.toString();
     }
 
-    public static String desencriptar64(String contrasenia) throws Exception {
+    public static String decodificar64(String contrasenia) throws Exception {
         byte[] desencriptada = decodeBase64(contrasenia);
 
         System.out.println(contrasenia + "desencriptada es " + desencriptada);

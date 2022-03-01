@@ -25,8 +25,9 @@ class LoginControllerSpec extends Specification {
         LoginRequest loginPrincipalValidador= new LoginRequest()
         loginPrincipalValidador.with {
             usuario = "accesod.infotec@oadprs.gob.mx"
-            contrasenia = "MXFhejJ3c1g="
+            contrasenia = "c2b7a35d89ff553dc8acf4c9f3d71626e4bc77798f917e1973dcbe154cbc5da8="
         }
+
 
         when:
         def resp = rest.postForObject("http://localhost:${ port }/login",
