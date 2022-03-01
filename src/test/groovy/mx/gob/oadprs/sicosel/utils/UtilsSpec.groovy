@@ -22,13 +22,13 @@ class UtileriasSpec extends Specification {
 
     def "Deberia recuperar contraseña encriptada a 64"() {
         when:
-        def resp = SeguridadLogin.encriptar64("Mexic@22")
+        def resp = SeguridadLogin.codificar64("Mexic@22")
 
         then:
         assert resp != null
 
         when:
-        def res = SeguridadLogin.desencriptar64(resp)
+        def res = SeguridadLogin.decodificar64(resp)
 
         then:
         assert res != null
