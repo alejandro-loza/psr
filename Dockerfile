@@ -19,7 +19,7 @@ RUN mvn dependency:go-offline -B
 COPY src src
 
 # construir el artefacto
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -P prod
 
 # nuestra imagen base final
 FROM openjdk:11.0.14-jre-slim

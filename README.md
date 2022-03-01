@@ -26,23 +26,38 @@ mvn install
 
 ## Compilación y empaquetado
 
-```bash
-# Construcción del artefacto
-mvn clean package -DskipTests
-```
-
-## Ejecución del Proyecto
-
+### Maven
 ```bash
 # Ingresar a la carpeta del proyecto
 cd sentenciados_ms
 
-# Ejecutar aplicacion
+# Compilar proyecto configuración local
+mvn clean package -DskipTests -P loc
+
+# Compilar proyecto configuración desarrollo
+mvn clean package -DskipTests -P dev
+
+# Compilar proyecto configuración produccion
+mvn clean package -DskipTests -P prod
+```
+> Para Gradle: [Compilación y empaquetado](#gradle)
+
+## Ejecución del Proyecto
+```bash
+# Ingresar a la carpeta del proyecto
+cd sentenciados_ms
+
+# Ejecutar proyecto configuración local
 mvn spring-boot:run -DskipTests
 
-# Generar .jar
-mvn package
+# Ejecutar proyecto configuración desarrollo
+mvn spring-boot:run -DskipTests -P dev
+
+# Ejecutar proyecto configuración produccion
+mvn spring-boot:run -DskipTests -P prod
+
 ```
+> Para Gradle: [Ejecución del Proyecto](#gradle)
 
 ## Ejecución con Docker
 
@@ -100,3 +115,34 @@ mvn test
 # Modelo de Datos
 
 > Esquema de base de base de datos  "rls"
+
+
+# Gradle
+## Compilación y empaquetado
+```bash
+# Ingresar a la carpeta del proyecto
+cd sentenciados_ms
+
+# Compilar proyecto configuración local
+gradle clean bootJar -P loc
+
+# Compilar proyecto configuración desarrollo
+gradle clean bootJar -P dev
+
+# Compilar proyecto configuración produccion
+gradle clean bootJar -P prod
+```
+## Ejecución del Proyecto
+```bash
+# Ingresar a la carpeta del proyecto
+cd sentenciados_ms
+
+# Ejecutar proyecto configuración local
+gradle bootRun
+
+# Ejecutar proyecto configuración desarrollo
+gradle bootRun -P dev
+
+# Ejecutar proyecto configuración produccion
+gradle bootRun -P prod
+```
