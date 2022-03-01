@@ -1,0 +1,25 @@
+spring:
+  jpa:
+    generate-ddl=true:
+    hibernate:
+      ddl-auto=create-drop:h2:
+    datasource:
+      url: jdbc:h2:file:~/test
+      username: sa
+      password:
+      driverClassName: org.h2.Driver
+  liquibase:
+    change-log: 'classpath:db/databaseChangeLog.yaml'
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: false
+        web-allow-others: false
+clientes:
+  autenticacion: http://10.238.1.143
+
+info:
+  application:
+    environment: 'prod'
