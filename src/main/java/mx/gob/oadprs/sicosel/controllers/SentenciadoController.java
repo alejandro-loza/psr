@@ -45,11 +45,11 @@ public class SentenciadoController {
     }
 
     @GetMapping(path = "/{sentenciadoId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity buscaPorId(@PathVariable("folio") UUID sentenciadoId) throws Exception {
-        return new ResponseEntity<>(new SentenciadoDto(sentenciadoService.busca(sentenciadoId)) , HttpStatus.OK);
+    ResponseEntity buscaPorId(@PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
+        return new ResponseEntity<>( new SentenciadoDto(sentenciadoService.busca(sentenciadoId)) , HttpStatus.OK);
     }
 
-    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity buscaPorNombreCompleto(@RequestParam(required = true) String nombre,
                                          @RequestParam(required = true) String apellidoPaterno,
