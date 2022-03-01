@@ -8,9 +8,9 @@ spring:
       path: /h2
   datasource:
     platform: postgres
-    url: { SET_YOUR_ORIGIN }
-    username:  {SET_YOUR_USERNAME}
-    password:  {SET_YOUR_SECRET_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driverClassName: org.postgresql.Driver
 clientes:
-  autenticacion: { SET_YOUR_AUTENTICATION_API_URL }
+  autenticacion: &{AUTETICACION_API_URL}

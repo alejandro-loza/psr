@@ -324,8 +324,7 @@ class SentenciadoControllerSpec extends Specification {
         def sentenciado = sentenciadoGuardado()
 
         when:
-        def resp = rest.getForEntity(
-                "http://localhost:${ port }/sentenciado/${sentenciado.getId()}" , Map)
+        def resp = rest.getForEntity("http://localhost:$port/sentenciado/$sentenciado.id" , Map)
 
         then:
         resp.getBody().with {
@@ -339,11 +338,10 @@ class SentenciadoControllerSpec extends Specification {
         given: 'dado un sentenciado guardado'
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
 
         when:
         rest.getForEntity(
-                "http://localhost:${ port }/sentenciado/XXXXXXXXXXXX" , Map)
+                "http://localhost:${port}/sentenciado/" + UUID.randomUUID(), Map)
 
         then:
         thrown HttpClientErrorException.NotFound

@@ -17,7 +17,7 @@ class LoginControllerSpec extends Specification {
     int port
     RestTemplate rest = new RestTemplate()
 
-    @Ignore
+    @Ignore//todo optar por generar mock servers
     def "Deberia traer los datos del usuarios autentificado"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
