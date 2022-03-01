@@ -19,7 +19,7 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: alfa3
+                  name: iso_alfa_3
                   type: java.sql.Types.VARCHAR(3)
                   constraints:
                     nullable: false

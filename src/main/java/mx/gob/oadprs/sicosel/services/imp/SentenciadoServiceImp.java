@@ -14,7 +14,9 @@ import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -64,7 +66,6 @@ public class SentenciadoServiceImp implements SentenciadoService {
         return sentencedRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound") );
     }
-
     @Override
     public DomicilioDto agregaDireccion(UUID sentenciadoId, DomicilioValidador validador) throws Exception {
         Sentenciado sentenciado = busca(sentenciadoId);
@@ -78,6 +79,35 @@ public class SentenciadoServiceImp implements SentenciadoService {
         }
         else throw new Exception("sentenciado.domicilio.alreadyExist");
     }
+
+    @Override
+    public Sentenciado buscaPorFolio(String folio) throws Exception {
+        return folioService.buscaPorFolio(folio).getSentenciado();
+    }
+
+    @Override
+    public Sentenciado creaDireccion(Sentenciado sentenciado, Domicilio domicilio) throws Exception {
+        if(sentenciado.getDomicilio() == null){
+            sentenciado.setDomicilio(domicilio);
+            return sentencedRepository.save(sentenciado);
+        }
+        else throw new Exception("sentenciado.domicilio.alreadyExist");
+    }
+
+    @Override
+    public List<SentenciadoDto> buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception{
+        return sentencedRepository
+                .findAllByNombreAndApellidoPaternoAndApellidoMaterno(nombre, apellidoPaterno, apellidoMaterno)
+                .stream().map(SentenciadoDto::new).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<SentenciadoDto> buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception{
+        return sentencedRepository.findAllByNombreAndApellidoPaterno(nombre, apellidoPaterno)
+                .stream().map(SentenciadoDto::new).collect(Collectors.toList());
+    }
+
 
     private Sentenciado construyeSentenciado(SentenciadoValidador sentencedInput, Estado estado, Pais pais) {
 

@@ -3,12 +3,13 @@ mx/gob/oadprs/sicosel/utils/FolioBuilder.class
 mx/gob/oadprs/sicosel/services/EstadoService.class
 mx/gob/oadprs/sicosel/services/MunicipioService.class
 mx/gob/oadprs/sicosel/model/catalog/Pais.class
-mx/gob/oadprs/sicosel/utils/IFolioBuilder.class
 mx/gob/oadprs/sicosel/model/catalog/Municipio.class
 mx/gob/oadprs/sicosel/model/Sentenciado$SentenciadoBuilder.class
 mx/gob/oadprs/sicosel/model/catalog/EstadoCivil.class
 mx/gob/oadprs/sicosel/repository/SentencedRepository.class
 mx/gob/oadprs/sicosel/repository/catalog/OcupacionRepository.class
+mx/gob/oadprs/sicosel/validator/LoginRequest.class
+mx/gob/oadprs/sicosel/services/imp/LoginServiceImp.class
 mx/gob/oadprs/sicosel/repository/catalog/EscolaridadRepository.class
 mx/gob/oadprs/sicosel/services/EstadoCivilService.class
 mx/gob/oadprs/sicosel/controllers/handlers/ApiError.class
@@ -22,6 +23,7 @@ mx/gob/oadprs/sicosel/services/imp/MunicipioServiceImp.class
 mx/gob/oadprs/sicosel/services/FamiliarService.class
 mx/gob/oadprs/sicosel/repository/catalog/EstadoCivilRepository.class
 mx/gob/oadprs/sicosel/model/catalog/Estado.class
+mx/gob/oadprs/sicosel/utils/SeguridadLogin.class
 mx/gob/oadprs/sicosel/services/SentenciadoService.class
 mx/gob/oadprs/sicosel/dto/OcupacionDto.class
 mx/gob/oadprs/sicosel/services/EtniaService.class
@@ -45,9 +47,11 @@ mx/gob/oadprs/sicosel/services/imp/FamiliarServiceImp.class
 mx/gob/oadprs/sicosel/services/imp/FolioServiceImp.class
 mx/gob/oadprs/sicosel/model/Domicilio$DomicilioBuilder.class
 mx/gob/oadprs/sicosel/services/FolioService.class
+mx/gob/oadprs/sicosel/validator/UserRequest.class
 mx/gob/oadprs/sicosel/PsrApplication.class
 mx/gob/oadprs/sicosel/model/catalog/Ocupacion.class
 mx/gob/oadprs/sicosel/services/imp/SentenciadoServiceImp.class
+mx/gob/oadprs/sicosel/services/LoginService.class
 mx/gob/oadprs/sicosel/controllers/handlers/CustomRestExceptionHandler.class
 mx/gob/oadprs/sicosel/dto/EstadoCivilDto.class
 mx/gob/oadprs/sicosel/services/imp/OcupacionServiceImp.class
@@ -58,12 +62,14 @@ mx/gob/oadprs/sicosel/model/catalog/Parentesco.class
 mx/gob/oadprs/sicosel/model/catalog/Periodo.class
 mx/gob/oadprs/sicosel/services/imp/EtniaServiceImp.class
 mx/gob/oadprs/sicosel/repository/FamiliarRepository.class
+mx/gob/oadprs/sicosel/validator/LoginRequestValidador.class
 mx/gob/oadprs/sicosel/dto/ParentescoDto.class
 mx/gob/oadprs/sicosel/services/ParentescoService.class
 mx/gob/oadprs/sicosel/repository/catalog/EstadoRepository.class
 mx/gob/oadprs/sicosel/services/DomicilioService.class
 mx/gob/oadprs/sicosel/enums/Sexo.class
 mx/gob/oadprs/sicosel/services/imp/EstadoServiceImp.class
+mx/gob/oadprs/sicosel/controllers/LoginController.class
 mx/gob/oadprs/sicosel/services/imp/ParentescoServiceImp.class
 mx/gob/oadprs/sicosel/dto/EstadoDto.class
 mx/gob/oadprs/sicosel/validator/DomicilioValidador.class
@@ -75,6 +81,5 @@ mx/gob/oadprs/sicosel/validator/FamiliarValidador.class
 mx/gob/oadprs/sicosel/services/imp/EscolaridadServiceImp.class
 mx/gob/oadprs/sicosel/services/OcupacionService.class
 mx/gob/oadprs/sicosel/controllers/SentenciadoController.class
-mx/gob/oadprs/sicosel/utils/Altisonantes.class
 mx/gob/oadprs/sicosel/model/Domicilio.class
 mx/gob/oadprs/sicosel/model/Sentenciado.class

@@ -1,12 +1,8 @@
 package mx.gob.oadprs.sicosel.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
 
 import static org.apache.tomcat.util.codec.binary.Base64.decodeBase64;
 import static org.apache.tomcat.util.codec.binary.Base64.encodeBase64;

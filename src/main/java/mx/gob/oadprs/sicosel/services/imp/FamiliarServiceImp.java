@@ -46,8 +46,8 @@ class FamiliarServiceImp implements FamiliarService{
     public FamiliarDto crear(FamiliarValidador familiarValidador, Sentenciado sentenciado) throws Exception {
         return new FamiliarDto(
                 familiarRepository.save(construyeFamiliar(familiarValidador, sentenciado,
-                    parentescoService.busca(familiarValidador.getParentescoId()),
-                    paisService.busca(familiarValidador.getNacionalidadId()))
+                        parentescoService.busca(familiarValidador.getParentescoId()),
+                        paisService.busca(familiarValidador.getNacionalidadId()))
                 )
         );
     }
@@ -79,8 +79,8 @@ class FamiliarServiceImp implements FamiliarService{
 
     private DomicilioDto agregaDomicilio(UUID familiarId, DomicilioValidador validador, Familiar familiar) throws Exception {
         Domicilio domicilio = domicilioService.crear(validador,
-            municipioService.busca(validador.getMunicipioId()),
-            paisService.busca(validador.getPaisId()));
+                municipioService.busca(validador.getMunicipioId()),
+                paisService.busca(validador.getPaisId()));
 
         familiar.setDomicilio(domicilio);
         familiarRepository.save(familiar);
