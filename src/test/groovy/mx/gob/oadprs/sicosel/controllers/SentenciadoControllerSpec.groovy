@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
@@ -297,6 +298,91 @@ class SentenciadoControllerSpec extends Specification {
         }
 
     }
+
+    def "Debería traer un sentenciado por folio"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${ port }/sentenciado/folio/${sentenciado.getFolio()}" , Map)
+
+        then:
+        resp.getBody().with {
+            assert folio == sentenciado.getFolio()
+            assert documento == 'HELA880416HHGRZL08'
+
+        }
+    }
+
+    def "Debería traer un sentenciado por id"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${ port }/sentenciado/${sentenciado.getId()}" , Map)
+
+        then:
+        resp.getBody().with {
+            assert folio == sentenciado.getFolio()
+            assert documento == 'HELA880416HHGRZL08'
+
+        }
+    }
+
+    def "No debería traer un sentenciado por folio con folio erroneo"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        rest.getForEntity(
+                "http://localhost:${ port }/sentenciado/XXXXXXXXXXXX" , Map)
+
+        then:
+        thrown HttpClientErrorException.NotFound
+    }
+
+    def "Debería traer un sentenciado por nombre completo"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
+                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
+                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert !resp.getBody().isEmpty()
+    }
+
+
+    def "Debería traer un sentenciado por nombre y apellido"(){
+        given: 'dado un sentenciado guardado'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        def sentenciado = sentenciadoGuardado()
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
+                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert !resp.getBody().isEmpty()
+    }
+
 
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
