@@ -10,7 +10,7 @@ management:
       enabled: true
     git:
       enable: true
-      mode: simple
+      mode: full
 
   endpoints:
     web:
@@ -19,4 +19,3 @@ management:
 info:
   application:
     name: ${spring.application.name}
-    description: '@project.description@'

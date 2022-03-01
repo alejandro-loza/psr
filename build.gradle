@@ -55,3 +55,11 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+if (project.hasProperty("prod")) {
+    apply from: "gradle/profile_prod.gradle"
+}else if (project.hasProperty("dev")) {
+	apply from: "gradle/profile_dev.gradle"
+}else{
+	apply from: "gradle/profile_loc.gradle"
+}
