@@ -23,8 +23,8 @@ class LoginControllerSpec extends Specification {
         headers.setContentType(MediaType.APPLICATION_JSON)
         LoginRequest loginPrincipalValidador= new LoginRequest()
         loginPrincipalValidador.with {
-            usuario = "accesod.infotec@oadprs.gob.mx"
-            contrasenia = "c2b7a35d89ff553dc8acf4c9f3d71626e4bc77798f917e1973dcbe154cbc5da8="
+            usuario = "sicosel.presentavig@oadprs.gob.mx"
+            contrasenia = "RFJ+XHeX9f6WAkJVMhesxg=="
         }
 
         when:

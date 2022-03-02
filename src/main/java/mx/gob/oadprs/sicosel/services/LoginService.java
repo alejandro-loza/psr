@@ -4,6 +4,6 @@ import mx.gob.oadprs.sicosel.validator.LoginRequest;
 import mx.gob.oadprs.sicosel.validator.UserRequest;
 
 public interface LoginService {
-    UserRequest prsLogin(LoginRequest loginRequest);
+    UserRequest prsLogin(LoginRequest loginRequest) throws Exception;
 
 }
