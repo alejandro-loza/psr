@@ -1,73 +1,58 @@
 package mx.gob.oadprs.sicosel.utils;
+import javax.crypto.Cipher;
 
-import javax.crypto.*;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Base64;
 
-import static org.apache.tomcat.util.codec.binary.Base64.decodeBase64;
-import static org.apache.tomcat.util.codec.binary.Base64.encodeBase64;
-
+@Configuration
 public class SeguridadLogin {
 
-    private static String key = "Sicosel2.Infotec"; //TODO PONER EN application.yaml
-    private static String c1 = "AES/OFB32/PKCS5Padding";//TODO PONER EN application.yaml
-    private static String iv = "0123456789ABCDEF";//TODO PONER EN application.yaml
-    private static final String algoritmo = "AES";//TODO PONER EN application.yaml
+    @Value("${app.rsa.privateKey}")
+    private String privateKey;
 
+    private static String PRIVATE_KEY;
 
-    public static String encriptarAES(String contrasenia) throws Exception {
-        Cipher cipher = Cipher.getInstance(c1);
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), algoritmo);
-        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
-        cipher.init(cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
-        byte[] encriptada = cipher.doFinal(contrasenia.getBytes());
-        String s = new String(encriptada);
-        //System.out.println("Encriptado AES "+ );
-        //byte[] bytes = encodeBase64(encriptada);
-        return s; //new String(bytes);
-
+    @Value("${app.rsa.privateKey}")
+    public void setNameStatic(String privateKey){
+        SeguridadLogin.PRIVATE_KEY = privateKey;
     }
 
-    private static final String ALGORITHM = "AES";
-    private static final String TRANSFORMATION = "AES/ECB/PKCS5Padding";
+    public static String desencriptarRSA(String contrasenia) throws Exception {
 
-    public String encryptMessage(byte[] message) throws InvalidKeyException, NoSuchPaddingException,
-            NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException {
-        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-        SecretKey secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] encryptedMessage = cipher.doFinal(message);
-        return new String(encryptedMessage);
+        // Obtenemos la llave privada
+        PrivateKey key = getPrivateKey(PRIVATE_KEY);
+        // Establecemos el algoritmo de cifrado
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        // Decodificamos la cadena cifrada
+        byte[] cipherContentBytes = Base64.getDecoder().decode(contrasenia.getBytes());
+        // Deciframos el contenido de la cadena
+        byte[] decryptedContent = cipher.doFinal(cipherContentBytes);
+        String decoded = new String(decryptedContent);
+        return decoded;
     }
 
-    public String decryptMessage(byte[] encryptedMessage) throws NoSuchPaddingException,
-            NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-        Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-        SecretKey secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        byte[] clearMessage = cipher.doFinal(encryptedMessage);
-        return new String(clearMessage);
+    public static PrivateKey getPrivateKey(String base64PrivateKey) throws Exception{
+        PrivateKey privateKey = null;
+        PKCS8EncodedKeySpec keySpec = null;
+
+        // Eliminamos cabecera, pie y saltos de linea
+        base64PrivateKey = base64PrivateKey
+                .replace("-----BEGIN PRIVATE KEY-----", "")
+                .replaceAll(System.lineSeparator(), "")
+                .replace("-----END PRIVATE KEY-----", "");
+
+        keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(base64PrivateKey.getBytes()));
+        KeyFactory keyFactory = null;
+        keyFactory = KeyFactory.getInstance("RSA");
+        privateKey = keyFactory.generatePrivate(keySpec);
+        return privateKey;
     }
 
-    public static String desencriptarAES(String contrasenia) throws Exception {
-        Cipher cipher = Cipher.getInstance(c1);
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), algoritmo);
-        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
-        cipher.init(cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
-        byte[] input = decodeBase64(contrasenia);
-        return new String(cipher.doFinal(input));
-    }
-
-    public static String codificar64(String contrasenia){
-        return new String(encodeBase64(contrasenia.getBytes()));
-    }
-
-    public static String decodificar64(String contrasenia){
-        return new String( decodeBase64(contrasenia));
-    }
 
 }
-

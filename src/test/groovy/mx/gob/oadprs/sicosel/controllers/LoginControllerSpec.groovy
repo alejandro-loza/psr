@@ -24,7 +24,7 @@ class LoginControllerSpec extends Specification {
         LoginRequest loginPrincipalValidador= new LoginRequest()
         loginPrincipalValidador.with {
             usuario = "sicosel.presentavig@oadprs.gob.mx"
-            contrasenia = "RFJ+XHeX9f6WAkJVMhesxg=="
+            contrasenia = "eVNoJVDt4v+4UiTLJzgSfjFjhtcgFdU/Q8J/5hOvVC/fcXqkACrXBSmRirWrvtijvacpLCnNKPpgTezTRxFaUA=="
         }
 
         when:
