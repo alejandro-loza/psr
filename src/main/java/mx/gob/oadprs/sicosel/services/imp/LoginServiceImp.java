@@ -31,14 +31,14 @@ public class LoginServiceImp implements LoginService {
         cmd.setUsuario(loginRequest.getUsuario());
         cmd.setSistema(NOMBRE_SISTEMA);
 
-        String contrasenia = SeguridadLogin.desencriptarAES(loginRequest.getContrasenia());
+       /*String contrasenia = SeguridadLogin.desencriptarAES(loginRequest.getContrasenia());
 
-        System.out.println("mi contraseña es "+ contrasenia);
+       System.out.println("mi contraseña es "+ contrasenia);
         contrasenia = SeguridadLogin.codificar64(contrasenia);
-        System.out.println("mi contraseña 64 "+ contrasenia);
-        cmd.setContrasenia(contrasenia);
+        System.out.println("mi contraseña 64 "+ contrasenia);*/
+        cmd.setContrasenia(loginRequest.getContrasenia());
 
-        System.out.println(cmd.getSistema() + " pass "+ cmd.getContrasenia() + " usu "+ cmd.getUsuario());
+        //System.out.println(cmd.getSistema() + " pass "+ cmd.getContrasenia() + " usu "+ cmd.getUsuario());
         ResponseEntity<Map> responseEntity = restTemplate.exchange(url + "/api/seguridad/autenticacion/",
                 HttpMethod.POST, new HttpEntity(cmd, headers), Map.class);
 
@@ -52,8 +52,6 @@ public class LoginServiceImp implements LoginService {
                 throw new RuntimeException("JSONException occurred");
             }
         }
-        System.out.println("Contrasela final "+ contrasenia);
-        System.out.println("usuario  "+ userRequest.getToken());
         return userRequest;
     }
 
