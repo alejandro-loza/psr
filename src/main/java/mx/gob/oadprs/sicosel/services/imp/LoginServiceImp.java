@@ -42,7 +42,7 @@ public class LoginServiceImp implements LoginService {
         if (responseEntity.getStatusCode() == HttpStatus.CREATED) {
             try {
                 userRequest.setUser(loginRequest.getUsuario());
-                userRequest.setPwd(loginRequest.getContrasenia());
+                userRequest.setPwd("");
                 userRequest.setToken(String.valueOf(responseEntity.getHeaders().get("X-JWT").get(0)));
             } catch (Exception e) {
                 throw new RuntimeException("JSONException occurred");
