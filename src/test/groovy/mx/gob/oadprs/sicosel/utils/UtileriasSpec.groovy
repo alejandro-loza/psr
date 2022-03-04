@@ -9,10 +9,10 @@ class UtileriasSpec extends Specification {
     def "Deberia recuperar contraseña desencriptada"() {
 
         when:
-        def res = SeguridadLogin.desencriptarRSA  ("eVNoJVDt4v+4UiTLJzgSfjFjhtcgFdU/Q8J/5hOvVC/fcXqkACrXBSmRirWrvtijvacpLCnNKPpgTezTRxFaUA==")
+        def res = SeguridadLogin.desencriptarRSA  ("mmUzFSJyqsFxUd/QIR6UjiP1Bbn4mXQcjtHXOnmvbtz/8IAaApG5dsPLuA78oHmYu15ZAGzcQgypwJoAS25qpQ==")
 
         then:
-        assert res != null
+        assert res == 'Mexic@22'
     }
 
 }

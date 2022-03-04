@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import static org.apache.tomcat.util.codec.binary.Base64.encodeBase64;
 
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public class LoginServiceImp implements LoginService {
         } catch (Exception e){
             System.out.println("Exception " + e.toString());
         }
+
 
         ResponseEntity<Map> responseEntity = restTemplate.exchange(url + "/api/seguridad/autenticacion/",
                 HttpMethod.POST, new HttpEntity(cmd, headers), Map.class);
@@ -58,8 +60,8 @@ public class LoginServiceImp implements LoginService {
     }
 
     private String codificaPassword(LoginRequest loginRequest) throws Exception {
-        return SeguridadLogin.desencriptarRSA(loginRequest.getContrasenia());
-
+        String s = SeguridadLogin.desencriptarRSA(loginRequest.getContrasenia());
+        return new String(encodeBase64(s.getBytes()));
     }
 
 }
