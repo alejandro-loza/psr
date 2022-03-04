@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import static org.apache.tomcat.util.codec.binary.Base64.encodeBase64;
 
 import java.util.Map;
 
@@ -22,26 +23,21 @@ public class LoginServiceImp implements LoginService {
     private String url;
 
     @Override
-    public UserRequest prsLogin(LoginRequest loginRequest) throws Exception{
+    public UserRequest prsLogin(LoginRequest loginRequest)throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("X-Get-JWT", "true");
         LoginRequestValidador cmd = new LoginRequestValidador();
-        cmd.setUsuario(loginRequest.getUsuario());
-        cmd.setSistema(NOMBRE_SISTEMA);
+        try {
+            cmd = generaLoginPayload(loginRequest);
+        } catch (Exception e){
+            System.out.println("Exception " + e.toString());
+        }
 
-       /*String contrasenia = SeguridadLogin.desencriptarAES(loginRequest.getContrasenia());
 
-       System.out.println("mi contraseña es "+ contrasenia);
-        contrasenia = SeguridadLogin.codificar64(contrasenia);
-        System.out.println("mi contraseña 64 "+ contrasenia);*/
-        cmd.setContrasenia(loginRequest.getContrasenia());
-
-        //System.out.println(cmd.getSistema() + " pass "+ cmd.getContrasenia() + " usu "+ cmd.getUsuario());
         ResponseEntity<Map> responseEntity = restTemplate.exchange(url + "/api/seguridad/autenticacion/",
                 HttpMethod.POST, new HttpEntity(cmd, headers), Map.class);
-
         UserRequest userRequest = new UserRequest();
         if (responseEntity.getStatusCode() == HttpStatus.CREATED) {
             try {
@@ -55,6 +51,17 @@ public class LoginServiceImp implements LoginService {
         return userRequest;
     }
 
+    private LoginRequestValidador generaLoginPayload(LoginRequest loginRequest) throws Exception {
+        LoginRequestValidador cmd = new LoginRequestValidador();
+        cmd.setUsuario(loginRequest.getUsuario());
+        cmd.setContrasenia(codificaPassword(loginRequest));
+        cmd.setSistema(NOMBRE_SISTEMA);
+        return cmd;
+    }
+
+    private String codificaPassword(LoginRequest loginRequest) throws Exception {
+        String s = SeguridadLogin.desencriptarRSA(loginRequest.getContrasenia());
+        return new String(encodeBase64(s.getBytes()));
+    }
 
 }
-
