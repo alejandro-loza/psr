@@ -15,7 +15,7 @@ import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200","http://dev.sicosel2.oadprs.gob.mx"})
 @RequestMapping("/sentenciado")
 @RestController
 public class SentenciadoController {
