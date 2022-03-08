@@ -157,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sentenciado'
+                $ref: '#/components/schemas/ConsultaSentenciado'
         '400':
           description: Something in the request was wrong.
           content:
@@ -804,6 +804,44 @@ components:
           type: number
           description: The date when the user was created.
           example: 1587567125458
+
+    ConsultaSentenciado:
+      description: Datos de la pantalla consulta.
+      properties:
+        id:
+          description: Id del sentenciado
+          type: integer
+          example: 123
+        folio:
+          description: Folio del sentenciado
+          type: string
+          minimum: 1
+          maximum: 50
+          example: MEJF84020515HMEX017
+        nombre:
+          description: Nombre del senteciado.
+          type: string
+          minimum: 1
+          maximum: 50
+          example: Juan Antonio
+        apellidoMaterno:
+          description: Apellido paterno.
+          type: string
+          minimum: 1
+          maximum: 20
+          example: PÃ©rez
+        apellidoPaterno:
+          description: Apellido materno.
+          type: string
+          minimum: 1
+          maximum: 20
+          example: GarcÃ­a
+        procesos:
+          description: lista de porcesos.
+          type: string
+          minimum: 1
+          maximum: 100
+          example: proceso, proceso
 
     CreateDemographics:
       description: Datos requerido por los demograficos
