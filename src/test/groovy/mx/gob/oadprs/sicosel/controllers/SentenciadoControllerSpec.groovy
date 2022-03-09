@@ -335,7 +335,7 @@ class SentenciadoControllerSpec extends Specification {
     }
 
     def "No debería traer un sentenciado por folio con folio erroneo"(){
-        given: 'dado un sentenciado guardado'
+        given:
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
 
@@ -347,23 +347,151 @@ class SentenciadoControllerSpec extends Specification {
         thrown HttpClientErrorException.NotFound
     }
 
-    def "Debería traer un sentenciado por nombre completo"(){
-        given: 'dado un sentenciado guardado'
+    def "Debería traer un sentenciado por nombre LIKE completo"(){
+        given:
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
-        def sentenciado = sentenciadoGuardado()
+
+        def nombreLike = 'ANG'
+        def apellidoPaternoLike = 'MAN'
+        def apellidoMaternoLike = 'HER'
 
         when:
         def resp = rest.getForEntity(
-                "http://localhost:${port}/sentenciado?nombre=${sentenciado.getNombre()}" +
-                        "&apellidoPaterno=${sentenciado.getApellidoPaterno()}" +
-                        "&apellidoMaterno=${sentenciado.getApellidoMaterno()}", List)
+                "http://localhost:${port}/sentenciado?nombre=${nombreLike}" +
+                        "&apellidoPaterno=${apellidoPaternoLike}" +
+                        "&apellidoMaterno=${apellidoMaternoLike}", List)
 
         then:
         assert resp.getStatusCode() == HttpStatus.OK
         assert !resp.getBody().isEmpty()
     }
 
+    def "Debería traer un sentenciado por alias like"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def alias = 'IV'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?alias=${alias}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().nombre == 'ANGEL IVAN'
+    }
+
+    def "Debería traer un sentenciado por otros nombres like"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def otrosNombres = 'WUA'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?otrosNombres=${otrosNombres}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().nombre == 'JUANCARLOS'
+    }
+
+    def "Debería traer un sentenciado por nombres padres like"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def nombrePadres = 'ALM'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombrePadres=${nombrePadres}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().nombre == 'PATRICIA'
+    }
+
+    def "Debería traer un sentenciado por apellido paterno de padres like"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def apellidoPaternoPadres = 'LO'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?apellidoPaternoPadres=${apellidoPaternoPadres}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().nombre == 'ANDREA'
+    }
+
+    def "Debería traer un sentenciado por apellido Materno de padres like"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def apellidoMaternoPadres = 'CAS'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?apellidoMaternoPadres=${apellidoMaternoPadres}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().nombre == 'MARGARITA'
+    }
+
+    def "Debería traer un sentenciado por pais"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def pais = '81'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?paisId=${pais}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().nombre == 'AXEL'
+    }
+
+    def "Debería traer un sentenciado por ocupacion"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def ocupacionId = '156'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?ocupacionId=${ocupacionId}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().nombre == 'AXEL'
+    }
 
     def "Debería traer un sentenciado por nombre y apellido"(){
         given: 'dado un sentenciado guardado'

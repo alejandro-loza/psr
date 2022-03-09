@@ -112,9 +112,9 @@ paths:
             type: string
           description: Apellido materno del sentenciado
         - in: query
-          name: pais
+          name: paisId
           schema:
-            type: string
+            type: number
           description: Pais materno del sentenciado
         - in: query
           name: alias
@@ -132,9 +132,9 @@ paths:
             type: string
           description: fechaNacimiento del sentenciado
         - in: query
-          name: ocupacion
+          name: ocupacionId
           schema:
-            type: string
+            type: number
           description: Ocupaciòn del sentenciado
         - in: query
           name: nombrePadres

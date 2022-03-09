@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,10 +18,14 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "vista_consulta")
 public class ConsultaSentenciado  {
 
+    @Id
+    @Column(name = "id_sentenciado", columnDefinition = "uuid", updatable = false)
+    private UUID id;
 
-    @NotNull(message= "sentenced.name.null")
+    @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
     private String nombre;
@@ -36,7 +41,7 @@ public class ConsultaSentenciado  {
     @JoinColumn(name="fk_id_cat_pais")
     private Pais nacionalidad;
 
-    private Folio folio;
+    private String folio;
 
     @Size(min = 1, max = 255)
     private String alias;
@@ -55,31 +60,18 @@ public class ConsultaSentenciado  {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
-    private String nombreMadre;
+    private String nombrePadres;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
-    private String apellidoPaternoMadre;
+    @Column(name = "appellido_padre")
+    private String apellidoPaternoPadres;
 
     @NotNull
     @NotBlank
     @Size(min = 1, max = 50)
-    private String apellidoMaternoMadre;
-
-    @NotNull
-    @NotBlank
-    @Size(min = 1, max = 50)
-    private String nombrePadre;
-
-    @NotNull
-    @NotBlank
-    @Size(min = 1, max = 50)
-    private String apellidoPaternoPadre;
-
-    @NotNull
-    @NotBlank
-    @Size(min = 1, max = 50)
-    private String apellidoMaternoPadre;
+    @Column(name = "apellido_madre")
+    private String apellidoMaternoPadres;
 
 }
