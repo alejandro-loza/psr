@@ -39,7 +39,6 @@ out/
 
 
 ## config
-application2.yaml
 target/
 git.properties
 application.yaml
