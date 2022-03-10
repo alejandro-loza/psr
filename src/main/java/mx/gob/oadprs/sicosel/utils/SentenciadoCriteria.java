@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -20,5 +21,8 @@ public class SentenciadoCriteria {
     private Optional<String> apellidoMaternoPadres;
     private Optional<Long> nacionalidad;
     private Optional<Long> ocupacion;
+    private Optional<String> folio;
+    private Optional<UUID> id;
+
 
 }

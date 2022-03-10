@@ -493,6 +493,43 @@ class SentenciadoControllerSpec extends Specification {
         assert resp.getBody().first().nombre == 'ANA KAREN'
     }
 
+    def "Debería traer un sentenciado por folio like"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def folio = 'GOG'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?folio=${folio}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().size() == 2
+    }
+
+    def "Debería traer un sentenciado por id "(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def id = '06cf12dd-2ff9-46d4-a404-708613816143'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?id=${id}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().first().folio == 'SXMK21111209MMEX003'
+    }
+
+
     def "Debería traer un sentenciado por nombre y apellido"(){
         given: 'dado un sentenciado guardado'
         HttpHeaders headers = new HttpHeaders()

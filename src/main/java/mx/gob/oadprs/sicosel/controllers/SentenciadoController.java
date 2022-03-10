@@ -68,6 +68,8 @@ public class SentenciadoController {
             @RequestParam(required = false) Optional<String> apellidoMaternoPadres,
             @RequestParam(required = false) Optional<Long> paisId,
             @RequestParam(required = false) Optional<Long> ocupacionId,
+            @RequestParam(required = false) Optional<String> folio,
+            @RequestParam(required = false) Optional<UUID> id,
 
 
             @RequestParam(defaultValue = "0") int page,
@@ -85,6 +87,8 @@ public class SentenciadoController {
                 .apellidoMaternoPadres(apellidoMaternoPadres)
                 .nacionalidad(paisId)
                 .ocupacion(ocupacionId)
+                .folio(folio)
+                .id(id)
                 .build();
 
         return new ResponseEntity<>(consultaService.consulta(criteriosBusqueda, PageRequest.of(page, size)), HttpStatus.OK);

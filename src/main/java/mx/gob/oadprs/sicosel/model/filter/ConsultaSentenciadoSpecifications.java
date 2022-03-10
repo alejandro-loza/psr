@@ -6,6 +6,7 @@ import mx.gob.oadprs.sicosel.utils.SentenciadoCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class ConsultaSentenciadoSpecifications {
 
@@ -22,6 +23,8 @@ public class ConsultaSentenciadoSpecifications {
                 .and(apellidoPaternoPadresLike(criterios.getApellidoPaternoPadres()))
                 .and(apellidoMaternoPadresLike(criterios.getApellidoMaternoPadres()))
                 .and(nacionalidadEqualTo(criterios.getNacionalidad()))
+                .and(folioLike(criterios.getFolio()))
+                .and(idEqualsTo(criterios.getId()))
                 .and(ocupacionEqualTo(criterios.getOcupacion()));
     }
 
@@ -99,6 +102,21 @@ public class ConsultaSentenciadoSpecifications {
     public static Specification<ConsultaSentenciado> ocupacionEqualTo(Optional<Long> ocupacionId) {
         return (root, query, builder) -> {
             return ocupacionId.map(ocupacion -> builder.equal(root.get(ConsultaSentenciado_.ocupacion), ocupacion)
+            ).orElse(null);
+        };
+    }
+
+    public static Specification<ConsultaSentenciado> folioLike(Optional<String> folio) {
+        return (root, query, builder) -> {
+            return folio.map(ti ->
+                    builder.like(root.get(ConsultaSentenciado_.folio), "%" + String.valueOf(ti) + "%")
+            ).orElse(null);
+        };
+    }
+
+    public static Specification<ConsultaSentenciado> idEqualsTo(Optional<UUID> id) {
+        return (root, query, builder) -> {
+            return id.map(i -> builder.equal(root.get(ConsultaSentenciado_.id), i)
             ).orElse(null);
         };
     }
