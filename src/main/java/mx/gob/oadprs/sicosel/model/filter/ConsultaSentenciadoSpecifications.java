@@ -5,6 +5,7 @@ import mx.gob.oadprs.sicosel.model.ConsultaSentenciado_;
 import mx.gob.oadprs.sicosel.utils.SentenciadoCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public class ConsultaSentenciadoSpecifications {
                 .and(apellidoMaternoPadresLike(criterios.getApellidoMaternoPadres()))
                 .and(nacionalidadEqualTo(criterios.getNacionalidad()))
                 .and(folioLike(criterios.getFolio()))
+                .and(fechaNacimientoEqualsTo(criterios.getFechaNacimiento()))
                 .and(idEqualsTo(criterios.getId()))
                 .and(ocupacionEqualTo(criterios.getOcupacion()));
     }
@@ -117,6 +119,13 @@ public class ConsultaSentenciadoSpecifications {
     public static Specification<ConsultaSentenciado> idEqualsTo(Optional<UUID> id) {
         return (root, query, builder) -> {
             return id.map(i -> builder.equal(root.get(ConsultaSentenciado_.id), i)
+            ).orElse(null);
+        };
+    }
+
+    public static Specification<ConsultaSentenciado> fechaNacimientoEqualsTo(Optional<String> fechaNacimiento) {
+        return (root, query, builder) -> {
+            return fechaNacimiento.map(i -> builder.equal(root.get(ConsultaSentenciado_.fechaNacimiento), LocalDate.parse(i) )
             ).orElse(null);
         };
     }

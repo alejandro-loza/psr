@@ -529,6 +529,24 @@ class SentenciadoControllerSpec extends Specification {
         assert resp.getBody().first().folio == 'SXMK21111209MMEX003'
     }
 
+    def "Debería traer un sentenciado por fecha nacimiento "(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def id =  '1988-04-16'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?fechaNacimiento=${id}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+    }
+
+
 
     def "Debería traer un sentenciado por nombre y apellido"(){
         given: 'dado un sentenciado guardado'

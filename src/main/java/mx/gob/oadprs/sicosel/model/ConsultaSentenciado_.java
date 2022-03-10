@@ -2,6 +2,7 @@ package mx.gob.oadprs.sicosel.model;
 
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import java.time.LocalDate;
 
 @StaticMetamodel(ConsultaSentenciado.class)
 public class ConsultaSentenciado_ {
@@ -15,6 +16,7 @@ public class ConsultaSentenciado_ {
     public static volatile SingularAttribute<ConsultaSentenciado, String> apellidoPaternoPadres;
     public static volatile SingularAttribute<ConsultaSentenciado, String> apellidoMaternoPadres;
     public static volatile SingularAttribute<ConsultaSentenciado, String> folio;
+    public static volatile SingularAttribute<ConsultaSentenciado, String> fechaNacimiento;
     public static volatile SingularAttribute<ConsultaSentenciado, Long> nacionalidad;
     public static volatile SingularAttribute<ConsultaSentenciado, Long> ocupacion;
 

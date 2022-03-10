@@ -16,6 +16,7 @@ import mx.gob.oadprs.sicosel.validator.FamiliarValidador;
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:4200")
@@ -69,9 +70,8 @@ public class SentenciadoController {
             @RequestParam(required = false) Optional<Long> paisId,
             @RequestParam(required = false) Optional<Long> ocupacionId,
             @RequestParam(required = false) Optional<String> folio,
+            @RequestParam(required = false) Optional<String> fechaNacimiento,
             @RequestParam(required = false) Optional<UUID> id,
-
-
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) throws Exception {
@@ -88,6 +88,7 @@ public class SentenciadoController {
                 .nacionalidad(paisId)
                 .ocupacion(ocupacionId)
                 .folio(folio)
+                .fechaNacimiento(fechaNacimiento)
                 .id(id)
                 .build();
 

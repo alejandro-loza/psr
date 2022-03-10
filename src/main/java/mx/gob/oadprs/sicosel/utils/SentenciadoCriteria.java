@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class SentenciadoCriteria {
     private Optional<Long> nacionalidad;
     private Optional<Long> ocupacion;
     private Optional<String> folio;
+    private Optional<String> fechaNacimiento;
     private Optional<UUID> id;
-
 
 }
