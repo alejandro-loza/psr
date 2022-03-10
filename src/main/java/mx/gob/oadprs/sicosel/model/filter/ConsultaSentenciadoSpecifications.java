@@ -22,7 +22,7 @@ public class ConsultaSentenciadoSpecifications {
                 .and(apellidoPaternoPadresLike(criterios.getApellidoPaternoPadres()))
                 .and(apellidoMaternoPadresLike(criterios.getApellidoMaternoPadres()))
                 .and(nacionalidadEqualTo(criterios.getNacionalidad()))
-                .and(ocupacionEqualTo(criterios.getOcupacionId()));
+                .and(ocupacionEqualTo(criterios.getOcupacion()));
     }
 
     public static Specification<ConsultaSentenciado> nombreLike(Optional<String> nombre) {
@@ -89,16 +89,16 @@ public class ConsultaSentenciadoSpecifications {
         };
     }
 
-    public static Specification<ConsultaSentenciado> nacionalidadEqualTo(Optional<Long> paisId) {
+    public static Specification<ConsultaSentenciado> nacionalidadEqualTo(Optional<Long> nacionalidad) {
         return (root, query, builder) -> {
-            return paisId.map(pais -> builder.equal(root.get(ConsultaSentenciado_.paisId), pais)
+            return nacionalidad.map(pais -> builder.equal(root.get(ConsultaSentenciado_.nacionalidad), pais)
             ).orElse(null);
         };
     }
 
     public static Specification<ConsultaSentenciado> ocupacionEqualTo(Optional<Long> ocupacionId) {
         return (root, query, builder) -> {
-            return ocupacionId.map(ocupacion -> builder.equal(root.get(ConsultaSentenciado_.ocupacionId), ocupacion)
+            return ocupacionId.map(ocupacion -> builder.equal(root.get(ConsultaSentenciado_.ocupacion), ocupacion)
             ).orElse(null);
         };
     }

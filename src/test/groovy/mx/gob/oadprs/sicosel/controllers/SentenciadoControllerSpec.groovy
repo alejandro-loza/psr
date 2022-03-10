@@ -490,7 +490,7 @@ class SentenciadoControllerSpec extends Specification {
         assert resp.getStatusCode() == HttpStatus.OK
         assert resp
         assert !resp.getBody().isEmpty()
-        assert resp.getBody().first().nombre == 'AXEL'
+        assert resp.getBody().first().nombre == 'ANA KAREN'
     }
 
     def "Debería traer un sentenciado por nombre y apellido"(){

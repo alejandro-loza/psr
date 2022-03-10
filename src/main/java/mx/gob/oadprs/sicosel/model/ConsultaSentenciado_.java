@@ -13,7 +13,7 @@ public class ConsultaSentenciado_ {
     public static volatile SingularAttribute<ConsultaSentenciado, String> nombrePadres;
     public static volatile SingularAttribute<ConsultaSentenciado, String> apellidoPaternoPadres;
     public static volatile SingularAttribute<ConsultaSentenciado, String> apellidoMaternoPadres;
-    public static volatile SingularAttribute<ConsultaSentenciado, Long> paisId;
-    public static volatile SingularAttribute<ConsultaSentenciado, Long> ocupacionId;
+    public static volatile SingularAttribute<ConsultaSentenciado, Long> nacionalidad;
+    public static volatile SingularAttribute<ConsultaSentenciado, Long> ocupacion;
 
 }

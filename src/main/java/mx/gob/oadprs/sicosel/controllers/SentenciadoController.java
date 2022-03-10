@@ -84,7 +84,7 @@ public class SentenciadoController {
                 .apellidoPaternoPadres(apellidoPaternoPadres)
                 .apellidoMaternoPadres(apellidoMaternoPadres)
                 .nacionalidad(paisId)
-                .ocupacionId(ocupacionId)
+                .ocupacion(ocupacionId)
                 .build();
 
         return new ResponseEntity<>(consultaService.consulta(criteriosBusqueda, PageRequest.of(page, size)), HttpStatus.OK);

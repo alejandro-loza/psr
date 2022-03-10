@@ -19,6 +19,6 @@ public class SentenciadoCriteria {
     private Optional<String> apellidoPaternoPadres;
     private Optional<String> apellidoMaternoPadres;
     private Optional<Long> nacionalidad;
-    private Optional<Long> ocupacionId;
+    private Optional<Long> ocupacion;
 
 }
