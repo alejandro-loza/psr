@@ -1,8 +1,11 @@
 package mx.gob.oadprs.sicosel.controllers;
 
 import mx.gob.oadprs.sicosel.model.Sentenciado;
+import mx.gob.oadprs.sicosel.services.ConsultaSentenciadoService;
 import mx.gob.oadprs.sicosel.services.FamiliarService;
+import mx.gob.oadprs.sicosel.utils.SentenciadoCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +16,8 @@ import mx.gob.oadprs.sicosel.validator.FamiliarValidador;
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 @CrossOrigin(origins = {"http://localhost:4200","http://dev.sicosel2.oadprs.gob.mx"})
 @RequestMapping("/sentenciado")
@@ -22,6 +26,9 @@ public class SentenciadoController {
 
     @Autowired
     SentenciadoService sentenciadoService;
+
+    @Autowired
+    ConsultaSentenciadoService consultaService;
 
     @Autowired
     FamiliarService familiarService;
@@ -51,23 +58,42 @@ public class SentenciadoController {
 
     @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity buscaPorNombreCompleto(@RequestParam(required = true) String nombre,
-                                         @RequestParam(required = true) String apellidoPaterno,
-                                         @RequestParam(required = false) String apellidoMaterno) throws Exception {
-        return (apellidoMaterno != null) ?
-                busquedaNombreCompleto(nombre, apellidoPaterno, apellidoMaterno):
-                busquedaNombreApellidoPaterno(nombre, apellidoPaterno);
+    public ResponseEntity buscaPorNombreCompleto(
+            @RequestParam(required = false) Optional<String> nombre,
+            @RequestParam(required = false) Optional<String> apellidoPaterno,
+            @RequestParam(required = false) Optional<String> apellidoMaterno,
+            @RequestParam(required = false) Optional<String> alias,
+            @RequestParam(required = false) Optional<String> otrosNombres,
+            @RequestParam(required = false) Optional<String> nombrePadres,
+            @RequestParam(required = false) Optional<String> apellidoPaternoPadres,
+            @RequestParam(required = false) Optional<String> apellidoMaternoPadres,
+            @RequestParam(required = false) Optional<Long> paisId,
+            @RequestParam(required = false) Optional<Long> ocupacionId,
+            @RequestParam(required = false) Optional<String> folio,
+            @RequestParam(required = false) Optional<String> fechaNacimiento,
+            @RequestParam(required = false) Optional<UUID> id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) throws Exception {
+
+        SentenciadoCriteria criteriosBusqueda = SentenciadoCriteria.builder()
+                .nombre(nombre)
+                .apellidoMaterno(apellidoMaterno)
+                .apellidoPaterno(apellidoPaterno)
+                .alias(alias)
+                .otrosNombres(otrosNombres)
+                .nombrePadres(nombrePadres)
+                .apellidoPaternoPadres(apellidoPaternoPadres)
+                .apellidoMaternoPadres(apellidoMaternoPadres)
+                .nacionalidad(paisId)
+                .ocupacion(ocupacionId)
+                .folio(folio)
+                .fechaNacimiento(fechaNacimiento)
+                .id(id)
+                .build();
+
+        return new ResponseEntity<>(consultaService.consulta(criteriosBusqueda, PageRequest.of(page, size)), HttpStatus.OK);
     }
 
-    private ResponseEntity<List <SentenciadoDto>> busquedaNombreCompleto(
-            String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception {
-        return new ResponseEntity<>(sentenciadoService.buscaPorNombreCompleto(
-                nombre, apellidoPaterno, apellidoMaterno), HttpStatus.OK);
-    }
-
-    private ResponseEntity<List <SentenciadoDto>> busquedaNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception {
-        return new ResponseEntity<>(sentenciadoService.buscaPorNombreApellidoPaterno(
-                nombre, apellidoPaterno), HttpStatus.OK);
-    }
 }
 
