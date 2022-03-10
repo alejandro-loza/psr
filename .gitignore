@@ -42,3 +42,4 @@ out/
 application2.yaml
 target/
 git.properties
+application.yaml
