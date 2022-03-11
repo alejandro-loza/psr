@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -75,6 +76,14 @@ class FamiliarServiceImp implements FamiliarService{
             throw new Exception("familiar.domicilio.alreadyExist");
         }
         return agregaDomicilio(familiarId, validador, familiar);
+    }
+
+    @Override
+    public DomicilioDto buscaDireccionFamiliar(UUID sentenciadoId, UUID familiarId) throws Exception {
+        Sentenciado sentenciado = sentenciadoService.busca(sentenciadoId);
+        Domicilio domicilio = Optional.of(buscaFamiliarSentenciado(sentenciado, familiarId).getDomicilio())
+                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound") );
+        return new DomicilioDto(domicilio, sentenciadoId );
     }
 
     private DomicilioDto agregaDomicilio(UUID familiarId, DomicilioValidador validador, Familiar familiar) throws Exception {
