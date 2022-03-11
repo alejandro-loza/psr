@@ -1,8 +1,11 @@
 package mx.gob.oadprs.sicosel.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import mx.gob.oadprs.sicosel.dto.FamiliarDto
 import mx.gob.oadprs.sicosel.dto.SentenciadoDto
 import mx.gob.oadprs.sicosel.enums.Sexo
+import mx.gob.oadprs.sicosel.model.Sentenciado
+import mx.gob.oadprs.sicosel.services.FamiliarService
 import mx.gob.oadprs.sicosel.services.SentenciadoService
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador
@@ -30,6 +33,9 @@ class SentenciadoControllerSpec extends Specification {
 
     @Autowired
     SentenciadoService sentenciadoService
+
+    @Autowired
+    FamiliarService familiarService;
 
     def "Deberia crear un sentenciado"(){
         given:'a body request'
@@ -239,6 +245,44 @@ class SentenciadoControllerSpec extends Specification {
 
     }
 
+    def "Deberia consultar los familiares de un sentenciado"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado'
+        def sentenciado = sentenciadoGuardado()
+
+        and:'familiares guardados'
+        2.times {crearFamiliar(sentenciadoService.busca(UUID.fromString(sentenciado.id)))}
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", List)?.body
+
+        then:
+        assert resp.size() == 2
+    }
+
+    def "Deberia consultar un familiar de un sentenciado"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado'
+        def sentenciado = sentenciadoGuardado()
+
+        and:'familiares guardados'
+        def familiar = crearFamiliar(sentenciadoService.busca(UUID.fromString(sentenciado.id)))
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/sentenciado/$sentenciado.id" +
+                "/familiar/$familiar.id", Map)?.body
+
+        then:
+        assert resp == familiar
+
+    }
+
     def "No deberia crear el familiar cuando faltan campos requeridos y responder Bad Request"(){
         given:'a body request'
         HttpHeaders headers = new HttpHeaders()
@@ -383,6 +427,23 @@ class SentenciadoControllerSpec extends Specification {
         assert resp
         assert !resp.getBody().isEmpty()
         assert resp.getBody().first().nombre == 'ANGEL IVAN'
+    }
+
+    def "Debería paginar"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        def folio = 'RXT'
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?folio=${folio}", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
     }
 
     def "Debería traer un sentenciado por otros nombres like"(){
@@ -546,8 +607,6 @@ class SentenciadoControllerSpec extends Specification {
         assert !resp.getBody().isEmpty()
     }
 
-
-
     def "Debería traer un sentenciado por nombre y apellido"(){
         given: 'dado un sentenciado guardado'
         HttpHeaders headers = new HttpHeaders()
@@ -563,7 +622,6 @@ class SentenciadoControllerSpec extends Specification {
         assert resp.getStatusCode() == HttpStatus.OK
         assert !resp.getBody().isEmpty()
     }
-
 
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
@@ -589,5 +647,19 @@ class SentenciadoControllerSpec extends Specification {
         return sentenciadoService.crear(cmd)
     }
 
+    private FamiliarDto crearFamiliar(Sentenciado sentenciado){
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            nombre = 'Chapo Mama'
+            apellidoMaterno = 'Loera'
+            apellidoPaterno = 'Virginia'
+            documento = 'HELA880416HHGRZL08'
+            telefonoFijo = 1234567
+            celular = 123123
+            parentescoId = 2
+            nacionalidadId = 82
+        }
+        return familiarService.crear(cmd, sentenciado)
+    }
 
 }

@@ -14,6 +14,8 @@ public interface SentenciadoService {
     SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception;
     Sentenciado busca(UUID id) throws Exception;
     DomicilioDto agregaDireccion(UUID sentenciadoId, DomicilioValidador domicilioRequest) throws Exception;
+    DomicilioDto buscaDireccion(UUID sentenciadoId) throws Exception;
+
     Sentenciado buscaPorFolio(String folio) throws Exception;
     Sentenciado creaDireccion(Sentenciado sentenciado, Domicilio domicilio) throws Exception;
 
