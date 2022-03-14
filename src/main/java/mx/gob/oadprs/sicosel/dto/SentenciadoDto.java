@@ -12,6 +12,12 @@ import java.time.LocalDate;
 @Setter
 public class SentenciadoDto {
 
+    Long nacionalidadId;
+    Long estadoId;
+    Long estadoCivilId;
+    Long etniaId;
+    Long escolaridadId;
+
     String id;
 
     String folio;
@@ -58,16 +64,21 @@ public class SentenciadoDto {
         this.apellidoPaterno = sentenciado.getApellidoPaterno();
         this.apellidoMaterno = sentenciado.getApellidoMaterno();
         this.nacionalidad = sentenciado.getNacionalidad().getNombre();
+        this.nacionalidadId = sentenciado.getNacionalidad().getId();
         this.estado = sentenciado.getEstado().getNombre();
+        this.estadoId = sentenciado.getEstado().getId();
         this.documento = sentenciado.getDocumento();
         this.estadoCivil = sentenciado.getEstadoCivil().getNombre();
+        this.estadoCivilId = sentenciado.getEstadoCivil().getId();
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
         this.fechaNacimiento = sentenciado.getFechaNacimiento();
         this.ocupacion = sentenciado.getOcupacion().getNombre();
         this.sexo = sentenciado.getSexo().toString();
         this.etnia = sentenciado.getEtnia().getNombre();
+        this.etniaId = sentenciado.getEtnia().getId();
         this.escolaridad = sentenciado.getEscolaridad().getNombre();
+        this.escolaridadId = sentenciado.getEscolaridad().getId();
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();
         this.correoElectronico = sentenciado.getCorreoElectronico();
@@ -80,9 +91,12 @@ public class SentenciadoDto {
         this.apellidoPaterno = sentenciado.getApellidoPaterno();
         this.apellidoMaterno = sentenciado.getApellidoMaterno();
         this.nacionalidad = sentenciado.getNacionalidad().getNombre();
+        this.nacionalidadId = sentenciado.getNacionalidad().getId();
         this.estado = sentenciado.getEstado().getNombre();
+        this.estadoId = sentenciado.getEstado().getId();
         this.documento = sentenciado.getDocumento();
         this.estadoCivil = sentenciado.getEstadoCivil().getNombre();
+        this.estadoCivilId = sentenciado.getEstadoCivil().getId();
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
         this.fechaNacimiento = sentenciado.getFechaNacimiento();
@@ -91,8 +105,12 @@ public class SentenciadoDto {
         this.sexo = sentenciado.getSexo().toString();
         this.etnia = sentenciado.getEtnia() != null?
                 sentenciado.getEtnia().getNombre(): null;
+        this.etniaId = sentenciado.getEtnia() != null?
+                sentenciado.getEtnia().getId(): null;
         this.escolaridad = sentenciado.getEscolaridad() != null?
                 sentenciado.getEscolaridad().getNombre(): null;
+        this.escolaridadId = sentenciado.getEscolaridad() != null?
+                sentenciado.getEscolaridad().getId() : null;
         this.telefonoFijo = sentenciado.getTelefonoFijo();
         this.celular = sentenciado.getCelular();
         this.correoElectronico = sentenciado.getCorreoElectronico();
