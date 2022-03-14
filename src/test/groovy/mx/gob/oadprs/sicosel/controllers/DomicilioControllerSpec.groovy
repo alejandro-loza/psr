@@ -68,8 +68,11 @@ class DomicilioControllerSpec extends Specification {
         resp.with {
             assert it.personaId == senteciado.id
             assert it.estado == 'HIDALGO'
+            assert it.estadoId == cmd.estadoId
             assert it.pais == 'MÉXICO'
+            assert it.paisId == cmd.paisId
             assert it.municipio == 'Pachuca de Soto'
+            assert it.municipioId == cmd.municipioId
             assert it.colonia == 'Benito Juarez'
             assert it.calle == 'Bolevar of bronken dreams'
             assert it.numero == '666'

@@ -80,6 +80,12 @@ class SentenciadoControllerSpec extends Specification {
             assert it.celular ==  "1234567890"
             assert it.correoElectronico == 'juan.antonio.perez.garcia@gmail.com'
             assert it.id
+            assert it.nacionalidadId == MEXICO_ID
+            assert it.estadoId == cmd.estadoId
+            assert it.estadoCivilId == cmd.estadoCivil
+            assert it.etniaId == cmd.etniaId
+            assert it.escolaridadId == cmd.escolaridad
+
         }
 
     }
@@ -234,7 +240,9 @@ class SentenciadoControllerSpec extends Specification {
             assert telefonoFijo == '1234567'
             assert celular == '123123'
             assert parentesco == 'MADRE'
+            assert parentescoId == cmd.parentescoId
             assert nacionalidad ==  "MÉXICO"
+            assert nacionalidadId ==  cmd.nacionalidadId
         }
 
     }
