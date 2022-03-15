@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class SentenciadoDto {
 
+    Long ocupacionId;
     Long nacionalidadId;
     Long estadoId;
     Long estadoCivilId;
@@ -73,7 +74,10 @@ public class SentenciadoDto {
         this.alias = sentenciado.getAlias();
         this.otrosNombres = sentenciado.getOtrosNombres();
         this.fechaNacimiento = sentenciado.getFechaNacimiento();
-        this.ocupacion = sentenciado.getOcupacion().getNombre();
+        this.ocupacion = sentenciado.getOcupacion() != null ?
+                sentenciado.getOcupacion().getNombre(): null;
+        this.ocupacionId = sentenciado.getOcupacion() != null ?
+                sentenciado.getOcupacion().getId(): null;
         this.sexo = sentenciado.getSexo().toString();
         this.etnia = sentenciado.getEtnia().getNombre();
         this.etniaId = sentenciado.getEtnia().getId();
@@ -102,6 +106,8 @@ public class SentenciadoDto {
         this.fechaNacimiento = sentenciado.getFechaNacimiento();
         this.ocupacion = sentenciado.getOcupacion() != null ?
                 sentenciado.getOcupacion().getNombre(): null;
+        this.ocupacionId = sentenciado.getOcupacion() != null ?
+                sentenciado.getOcupacion().getId(): null;
         this.sexo = sentenciado.getSexo().toString();
         this.etnia = sentenciado.getEtnia() != null?
                 sentenciado.getEtnia().getNombre(): null;
