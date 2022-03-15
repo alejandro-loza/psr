@@ -34,6 +34,8 @@ public class DomicilioDto {
 
     String longitud;
 
+    String descripcion;
+
     public DomicilioDto(Domicilio domicilio, UUID personaId) {
         this.personaId = personaId;
         this.estado = domicilio.getEstado().getNombre();
