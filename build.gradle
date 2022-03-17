@@ -35,8 +35,8 @@ dependencies {
 			'javax.inject:javax.inject:1',
 			'org.apache.commons:commons-lang3:3.0',
 			'org.liquibase:liquibase-core',
-	        'com.google.guava:guava:11.0.2'
-
+	        'com.google.guava:guava:11.0.2',
+	        'commons-beanutils:commons-beanutils:1.9.4'
 
 
 	runtimeOnly 'com.h2database:h2',

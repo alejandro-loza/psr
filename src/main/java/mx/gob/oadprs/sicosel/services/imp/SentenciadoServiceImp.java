@@ -11,9 +11,11 @@ import mx.gob.oadprs.sicosel.repository.SentencedRepository;
 import mx.gob.oadprs.sicosel.services.*;
 import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
 import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -59,6 +61,33 @@ public class SentenciadoServiceImp implements SentenciadoService {
 
         Sentenciado sentenciado = sentencedRepository.save(construyeSentenciado(sentenciadoValidador, estado, pais));
         return new SentenciadoDto(sentenciado, folioService.generar(sentenciado));
+    }
+
+    @Override
+    public SentenciadoDto modifica(SentenciadoValidador sentenciadoValidador, UUID sentenciadoId) throws Exception {
+        Estado estado = estadoService.busca(sentenciadoValidador.getEstadoId());
+        Pais pais = paisService.busca(sentenciadoValidador.getNacionalidadId());
+        Sentenciado sentenciado = busca(sentenciadoId);
+        mergeDeNuevasPropiedades(sentenciadoValidador, estado, pais, sentenciado);
+        return new SentenciadoDto(sentencedRepository.save(sentenciado));//todo verificar folio previamente creado
+    }
+
+    private void mergeDeNuevasPropiedades(
+            SentenciadoValidador sentenciadoValidador,
+            Estado estado,
+            Pais pais,
+            Sentenciado sentenciado) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+
+        PropertyUtils.describe(construyeSentenciado(sentenciadoValidador, estado, pais)).entrySet().stream()
+                .filter(e -> e.getValue() != null)
+                .filter(e -> ! e.getKey().equals("class"))
+                .forEach(e -> {
+                    try {
+                        PropertyUtils.setProperty(sentenciado, e.getKey(), e.getValue());
+                    } catch (Exception illegalAccessException) {
+                        illegalAccessException.printStackTrace();
+                    }
+                });
     }
 
     @Override

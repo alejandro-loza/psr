@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.HttpClientErrorException
@@ -564,6 +565,117 @@ class SentenciadoControllerSpec extends Specification {
         assert !resp.getBody().isEmpty()
     }
 
+    def "Deberia modificar un sentenciado"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+        and: ' un sentenciado guardado'
+        def sentenciado = sentenciadoGuardado()
+
+        Map cmd = [:]
+        cmd.with {
+            nombre = 'Alejandro'
+            apellidoPaterno = 'Ràmirez'
+            apellidoMaterno = 'Torres'
+            nacionalidadId = MEXICO_ID
+            estadoId = 13
+            documento = 'HELA880416HHGRZL08'
+            estadoCivil = 1
+            alias = "el pinky"
+            otrosNombres =  "Enrique Peña"
+            fechaNacimiento = "1988-04-16"
+            ocupacionId = 1
+            sexo = Sexo.MASCULINO
+            etniaId = 1
+            escolaridad = 1
+            telefonoFijo =  1234567890
+            celular =  1234567890
+            correoElectronico = 'juan.antonio.perez.garcia@gmail.com'
+        }
+
+        when:
+
+        def resp = rest.exchange("http://localhost:${ port }/sentenciado/$sentenciado.id",
+                HttpMethod.PUT, new HttpEntity(cmd, headers), Map)
+
+        then:
+        assert resp.statusCode == HttpStatus.OK
+        resp.body.with {
+            assert it.nombre == 'Alejandro'
+            assert it.folio == sentenciado.folio //TODO REVISAR CASO DE USO UPDATE
+            assert it.apellidoPaterno == 'Ràmirez'
+            assert it.apellidoMaterno == 'Torres'
+            assert it.nacionalidad == 'MÉXICO'
+            assert it.documento == 'HELA880416HHGRZL08'
+            assert it.estadoCivil == 'SOLTERO(A)'
+            assert it.alias == "el pinky"
+            assert it.otrosNombres ==  "Enrique Peña"
+            assert it.fechaNacimiento == '1988-04-16'
+            assert it.ocupacion == "EMPLEADO"
+            assert it.sexo == 'MASCULINO'
+            assert it.etnia == 'AMUZGO'
+            assert it.escolaridad == 'SIN ESCOLARIDAD'
+            assert it.telefonoFijo ==  '1234567890'
+            assert it.celular ==  "1234567890"
+            assert it.correoElectronico == 'juan.antonio.perez.garcia@gmail.com'
+            assert it.id == sentenciado.id
+        }
+
+    }
+
+    def "Deberia modificar un sentenciado UPDATE SIN OPCIONALES"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and: 'un sentenciado guardado'
+        def sentenciado = sentenciadoGuardado()
+
+        and:'solo campos requeridos'
+        Map cmd = [:]
+        cmd.with {
+            celular =  "9999999999"
+            correoElectronico =  "anita19@ggd"
+            documento = "AINA941015MDFVYN05"
+            estadoCivil = "5"
+            estadoId = "9"
+            fechaNacimiento = "2022-01-07"
+            nacionalidadId =  "82"
+            nombre =  "DDDD"
+            sexo = "MASCULINO"
+        }
+
+        when:
+
+        def resp = rest.exchange("http://localhost:${ port }/sentenciado/$sentenciado.id",
+                HttpMethod.PUT, new HttpEntity(cmd, headers), Map)
+
+        then:
+        assert resp.statusCode == HttpStatus.OK
+        resp.body.with {
+            assert nombre ==  "DDDD"
+            assert it.folio == sentenciado.folio //TODO REVISAR CASO DE USO UPDATE
+            assert it.apellidoPaterno == 'Ràmirez'
+            assert it.apellidoMaterno == 'Torres'
+            assert it.nacionalidad == 'MÉXICO'
+            assert it.estado == "CIUDAD DE MÉXICO"
+            assert it.documento == "AINA941015MDFVYN05"
+            assert it.estadoCivil == 'UNIÓN LIBRE'
+            assert it.alias == "el pinky"
+            assert it.otrosNombres ==  "Enrique Peña"
+            assert it.fechaNacimiento == "2022-01-07"
+            assert it.ocupacion == "EMPLEADO"
+            assert it.sexo == 'MASCULINO'
+            assert it.etnia == 'AMUZGO'
+            assert it.escolaridad == 'SIN ESCOLARIDAD'
+            assert it.telefonoFijo ==  '1234567890'
+            assert it.celular == "9999999999"
+            assert it.correoElectronico == "anita19@ggd"
+            assert it.id == sentenciado.id
+        }
+
+
+    }
 
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
@@ -588,6 +700,5 @@ class SentenciadoControllerSpec extends Specification {
         }
         return sentenciadoService.crear(cmd)
     }
-
 
 }

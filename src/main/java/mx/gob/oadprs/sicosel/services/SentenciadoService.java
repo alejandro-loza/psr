@@ -12,12 +12,13 @@ import java.util.UUID;
 
 public interface SentenciadoService {
     SentenciadoDto crear(SentenciadoValidador sentenciadoValidador) throws Exception;
+    SentenciadoDto modifica(SentenciadoValidador sentenciadoValidador, UUID uuid) throws Exception;
     Sentenciado busca(UUID id) throws Exception;
     DomicilioDto agregaDireccion(UUID sentenciadoId, DomicilioValidador domicilioRequest) throws Exception;
     Sentenciado buscaPorFolio(String folio) throws Exception;
     Sentenciado creaDireccion(Sentenciado sentenciado, Domicilio domicilio) throws Exception;
-
     List<SentenciadoDto> buscaPorNombreCompleto(String nombre, String apellidoPaterno, String apellidoMaterno) throws Exception;
-
     List<SentenciadoDto> buscaPorNombreApellidoPaterno(String nombre, String apellidoPaterno) throws Exception;
+
+
 }

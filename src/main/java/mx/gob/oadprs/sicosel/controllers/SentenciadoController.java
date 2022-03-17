@@ -38,6 +38,14 @@ public class SentenciadoController {
         return new ResponseEntity<>( sentenciadoService.crear(validador), HttpStatus.OK);
     }
 
+    @PutMapping(path="/{sentenciadoId}", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity modificaSentenciado(@RequestBody @Valid SentenciadoValidador validador,
+                                 @PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
+        SentenciadoDto modifica = sentenciadoService.modifica(validador, sentenciadoId);
+        return new ResponseEntity<>(modifica, HttpStatus.OK);
+    }
+
     @PostMapping(path="/{sentenciadoId}/familiar", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity crearFamiliar(@RequestBody @Valid FamiliarValidador validador,
