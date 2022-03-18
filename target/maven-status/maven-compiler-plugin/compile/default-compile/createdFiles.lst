@@ -11,7 +11,9 @@ mx/gob/oadprs/sicosel/model/Sentenciado$SentenciadoBuilder.class
 mx/gob/oadprs/sicosel/model/catalog/EstadoCivil.class
 mx/gob/oadprs/sicosel/repository/SentencedRepository.class
 mx/gob/oadprs/sicosel/repository/catalog/OcupacionRepository.class
+mx/gob/oadprs/sicosel/model/filter/ConsultaSentenciadoSpecifications.class
 mx/gob/oadprs/sicosel/validator/LoginRequest.class
+mx/gob/oadprs/sicosel/services/imp/LoginServiceImp.class
 mx/gob/oadprs/sicosel/repository/ConsultaSentenciadoRepository.class
 mx/gob/oadprs/sicosel/repository/catalog/EscolaridadRepository.class
 mx/gob/oadprs/sicosel/services/EstadoCivilService.class
@@ -59,6 +61,7 @@ mx/gob/oadprs/sicosel/services/FolioService.class
 mx/gob/oadprs/sicosel/validator/UserRequest.class
 mx/gob/oadprs/sicosel/PsrApplication.class
 mx/gob/oadprs/sicosel/model/catalog/Ocupacion.class
+mx/gob/oadprs/sicosel/services/imp/SentenciadoServiceImp.class
 mx/gob/oadprs/sicosel/services/LoginService.class
 mx/gob/oadprs/sicosel/controllers/handlers/CustomRestExceptionHandler.class
 mx/gob/oadprs/sicosel/dto/EstadoCivilDto.class

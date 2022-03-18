@@ -42,3 +42,5 @@ databaseChangeLog:
       file: db/data/parentesco_data.yaml
   - include:
       file: db/data/estados_civil_data.yaml
+  - include:
+      file: db/view_consulta.yaml

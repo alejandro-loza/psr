@@ -55,6 +55,7 @@ class FamiliarServiceImp implements FamiliarService{
     @Override
     public Familiar busca(UUID id) throws ItemNotFoundException {
         return familiarRepository.findById(id)
+
                 .orElseThrow(() -> new ItemNotFoundException("familiar.notFound") );
     }
 

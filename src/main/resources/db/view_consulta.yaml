@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: vista_consulta
+      author: alejandro.hernadnez
+      changes:
+        - createView:
+           encoding:  UTF-8
+           fullDefinition:  false
+           relativeToChangelogFile:  true
+           replaceIfExists:  false
+           selectQuery: SELECT DISTINCT ON (t1.id_sentenciado) t1.id_sentenciado,
+             t1.nombre,
+             t1.apellido_paterno,
+             t1.apellido_materno,
+             t1.fk_id_cat_pais,
+             t1.alias,
+             t1.otros_nombres,
+             t1.fch_nacimiento,
+             t1.fk_id_cat_ocupacion,
+             t2.nombre AS nombre_padres,
+             t2.apellido_paterno AS appellido_padre,
+             t2.apellido_materno AS apellido_madre,
+             t3.folio
+             FROM sentenciado t1
+             LEFT JOIN familiar t2 ON t1.id_sentenciado = t2.fk_id_sentenciado
+             LEFT JOIN folio t3 ON t3.id_sentenciado = t1.id_sentenciado
+           viewName:  vista_consulta
