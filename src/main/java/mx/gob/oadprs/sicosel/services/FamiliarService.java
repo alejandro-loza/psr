@@ -8,6 +8,7 @@ import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,4 +21,6 @@ public interface FamiliarService {
     DomicilioDto buscaDireccionFamiliar(UUID sentenciadoId, UUID familiarId) throws Exception;
 
     List<FamiliarDto> familiaresSentenciado(Sentenciado sentenciado);
+
+    FamiliarDto modifica(FamiliarValidador validador, UUID familiarId, Sentenciado sentenciado) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, Exception;
 }

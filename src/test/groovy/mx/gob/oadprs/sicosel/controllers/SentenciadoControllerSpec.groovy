@@ -869,6 +869,53 @@ class SentenciadoControllerSpec extends Specification {
 
     }
 
+    def "Deberia modificar un familiar"(){
+        given:'a body request'
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado'
+        def sentenciado = sentenciadoGuardado()
+
+        and:'un familiar guardado'
+        def familiar = crearFamiliar(sentenciadoService.busca(UUID.fromString(sentenciado.id)))
+
+        FamiliarValidador cmd = new FamiliarValidador()
+        cmd.with {
+            nombre = 'Maria Consuelo'
+            apellidoMaterno = 'Loera'
+            apellidoPaterno = 'Perez'
+            documento = 'testtest'
+            telefonoFijo = "66666"
+            celular = "7777"
+            parentescoId = 2
+            nacionalidadId =  82
+        }
+
+        when:
+        def resp = rest.exchange("http://localhost:${ port }/sentenciado/$sentenciado.id" +
+                "/familiar/$familiar.id",
+                HttpMethod.PUT, new HttpEntity(cmd, headers), Map)
+
+        then:
+        assert resp.statusCode == HttpStatus.OK
+        resp.body.with {
+            assert id
+            assert sentenciadoId == sentenciado.id
+            assert nombre == 'Maria Consuelo'
+            assert apellidoPaterno == 'Perez'
+            assert apellidoMaterno == 'Loera'
+            assert documento == 'testtest'
+            assert telefonoFijo == 66666.toString()
+            assert celular ==  7777.toString()
+            assert parentesco == 'MADRE'
+            assert parentescoId == 2
+            assert nacionalidad ==  "MÉXICO"
+            assert nacionalidadId ==  82
+
+        }
+    }
+
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {

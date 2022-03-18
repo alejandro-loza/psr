@@ -6,15 +6,19 @@ import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.Familiar;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
+import mx.gob.oadprs.sicosel.model.catalog.Estado;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.model.catalog.Parentesco;
 import mx.gob.oadprs.sicosel.repository.FamiliarRepository;
 import mx.gob.oadprs.sicosel.services.*;
 import mx.gob.oadprs.sicosel.validator.DomicilioValidador;
 import mx.gob.oadprs.sicosel.validator.FamiliarValidador;
+import mx.gob.oadprs.sicosel.validator.SentenciadoValidador;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -103,6 +107,32 @@ class FamiliarServiceImp implements FamiliarService{
         return familiarRepository.findAllBySentenciado(sentenciado)
                 .stream().map(FamiliarDto::new).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public FamiliarDto modifica(FamiliarValidador validador, UUID familiarId, Sentenciado sentenciado) throws Exception {
+        Familiar familiar =  buscaFamiliarSentenciado(sentenciado,familiarId );
+        Parentesco parentesco = parentescoService.busca(validador.getParentescoId());
+        Pais pais = paisService.busca(validador.getNacionalidadId());
+        mergeDeNuevasPropiedades(validador,pais, parentesco, sentenciado, familiar);
+        return new FamiliarDto(familiarRepository.save(familiar));
+    }
+
+    private void mergeDeNuevasPropiedades(
+            FamiliarValidador familiarValidador,
+            Pais pais, Parentesco parentesco,
+            Sentenciado sentenciado, Familiar familiar) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+
+        PropertyUtils.describe(construyeFamiliar(familiarValidador, sentenciado, parentesco, pais)).entrySet().stream()
+            .filter(e -> e.getValue() != null)
+            .filter(e -> ! e.getKey().equals("class"))
+            .forEach(e -> {
+                try {
+                    PropertyUtils.setProperty(familiar, e.getKey(), e.getValue());
+                } catch (Exception illegalAccessException) {
+                    illegalAccessException.printStackTrace();
+                }
+            });
     }
 
     private Familiar construyeFamiliar(FamiliarValidador familiar, Sentenciado sentenciado,
