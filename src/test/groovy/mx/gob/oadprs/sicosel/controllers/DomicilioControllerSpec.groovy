@@ -1,5 +1,6 @@
 package mx.gob.oadprs.sicosel.controllers
 
+import mx.gob.oadprs.sicosel.dto.DomicilioDto
 import mx.gob.oadprs.sicosel.dto.FamiliarDto
 import mx.gob.oadprs.sicosel.dto.SentenciadoDto
 import mx.gob.oadprs.sicosel.enums.Sexo
@@ -24,7 +25,6 @@ import java.time.Month
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class DomicilioControllerSpec extends Specification {
     public static final int MEXICO_ID = 82
-
 
     @Value('${local.server.port}')
     int port
@@ -68,8 +68,11 @@ class DomicilioControllerSpec extends Specification {
         resp.with {
             assert it.personaId == senteciado.id
             assert it.estado == 'HIDALGO'
+            assert it.estadoId == cmd.estadoId
             assert it.pais == 'MÉXICO'
+            assert it.paisId == cmd.paisId
             assert it.municipio == 'Pachuca de Soto'
+            assert it.municipioId == cmd.municipioId
             assert it.colonia == 'Benito Juarez'
             assert it.calle == 'Bolevar of bronken dreams'
             assert it.numero == '666'
@@ -77,6 +80,44 @@ class DomicilioControllerSpec extends Specification {
             assert it.latitud == '19.4326018'
             assert it.longitud == '-99.1332049'
         }
+
+    }
+
+    def "Deberia consultar un domicilio"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado con domicilio guardado'
+        def senteciado = sentenciadoGuardado()
+        def domicilio = agregaDomicilioSentenciado(senteciado)
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/sentenciado/$senteciado.id/domicilio", Map)?.body
+
+        then:
+        assert UUID.fromString(resp.personaId as String) == domicilio.personaId
+    }
+
+    def "Deberia consultar un domicilio de un familiar"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado'
+        def senteciado = sentenciadoGuardado()
+
+        and:'un familiar guardado'
+        def familiar = crearFamiliar(sentenciadoService.busca(UUID.fromString(senteciado.id)))
+
+        agregaDomicilioFamiliar(familiar.id, UUID.fromString(senteciado.id))
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/sentenciado/$senteciado.id" +
+                "/familiar/$familiar.id/domicilio", Map)?.body
+
+        then:
+        assert resp.personaId == familiar.id.toString()
 
     }
 
@@ -122,7 +163,6 @@ class DomicilioControllerSpec extends Specification {
 
     }
 
-
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
         cmd.with {
@@ -147,6 +187,40 @@ class DomicilioControllerSpec extends Specification {
         return sentenciadoService.crear(cmd)
     }
 
+    private DomicilioDto agregaDomicilioSentenciado(SentenciadoDto senteciado){
+        DomicilioValidador cmd = new DomicilioValidador()
+        cmd.with {
+            estadoId = 13
+            paisId = MEXICO_ID
+            municipioId = 13048
+            codigoPostal = '12345'
+            colonia = 'Benito Juarez'
+            calle = 'Bolevar of bronken dreams'
+            numero = 666
+            latitud = '19.4326018'
+            longitud = '-99.1332049'
+            descripcion = 'datos test'
+        }
+        sentenciadoService.agregaDireccion(UUID.fromString(senteciado.id), cmd)
+    }
+
+    private DomicilioDto agregaDomicilioFamiliar(UUID familiarId, UUID sentenciadoId){
+        DomicilioValidador cmd = new DomicilioValidador()
+        cmd.with {
+            estadoId = 13
+            paisId = MEXICO_ID
+            municipioId = 13048
+            codigoPostal = '12345'
+            colonia = 'Benito Juarez'
+            calle = 'Bolevar of bronken dreams'
+            numero = 666
+            latitud = '19.4326018'
+            longitud = '-99.1332049'
+            descripcion = 'datos test'
+        }
+        familiarService.creaDireccion(sentenciadoId, familiarId, cmd)
+    }
+
     private FamiliarDto crearFamiliar(Sentenciado sentenciado){
         FamiliarValidador cmd = new FamiliarValidador()
         cmd.with {
@@ -161,6 +235,5 @@ class DomicilioControllerSpec extends Specification {
         }
         return familiarService.crear(cmd, sentenciado)
     }
-
 
 }

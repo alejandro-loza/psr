@@ -105,6 +105,12 @@ class SentenciadoControllerSpec extends Specification {
             assert it.celular ==  "1234567890"
             assert it.correoElectronico == 'juan.antonio.perez.garcia@gmail.com'
             assert it.id
+            assert it.nacionalidadId == MEXICO_ID
+            assert it.estadoId == cmd.estadoId
+            assert it.estadoCivilId == cmd.estadoCivil
+            assert it.etniaId == cmd.etniaId
+            assert it.escolaridadId == cmd.escolaridad
+
         }
 
     }
@@ -259,8 +265,48 @@ class SentenciadoControllerSpec extends Specification {
             assert telefonoFijo == '1234567'
             assert celular == '123123'
             assert parentesco == 'MADRE'
+            assert parentescoId == cmd.parentescoId
             assert nacionalidad ==  "MÉXICO"
+            assert nacionalidadId ==  cmd.nacionalidadId
         }
+
+    }
+
+    def "Deberia consultar los familiares de un sentenciado"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado'
+        def sentenciado = sentenciadoGuardado()
+
+        and:'familiares guardados'
+        2.times {crearFamiliar(sentenciadoService.busca(UUID.fromString(sentenciado.id)))}
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/sentenciado/$sentenciado.id/familiar", List)?.body
+
+        then:
+        assert resp.size() == 2
+    }
+
+    def "Deberia consultar un familiar de un sentenciado"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado'
+        def sentenciado = sentenciadoGuardado()
+
+        and:'familiares guardados'
+        def familiar = crearFamiliar(sentenciadoService.busca(UUID.fromString(sentenciado.id)))
+
+        when:
+        def resp = rest.getForEntity("http://localhost:${ port }/sentenciado/$sentenciado.id" +
+                "/familiar/$familiar.id", Map)?.body
+
+        then:
+        assert resp.id == familiar.id.toString()
 
     }
 
@@ -458,7 +504,26 @@ class SentenciadoControllerSpec extends Specification {
         resp.getBody().every {it.nombre == 'Tomas'}
     }
 
-    def "Debería traer sentenciados sentenciado por otros nombres like"(){
+    def "Debería paginar"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        20.times {sentenciadoGuardado()}
+
+        when:
+        def resp = rest.getForEntity(
+                "http://localhost:${port}/sentenciado?nombre=Tomas&page=0&size=15", List)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+        assert resp
+        assert !resp.getBody().isEmpty()
+        assert resp.getBody().size() == 15
+
+    }
+
+    def "Debería traer un sentenciado por otros nombres like"(){
         given:
         HttpHeaders headers = new HttpHeaders()
         headers.setContentType(MediaType.APPLICATION_JSON)
@@ -674,8 +739,6 @@ class SentenciadoControllerSpec extends Specification {
         assert resp
         assert !resp.getBody().isEmpty()
     }
-
-
 
     def "Debería traer un sentenciado por nombre y apellido"(){
         given: 'dado un sentenciado guardado'

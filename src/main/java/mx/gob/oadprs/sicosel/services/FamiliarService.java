@@ -17,6 +17,7 @@ public interface FamiliarService {
     Familiar buscaFamiliarSentenciado(Sentenciado sentenciado, UUID familiarId) throws ItemNotFoundException;
 
     DomicilioDto creaDireccion(UUID sentenciadoId, UUID familiarId, DomicilioValidador validador) throws Exception;
+    DomicilioDto buscaDireccionFamiliar(UUID sentenciadoId, UUID familiarId) throws Exception;
 
     List<FamiliarDto> familiaresSentenciado(Sentenciado sentenciado);
 }

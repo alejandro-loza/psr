@@ -1,5 +1,8 @@
 package mx.gob.oadprs.sicosel.controllers;
 
+import mx.gob.oadprs.sicosel.dto.FamiliarDto;
+import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
+import mx.gob.oadprs.sicosel.model.Familiar;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.services.ConsultaSentenciadoService;
 import mx.gob.oadprs.sicosel.services.FamiliarService;
@@ -52,6 +55,25 @@ public class SentenciadoController {
                                  @PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
         Sentenciado sentenciado = sentenciadoService.busca(sentenciadoId);
         return new ResponseEntity<>( familiarService.crear(validador, sentenciado), HttpStatus.OK);
+    }
+
+    @GetMapping(path="/{sentenciadoId}/familiar/{familiarId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity listaFamiliares(@RequestBody
+                                 @PathVariable("sentenciadoId") UUID sentenciadoId,
+                                 @PathVariable("familiarId") UUID familiarId) throws Exception {
+        Familiar familiar = familiarService.busca(familiarId);
+        if(familiar.getSentenciado().getId().compareTo(sentenciadoId) > 0){
+            throw new ItemNotFoundException("familiar.notFound");
+        }
+
+        return new ResponseEntity<>( new FamiliarDto(familiar), HttpStatus.OK);
+    }
+
+    @GetMapping(path="/{sentenciadoId}/familiar", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity obtieneFamiliar(@RequestBody
+                                   @PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
+        return new ResponseEntity<>(
+                familiarService.familiaresSentenciado(sentenciadoService.busca(sentenciadoId)), HttpStatus.OK);
     }
 
     @GetMapping("/folio/{folio}")

@@ -8,6 +8,8 @@ import java.util.UUID;
 @Data
 public class FamiliarDto {
 
+    private Long parentescoId;
+    private Long nacionalidadId;
     private UUID id;
     private UUID sentenciadoId;
     private String nombre;
@@ -27,9 +29,11 @@ public class FamiliarDto {
         this.apellidoMaterno = familiar.getApellidoMaterno();
         this.documento = familiar.getDocumento();
         this.nacionalidad = familiar.getNacionalidad().getNombre();
+        this.nacionalidadId = familiar.getNacionalidad().getId();
         this.telefonoFijo = familiar.getTelefonoFijo();
         this.celular = familiar.getCelular();
         this.parentesco = familiar.getParentesco().getNombre();
+        this.parentescoId = familiar.getParentesco().getId();
     }
 
 

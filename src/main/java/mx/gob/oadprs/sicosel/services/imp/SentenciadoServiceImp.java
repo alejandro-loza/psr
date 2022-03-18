@@ -107,7 +107,16 @@ public class SentenciadoServiceImp implements SentenciadoService {
             sentencedRepository.save(sentenciado);
             return new DomicilioDto(domicilio, sentenciado.getId());
         }
-        else throw new Exception("sentenciado.domicilio.alreadyExist");
+        return new DomicilioDto(domicilio, sentenciado.getId());
+    }
+
+    @Override
+    public DomicilioDto buscaDireccion(UUID sentenciadoId) throws Exception {
+        Domicilio domicilio = busca(sentenciadoId).getDomicilio();
+        if(domicilio == null){
+            throw new Exception("sentenciado.domicilio.doesNotExist");
+        }
+        return new DomicilioDto(domicilio, sentenciadoId);
     }
 
     @Override
