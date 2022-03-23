@@ -6,6 +6,7 @@ import mx.gob.oadprs.sicosel.exceptions.ItemNotFoundException;
 import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.model.catalog.Estado;
+import mx.gob.oadprs.sicosel.model.catalog.Municipio;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.repository.SentencedRepository;
 import mx.gob.oadprs.sicosel.services.*;
@@ -111,12 +112,26 @@ public class SentenciadoServiceImp implements SentenciadoService {
     }
 
     @Override
+    public DomicilioDto modificaDireccion(UUID sentenciadoId, DomicilioValidador validador) throws Exception {
+
+        Domicilio domicilio = busca(sentenciadoId).getDomicilio();
+        existeDomicilio(domicilio);
+        Municipio municipio = municipioService.busca(validador.getMunicipioId());
+        Pais pais =  paisService.busca(validador.getPaisId());
+        return new DomicilioDto(domicilioService.modifica(validador, municipio, pais, domicilio.getId()), sentenciadoId);
+    }
+
+    @Override
     public DomicilioDto buscaDireccion(UUID sentenciadoId) throws Exception {
         Domicilio domicilio = busca(sentenciadoId).getDomicilio();
-        if(domicilio == null){
+        existeDomicilio(domicilio);
+        return new DomicilioDto(domicilio, sentenciadoId);
+    }
+
+    private void existeDomicilio(Domicilio domicilio) throws Exception {
+        if (domicilio == null) {
             throw new Exception("sentenciado.domicilio.doesNotExist");
         }
-        return new DomicilioDto(domicilio, sentenciadoId);
     }
 
     @Override

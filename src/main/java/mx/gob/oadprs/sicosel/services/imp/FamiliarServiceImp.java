@@ -7,6 +7,7 @@ import mx.gob.oadprs.sicosel.model.Domicilio;
 import mx.gob.oadprs.sicosel.model.Familiar;
 import mx.gob.oadprs.sicosel.model.Sentenciado;
 import mx.gob.oadprs.sicosel.model.catalog.Estado;
+import mx.gob.oadprs.sicosel.model.catalog.Municipio;
 import mx.gob.oadprs.sicosel.model.catalog.Pais;
 import mx.gob.oadprs.sicosel.model.catalog.Parentesco;
 import mx.gob.oadprs.sicosel.repository.FamiliarRepository;
@@ -118,10 +119,20 @@ class FamiliarServiceImp implements FamiliarService{
         return new FamiliarDto(familiarRepository.save(familiar));
     }
 
+    @Override
+    public DomicilioDto modificaDireccion(UUID familiarId, UUID sentenciadoId, DomicilioValidador validador) throws Exception {
+        Sentenciado sentenciado = sentenciadoService.busca(sentenciadoId);
+        Domicilio domicilio = Optional.of(buscaFamiliarSentenciado(sentenciado, familiarId).getDomicilio())
+                .orElseThrow(() -> new ItemNotFoundException("sentenciado.notFound") );
+        Municipio municipio = municipioService.busca(validador.getMunicipioId());
+        Pais pais =  paisService.busca(validador.getPaisId());
+        return new DomicilioDto(domicilioService.modifica(validador, municipio, pais, domicilio.getId()), familiarId);
+    }
+
     private void mergeDeNuevasPropiedades(
             FamiliarValidador familiarValidador,
             Pais pais, Parentesco parentesco,
-            Sentenciado sentenciado, Familiar familiar) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+            Sentenciado sentenciado, Familiar familiar) throws Exception {
 
         PropertyUtils.describe(construyeFamiliar(familiarValidador, sentenciado, parentesco, pais)).entrySet().stream()
             .filter(e -> e.getValue() != null)

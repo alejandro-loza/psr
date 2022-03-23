@@ -891,6 +891,7 @@ class SentenciadoControllerSpec extends Specification {
             parentescoId = 2
             nacionalidadId =  82
         }
+        println(new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(cmd))
 
         when:
         def resp = rest.exchange("http://localhost:${ port }/sentenciado/$sentenciado.id" +

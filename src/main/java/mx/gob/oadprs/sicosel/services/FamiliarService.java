@@ -22,5 +22,7 @@ public interface FamiliarService {
 
     List<FamiliarDto> familiaresSentenciado(Sentenciado sentenciado);
 
-    FamiliarDto modifica(FamiliarValidador validador, UUID familiarId, Sentenciado sentenciado) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, Exception;
+    FamiliarDto modifica(FamiliarValidador validador, UUID familiarId, Sentenciado sentenciado) throws Exception;
+
+    DomicilioDto modificaDireccion(UUID familiarId, UUID sentenciadoId, DomicilioValidador validador) throws Exception;
 }

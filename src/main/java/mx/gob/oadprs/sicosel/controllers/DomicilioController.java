@@ -31,6 +31,13 @@ public class DomicilioController {
         return new ResponseEntity<>(sentenciadoService.agregaDireccion(sentenciadoId,validador), HttpStatus.OK);
     }
 
+    @PutMapping(path="/{sentenciadoId}/domicilio", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity modificaDomicilio(@RequestBody @Valid DomicilioValidador validador,
+                                        @PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
+        return new ResponseEntity<>(sentenciadoService.modificaDireccion(sentenciadoId,validador), HttpStatus.OK);
+    }
+
     @GetMapping(path="/{sentenciadoId}/domicilio", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity buscaSentenciadoDomicilio(@PathVariable("sentenciadoId") UUID sentenciadoId) throws Exception {
         return new ResponseEntity<>(sentenciadoService.buscaDireccion(sentenciadoId), HttpStatus.OK);
@@ -43,6 +50,15 @@ public class DomicilioController {
                                      @PathVariable("familiarId") UUID familiarId) throws Exception {
 
         return new ResponseEntity<>( familiarService.creaDireccion(sentenciadoId,familiarId, validador) , HttpStatus.OK);
+    }
+
+    @PutMapping(path="/{sentenciadoId}/familiar/{familiarId}/domicilio", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity modificaFamiliarDomicilio(@RequestBody @Valid DomicilioValidador validador,
+                                         @PathVariable("sentenciadoId") UUID sentenciadoId,
+                                         @PathVariable("familiarId") UUID familiarId) throws Exception {
+
+        return new ResponseEntity<>( familiarService.modificaDireccion(sentenciadoId,familiarId, validador) , HttpStatus.OK);
     }
 
     @GetMapping(path="/{sentenciadoId}/familiar/{familiarId}/domicilio", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
@@ -79,6 +81,44 @@ class DomicilioControllerSpec extends Specification {
             assert it.codigoPostal == '12345'
             assert it.latitud == '19.4326018'
             assert it.longitud == '-99.1332049'
+        }
+
+    }
+
+    def "Deberia modificar un domicilio"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado con domicilio'
+        def senteciado = sentenciadoGuardado()
+
+        def domicilio = agregaDomicilioSentenciado(senteciado)
+
+        and:'a body request'
+        DomicilioValidador cmd = new DomicilioValidador()
+        cmd.with {
+            estadoId = 13
+            paisId = MEXICO_ID
+            municipioId = 13048
+            codigoPostal = '12345'
+            colonia = 'Benito Juarez'
+            calle = 'High wall to hell'
+            numero = 666
+            latitud = '19.4326018'
+            longitud = '-99.1332049'
+            descripcion = 'datos test'
+        }
+
+        when:
+        def resp = rest.exchange("http://localhost:${port}/sentenciado/" +
+                "$senteciado.id/domicilio", HttpMethod.PUT, new HttpEntity(cmd, headers), Map)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+
+        resp.getBody().with {
+            assert it.calle == cmd.calle
         }
 
     }
@@ -162,6 +202,51 @@ class DomicilioControllerSpec extends Specification {
         }
 
     }
+
+    def "Deberia modificar un domicilio de un familiar"(){
+        given:
+        HttpHeaders headers = new HttpHeaders()
+        headers.setContentType(MediaType.APPLICATION_JSON)
+
+        and:'un sentenciado guardado con domicilio'
+        def senteciado = sentenciadoGuardado()
+
+        and:'un familiar guardado'
+        def familiar = crearFamiliar(sentenciadoService.busca(UUID.fromString(senteciado.id)))
+
+        and:'un domicilio de familiar guardado'
+        agregaDomicilioFamiliar(familiar.id, UUID.fromString(senteciado.id))
+
+
+        and:'a body request'
+        DomicilioValidador cmd = new DomicilioValidador()
+        cmd.with {
+            estadoId = 13
+            paisId = MEXICO_ID
+            municipioId = 13048
+            codigoPostal = '12345'
+            colonia = 'Benito Juarez'
+            calle = 'High wall to hell'
+            numero = 666
+            latitud = '19.4326018'
+            longitud = '-99.1332049'
+            descripcion = 'datos test'
+        }
+
+        when:
+        def resp = rest.exchange("http://localhost:${port}/sentenciado/" +
+                "$familiar.sentenciadoId/familiar/$familiar.id/domicilio",
+                HttpMethod.PUT, new HttpEntity(cmd, headers), Map)
+
+        then:
+        assert resp.getStatusCode() == HttpStatus.OK
+
+        resp.getBody().with {
+            assert it.calle == cmd.calle
+        }
+
+    }
+
 
     private SentenciadoDto sentenciadoGuardado() {
         SentenciadoValidador cmd = new SentenciadoValidador()
