@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: ocupacion
+      author: alejandro.hernandez
+      changes:
+        - createTable:
+            tableName: cat_ocupacion
+            columns:
+              - column:
+                  name: id_cat_ocupacion
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: nombre
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: descripcion
+                  type: java.sql.Types.VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activo
+                  type: java.sql.Types.BOOLEAN
+                  constraints:
+                    nullable: false
